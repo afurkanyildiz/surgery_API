@@ -1,0 +1,97 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4" id="container-content">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Kayıt Ekle</h4></div>
+                    <div class="card-body" id="convert">
+                        <form action="" method="POST" id="registrationForm">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col-6">
+                                    <input type="text" class="form-control" id="record_username" name="username" placeholder="Ad Soyad">
+                                </div> 
+                                <div class="mb-3 col-6">
+                                    <input type="text" class="form-control" id="record_tel" name="tel"  placeholder="Tel No">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-6">
+                                    <label for="record_date" class="form-label">Kayıt Tarihi</label>
+                                    <input type="date" class="form-control" id="record_date" name="date"  placeholder="Tarih" >
+                                </div>
+                                <div class="mb-3 col-6">
+                                    <label for="records_hour" class="form-label">Kayıt Saati</label>
+                                    <input type="time" class="form-control" id="records_hour" name="hours"  placeholder="Saat">
+                                </div>
+                              
+                            </div>
+                            
+
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <input type="text" class="form-control" id="record_tc_no" name="tcNo"  placeholder="TC Numarası" >
+                                </div>
+                                <div class="mb-3 col">
+                                    <input type="text" class="form-control" id="record_adress" name="adress"  placeholder="Adres/Köy">
+                                </div>
+                            </div>
+                            <div class="row">     
+                                <div class="mb-3 col">
+                                    <input type="text" class="form-control" id="record_kurum" name="kurum"  placeholder="Kurum" >
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <input type="text" class="form-control" id="record_doctor" name="doctor"  placeholder="Doktor"
+                                </div>
+                            </div>
+                            <div class="row">      
+                                <div class="mb-3 col"> 
+                                    <textarea type="text" class="form-control" id="record_diagnosis" name="diagnosis" style="height: 100px" placeholder="Tanı" ></textarea>
+   
+                                </div>
+                                <div class="mb-3 col">
+                                    <textarea type="text" class="form-control" id="record_intervention" name="intervention" style="height: 100px" placeholder="Müdahale"></textarea> 
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px" placeholder="İlaçlar"></textarea> 
+
+                                </div>
+                                <div class="mb-3 col">
+
+                                  <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3 col"> 
+                                <button type="submit" name="registrationSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                &nbsp;
+                                <button type="button" id="registrationPreview" onclick="registrationFormPdf()"  class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                <button type="button" name="registrationPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                &nbsp;
+                                <button type="reset" name="registrationClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+
+
+{% endblock%}

@@ -1,0 +1,121 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Healmedy</h4></div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="healmedy_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="healmedy_date" name="healmedy_date">
+                                </div> 
+                                <div class="mb-3 col">
+                                    <label for="healmedy_time" class="form-label">SAAT</label>
+                                    <input type="time" class="form-control" id="healmedy_time" name="healmedy_time">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="healmedy_patient_username" class="form-label">1.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username" name="healmedy_patient_username">
+
+                                    <label for="healmedy_patient_username1" class="form-label">2.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username1" name="healmedy_patient_username1">
+
+                                    <label for="healmedy_patient_username2" class="form-label">3.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username2" name="healmedy_patient_username2">
+
+                                    <label for="healmedy_patient_username3" class="form-label">4.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username3" name="healmedy_patient_username3">
+
+                                    <label for="healmedy_patient_username4" class="form-label">5.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username4" name="healmedy_patient_username4">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="healmedy_patient_username5" class="form-label">6.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username5" name="healmedy_patient_username5">
+
+                                    <label for="healmedy_patient_username6" class="form-label">7.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username6" name="healmedy_patient_username6">
+
+                                    <label for="healmedy_patient_username7" class="form-label">8.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username7" name="healmedy_patient_username7">
+
+                                    <label for="healmedy_patient_username8" class="form-label">9.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username8" name="healmedy_patient_username8">
+
+                                    <label for="healmedy_patient_username9" class="form-label">10.HASTA ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="healmedy_patient_username9" name="healmedy_patient_username9">
+                                </div>                             
+                            </div>
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="healmedy_fee" class="form-label">ÜCRET</label>
+                                    <input type="text" class="form-control" id="healmedy_fee" name="healmedy_fee">
+
+                                    <label for="healmedy_tel" class="form-label">TELEFON NUMARASI</label>
+                                    <input type="text" class="form-control" id="healmedy_tel" name="healmedy_tel">
+
+                                    <label for="healmedy_notes" class="form-label">NOTLAR</label>
+                                    <textarea type="text" class="form-control" id="healmedy_notes" name="healmedy_notes" style="height: 100px"></textarea>
+
+                                    <label for="healmedy_explanation" class="form-label">YAPILAN HİZMET AÇIKLAMA</label>
+                                    <textarea type="text" class="form-control" id="healmedy_explanation" name="healmedy_explanation" style="height: 100px"></textarea>
+
+                                    <label for="healmedy_where_it_was_transplanted" class="form-label">NAKLEDİLDİĞİ YER </label>
+                                    <textarea type="text" class="form-control" id="healmedy_where_it_was_transplanted" name="healmedy_where_it_was_transplanted" style="height: 100px"></textarea>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="healmedy_car_info" class="form-label">PLAKA</label>
+                                    <select name="healmedy_car_info" id="healmedy_car_info" class="form-select" aria-label="Default select example">
+                                        <option value="selectcar">Lütfen Araç Seçiniz</option>
+                                        <option value="34SAS20">34 SAS 20</option>
+                                        <option value="34SAS30">34 SAS 30</option>
+                                        <option value="34BF2904">34 BF 2904</option>
+                                        <option value="34TP0633">34 TP 0633</option>
+                                        <option value="34BF9529">34 BF 9529</option>
+                                    </select>
+
+                                    <label for="healmedy_adress" class="form-label">ADRESS</label>
+                                    <textarea type="text" class="form-control" id="healmedy_adress" name="healmedy_adress" style="height: 100px"></textarea>
+
+                                    <label for="healmedy_where_taken" class="form-label">ALINDIĞI YER</label>
+                                    <textarea type="text" class="form-control" id="healmedy_where_taken" name="healmedy_where_taken" style="height: 100px"></textarea>
+
+
+                                    <button type="submit" name="healmedySave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" name="healmedyPreview" onclick="healmedyPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                    <button type="button" name="healmedyPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="reset" name="healmedyClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+
+                                </div>
+                            </div>
+                            <div class="mb-3 col"> 
+                               
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

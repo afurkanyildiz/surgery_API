@@ -1,0 +1,718 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+
+<script>
+    $(function() {
+       var sig = $('#delivery_by_signature').signature();
+       $('#delivery_by_clear').click(function() {
+           sig.signature('clear');
+       });
+
+       $('#delivery_by_json').click(function() {
+           $('#delivery_by_signaturetext').val(sig.signature('toJSON'));
+       });
+});
+    $(function() {
+       var sig = $('#receiving_area_signature').signature();
+       $('#receiving_area_clear').click(function() {
+           sig.signature('clear');
+       });
+
+       $('#receiving_area_json').click(function() {
+           $('#receiving_area_signaturetext').val(sig.signature('toJSON'));
+       });
+});
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Ambulans Günlük Kontrol ve Devir Teslim Formu</h4></div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="station_name" class="form-label">İSTASYON ADI</label>
+                                    <input type="text" class="form-control" id="station_name" name="station_name">
+
+                                    <label for="ambulance_km" class="form-label">KM</label>
+                                    <input type="text" class="form-control" id="ambulance_km" name="ambulance_km">
+                                </div> 
+
+                                <div class="mb-3 col">
+                                    <label for="number_plate" class="form-label">PLAKA</label>
+                                    <input type="text" class="form-control" id="number_plate" name="number_plate">
+
+                                    <label for="ambulance_control_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="ambulance_control_date" name="ambulance_control_date">
+                                </div>
+                            </div>
+                            <h3>ARAÇ</h3>
+                            <H6>1-ARACIN GENEL DURUMU</H6>
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ARACIN RUHSATI VAR MI</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="permit_yes" name="permit" value="permit_yes">
+                                        <label for="permit_yes" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="permit_no" name="permit" value="permit_no">
+                                        <label for="permit_no" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ARACIN DIŞ GÖRÜNÜŞÜ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="clean" name="physical_appereance" value="clean">
+                                        <label for="clean" class="form-label">Temiz</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="dirty" name="physical_appereance" value="dirty">
+                                        <label for="dirty" class="form-label">Kirli</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">     
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">KAPORTA </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="durable" name="bodywork" value="durable">
+                                        <label for="durable" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="damaged" name="bodywork" value="damaged">
+                                        <label for="damaged" class="form-label">Hasarlı</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">KAPILAR </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="door_durable" name="doors" value="door_durable">
+                                        <label for="door_durable" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="door_damaged" name="doors" value="door_damaged">
+                                        <label for="door_damaged" class="form-label">Hasarlı</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">      
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">LASTİKLER </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="tyre_durable" name="tyre" value="tyre_durable">
+                                        <label for="tyre_durable" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="tooth_der" name="tyre" value="tooth_der">
+                                        <label for="tooth_der" class="form-label">Diş Der.</label>
+                                    </div> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="air_less" name="tyre" value="air_less">
+                                        <label for="air_less" class="form-label">Havası Az</label>
+                                    </div> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="air_more" name="tyre" value="air_more">
+                                        <label for="air_more" class="form-label">Havası Fazla</label>
+                                    </div> 
+   
+                                </div>
+                            </div>
+                            <h5>2-Aracın Yakıt Durumu</h5>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="" class="form-label">YAKIT MATİK </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="fuel_there_is" name="fuel" value="fuel_there_is">
+                                        <label for="fuel_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="fuel_none" name="fuel" value="fuel_none">
+                                        <label for="fuel_none" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ARACIN YAKIT DURUMU </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="0" name="fuel_status" value="0">
+                                        <label for="0" class="form-label">%0</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="25" name="fuel_status" value="25">
+                                        <label for="25" class="form-label">%25</label>
+                                    </div> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="50" name="fuel_status" value="50">
+                                        <label for="50" class="form-label">%50</label>
+                                    </div> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="75" name="fuel_status" value="75">
+                                        <label for="75" class="form-label">%75</label>
+                                    </div> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="100" name="fuel_status" value="100">
+                                        <label for="100" class="form-label">%100</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>3-Aracın Altının Kontrolü</h5>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">YAĞ DAMLAMASI VAR MI? </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="oil_dripping_have" name="oil_dripping" value="oil_dripping_have">
+                                        <label for="oil_dripping_have" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="oil_dripping_none" name="oil_dripping" value="oil_dripping_none">
+                                        <label for="oil_dripping_none" class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">HİDROLİK KAÇAĞI VAR MI? </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="hydraulic_leakage_have" name="hydraulic_leakage" value="hydraulic_leakage_have">
+                                        <label for="hydraulic_leakage_have" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="hydraulic_leakage_none" name="hydraulic_leakage" value="hydraulic_leakage_none">
+                                        <label for="hydraulic_leakage_none" class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">DARBE VAR MI? </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="blow_have" name="blow" value="blow_have">
+                                        <label for="blow_have" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="blow_none" name="blow" value="blow_none">
+                                        <label for="blow_none" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">SU KAÇAĞI VAR MI? </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="water_leak_have" name="water_leak" value="water_leak_have">
+                                        <label for="water_leak_have" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="water_leak_none" name="water_leak" value="water_leak_none">
+                                        <label for="water_leak_none" class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">YAKIT KAÇAĞI VAR MI? </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="fuel_leak_have" name="fuel_leak" value="fuel_leak_have">
+                                        <label for="fuel_leak_have" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="fuel_leak_none" name="fuel_leak" value="fuel_leak_none">
+                                        <label for="fuel_leak_none" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <h5>4-Aracın Motor Kontrolü</h5>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">MOTOR KAPUTU AÇMA SİSTEMİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="hood_opening_system_normal" name="hood_opening_system" value="hood_opening_system_normal">
+                                        <label for="hood_opening_system_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="hood_opening_system_failed" name="hood_opening_system" value="hood_opening_system_failed">
+                                        <label for="hood_opening_system_failed" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">SİLECEK SUYU SIVI SEVİYESİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="wiper_water_level_normal" name="wiper_water_level" value="wiper_water_level_normal">
+                                        <label for="wiper_water_level_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="wiper_fluid_level_low" name="wiper_water_level" value="wiper_fluid_level_low">
+                                        <label for="wiper_fluid_level_low" class="form-label">Düşük</label>
+                                    </div>
+
+                                    <label for="" class="form-label">MOTOR YAĞ SEVİYESİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="engine_oil_level_normal" name="engine_oil_level" value="engine_oil_level_normal">
+                                        <label for="engine_oil_level_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="engine_oil_level_low" name="engine_oil_level" value="engine_oil_level_low">
+                                        <label for="engine_oil_level_low" class="form-label">Düşük</label>
+                                    </div>
+
+                                    <label for="" class="form-label">MOTOR TEMİZLİĞİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="engine_cleaning_normal" name="engine_cleaning" value="engine_cleaning_normal">
+                                        <label for="engine_cleaning_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="engine_cleaning_dirty" name="engine_cleaning" value="engine_cleaning_dirty">
+                                        <label for="engine_cleaning_dirty" class="form-label">Kirli</label>
+                                    </div>
+
+                                    <label for="" class="form-label">YANAN ARIZA LAMBASI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="malfunction_lamp_none" name="malfuntion_lamp" value="malfunction_lamp_none">
+                                        <label for="malfunction_lamp_none" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="malfunction_lamp_there_is" name="malfuntion_lamp" value="malfunction_lamp_there_is">
+                                        <label for="malfunction_lamp_there_is" class="form-label">Var</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">SİLECEK LASTİĞİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="wiper_rubber_normal" name="wiper_rubber" value="wiper_rubber_normal">
+                                        <label for="wiper_rubber_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="wiper_rubber_worn" name="wiper_rubber" value="wiper_rubber_worn">
+                                        <label for="fuel_leak_nowiper_rubber_wornne" class="form-label">Yıpranmış</label>
+                                    </div>
+
+                                    <label for="" class="form-label">RADYATÖR SIVI SEVİYESİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="radiator_fluid_level_normal" name="radiator_fluid_level" value="radiator_fluid_level_normal">
+                                        <label for="radiator_fluid_level_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="radiator_fluid_level_low" name="radiator_fluid_level" value="radiator_fluid_level_low">
+                                        <label for="radiator_fluid_level_low" class="form-label">Düşük</label>
+                                    </div>
+
+                                    <label for="" class="form-label">FREN HİDROLİK YAĞ SEVİYESİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="brake_hydraulic_oil_level_normal" name="brake_hydraulic_oil_level" value="brake_hydraulic_oil_level_normal">
+                                        <label for="brake_hydraulic_oil_level_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="brake_hydraulic_oil_level_low" name="brake_hydraulic_oil_level" value="brake_hydraulic_oil_level_low">
+                                        <label for="brake_hydraulic_oil_level_low" class="form-label">Düşük</label>
+                                    </div>
+
+                                    <label for="" class="form-label">STEPNE </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="spare_wheel_there_is" name="spare_wheel" value="spare_wheel_there_is">
+                                        <label for="spare_wheel_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="spare_wheel_none" name="spare_wheel" value="spare_wheel_none">
+                                        <label for="spare_wheel_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">KLİMA </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="air_conditioner_normal" name="air_conditioner" value="air_conditioner_normal">
+                                        <label for="air_conditioner_normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="air_conditioner_defective" name="air_conditioner" value="air_conditioner_defective">
+                                        <label for="air_conditioner_defective" class="form-label">Arızalı</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>5-Aracı Çalıştırınız</h5>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">GPS </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="gps_healthy" name="gps" value="gps_healthy">
+                                        <label for="gps_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="gps_defective" name="gps" value="gps_defective">
+                                        <label for="gps_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">MAYK </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="mayk_healthy" name="mayk" value="mayk_healthy">
+                                        <label for="mayk_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="mayk_defective" name="mayk" value="mayk_defective">
+                                        <label for="mayk_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">FARLAR / SİNYAL LAMBALARI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="headlight_healthy" name="headlight" value="headlight_healthy">
+                                        <label for="headlight_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="headlight_defective" name="headlight" value="headlight_defective">
+                                        <label for="headlight_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">GERİ VİTES LAMBASI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="reversing_light_healthy" name="reversing_light" value="reversing_light_healthy">
+                                        <label for="reversing_light_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="reversing_light_defective" name="reversing_light" value="reversing_light_defective">
+                                        <label for="reversing_light_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">TEPE LAMBALARI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="overhead_lamps_healthy" name="overhead_lamps" value="overhead_lamps_healthy">
+                                        <label for="overhead_lamps_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="overhead_lamps_defective" name="overhead_lamps" value="overhead_lamps_defective">
+                                        <label for="overhead_lamps_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">FREN SİSTEMİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="braking_system_healthy" name="braking_system" value="braking_system_healthy">
+                                        <label for="braking_system_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="braking_system_defective" name="braking_system" value="braking_system_defective">
+                                        <label for="braking_system_defective" class="form-label">Arızalı</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ARAÇ TELSİZİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="car_radio_healthy" name="car_radio" value="car_radio_healthy">
+                                        <label for="car_radio_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="car_radio_defective" name="car_radio" value="car_radio_defective">
+                                        <label for="car_radio_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">SİRENLER </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="sirens_healthy" name="sirens" value="sirens_healthy">
+                                        <label for="sirens_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sirens_defective" name="sirens" value="sirens_defective">
+                                        <label for="sirens_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">FLAŞÖRLER </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="flasher_healthy" name="flasher" value="flasher_healthy">
+                                        <label for="flasher_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="flasher_defective" name="flasher" value="flasher_defective">
+                                        <label for="flasher_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ARKA KAPI AYDINLATMASI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="rear_door_lighting_healthy" name="rear_door_lighting" value="rear_door_lighting_healthy">
+                                        <label for="rear_door_lighting_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="rear_door_lighting_defective" name="rear_door_lighting" value="rear_door_lighting_defective">
+                                        <label for="rear_door_lighting_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">FREN LAMBALARI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="brake_lights_healthy" name="break_lights" value="brake_lights_healthy">
+                                        <label for="brake_lights_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="break_lights_defective" name="break_lights" value="break_lights_defective">
+                                        <label for="break_lights_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">VİTES SİSTEMİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="gear_system_healthy" name="gear_system" value="gear_system_healthy">
+                                        <label for="gear_system_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="gear_system_defective" name="gear_system" value="gear_system_defective">
+                                        <label for="gear_system_defective" class="form-label">Arızalı</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ÖN/ARKA EMNİYET KEMERİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="safety_belt_healthy" name="safety_belt" value="safety_belt_healthy">
+                                        <label for="safety_belt_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="safety_belt_defective" name="safety_belt" value="safety_belt_defective">
+                                        <label for="safety_belt_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">MOTOR ÇALIŞMASI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="engine_operation_healthy" name="engine_operation" value="engine_operation_healthy">
+                                        <label for="engine_operation_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="engine_operation_defective" name="engine_operation" value="engine_operation_defective">
+                                        <label for="engine_operation_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">DİREKSİYON SİSTEMİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="steering_system_healthy" name="steering_system" value="steering_system_healthy">
+                                        <label for="steering_system_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="steering_system_defective" name="steering_system" value="steering_system_defective">
+                                        <label for="steering_system_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">GÖSTERGE PANELİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="instrument_panel_healthy" name="instrument_panel" value="instrument_panel_healthy">
+                                        <label for="instrument_panel_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="instrument_panel_defective" name="instrument_panel" value="instrument_panel_defective">
+                                        <label for="instrument_panel_defective" class="form-label">Arızalı</label>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">AYNALAR </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="mirrors_healthy" name="mirrors" value="mirrors_healthy">
+                                        <label for="mirrors_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="mirrors_fracture" name="mirrors" value="mirrors_fracture">
+                                        <label for="mirrors_fracture" class="form-label">Kırık</label>
+                                    </div>
+
+                                    <label for="" class="form-label">EGZOZ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="exhaust_healthy" name="exhaust" value="exhaust_healthy">
+                                        <label for="exhaust_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="exhaust_defective" name="exhaust" value="exhaust_defective">
+                                        <label for="exhaust_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                    <label for="" class="form-label">MERKEZİ SİSTEM KİLİTLEME </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="central_system_locking_there_is" name="central_system_locking" value="central_system_locking_there_is">
+                                        <label for="central_system_locking_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="central_system_locking_none" name="central_system_locking" value="central_system_locking_none">
+                                        <label for="central_system_locking_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">RADYO-TEYP </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="radio_tape_healthy" name="radio_tape" value="radio_tape_healthy">
+                                        <label for="radio_tape_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="radio_tape_defective" name="radio_tape" value="radio_tape_defective">
+                                        <label for="radio_tape_defective" class="form-label">Arızalı</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>6-Arka Kabin İçi</h5>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">TEMİZLİK </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="cleaning_clean" name="cleaning" value="cleaning_clean">
+                                        <label for="cleaning_clean" class="form-label">Temiz</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="cleaning_dirty" name="cleaning" value="cleaning_dirty">
+                                        <label for="cleaning_dirty" class="form-label">Kirli</label>
+                                    </div>
+
+                                    <label for="" class="form-label">AYDINLATMA </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="lighting_healthy" name="lighting" value="lighting_healthy">
+                                        <label for="lighting_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="lighting_defective" name="lighting" value="lighting_defective">
+                                        <label for="lighting_defective" class="form-label">Arızalı</label>
+                                    </div>
+
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ÇÖP KUTUSU </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="rubbish_bin_empty" name="rubbish_bin" value="rubbish_bin_empty">
+                                        <label for="rubbish_bin_empty" class="form-label">Boş</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="rubbish_bin_full" name="rubbish_bin" value="rubbish_bin_full">
+                                        <label for="rubbish_bin_full" class="form-label">Dolu</label>
+                                    </div>
+
+                                    <label for="" class="form-label">REDRESÖR </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="rectifiers_healthy" name="rectifiers" value="rectifiers_healthy">
+                                        <label for="rectifiers_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="rectifiers_defective" name="rectifiers" value="rectifiers_defective">
+                                        <label for="rectifiers_defective" class="form-label">Arızalı</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>7-Avadanlık</h5>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">KRİKO </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="jack_there_is" name="jack" value="jack_there_is">
+                                        <label for="jack_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="jack_none" name="jack" value="jack_none">
+                                        <label for="jack_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">PATİNAJ ZİNCİRİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="skidding_chain_there_is" name="skidding_chain" value="skidding_chain_there_is">
+                                        <label for="skidding_chain_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="skidding_chain_none" name="skidding_chain" value="skidding_chain_none">
+                                        <label for="skidding_chain_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">220 VOLT ŞARJ KABLOSU </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="charging_cable_there_is" name="charging_cable" value="charging_cable_there_is">
+                                        <label for="charging_cable_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="charging_cable_none" name="charging_cable" value="charging_cable_none">
+                                        <label for="charging_cable_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">BİJON ANAHTARI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="stud_wrench_there_is" name="stud_wrench" value="stud_wrench_there_is">
+                                        <label for="stud_wrench_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="stud_wrench_none" name="stud_wrench" value="stud_wrench_none">
+                                        <label for="stud_wrench_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">YANGIN SÖNDÜRME TÜPÜ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="fire_extinguishing_tube_there_is" name="fire_extinguishing_tube" value="fire_extinguishing_tube_there_is">
+                                        <label for="fire_extinguishing_tube_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="fire_extinguishing_tube_none" name="fire_extinguishing_tube" value="fire_extinguishing_tube_none">
+                                        <label for="fire_extinguishing_tube_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">İMDAT ÇEKİCİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="distress_hammer_there_is" name="distress_hammer" value="distress_hammer_there_is">
+                                        <label for="distress_hammer_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="distress_hammer_none" name="distress_hammer" value="distress_hammer_none">
+                                        <label for="distress_hammer_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="ambulance_daily_explanation" class="form-label">AÇIKLAMA</label>
+                                    <textarea type="text" class="form-control" id="ambulance_daily_explanation" name="ambulance_daily_explanation" style="height: 100px"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="delivery_by_username" class="form-label">TESLİM EDEN ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="delivery_by_username" name="delivery_by_username">
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="delivery_by_signature" class="form-label">İMZA</label>
+                                        <div class=" border border-5" id="delivery_by_signature">
+                                                
+                                        </div>
+                                        <textarea name="delivery_by_signaturetext" id="delivery_by_signaturetext" cols="30" rows="10" style="display: none;"></textarea>                                       
+                                    </div>
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="delivery_by_clear" name="delivery_by_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="delivery_by_json" name="delivery_by_signature_json">İmzayı Kaydet</button>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="receiving_area_username" class="form-label">TESLİM ALAN ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="receiving_area_username" name="receiving_area_username">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="receiving_area_signature" class="form-label">İMZA</label>
+                                        <div class=" border border-5" id="receiving_area_signature">
+                                                    
+                                        </div>
+                                        <textarea name="receiving_area_signaturetext" id="receiving_area_signaturetext" cols="30" rows="10" style="display: none;"></textarea>                                       
+                                    </div>
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="receiving_area_clear" name="receiving_area_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="receiving_area_json" name="receiving_area_signature_json">İmzayı Kaydet</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col"> 
+                                <button type="submit" name="dailySave"class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                &nbsp;
+                                <button type="button" name="dailyPreview" onclick="ambulanceDailyPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+
+                                <button type="button" name="dailyPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                &nbsp;
+                                <button type="reset" name="dailyClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

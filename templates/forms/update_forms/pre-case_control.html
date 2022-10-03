@@ -1,0 +1,747 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+<script>
+   $(document).ready(function()
+   {
+        $('.defibrillator').click(function()
+        {
+            var text="";
+            $('.defibrillator:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtdefibrillator').val(text);
+        });
+        $('.mechanical_ventilator').click(function()
+        {
+            var text="";
+            $('.mechanical_ventilator:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtmechanical_ventilator').val(text);
+        });
+        $('.portable_aspirator').click(function()
+        {
+            var text="";
+            $('.portable_aspirator:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtportable_aspirator').val(text);
+        });
+        $('.fixed_aspirator').click(function()
+        {
+            var text="";
+            $('.fixed_aspirator:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtfixed_aspirator').val(text);
+        });
+        $('.fixed_oxygen_aspirator').click(function()
+        {
+            var text="";
+            $('.fixed_oxygen_aspirator:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtfixed_oxygen_aspirator').val(text);
+        });
+        $('.portable_oxygen_system').click(function()
+        {
+            var text="";
+            $('.portable_oxygen_system:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtportable_oxygen_system').val(text);
+        });
+        $('.main_stretcher').click(function()
+        {
+            var text="";
+            $('.main_stretcher:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtmain_stretcher').val(text);
+        });
+        $('.combination_stretcher').click(function()
+        {
+            var text="";
+            $('.combination_stretcher:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtcombination_stretcher').val(text);
+        });
+        $('.spine_board').click(function()
+        {
+            var text="";
+            $('.spine_board:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtspine_board').val(text);
+        });
+        $('.spoon_stretcher').click(function()
+        {
+            var text="";
+            $('.spoon_stretcher:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtspoon_stretcher').val(text);
+        });
+        $('.emergency_bag').click(function()
+        {
+            var text="";
+            $('.emergency_bag:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtemergency_bag').val(text);
+        });
+        $('.first_aid_kit').click(function()
+        {
+            var text="";
+            $('.first_aid_kit:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtfirst_aid_kit').val(text);
+        });
+        $('.rear_cab_floor').click(function()
+        {
+            var text="";
+            $('.rear_cab_floor:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtrear_cab_floor').val(text);
+        });
+        $('.medical_waste').click(function()
+        {
+            var text="";
+            $('.medical_waste:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txtmedical_waste').val(text);
+        });
+   });
+</script>
+
+<script>
+    $(function() {
+        if($('#pre_case_signaturetext').is(':contains("lines")')){
+            var sig = $('#pre_case_signature').signature();
+            sig.signature('draw', $('#pre_case_signaturetext').val());
+            sig.signature('disable');   
+            $('#pre_case_signature').signature({disabled:true});
+        } else {
+            var sig = $('#pre_case_signature').signature();
+            sig.signature('disable');   
+            $('#pre_case_signature').signature({disabled:true});
+        }
+    
+});
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Vaka Öncesi Kontrol Formu</h4></div>
+                    <div class="card-body">
+                        <form action="{% url 'updatePreCaseControl' PreCaseControl.id %}" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">DEFİBRİLATOR</label> 
+                                    <div >                                       
+                                        <input class="defibrillator" type="checkbox" id="there_is" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'there_is' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="defibrillator" type="checkbox" id="none" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'none' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="defibrillator" type="checkbox" id="working" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'working' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="defibrillator" type="checkbox" id="not_working" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'not_working' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="defibrillator" type="checkbox" id="defective" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'defective' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="defibrillator" type="checkbox" id="clean" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'clean' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="defibrillator" type="checkbox" id="dirty" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'dirty' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="defibrillator" type="checkbox" id="cleaned" name="defibrillator" {% for case in PreCaseControl.Defibrillator %}{% if case == 'cleaned' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtdefibrillator" type="text" name="Defibrillator"value="{%for case in PreCaseControl.Defibrillator%}{{case}},{%endfor%}" style="display: none;" readonly>
+                                </div> 
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">MEKANİK VENİLATOR</label> 
+                                    <div >                                       
+                                        <input class="mechanical_ventilator" type="checkbox" id="there_is1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'there_is1' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is1" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="mechanical_ventilator" type="checkbox" id="none1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'none1' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none1" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="mechanical_ventilator" type="checkbox" id="working1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'working1' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working1" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="mechanical_ventilator" type="checkbox" id="not_working1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'not_working1' %} checked {%endif%}{%endfor%} value="çalışşmıyor">
+                                        <label for="not_working1" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="mechanical_ventilator" type="checkbox" id="defective1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'defective1' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective1" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="mechanical_ventilator" type="checkbox" id="clean1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'clean1' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean1" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="mechanical_ventilator" type="checkbox" id="dirty1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'dirty1' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty1" class="form-label">Kirli</label>
+                                    </div>
+                                    <div> 
+                                        <input class="mechanical_ventilator" type="checkbox" id="cleaned1" name="mechanical_ventilator" {% for case in PreCaseControl.mechanicalventilator %}{% if case == 'cleaned1' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned1" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtmechanical_ventilator" type="text" name="mechanicalventilator"value="{%for case in PreCaseControl.mechanicalventilator%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">PORTATİF ASPİRATÖR</label> 
+                                    <div >                                       
+                                        <input class="portable_aspirator" type="checkbox" id="there_is2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'there_is2' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is2" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="portable_aspirator" type="checkbox" id="none2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'none2' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none2" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="portable_aspirator" type="checkbox" id="working2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'working2' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working2" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="portable_aspirator" type="checkbox" id="not_working2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'not_working2' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working2" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_aspirator" type="checkbox" id="defective2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'defective2' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective2" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_aspirator" type="checkbox" id="clean2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'clean2' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean2" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_aspirator" type="checkbox" id="dirty2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'dirty2' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty2" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_aspirator" type="checkbox" id="cleaned2" name="portable_aspirator" {% for case in PreCaseControl.portableaspirator %}{% if case == 'cleaned2' %} checked {%endif%}{%endfor%} value="temizzlendi">
+                                        <label for="cleaned2" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtportable_aspirator" type="text" name="portableaspirator"value="{%for case in PreCaseControl.portableaspirator%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">SABİT ASPİRATÖR</label> 
+                                    <div >                                       
+                                        <input class="fixed_aspirator" type="checkbox" id="there_is3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'there_is3' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is3" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="fixed_aspirator" type="checkbox" id="none3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'none3' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none3" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="fixed_aspirator" type="checkbox" id="working3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'working3' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working3" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="fixed_aspirator" type="checkbox" id="not_working3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'not_working3' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working3" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_aspirator" type="checkbox" id="defective3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'defective3' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective3" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_aspirator" type="checkbox" id="clean3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'clean3' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean3" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_aspirator" type="checkbox" id="dirty3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'dirty3' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty3" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_aspirator" type="checkbox" id="cleaned3" name="fixed_aspirator" {% for case in PreCaseControl.fixedaspirator %}{% if case == 'cleaned3' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned3" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtfixed_aspirator" type="text" name="fixedaspirator"value="{%for case in PreCaseControl.fixedaspirator%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+
+                            </div>
+
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">SABİT OKSİJEN ASPİRATÖR</label> 
+                                    <div >                                       
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="there_is4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'there_is4' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is4" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="none4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'none4' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none4" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="working4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'working4' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working4" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="not_working4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'not_working4' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working4" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="defective4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'defective4' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective4" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="clean4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'clean4' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean4" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="dirty4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'dirty4' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty4" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="fixed_oxygen_aspirator" type="checkbox" id="cleaned4" name="fixed_oxygen_aspirator" {% for case in PreCaseControl.fixedoxygenaspirator %}{% if case == 'cleaned4' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned4" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtfixed_oxygen_aspirator" type="text" name="fixedoxygenaspirator"value="{%for case in PreCaseControl.fixedoxygenaspirator%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">PORTATİF OKSİJEN SİSTEMİ</label> 
+                                    <div >                                       
+                                        <input class="portable_oxygen_system" type="checkbox" id="there_is5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'there_is5' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is5" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="portable_oxygen_system" type="checkbox" id="none5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'none5' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none5" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="portable_oxygen_system" type="checkbox" id="working5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'working5' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working5" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="portable_oxygen_system" type="checkbox" id="not_working5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'not_working5' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working5" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_oxygen_system" type="checkbox" id="defective5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'defective5' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective5" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_oxygen_system" type="checkbox" id="clean5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'clean5' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean5" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_oxygen_system" type="checkbox" id="dirty5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'dirty5' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty5" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="portable_oxygen_system" type="checkbox" id="cleaned5" name="portable_oxygen_system" {% for case in PreCaseControl.portableoxygensystem %}{% if case == 'cleaned5' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned5" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtportable_oxygen_system" type="text" name="portableoxygensystem"value="{%for case in PreCaseControl.portableoxygensystem%}{{case}},{%endfor%}" style="display: none;"  readonly>
+
+                                </div>
+                            </div>
+                            <div class="row">     
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ANA SEDYE</label> 
+                                    <div >                                       
+                                        <input class="main_stretcher" type="checkbox" id="there_is6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'there_is6' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is6" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="main_stretcher" type="checkbox" id="none6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'none6' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none6" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="main_stretcher" type="checkbox" id="working6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'working6' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working6" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="main_stretcher" type="checkbox" id="not_working6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'not_working6' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working6" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="main_stretcher" type="checkbox" id="defective6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'defective6' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective6" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="main_stretcher" type="checkbox" id="clean6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'clean6' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean6" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="main_stretcher" type="checkbox" id="dirty6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'dirty6' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty6" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="main_stretcher" type="checkbox" id="cleaned6" name="main_stretcher" {% for case in PreCaseControl.mainstretcher %}{% if case == 'cleaned6' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned6" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtmain_stretcher" type="text" name="mainstretcher"value="{%for case in PreCaseControl.mainstretcher%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">KOMBİNASYON SEDYE</label> 
+                                    <div >                                       
+                                        <input class="combination_stretcher" type="checkbox" id="there_is7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'there_is7' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is7" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="combination_stretcher" type="checkbox" id="none7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'none7' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none7" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="combination_stretcher" type="checkbox" id="working7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'working7' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working7" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="combination_stretcher" type="checkbox" id="not_working7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'not_working7' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working7" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="combination_stretcher" type="checkbox" id="defective7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'defective7' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective7" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="combination_stretcher" type="checkbox" id="clean7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'clean7' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean7" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="combination_stretcher" type="checkbox" id="dirty7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'dirty7' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty7" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="combination_stretcher" type="checkbox" id="cleaned7" name="combination_stretcher" {% for case in PreCaseControl.combinationstretcher %}{% if case == 'cleaned7' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned7" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtcombination_stretcher" type="text" name="combinationstretcher"value="{%for case in PreCaseControl.combinationstretcher%}{{case}},{%endfor%}" style="display: none;"  readonly>
+
+                                </div>
+                            </div>
+                            <div class="row">      
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">OMURGA TAHTASI</label> 
+                                    <div >                                       
+                                        <input class="spine_board" type="checkbox" id="there_is8" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'there_is8' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is8" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="spine_board" type="checkbox" id="none8" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'none8' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none8" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="spine_board" type="checkbox" id="working8" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'working8' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working8" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="spine_board" type="checkbox" id="not_working8" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'not_working8' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working8" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="spine_board" type="checkbox" id="defective8" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'defective8' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective8" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="spine_board" type="checkbox" id="clean2" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'clean2' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean8" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="spine_board" type="checkbox" id="dirty8" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'dirty8' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty8" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="spine_board" type="checkbox" id="cleaned8" name="spine_board" {% for case in PreCaseControl.spineboard %}{% if case == 'cleaned8' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned8" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtspine_board" type="text" name="spineboard"value="{%for case in PreCaseControl.spineboard%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">KAŞIK SEDYE</label> 
+                                    <div >                                       
+                                        <input class="spoon_stretcher" type="checkbox" id="there_is9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'there_is9' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is9" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="spoon_stretcher" type="checkbox" id="none9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'none9' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none9" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="spoon_stretcher" type="checkbox" id="working9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'working9' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working9" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="spoon_stretcher" type="checkbox" id="not_working9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'not_working9' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working9" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="spoon_stretcher" type="checkbox" id="defective9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'defective9' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective9" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="spoon_stretcher" type="checkbox" id="clean9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'clean9' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean9" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="spoon_stretcher" type="checkbox" id="dirty9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'dirty9' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty9" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="spoon_stretcher" type="checkbox" id="cleaned9" name="spoon_stretcher" {% for case in PreCaseControl.spoonstretcher %}{% if case == 'cleaned9' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned9" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtspoon_stretcher" type="text" name="spoonstretcher"value="{%for case in PreCaseControl.spoonstretcher%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="" class="form-label">ACİL ÇANTASI</label> 
+                                    <div >                                       
+                                        <input class="emergency_bag" type="checkbox" id="there_is10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'there_is10' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is10" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="emergency_bag" type="checkbox" id="none10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'none10' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none10" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="emergency_bag" type="checkbox" id="working10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'working10' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working10" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="emergency_bag" type="checkbox" id="not_working10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'not_working10' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working10" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="emergency_bag" type="checkbox" id="defective10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'defective10' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective10" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="emergency_bag" type="checkbox" id="clean10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'clean10' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean10" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="emergency_bag" type="checkbox" id="dirty10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'dirty10' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty10" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="emergency_bag" type="checkbox" id="cleaned10" name="emergency_bag" {% for case in PreCaseControl.emergencybag %}{% if case == 'cleaned10' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned10" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtemergency_bag" type="text" name="emergencybag"value="{%for case in PreCaseControl.emergencybag%}{{case}},{%endfor%}" style="display: none;"  readonly>
+
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">İLKYARDIM ÇANTASI</label> 
+                                    <div >                                       
+                                        <input class="first_aid_kit" type="checkbox" id="there_is11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'there_is11' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is11" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="first_aid_kit" type="checkbox" id="none11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'none11' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none11" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="first_aid_kit" type="checkbox" id="working11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'working11' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working11" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="first_aid_kit" type="checkbox" id="not_working11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'not_working11' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working11" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="first_aid_kit" type="checkbox" id="defective11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'defective11' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective11" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="first_aid_kit" type="checkbox" id="clean11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'clean11' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean11" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="first_aid_kit" type="checkbox" id="dirty11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'dirty11' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty11" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="first_aid_kit" type="checkbox" id="cleaned11" name="first_aid_kit" {% for case in PreCaseControl.firstaidkit %}{% if case == 'cleaned11' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned11" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtfirst_aid_kit" type="text" name="firstaidkit"value="{%for case in PreCaseControl.firstaidkit%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                </div>
+                            </div>
+                            <div class="row">      
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">ARKA KABİN ZEMİN</label> 
+                                    <div >                                       
+                                        <input class="rear_cab_floor" type="checkbox" id="there_is12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'there_is12' %} checked {%endif%}{%endfor%} value="var">
+                                        <label for="there_is2" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="rear_cab_floor" type="checkbox" id="none12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'none12' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none12" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="rear_cab_floor" type="checkbox" id="working12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'working12' %} checked {%endif%}{%endfor%}  value="çalışıyo">
+                                        <label for="working12" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="rear_cab_floor" type="checkbox" id="not_working12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'not_working12' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working12" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="rear_cab_floor" type="checkbox" id="defective12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'defective12' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective12" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="rear_cab_floor" type="checkbox" id="clean12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'clean12' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean12" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="rear_cab_floor" type="checkbox" id="dirty12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'dirty12' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty12" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="rear_cab_floor" type="checkbox" id="cleaned12" name="rear_cab_floor" {% for case in PreCaseControl.rearcabfloor %}{% if case == 'cleaned12' %} checked {%endif%}{%endfor%}  value="temizlendi">
+                                        <label for="cleaned12" class="form-label">Temizlendi</label>
+                                    </div> 
+                                    <input id="txtrear_cab_floor" type="text" name="rearcabfloor"value="{%for case in PreCaseControl.rearcabfloor%}{{case}},{%endfor%}" style="display: none;"  readonly>
+
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">TIBBİ ATIK</label> 
+                                    <div >                                       
+                                        <input class="medical_waste" type="checkbox" id="there_is13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'there_is13' %} checked {%endif%}{%endfor%}  value="var">
+                                        <label for="there_is13" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="medical_waste" type="checkbox" id="none13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'none13' %} checked {%endif%}{%endfor%} value="yok">
+                                        <label for="none13" class="form-label">Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="medical_waste" type="checkbox" id="working13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'working13' %} checked {%endif%}{%endfor%} value="çalışıyor">
+                                        <label for="working13" class="form-label">Çalışıyor</label>
+                                    </div> 
+                                    <div>
+                                        <input class="medical_waste" type="checkbox" id="not_working13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'not_working13' %} checked {%endif%}{%endfor%} value="çalışmıyor">
+                                        <label for="not_working13" class="form-label">Çalışmıyor</label>
+                                    </div>
+                                    <div>
+                                        <input class="medical_waste" type="checkbox" id="defective13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'defective13' %} checked {%endif%}{%endfor%} value="arızalı">
+                                        <label for="defective13" class="form-label">Arızalı</label>
+                                    </div>
+                                    <div>
+                                        <input class="medical_waste" type="checkbox" id="clean13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'clean13' %} checked {%endif%}{%endfor%} value="temiz">
+                                        <label for="clean13" class="form-label">Temiz</label>
+                                    </div>
+                                    <div>
+                                        <input class="medical_waste" type="checkbox" id="dirty13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'dirty13' %} checked {%endif%}{%endfor%} value="kirli">
+                                        <label for="dirty13" class="form-label">Kirli</label>
+                                    </div>
+                                    <div>
+                                        <input class="medical_waste" type="checkbox" id="cleaned13" name="medical_waste" {% for case in PreCaseControl.medicalwaste %}{% if case == 'cleaned13' %} checked {%endif%}{%endfor%} value="temizlendi">
+                                        <label for="cleaned13" class="form-label">Temizlendi</label>
+                                    </div>
+                                    <input id="txtmedical_waste" type="text" name="medicalwaste"value="{%for case in PreCaseControl.medicalwaste%}{{case}},{%endfor%}" style="display: none;" readonly>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="pre_case_date" class="form-label">Tarih</label>
+                                    <input type="date" class="form-control" id="pre_case_date" name="pre_case_date" value="{{PreCaseControl.pre_case_date}}">
+                                    <label for="pre_case_time" class="form-label">Saat</label>
+                                    <input type="time" class="form-control" id="pre_case_time" name="pre_case_time" value="{{PreCaseControl.pre_case_time}}">
+                                    </br>
+                                    </br>
+                                    <button type="submit" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" onclick="updatePreCasePdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                    <button type="button" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="reset" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="pre_case_username" class="form-label">ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="pre_case_username" name="pre_case_username" value="{{PreCaseControl.pre_case_username}}">
+                                    
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    <label for="pre_case_signature" class="form-label">İMZA</label>
+                                    <div class="container border border-5" id="pre_case_signature" >
+                                                
+                                    </div>
+                                    <textarea name="pre_case_signaturetext" id="pre_case_signaturetext" cols="30" rows="10" style="display: none;">{{PreCaseControl.pre_case_signaturetext}}</textarea>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

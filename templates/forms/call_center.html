@@ -1,0 +1,302 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Çağrı Merkezi Formu</h4></div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token%}
+                            <h3>Çağrıyı Yapan</h3>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="institution_name" class="form-label">KURUM ADI</label>
+                                    <input type="text" class="form-control" id="institution_name" name="institution_name">
+                                </div> 
+                                <div class="mb-3 col">
+                                    <label for="caller_username" class="form-label">ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="caller_username" name="caller_username">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="proximity" class="form-label">YAKINLIĞI</label>
+                                    <input type="text" class="form-control" id="proximity" name="proximity">
+                                </div>
+                                <div class="mb-3 col" data-type="control-phone">
+                                    <label for="caller_tel_no" class="form-label">TELEFON NUMARASI</label>
+                                    <input type="tel" class="form-control" id="caller_tel_no" name="caller_tel_no" value placeholder="(000) 000-0000" data-component="phone" inputmode="text" maskvalue="(###) ###-####">
+                                    <label class="form-sub-label" style="min-height: 13px;" for="caller_tel_no_sub">Lütfen geçerli bir telefon numarası girin.</label>
+                                </div>
+                            </div>
+                            <h3>Hasta</h3>
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="patient_username" class="form-label">ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="patient_username" name="patient_username">
+                                    <label for="patient_age" class="form-label">YAŞ</label>
+                                    <input type="text" class="form-control" id="patient_age" name="patient_age">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">CİNSİYET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="male" name="gender" value="erkek">
+                                        <label for="male" class="form-label">Erkek</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="female" name="gender" value="kadın">
+                                        <label for="female" class="form-label">Kadın</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">     
+                                <div class="mb-3 col"> 
+                                    <label for="patient_adress" class="form-label">ADRES</label>
+                                    <textarea type="text" class="form-control" id="patient_adress" name="patient_adress" style="height: 100px"></textarea>
+   
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="patient_for_directions" class="form-label">ADRES TARİFİ</label>
+                                    <textarea type="text" class="form-control" id="patient_for_directions" name="patient_for_directions" style="height: 100px"></textarea> 
+                                </div>
+                            </div>
+                            <div class="row">      
+                               <div class="mb-3 col">
+                                    <label for="case_no" class="form-label">VAKA NO</label>
+                                    <input type="text" class="form-control" name="case_no" id="case_no">
+                               </div>
+                               <div class="mb-3 col">
+                                    <label for="case_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" name="case_date" id="case_date">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="car_info" class="form-label">TAŞIT BİLGİSİ</label>
+                                    <div></div>
+                                    <select name="car_info" id="car_info" class="form-select" aria-label="Default select example">
+                                        <option value="selectcar">Lütfen Araç Seçiniz</option>
+                                        <option value="34SAS20">34 SAS 20</option>
+                                        <option value="34SAS30">34 SAS 30</option>
+                                        <option value="34BF2904">34 BF 2904</option>
+                                        <option value="34RE1140">34 RE 1140</option>
+                                        <option value="34BF9529">34 BF 9529</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="case_time" class="form-label">ÇAĞRI ALIŞ SAATİ</label>
+                                    <input type="time" class="form-control" name="case_time" id="case_time">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="alarm_clock" class="form-label">ALARM SAATİ</label>
+                                    <input type="time" class="form-control" name="alarm_clock" id="alarm_clock">
+
+                                    <label for="" class="form-label">RANDEVU</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="case_yes" name="case_yes" value="evet">
+                                        <label for="case_yes" class="form-label">Evet</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="appointment_time" class="form-label">RANDEVU SAATİ</label>
+                                    <input type="time" class="form-control" name="appointment_time" id="appointment_time">
+
+                                    <label for="appointment_date" class="form-label">RANDEVU TARİHİ</label>
+                                    <input type="date" class="form-control" name="appointment_date" id="appointment_date">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="patient_complaint" class="form-label">HASTANIN ŞİKAYETİ</label>
+                                    <input type="text" class="form-control" name="patient_complaint" id="patient_complaint">
+
+                                    <label for="patient_clinic" class="form-label">HASTANIN KLİNİĞİ</label>
+                                    <input type="text" class="form-control" name="patient_clinic" id="patient_clinic">
+                                    
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="pre_diagnosis" class="form-label">ÖN TANI</label>
+                                    <input type="text" class="form-control" name="pre_diagnosis" id="pre_diagnosis">
+
+                                    <label for="consent_received_person" class="form-label">ONAY ALINAN KİŞİ</label>
+                                    <input type="text" class="form-control" name="consent_received_person" id="consent_received_person">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">TRİAJ KODU</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="1" name="triaj" value="1">
+                                        <label for="1" class="form-label">1</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="2" name="triaj" value="2">
+                                        <label for="2" class="form-label">2</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="3" name="triaj" value="3">
+                                        <label for="3" class="form-label">3</label>
+                                    </div>
+
+                                    <label for="exit_time" class="form-label">ÇIKIŞ SAATİ</label>
+                                    <input type="time" class="form-control" name="exit_time" id="exit_time">
+                                   
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ÇIKIŞ ŞEKLİ</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="urgent" name="output_method" value="acil">
+                                        <label for="urgent" class="form-label">Acil</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="controlled" name="output_method" value="kontrollü">
+                                        <label for="controlled" class="form-label">Kontrollü</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="by_appointment" name="output_method" value="randevulu">
+                                        <label for="by_appointment" class="form-label">Randevulu</label>
+                                    </div>
+
+                                    <label for="transport_hour" class="form-label">ULAŞIM SAATİ</label>
+                                    <input type="time" class="form-control" name="transport_hour" id="transport_hour">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="event_exit_time" class="form-label">VAKADAN ÇIKIŞ SAATİ</label>
+                                    <input type="time" class="form-control" name="event_exit_time" id="event_exit_time">
+
+                                    <label for="hospital_arrival_time" class="form-label">HASTANEYE VARIŞ SAATİ</label>
+                                    <input type="time" class="form-control" name="hospital_arrival_time" id="hospital_arrival_time">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="time_out_hospital" class="form-label">HASTANEDEN ÇIKIŞ SAATİ</label>
+                                    <input type="time" class="form-control" name="time_out_hospital" id="time_out_hospital">
+
+                                    <label for="point_return_time" class="form-label">NOKTAYA DÖNÜŞ SAATİ</label>
+                                    <input type="time" class="form-control" name="point_return_time" id="point_return_time">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="patient_taken_place" class="form-label">HASTANIN ALINDIĞI YER</label>
+                                    <input type="text" class="form-control" name="patient_taken_place" id="patient_taken_place">
+
+                                    <label for="where_patient_first_dropped out" class="form-label">HASTANIN İLK BIRAKILDIĞI YER</label>
+                                    <input type="text" class="form-control" name="where_patient_first_dropped" id="where_patient_first_dropped out">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="patient_last_off_place" class="form-label">HASTANIN SON BIRAKILDIĞI YER</label>
+                                    <input type="text" class="form-control" name="patient_last_off_place" id="patient_last_off_place">
+
+                                    <label for="point_return_time" class="form-label">AMBULANS TİPİ</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="land_ambulance" name="ambulance" value="land_ambulance">
+                                        <label for="land_ambulance" class="form-label">KARA AMBULANSI</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="air_ambulance" name="ambulance" value="air_ambulance">
+                                        <label for="air_ambulance" class="form-label">HAVA AMBULANSI</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3>HASTANIN GÜVENCESİ</h3>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="assurance" class="form-label">STAR ÜYELİĞİ</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="assurance_yes" name="assurance" value="assurance_yes">
+                                        <label for="assurance_yes" class="form-label">Evet</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="assurance_no" name="assurance" value="assurance_no">
+                                        <label for="assurance_no" class="form-label">Hayır</label>
+                                    </div>
+                                </br>
+                                    <label for="paid" class="form-label">ÜCRETLİ</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="paid_yes" name="paid" value="paid_yes">
+                                        <label for="paid_yes" class="form-label">Evet</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="paid_no" name="paid" value="paid_no">
+                                        <label for="paid_no" class="form-label">Hayır</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="mb-3 col">
+                                    <label for="free" class="form-label">ÜCRETSİZ</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="free_yes" name="free" value="free_yes">
+                                        <label for="free_yes" class="form-label">Evet</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="free_no" name="free" value="free_no">
+                                        <label for="free_no" class="form-label">Hayır</label>
+                                    </div>
+                                </br>
+                                    <label for="contracted_institution" class="form-label">Anlaşmalı Kurum</label>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="contracted_institution_yes" name="contracted_institution" value="contracted_institution_yes">
+                                        <label for="contracted_institution_yes" class="form-label">Evet</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="contracted_institution_no" name="contracted_institution" value="contracted_institution_no">
+                                        <label for="contracted_institution_no" class="form-label">Hayır</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="discount" class="form-label">İNDİRİM</label>
+                                    <input type="text" class="form-control" name="discount" id="discount">
+
+                                    <label for="protocol_number" class="form-label">112 PROTOKOL NUMARASI</label>
+                                    <input type="text" class="form-control" name="protocol_number out" id="protocol_number">
+
+                                    <label for="intervention" class="form-label">MÜDAHALE</label>
+                                    <textarea type="text" class="form-control" id="intervention" name="intervention" style="height: 100px"></textarea>
+
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="confirmation_code" class="form-label">K.K ONAY KODU</label>
+                                    <input type="text" class="form-control" name="confirmation_code" id="confirmation_code">
+
+                                    <label for="fee" class="form-label">ÜCRETİ</label>
+                                    <input type="text" class="form-control" name="fee" id="fee">
+
+                                    <label for="call_domain_username" class="form-label">ÇAĞRIYI ALAN ADI SOYADI</label>
+                                    <input type="text" class="form-control" name="call_domain_username" id="call_domain_username">
+
+                                    </br> 
+                                    <button type="submit" name="callSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" name="callPreview" onclick="callCenterPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                    &nbsp;
+                                    <button type="button" name="callPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="clear" name="callClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                    </div>
+                                </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+
+{% endblock%}

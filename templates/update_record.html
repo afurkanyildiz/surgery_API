@@ -1,0 +1,109 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Kayıt Güncelle</h4></div>
+                    <div class="card-body">
+                        <form action="{% url 'updateRecords' Records.id %}" method="POST" id="uregistrationForm">
+                            {% csrf_token%}
+                            {% comment %} {{print(request.method)}} {% endcomment %}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="username" class="form-label">Ad Soyad</label>
+                                    <input type="text" class="form-control" id="record_username" name="username" value="{{Records.username}}">
+                                </div> 
+                                <div class="mb-3 col">
+                                    <label for="record_tel" class="form-label"> Telefon Numarası</label>
+                                    <input type="text" class="form-control" id="record_tel" name="tel"  value="{{Records.tel}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="record_date" class="form-label">Kayıt Tarihi</label>
+                                    <input type="date" class="form-control" id="record_date" name="date"  value="{{Records.date}}" >
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="records_hour" class="form-label">Kayıt Saati</label>
+                                    <input type="time" class="form-control" id="records_hour" name="hours"  value="{{Records.hours}}">
+                                </div>
+                              
+                            </div> 
+
+                            <div class="row">  
+                                <div class="mb-3 col">
+                                    <label for="record_tc_no" class="form-label">TC Numarası</label>
+                                    <input type="text" class="form-control" id="record_tc_no" name="tcNo"  value="{{Records.tcNo}}" >
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="record_adress" class="form-label">Adres/Köy</label>
+                                    <input type="text" class="form-control" id="record_adress" name="adress"  value="{{Records.adress}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+                               
+                                <div class="mb-3 col">
+                                    <label for="record_kurum" class="form-label">Kurum</label>
+                                    <input type="text" class="form-control" id="record_kurum" name="kurum" value="{{Records.kurum}}" >
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="record_doctor" class="form-label">Doktor</label> 
+                                    <input type="text" class="form-control" id="record_doctor" name="doctor" value="{{Records.doctor}}">
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+  
+                                <div class="mb-3 col"> 
+                                    <label for="record_diagnosis" class="form-label">Tanı</label>
+                                    <textarea type="text" class="form-control" id="record_diagnosis" name="diagnosis" style="height: 100px">{{Records.diagnosis}}</textarea>   
+                                    
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="record_intervention" class="form-label">Müdahale</label>
+                                    <textarea type="text" class="form-control" id="record_intervention" name="intervention" style="height: 100px">{{Records.intervention}}</textarea> 
+                                   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="record_intervention" class="form-label">İlaçlar</label>
+                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px">{{Records.medications}}</textarea> 
+                                   
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="record_conclusion" class="form-label">Sonuç</label>
+                                    <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç">{{Records.conclusion}}</textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3 col"> 
+                                <button type="submit" name="uregistrationSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                <button type="button" name="uregistrationPreview" onclick="updateregistrationFormPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                <button type="button" name="uregistrationPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                &nbsp;
+                                <button type="reset" name="uregistrationClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function printForm(){
+            window.print();
+        }
+    </script>
+</main>
+
+
+{% endblock%}

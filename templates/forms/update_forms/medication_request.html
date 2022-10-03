@@ -1,0 +1,264 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+
+<script>
+    $(function() {
+        if($('#medication_request_manager_signaturetext').is(':contains("lines")')){
+            var sig = $('#medication_request_manager_signature').signature();
+            sig.signature('draw', $('#medication_request_manager_signaturetext').val());
+            sig.signature('disable');
+            $('#medication_request_manager_signature').signature({disabled:true}); 
+        } else{
+            var sig = $('#medication_request_manager_signature').signature();
+            sig.signature('disable');
+            $('#medication_request_manager_signature').signature({disabled:true});
+        }     
+});
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">İlaç Talep Formu Güncelleme</h4></div>
+                    <div class="card-body">
+                        <form action="{% url 'updateMedicationRequest' MedicationRequest.id%}" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="drug_name" class="form-label">1-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name" name="drug_name" value="{{MedicationRequest.drug_name}}">
+
+                                    <label for="form_of_drug" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug" name="form_of_drug" value="{{MedicationRequest.form_of_drug}}">
+
+                                    <label for="quantity_requested" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested" name="quantity_requested" value="{{MedicationRequest.quantity_requested}}">
+
+                                    <label for="drug_name1" class="form-label">2-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name1" name="drug_name1" value="{{MedicationRequest.drug_name1}}">
+
+                                    <label for="form_of_drug1" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug1" name="form_of_drug1"  value="{{MedicationRequest.form_of_drug1}}">
+
+                                    <label for="quantity_requested1" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested1" name="quantity_requested1" value="{{MedicationRequest.quantity_requested1}}">
+
+                                    <label for="drug_name2" class="form-label">3-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name22" name="drug_name2" value="{{MedicationRequest.drug_name2}}">
+
+                                    <label for="form_of_drug2" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug2" name="form_of_drug2"  value="{{MedicationRequest.form_of_drug2}}">
+
+                                    <label for="quantity_requested2" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested2" name="quantity_requested2" value="{{MedicationRequest.quantity_requested2}}">
+
+                                    <label for="drug_name3" class="form-label">4-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name3" name="drug_name3" value="{{MedicationRequest.drug_name3}}">
+
+                                    <label for="form_of_drug3" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug3" name="form_of_drug3"  value="{{MedicationRequest.form_of_drug3}}">
+
+                                    <label for="quantity_requested3" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested3" name="quantity_requested3" value="{{MedicationRequest.quantity_requested3}}">
+
+                                    <label for="drug_name4" class="form-label">-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name4" name="drug_name4" value="{{MedicationRequest.drug_name4}}">
+
+                                    <label for="form_of_drug4" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug4" name="form_of_drug4" value="{{MedicationRequest.form_of_drug4}}">
+
+                                    <label for="quantity_requested4" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested4" name="quantity_requested4" value="{{MedicationRequest.quantity_requested4}}">
+
+                                    <label for="drug_name5" class="form-label">6-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name5" name="drug_name5" value="{{MedicationRequest.drug_name5}}">
+
+                                    <label for="form_of_drug5" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug5" name="form_of_drug5"  value="{{MedicationRequest.form_of_drug5}}">
+
+                                    <label for="quantity_requested5" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested5" name="quantity_requested5" value="{{MedicationRequest.quantity_requested5}}">
+
+                                    <label for="drug_name6" class="form-label">7-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name6" name="drug_name6" value="{{MedicationRequest.drug_name6}}">
+
+                                    <label for="form_of_drug6" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug6" name="form_of_drug6" value="{{MedicationRequest.form_of_drug6}}">
+
+                                    <label for="quantity_requested6" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested6" name="quantity_requested6" value="{{MedicationRequest.quantity_requested6}}">
+
+                                    <label for="drug_name7" class="form-label">-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name7" name="drug_name7" value="{{MedicationRequest.drug_name7}}">
+
+                                    <label for="form_of_drug7" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug7" name="form_of_drug7" value="{{MedicationRequest.form_of_drug7}}">
+
+                                    <label for="quantity_requested7" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested7" name="quantity_requested7" value="{{MedicationRequest.quantity_requested7}}">
+
+                                    <label for="drug_name8" class="form-label">9-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name8" name="drug_name8" value="{{MedicationRequest.drug_name8}}">
+
+                                    <label for="form_of_drug8" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug8" name="form_of_drug8" value="{{MedicationRequest.form_of_drug8}}">
+
+                                    <label for="quantity_requested8" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested8" name="quantity_requested8" value="{{MedicationRequest.quantity_requested8}}">
+
+                                    <label for="drug_name9" class="form-label">10-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name9" name="drug_name9" value="{{MedicationRequest.drug_name9}}">
+
+                                    <label for="form_of_drug9" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug9" name="form_of_drug9" value="{{MedicationRequest.form_of_drug9}}">
+
+                                    <label for="quantity_requested9" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested9" name="quantity_requested9" value="{{MedicationRequest.quantity_requested9}}">
+                                </div> 
+                                <div class="mb-3 col">
+                                    <label for="drug_name10" class="form-label">11-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name10" name="drug_name10" value="{{MedicationRequest.drug_name10}}">
+
+                                    <label for="form_of_drug10" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug10" name="form_of_drug10" value="{{MedicationRequest.form_of_drug10}}">
+                                    
+                                    <label for="quantity_requested10" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested10" name="quantity_requested10" value="{{MedicationRequest.quantity_requested10}}">
+
+                                    <label for="drug_name11" class="form-label">12-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name11" name="drug_name11" value="{{MedicationRequest.drug_name11}}">
+
+                                    <label for="form_of_drug11" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug11" name="form_of_drug11" value="{{MedicationRequest.form_of_drug11}}">
+
+                                    <label for="quantity_requested11" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested11" name="quantity_requested11" value="{{MedicationRequest.quantity_requested11}}">
+
+                                    <label for="drug_name12" class="form-label">13-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name12" name="drug_name12" value="{{MedicationRequest.drug_name12}}">
+
+                                    <label for="form_of_drug12" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug12" name="form_of_drug12" value="{{MedicationRequest.form_of_drug12}}">
+
+                                    <label for="quantity_requested12" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested12" name="quantity_requested12" value="{{MedicationRequest.quantity_requested12}}">
+
+                                    <label for="drug_name13" class="form-label">14-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name13" name="drug_name13" value="{{MedicationRequest.drug_name13}}">
+
+                                    <label for="form_of_drug13" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug13" name="form_of_drug13" value="{{MedicationRequest.form_of_drug13}}">
+
+                                    <label for="quantity_requested13" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested13" name="quantity_requested13" value="{{MedicationRequest.quantity_requested13}}">
+
+                                    <label for="drug_name14" class="form-label">15-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name14" name="drug_name14" value="{{MedicationRequest.drug_name14}}">
+
+                                    <label for="form_of_drug14" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug14" name="form_of_drug14" value="{{MedicationRequest.form_of_drug14}}">
+
+                                    <label for="quantity_requested14" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested14" name="quantity_requested14" value="{{MedicationRequest.quantity_requested14}}">
+
+                                    <label for="drug_name15" class="form-label">16-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name15" name="drug_name15" value="{{MedicationRequest.drug_name15}}">
+
+                                    <label for="form_of_drug15" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug15" name="form_of_drug15" value="{{MedicationRequest.form_of_drug15}}">
+
+                                    <label for="quantity_requested15" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested15" name="quantity_requested15" value="{{MedicationRequest.quantity_requested15}}">
+
+                                    <label for="drug_name16" class="form-label">17-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name16" name="drug_name16" value="{{MedicationRequest.drug_name16}}">
+
+                                    <label for="form_of_drug16" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug16" name="form_of_drug16" value="{{MedicationRequest.form_of_drug16}}">
+
+                                    <label for="quantity_requested16" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested16" name="quantity_requested16" value="{{MedicationRequest.quantity_requested16}}">
+
+                                    <label for="drug_name17" class="form-label">18-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name17" name="drug_name17" value="{{MedicationRequest.drug_name17}}">
+
+                                    <label for="form_of_drug17" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug17" name="form_of_drug17" value="{{MedicationRequest.form_of_drug17}}">
+
+                                    <label for="quantity_requested17" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested17" name="quantity_requested17" value="{{MedicationRequest.quantity_requested17}}">
+
+                                    <label for="drug_name18" class="form-label">19-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name18" name="drug_name18" value="{{MedicationRequest.drug_name18}}">
+
+                                    <label for="form_of_drug18" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug18" name="form_of_drug18" value="{{MedicationRequest.form_of_drug18}}">
+
+                                    <label for="quantity_requested18" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested18" name="quantity_requested18" value="{{MedicationRequest.quantity_requested18}}">
+
+                                    <label for="drug_name19" class="form-label">20-İLAÇ ADI</label>
+                                    <input type="text" class="form-control" id="drug_name19" name="drug_name19" value="{{MedicationRequest.drug_name19}}">
+
+                                    <label for="form_of_drug19" class="form-label">İLACIN FORMU</label>
+                                    <input type="text" class="form-control" id="form_of_drug19" name="form_of_drug19" value="{{MedicationRequest.form_of_drug19}}">
+
+                                    <label for="quantity_requested19" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_requested19" name="quantity_requested19" value="{{MedicationRequest.quantity_requested19}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="total_requested_drug" class="form-label">TOPLAM TALEP EDİLEN İLAÇ</label>
+                                    <input type="text" class="form-control" id="total_requested_drug" name="total_requested_drug" value="{{MedicationRequest.total_requested_drug}}">
+
+                                    <label for="the_requesters_username" class="form-label">İSTEĞİ YAPAN BÖLÜM YÖNETİCİSİ</label>
+                                    <input type="text" class="form-control" id="the_requesters_username" name="the_requesters_username" value="{{MedicationRequest.the_requesters_username}}">
+
+                                    <label for="medication_requested_manager_title" class="form-label">ÜNVAN</label>
+                                    <input type="text" class="form-control" id="material_requested_manager_title" name="material_requested_manager_title" value="{{MedicationRequest.material_requested_manager_title}}">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="medication_request_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="medication_request_date" name="medication_request_date" value="{{MedicationRequest.medication_request_date}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    <label for="medication_request_manager_signature" class="form-label">İMZA</label>
+                                    <div class="container border border-5" id="medication_request_manager_signature" >
+                                                
+                                    </div>
+                                    <textarea name="medication_request_manager_signaturetext" id="medication_request_manager_signaturetext" cols="30" rows="10" style="display: none;">{{MedicationRequest.medication_request_manager_signaturetext}}</textarea>
+                                </div>
+                                </div>                             
+                            </div>
+                            <div class="mb-3 col"> 
+                                <button type="submit" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" onclick="updateMedicationRequestPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                    <button type="button" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="reset" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

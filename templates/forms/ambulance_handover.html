@@ -1,0 +1,219 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+
+<script>
+    $(function() {
+       var sig = $('#submitter_username_signature').signature();
+       $('#submitter_username_signature_clear').click(function() {
+           sig.signature('clear');
+       });
+
+       $('#submitter_username_signature_json').click(function() {
+           $('#submitter_username_signaturetext').val(sig.signature('toJSON'));
+       });
+});
+    $(function() {
+       var sig = $('#delivery_domain_username_signature').signature();
+       $('#delivery_domain_username_signature_clear').click(function() {
+           sig.signature('clear');
+       });
+
+       $('#delivery_domain_username_signature_json').click(function() {
+           $('#delivery_domain_username_signaturetext').val(sig.signature('toJSON'));
+       });
+});
+    $(function() {
+       var sig = $('#department_manager_signature').signature();
+       $('#department_manager_signature_signature_clear').click(function() {
+           sig.signature('clear');
+       });
+
+       $('#department_manager_signature_signature_json').click(function() {
+           $('#department_manager_signaturetext').val(sig.signature('toJSON'));
+       });
+});
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Ambulans Devir Teslim Formu</h4></div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="ambulance_number_plate" class="form-label">ARAÇ PLAKASI</label>
+                                    <input type="text" class="form-control" id="ambulance_number_plate" name="ambulance_number_plate">
+                                </div> 
+                                <div class="mb-3 col">
+                                    <label for="record_date" class="form-label">KAYIT TARİHİ</label>
+                                    <input type="date" class="form-control" id="record_date" name="date"  placeholder="Tarih" >
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="delivery_km" class="form-label">TESLİM ALINAN KM</label>
+                                    <input type="text" class="form-control" id="delivery_km" name="delivery_km">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="to_be_serviced_km" class="form-label">SERVİS YAPILACAK KM</label>
+                                    <input type="text" class="form-control" id="to_be_serviced_km" name="to_be_serviced_km">
+                                </div>
+                              
+                            </div>
+
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">FOSFORLU YELEK (3 ADET)</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="there_is" name="phosphor_vest" value="var">
+                                        <label for="there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="none" name="phosphor_vest" value="yok">
+                                        <label for="none" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">TAKVİYE KABLOSU</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="there_is1" name="jumper_cable" value="var">
+                                        <label for="there_is1" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="none1" name="jumper_cable" value="yok">
+                                        <label for="none1" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">     
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ÇEKME KABLOSU</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="there_is2" name="towing_cable" value="var">
+                                        <label for="there_is2" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="none2" name="towing_cable" value="yok">
+                                        <label for="none2" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">ÜÇGEN (1 ADET)</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="there_is3" name="triangle" value="var">
+                                        <label for="there_is3" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="none3" name="triangle" value="yok">
+                                        <label for="none3" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">      
+                                <div class="mb-3 col"> 
+                                    <label for="notes" class="form-label">TESLİM EDENİN NOTLARI</label>
+                                    <textarea type="text" class="form-control" id="notes" name="notes" style="height: 100px"></textarea>
+                                   </div>
+                                <div class="mb-3 col">
+                                    <label for="damage_detection_notification" class="form-label">HASAR TESPİT BİLDİRİMİ</label>
+                                    <textarea type="text" class="form-control" id="damage_detection_notification" name="damage_detection_notification" style="height: 100px"></textarea> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="submitter_username" class="form-label">TESLİM EDENİN ADI-SOYADI</label>
+                                    <input type="text" class="form-control" id="submitter_username" name="submitter_username">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="submitter_username_signature" class="form-label">İMZA</label>
+                                        <div class=" border border-5" id="submitter_username_signature">
+                                                    
+                                        </div>
+                                        <textarea name="submitter_username_signaturetext" id="submitter_username_signaturetext" cols="30" rows="10" style="display: none;"></textarea>                                       
+                                    </div>
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="submitter_username_signature_clear" name="submitter_username_signature_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="submitter_username_signature_json" name="submitter_username_signature_signature_json">İmzayı Kaydet</button>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="delivery_area_username" class="form-label">TESLİM ALANIN ADI-SOYADI</label>
+                                    <input type="text" class="form-control" id="delivery_area_username" name="delivery_area_username">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="delivery_domain_username_signature" class="form-label">İMZA</label>
+                                        <div class=" border border-5" id="delivery_domain_username_signature">
+                                                    
+                                        </div>
+                                        <textarea name="delivery_domain_username_signaturetext" id="delivery_domain_username_signaturetext" cols="30" rows="10" style="display: none;"></textarea>                                       
+                                    </div>
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="delivery_domain_username_signature_clear" name="delivery_domain_username_signature_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="delivery_domain_username_signature_json" name="delivery_domain_username_signature_signature_json">İmzayı Kaydet</button>
+                                    </div>
+                                </div>
+                            </br>
+                            <h4>Bölüm / Birim Yöneticisinin Onayı</h4>
+                            </br>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="department_manager_username" class="form-label">BİRİM YÖNETİCİSİNİN ADI-SOYADI</label>
+                                    <input type="text" class="form-control" id="department_manager_username" name="department_manager_username">
+
+                                    <label for="department_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="department_date" name="department_date">
+                                </br>
+                                    <button type="submit" name="handoverSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" name="handoverPreview" onclick="ambulanceHandoverPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                    <button type="button" name="handoverPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="reset" name="handoverClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>                               
+                                </div>
+                            
+                                <div class="mb-3 col"> 
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="department_manager_signature" class="form-label">İMZA</label>
+                                        <div class=" border border-5" id="department_manager_signature">
+                                                    
+                                        </div>
+                                        <textarea name="department_manager_signaturetext" id="department_manager_signaturetext" cols="30" rows="10" style="display: none;"></textarea>                                       
+                                    </div>
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="department_manager_signature_signature_clear" name="department_manager_signature_signature_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="department_manager_signature_signature_json" name="department_manager_signature_signature_signature_json">İmzayı Kaydet</button>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

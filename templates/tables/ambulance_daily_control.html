@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4">
+        {% csrf_token %}
+        <h1 class="mt-4">Ambulans Günlük Kontrol Kayıtları Görüntüleme</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'index'%}">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Ambulans Günlük Kontrol Tablosu</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Ambulans Günlük Kontrol Tablosu
+            </div>
+            <div class="card-body">
+                {% if AmbulanceDailyControl %}
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarih</th>
+                            <th>İstasyon Adı</th>
+                            <th>Ambulans KM</th>
+                            <th>Ambulans Plaka</th>
+                            <th>Teslim Edenin Adı Soyadı</th>
+                            <th>Teslim Alanın Adı Soyadı</th>
+                            <th>Duzenle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                             <th>ID</th>
+                            <th>Tarih</th>
+                            <th>İstasyon Adı</th>
+                            <th>Ambulans KM</th>
+                            <th>Ambulans Plaka</th>
+                            <th>Teslim Edenin Adı Soyadı</th>
+                            <th>Teslim Alanın Adı Soyadı</th>
+                            <th>Duzenle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for ambulanceDaily in AmbulanceDailyControl %}
+                        <tr>
+                            <th scope="row">{{ambulanceDaily.id}}</th>
+                            <td >{{ambulanceDaily.ambulance_control_date}}</td>
+                            <td>{{ambulanceDaily.station_name}}</td>
+							<td>{{ambulanceDaily.ambulance_km}}</td>
+							<td>{{ambulanceDaily.number_plate}}</td>
+							<td>{{ambulanceDaily.delivery_by_username}}</td>
+							<td>{{ambulanceDaily.receiving_area_username}}</td>
+                    <td>
+						<a href="{% url 'editAmbulanceDailyControl' ambulanceDaily.id %}" data-placement="top" data-toggle="tooltip" title="Edit">
+							<button class="bi bi-pencil-square btn btn-outline-warning" data-title="Edit" data-toggle="modal" data-target="#edit" > Düzenle</button></a></td>
+                    <td>
+                            <button type="button" class="bi bi-trash btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ambulanceDaily.id}}">
+                                Sil 
+                            </button>
+                         <div class="modal fade" id="exampleModal_{{ambulanceDaily.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Kayit Sil</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{ambulanceDaily.number_plate}} Plakaya Ait Kaydı Silmek İstiyor musunuz?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Kapat</button>
+                                    <a href="{% url 'deleteAmbulanceDaily' ambulanceDaily.id %}">
+                                        <button  type="button" class="btn  btn-outline-danger">Sil</button>
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div> 
+                       
+						</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+              <div class="alert alert-warning">
+                <p>
+                  No Records Table
+                </p>
+              </div>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

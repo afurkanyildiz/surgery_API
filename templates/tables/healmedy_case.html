@@ -1,0 +1,98 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4">
+        {% csrf_token %}
+        <h1 class="mt-4">Healmedy Vaka Kayıtları Görüntüleme</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'index'%}">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Healmedy Vaka Tablosu</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Healmedy Vaka Tablosu
+            </div>
+            <div class="card-body">
+                {% if HealmedyCase %}
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarih</th>
+                            <th>Saat</th>
+                            <th>Plaka</th>
+                            <th>Telefon Numarası</th>
+                            <th>Adres</th>
+                            <th>Duzenle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarih</th>
+                            <th>Saat</th>
+                            <th>Plaka</th>
+                            <th>Telefon Numarası</th>
+                            <th>Adres</th>
+                            <th>Duzenle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for healmedy in HealmedyCase %}
+                        <tr>
+                            <th scope="row">{{healmedy.id}}</th>
+                            <td >{{healmedy.healmedy_date}}</td>
+                            <td>{{healmedy.healmedy_time}}</td>
+							<td>{{healmedy.healmedy_car_info}}</td>
+							<td>{{healmedy.healmedy_tel}}</td>
+							<td>{{healmedy.healmedy_adress}}</td>
+                    <td>
+						<a href="{% url 'editHealmedyCase' healmedy.id %}" data-placement="top" data-toggle="tooltip" title="Edit">
+							<button class="bi bi-pencil-square btn btn-outline-warning" data-title="Edit" data-toggle="modal" data-target="#edit" > Düzenle</button></a></td>
+                    <td>
+                            <button type="button" class="bi bi-trash btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{healmedy.id}}">
+                                Sil 
+                            </button>
+                         <div class="modal fade" id="exampleModal_{{healmedy.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Kayit Sil</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{healmedy.healmedy_time}} Tarihli Kaydı Silmek İstiyor musunuz?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Kapat</button>
+                                    <a href="{% url 'deleteHealmedyCase' healmedy.id %}">
+                                        <button  type="button" class="btn  btn-outline-danger">Sil</button>
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div> 
+                       
+						</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+              <div class="alert alert-warning">
+                <p>
+                  No Records Table
+                </p>
+              </div>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

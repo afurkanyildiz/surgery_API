@@ -1,0 +1,1278 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+
+<script>
+    $(function() {
+       var sig = $('#responsible_signature').signature();
+       $('#responsible_signature_clear').click(function() {
+           sig.signature('clear');
+       });
+
+       $('#responsible_signature_json').click(function() {
+           $('#responsible_signaturetext').val(sig.signature('toJSON'));
+       });
+});
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Ambulans Cihaz, Malzeme ve İlaç Günük Kontrol Formu</h4></div>
+                    <div class="card-body">
+                        <form action="" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="station_name" class="form-label">ARAÇ PLAKASI</label>
+                                    <input type="text" class="form-control" id="station_name" name="station_name">
+
+                                    <label for="emergency_lock_number" class="form-label">ACİL ÇANTA KİLİT NO</label>
+                                    <input type="text" class="form-control" id="emergency_lock_number" name="emergency_lock_number">
+                                </div> 
+
+                                <div class="mb-3 col">
+                                    <label for="material_control_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="material_control_date" name="material_control_date">
+
+                                    <label for="material_control_time" class="form-label">SAAT</label>
+                                    <input type="time" class="form-control" id="material_control_time" name="material_control_time">
+
+                                </div>
+                            </div>
+                            <H6>Cihaz ve Malzeme Listesi</H6>
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ANA SEDYE VE EMNİYET KEMERİ</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="main_stretcher_healthy" name="main_stretcher" value="main_stretcher_healthy">
+                                        <label for="main_stretcher_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="main_stretcher_defective" name="main_stretcher" value="main_stretcher_defective">
+                                        <label for="main_stretcher_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="main_stretcher_none" name="main_stretcher" value="main_stretcher_none">
+                                        <label for="main_stretcher_none" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">KOMBİNASYON SEDYE VE EMNİYET KEMERİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="combination_stretcher_healthy" name="combination_stretcher" value="combination_stretcher_healthy">
+                                        <label for="combination_stretcher_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="combination_stretcher_defective" name="combination_stretcher" value="combination_stretcher_defective">
+                                        <label for="combination_stretcher_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="combination_stretcher_none" name="combination_stretcher" value="combination_stretcher_none">
+                                        <label for="combination_stretcher_none" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">     
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">VAKUM SEDYE </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="vacuum_stretcher_healthy" name="vacuum_stretcher" value="vacuum_stretcher_healthy">
+                                        <label for="vacuum_stretcher_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="vacuum_stretcher_defective" name="vacuum_stretcher" value="vacuum_stretcher_defective">
+                                        <label for="vacuum_stretcher_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="vacuum_stretcher_none" name="vacuum_stretcher" value="vacuum_stretcher_none">
+                                        <label for="vacuum_stretcher_none" class="form-label">Yok</label>
+                                    </div>   
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">FARAŞ SEDYE </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="faras_stretcher_healthy" name="faras_stretcher" value="faras_stretcher_healthy">
+                                        <label for="faras_stretcher_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="faras_stretcher_defective" name="faras_stretcher" value="faras_stretcher_defective">
+                                        <label for="faras_stretcher_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="faras_stretcher_none" name="faras_stretcher" value="faras_stretcher_none">
+                                        <label for="faras_stretcher_none" class="form-label">Yok</label>
+                                    </div>    
+                                </div>
+                            </div>
+                            <div class="row">      
+                                <div class="mb-3 col"> 
+                                    <label for="" class="form-label">SIRT TAHTASI ve EMNİYET KEMERİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="back_board_healthy" name="back_board" value="back_board_healthy">
+                                        <label for="back_board_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="back_board_defective" name="back_board" value="back_board_defective">
+                                        <label for="back_board_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="back_board_none" name="back_board" value="back_board_none">
+                                        <label for="back_board_none" class="form-label">Yok</label>
+                                    </div>   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="" class="form-label">TRAKSİYON ATEL SETİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="traction_splint_set_healthy" name="traction_splint_set" value="traction_splint_set_healthy">
+                                        <label for="traction_splint_set_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="traction_splint_set_defective" name="traction_splint_set" value="traction_splint_set_defective">
+                                        <label for="traction_splint_set_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="traction_splint_set_none" name="traction_splint_set" value="traction_splint_set_none">
+                                        <label for="traction_splint_set_none" class="form-label">Yok</label>
+                                    </div>   
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ŞİŞME ATEL SETİ 6 PARÇA </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="infitable_splint_set_healthy" name="infitable_splint_set" value="infitable_splint_set_healthy">
+                                        <label for="infitable_splint_set_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="infitable_splint_set_defective" name="infitable_splint_set" value="infitable_splint_set_defective">
+                                        <label for="infitable_splint_set_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="infitable_splint_set_none" name="infitable_splint_set" value="infitable_splint_set_none">
+                                        <label for="infitable_splint_set_none" class="form-label">Yok</label>
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">BOYUNLUK SETİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="neck_brace_set_healthy" name="neck_brace_set" value="neck_brace_set_healthy">
+                                        <label for="neck_brace_set_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="neck_brace_set_defective" name="neck_brace_set" value="neck_brace_set_defective">
+                                        <label for="neck_brace_set_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="neck_brace_set_none" name="neck_brace_set" value="neck_brace_set_none">
+                                        <label for="neck_brace_set_none " class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">KED KURTARMA YELEĞİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="ked_rescue_vest_healthy" name="ked_rescue_vest" value="ked_rescue_vest_healthy">
+                                        <label for="ked_rescue_vest_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="ked_rescue_vest_defective" name="ked_rescue_vest" value="ked_rescue_vest_defective">
+                                        <label for="ked_rescue_vest_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="ked_rescue_vest_none" name="ked_rescue_vest" value="ked_rescue_vest_none">
+                                        <label for="ked_rescue_vest_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">SABİT OKSİJEN TÜPÜ ve PRİZİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="stationary_oxygen_cylinder_healthy" name="stationary_oxygen_cylinder" value="stationary_oxygen_cylinder_healthy">
+                                        <label for="stationary_oxygen_cylinder_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="stationary_oxygen_cylinder_defective" name="stationary_oxygen_cylinder" value="stationary_oxygen_cylinder_defective">
+                                        <label for="stationary_oxygen_cylinder_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="stationary_oxygen_cylinder_none" name="stationary_oxygen_cylinder" value="stationary_oxygen_cylinder_none">
+                                        <label for="stationary_oxygen_cylinder_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">TRANSPORT VENTİLATÖR CİHAZI(ERİŞKİN VE PEDİATRİK KULLANIMA UYGUN BASINCA "10-50 CMH20" AYARLANABİLİR PEEF VALFİ BULUNAN) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="transport_ventilator_device_healthy" name="transport_ventilator_device_healthy" value="transport_ventilator_device_healthy">
+                                        <label for="transport_ventilator_device_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="transport_ventilator_device_healthy_defective" name="transport_ventilator_device_healthy" value="transport_ventilator_device_healthy_defective">
+                                        <label for="transport_ventilator_device_healthy_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="transport_ventilator_device_healthy_none" name="transport_ventilator_device_healthy" value="transport_ventilator_device_healthy_none">
+                                        <label for="transport_ventilator_device_healthy_none " class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">SABİT VAKUM ASPİRATÖRÜ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="constant_vacuum_aspirator_healthy" name="constant_vacuum_aspirator" value="constant_vacuum_aspirator_healthy">
+                                        <label for="constant_vacuum_aspirator_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="constant_vacuum_aspirator_defective" name="constant_vacuum_aspirator" value="constant_vacuum_aspirator_defective">
+                                        <label for="constant_vacuum_aspirator_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="constant_vacuum_aspirator_none" name="constant_vacuum_aspirator" value="constant_vacuum_aspirator_none">
+                                        <label for="constant_vacuum_aspirator_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">PORTATİF ASPİRATÖR </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="portable_aspirator_healthy" name="portable_aspirator" value="portable_aspirator_healthy">
+                                        <label for="portable_aspirator_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_aspirator_defective" name="portable_aspirator" value="portable_aspirator_defective">
+                                        <label for="portable_aspirator_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_aspirator_none" name="portable_aspirator" value="portable_aspirator_none">
+                                        <label for="portable_aspirator_none " class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">PORTATİF ASPİRATÖR ŞARJI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="portable_aspirator_charging_healthy" name="portable_aspirator_charging" value="portable_aspirator_charging_healthy">
+                                        <label for="portable_aspirator_charging_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_aspirator_charging_defective" name="portable_aspirator_charging" value="portable_aspirator_charging_defective">
+                                        <label for="portable_aspirator_charging_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_aspirator_charging_none" name="portable_aspirator_charging" value="portable_aspirator_charging_none">
+                                        <label for="portable_aspirator_charging_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">SABİT TANSİYON ALETİ(STETESKOPLU) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="stationary_sphygmomanometer_healthy" name="stationary_sphygmomanometer" value="stationary_sphygmomanometer_healthy">
+                                        <label for="stationary_sphygmomanometer_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="stationary_sphygmomanometer_defective" name="stationary_sphygmomanometer" value="stationary_sphygmomanometer_defective">
+                                        <label for="stationary_sphygmomanometer_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="stationary_sphygmomanometer_none" name="stationary_sphygmomanometer" value="stationary_sphygmomanometer_none">
+                                        <label for="stationary_sphygmomanometer_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">PORTATİF TANSİYON ALETİ(ERİŞKİN) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="portable_sphymomanometer_healthy" name="portable_sphymomanometer" value="portable_sphymomanometer_healthy">
+                                        <label for="portable_sphymomanometer_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_sphymomanometer_defective" name="portable_sphymomanometer" value="portable_sphymomanometer_defective">
+                                        <label for="portable_sphymomanometer_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_sphymomanometer_none" name="portable_sphymomanometer" value="portable_sphymomanometer_none">
+                                        <label for="portable_sphymomanometer_none " class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">PORTATİF TANSİYON ALETİ(ÇOCUK) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="portable_sphymomanometer_kid_healthy" name="portable_sphymomanometer_kid" value="portable_sphymomanometer_kid_healthy">
+                                        <label for="portable_sphymomanometer_kid_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_sphymomanometer_kid_defective" name="portable_sphymomanometer_kid" value="portable_sphymomanometer_kid_defective">
+                                        <label for="portable_sphymomanometer_kid_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="portable_sphymomanometer_kid_none" name="portable_sphymomanometer_kid" value="portable_sphymomanometer_kid_none">
+                                        <label for="portable_sphymomanometer_kid_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">OKSİMETRE </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="oximeter_healthy" name="oximeter" value="oximeter_healthy">
+                                        <label for="oximeter_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="oximeter_defective" name="oximeter" value="oximeter_defective">
+                                        <label for="oximeter_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="oximeter_none" name="oximeter" value="oximeter_none">
+                                        <label for="oximeter_none " class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">TERMOMETRE </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="thermometer_healthy" name="thermometer" value="thermometer_healthy">
+                                        <label for="thermometer_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="thermometer_defective" name="thermometer" value="thermometer_defective">
+                                        <label for="thermometer_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="thermometer_none" name="thermometer" value="thermometer_none">
+                                        <label for="thermometer_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">DİAGNOSTİK SET(OTOSKOP, OFTALMASKOP, RİNO,SKOP) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="diagnostic_set_healthy" name="diagnostic_set" value="diagnostic_set_healthy">
+                                        <label for="diagnostic_set_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="diagnostic_set_defective" name="diagnostic_set" value="diagnostic_set_defective">
+                                        <label for="diagnostic_set_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="diagnostic_set_none" name="diagnostic_set" value="diagnostic_set_none">
+                                        <label for="diagnostic_set_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">SERUM ASKISI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="serum_sling_healthy" name="serum_sling" value="serum_sling_healthy">
+                                        <label for="serum_sling_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="serum_sling_defective" name="serum_sling" value="serum_sling_defective">
+                                        <label for="serum_sling_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="serum_sling_none" name="serum_sling" value="serum_sling_none">
+                                        <label for="serum_sling_none " class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ENJEKTÖR POMPASI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="injector_pump_healthy" name="injector_pump" value="injector_pump_healthy">
+                                        <label for="injector_pump_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="injector_pump_defective" name="injector_pump" value="injector_pump_defective">
+                                        <label for="injector_pump_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="injector_pump_none" name="injector_pump" value="injector_pump_none">
+                                        <label for="injector_pump_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">DEFİBRİLATÖR(MONİTÖRLÜ) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="defibrillator_healthy" name="defibrillator" value="defibrillator_healthy">
+                                        <label for="defibrillator_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="defibrillator_defective" name="defibrillator" value="defibrillator_defective">
+                                        <label for="defibrillator_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="defibrillator_none" name="defibrillator" value="defibrillator_none">
+                                        <label for="defibrillator_none" class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">BALON VALF MASKE SETİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="balloon_valve_maske_set_healthy" name="balloon_valve_maske_set" value="balloon_valve_maske_set_healthy">
+                                        <label for="balloon_valve_maske_set_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="balloon_valve_maske_set_defective" name="balloon_valve_maske_set" value="balloon_valve_maske_set_defective">
+                                        <label for="balloon_valve_maske_set_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="balloon_valve_maske_set_none" name="balloon_valve_maske_set" value="balloon_valve_maske_set_none">
+                                        <label for="balloon_valve_maske_set_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">LARİNGOSKOP SETİ (BLADE DAHİL) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="laryngoscope_set_healthy" name="laryngoscope_set" value="laryngoscope_set_healthy">
+                                        <label for="laryngoscope_set_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="laryngoscope_set_defective" name="laryngoscope_set" value="laryngoscope_set_defective">
+                                        <label for="laryngoscope_set_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="laryngoscope_set_none" name="laryngoscope_set" value="laryngoscope_set_none">
+                                        <label for="laryngoscope_set_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ENTÜBASYON TÜPLERİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="intubation_tubes_healthy" name="intubation_tubes" value="intubation_tubes_healthy">
+                                        <label for="intubation_tubes_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="intubation_tubes_defective" name="intubation_tubes" value="intubation_tubes_defective">
+                                        <label for="intubation_tubes_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="intubation_tubes_none" name="intubation_tubes" value="intubation_tubes_none">
+                                        <label for="intubation_tubes_none " class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">HAVAYOLU TÜPÜ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="airway_tube_healthy" name="airway_tube" value="airway_tube_healthy">
+                                        <label for="airway_tube_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="airway_tube_defective" name="airway_tube" value="airway_tube_defective">
+                                        <label for="airway_tube_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="airway_tube_none" name="airway_tube" value="airway_tube_none">
+                                        <label for="airway_tube_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+
+                                    <label for="" class="form-label">GLUKOMETRE </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="glucometer_healthy" name="glucometer" value="glucometer_healthy">
+                                        <label for="glucometer_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="glucometer_defective" name="glucometer" value="glucometer_defective">
+                                        <label for="glucometer_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="glucometer_none" name="glucometer" value="glucometer_none">
+                                        <label for="glucometer_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">DİKİŞ SETİ</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="sewing_kit_healthy" name="sewing_kit" value="sewing_kit_healthy">
+                                        <label for="sewing_kit_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sewing_kit_defective" name="sewing_kit" value="sewing_kit_defective">
+                                        <label for="sewing_kit_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sewing_kit_none" name="sewing_kit" value="sewing_kit_none">
+                                        <label for="sewing_kit_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ISI İZOLASYON KAP</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="heat_insulation_container_healthy" name="heat_insulation_container" value="heat_insulation_container_healthy">
+                                        <label for="heat_insulation_container_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="heat_insulation_container_defective" name="heat_insulation_container" value="heat_insulation_container_defective">
+                                        <label for="heat_insulation_container_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="heat_insulation_container_none" name="heat_insulation_container" value="heat_insulation_container_none">
+                                        <label for="heat_insulation_container_none " class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">OKSİJEN MASKESİ ve NAZAL KATATERLER (SET) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="oxygen_mask_healthy" name="oxygen_mask" value="oxygen_mask_healthy">
+                                        <label for="oxygen_mask_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="oxygen_mask_defective" name="oxygen_mask" value="oxygen_mask_defective">
+                                        <label for="oxygen_mask_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="oxygen_mask_none" name="oxygen_mask" value="oxygen_mask_none">
+                                        <label for="oxygen_mask_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ASPİRASYON KATATERLERİ (3 FARKLI BOYDA) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="aspiration_catheters_healthy" name="aspiration_catheters" value="aspiration_catheters_healthy">
+                                        <label for="aspiration_catheters_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="aspiration_catheters_defective" name="aspiration_catheters" value="aspiration_catheters_defective">
+                                        <label for="aspiration_catheters_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="aspiration_catheters_none" name="aspiration_catheters" value="aspiration_catheters_none">
+                                        <label for="aspiration_catheters_none " class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">İDRAR SONDASI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="urinary_catheter_healthy" name="urinary_catheter" value="urinary_catheter_healthy">
+                                        <label for="urinary_catheter_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="urinary_catheter_defective" name="urinary_catheter" value="urinary_catheter_defective">
+                                        <label for="urinary_catheter_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="urinary_catheter_none" name="urinary_catheter" value="urinary_catheter_none">
+                                        <label for="urinary_catheter_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">İDRAR TORBASI </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="bladder_healthy" name="bladder" value="bladder_healthy">
+                                        <label for="bladder_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="bladder_defective" name="bladder" value="bladder_defective">
+                                        <label for="bladder_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="bladder_none" name="bladder" value="bladder_none">
+                                        <label for="bladder_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">MUHTELİF ÖLÇÜDE ENJEKTÖR(10 ADET) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="injector_healthy" name="injector" value="injector_healthy">
+                                        <label for="injector_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="injector_defective" name="injector" value="injector_defective">
+                                        <label for="injector_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="injector_none" name="injector" value="injector_none">
+                                        <label for="injector_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ACİL DOĞUM SETİ </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="emergency_birth_kit_healthy" name="emergency_birth_kit" value="emergency_birth_kit_healthy">
+                                        <label for="emergency_birth_kit_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="emergency_birth_kit_defective" name="emergency_birth_kit" value="emergency_birth_kit_defective">
+                                        <label for="emergency_birth_kit_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="emergency_birth_kit_none" name="emergency_birth_kit" value="emergency_birth_kit_none">
+                                        <label for="emergency_birth_kit_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">YANIK SETİ(ALÜMİNYUM YANIK BATTANİYESİ, YANIK SARGISI VE KOMPRESLER VEYA YANIK JELİ)</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="burn_kit_healthy" name="burn_kit" value="burn_kit_healthy">
+                                        <label for="burn_kit_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="burn_kit_defective" name="burn_kit" value="burn_kit_defective">
+                                        <label for="burn_kit_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="burn_kit_none" name="burn_kit" value="burn_kit_none">
+                                        <label for="burn_kit_none" class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">TEMEL TIBBİ MALZEME ÇANTASI (YÜZÜK KESME MAKASI, TURNİKE, STERİL SPANÇ, KOMPRES, KANAMA DURDURUCU MATERYAL, SARGI BEZİ, ELASTİK BANDAJ VE PLAFTER) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="basic_medical_equiqment_bag_healthy" name="basic_medical_equiqment_bag" value="basic_medical_equiqment_bag_healthy">
+                                        <label for="basic_medical_equiqment_bag_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="basic_medical_equiqment_bag_defective" name="basic_medical_equiqment_bag" value="basic_medical_equiqment_bag_defective">
+                                        <label for="basic_medical_equiqment_bag_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="basic_medical_equiqment_bag_none" name="basic_medical_equiqment_bag" value="basic_medical_equiqment_bag_none">
+                                        <label for="basic_medical_equiqment_bag_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">SERUM SETİ VE KELEBEK SET İLE INTRAKETLER </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="interracquets_healthy" name="interracquets" value="interracquets_healthy">
+                                        <label for="interracquets_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="interracquets_defective" name="interracquets" value="interracquets_defective">
+                                        <label for="interracquets_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="interracquets_none" name="interracquets" value="interracquets_none">
+                                        <label for="interracquets_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">CENAZE TORBASI (2 ADET) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="funeral_bag_healthy" name="funeral_bag" value="funeral_bag_healthy">
+                                        <label for="funeral_bag_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="funeral_bag_defective" name="funeral_bag" value="funeral_bag_defective">
+                                        <label for="funeral_bag_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="funeral_bag_none" name="funeral_bag" value="funeral_bag_none">
+                                        <label for="funeral_bag_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">BİSTÜRİ (5 ADET) </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="scalpel_healthy" name="scalpel" value="scalpel_healthy">
+                                        <label for="scalpel_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="scalpel_defective" name="scalpel" value="scalpel_defective">
+                                        <label for="scalpel_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="scalpel_none" name="scalpel" value="scalpel_none">
+                                        <label for="scalpel_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">POVİDON İOD </label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="poviddon_iod_healthy" name="poviddon_iod" value="poviddon_iod_healthy">
+                                        <label for="poviddon_iod_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="poviddon_iod_defective" name="poviddon_iod" value="poviddon_iod_defective">
+                                        <label for="poviddon_iod_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="poviddon_iod_none" name="poviddon_iod" value="poviddon_iod_none">
+                                        <label for="poviddon_iod_none " class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">ALKOL(500 ML)</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="alcohol_healthy" name="alcohol" value="alcohol_healthy">
+                                        <label for="alcohol_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="alcohol_defective" name="alcohol" value="alcohol_defective">
+                                        <label for="alcohol_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="alcohol_none" name="alcohol" value="alcohol_none">
+                                        <label for="alcohol_none " class="form-label">Yok</label>
+                                    </div> 
+
+                                    <label for="" class="form-label">PAMUK</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="cotton_healthy" name="cotton" value="cotton_healthy">
+                                        <label for="cotton_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="cotton_defective" name="cotton" value="cotton_defective">
+                                        <label for="cotton_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="cotton_none" name="cotton" value="cotton_none">
+                                        <label for="cotton_none " class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">BATTANİYE (2 ADET)</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="blanket_healthy" name="blanket" value="blanket_healthy">
+                                        <label for="blanket_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="blanket_defective" name="blanket" value="blanket_defective">
+                                        <label for="blanket_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="blanket_none" name="blanket" value="blanket_none">
+                                        <label for="blanket_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ÇARŞAF (2 ADET)</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="sheet_healthy" name="sheet" value="sheet_healthy">
+                                        <label for="sheet_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sheet_defective" name="sheet" value="sheet_defective">
+                                        <label for="sheet_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sheet_none" name="sheet" value="sheet_none">
+                                        <label for="sheet_none " class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">BAŞ YASTIĞI(2 ADET)</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="head_pillow_healthy" name="head_pillow" value="head_pillow_healthy">
+                                        <label for="head_pillow_healthy" class="form-label">Sağlam</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="head_pillow_defective" name="head_pillow" value="head_pillow_defective">
+                                        <label for="head_pillow_defective" class="form-label">Arızalı</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="head_pillow_none" name="head_pillow" value="head_pillow_none">
+                                        <label for="head_pillow_none " class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">ADRENALİN AMPUL 1 MG /// 10 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="adrenaline_bulb_there_is" name="adrenaline_bulb" value="adrenaline_bulb_there_is">
+                                        <label for="adrenaline_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="adrenaline_bulb_none" name="adrenaline_bulb" value="adrenaline_bulb_none">
+                                        <label for="adrenaline_bulb_none" class="form-label">Yok</label>
+                                    </div>  
+
+                                    <label for="" class="form-label">AMİNOCARDOL AMPUL 240 MG /// 4 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="aminocardol_bulb_there_is" name="aminocardol_bulb" value="aminocardol_bulb_there_is">
+                                        <label for="aminocardol_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="aminocardol_bulb_none" name="aminocardol_bulb" value="aminocardol_bulb_none">
+                                        <label for="aminocardol_bulb_none" class="form-label">Yok</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">LİDOKAİN %2 AMPUL /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="lidokain_bulb_there_is" name="lidokain_bulb" value="lidokain_bulb_there_is">
+                                        <label for="lidokain_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="lidokain_bulb_none" name="lidokain_bulb" value="lidokain_bulb_none">
+                                        <label for="lidokain_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ATROPİN AMPUL 0.5 MG /// 10 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="atropin_bulb_there_is" name="atropin_bulb" value="atropin_bulb_there_is">
+                                        <label for="atropin_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="atropin_bulb_none" name="atropin_bulb" value="atropin_bulb_none">
+                                        <label for="atropin_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ANTİHİSTAMİNİK AMPUL /// 4 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="antihistaminik_bulb_there_is" name="antihistaminik_bulb" value="antihistaminik_bulb_there_is">
+                                        <label for="antihistaminik_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="antihistaminik_bulb_none" name="antihistaminik_bulb" value="antihistaminik_bulb_none">
+                                        <label for="antihistaminik_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">BETA BLOKER AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="beta_bloker_bulb_there_is" name="beta_bloker_bulb" value="beta_bloker_bulb_there_is">
+                                        <label for="beta_bloker_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="beta_bloker_bulb_none" name="beta_bloker_bulb" value="beta_bloker_bulb_none">
+                                        <label for="beta_bloker_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">SPAZMOLİTİK AMPUL /// 4 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="spazmolitik_bulb_there_is" name="spazmolitik_bulb" value="spazmolitik_bulb_there_is">
+                                        <label for="spazmolitik_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="spazmolitik_bulb_none" name="spazmolitik_bulb" value="spazmolitik_bulb_none">
+                                        <label for="spazmolitik_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">CALCİUM AMPUL /// 3 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="calcium_bulb_there_is" name="calcium_bulb" value="calcium_bulb_there_is">
+                                        <label for="calcium_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="calcium_bulb_none" name="calcium_bulb" value="calcium_bulb_none">
+                                        <label for="calcium_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">CİTANEST %2 FLAKON 20 MG /// 1 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="citanest_flakon_there_is" name="citanest_flakon" value="citanest_flakon_there_is">
+                                        <label for="citanest_flakon_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="citanest_flakon_none" name="citanest_flakon" value="citanest_flakon_none">
+                                        <label for="citanest_flakon_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">KORTİKOSTEROİD AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="kortikosteroid_bulb_there_is" name="kortikosteroid_bulb" value="kortikosteroid_bulb_there_is">
+                                        <label for="kortikosteroid_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="kortikosteroid_bulb_none" name="kortikosteroid_bulb" value="kortikosteroid_bulb_none">
+                                        <label for="kortikosteroid_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ISOPTİN AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="isoptin_bulb_there_is" name="isoptin_bulb" value="isoptin_bulb_there_is">
+                                        <label for="isoptin_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="isoptin_bulb_none" name="isoptin_bulb" value="isoptin_bulb_none">
+                                        <label for="isoptin_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">DİAZEPAM AMPUL 10 MG /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="diazepam_bulb_there_is" name="diazepam_bulb" value="diazepam_bulb_there_is">
+                                        <label for="diazepam_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="diazepam_bulb_none" name="diazepam_bulb" value="diazepam_bulb_none">
+                                        <label for="diazepam_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">DİLTİAZEM AMPUL 25 MG /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="diltiazem_bulb_there_is" name="diltiazem_bulb" value="diltiazem_bulb_there_is">
+                                        <label for="diltiazem_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="diltiazem_bulb_none" name="diltiazem_bulb" value="diltiazem_bulb_none">
+                                        <label for="diltiazem_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">DOPAMİN 40 AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="dopamin_bulb_there_is" name="dopamin_bulb" value="dopamin_bulb_there_is">
+                                        <label for="dopamin_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="dopamin_bulb_none" name="dopamin_bulb" value="dopamin_bulb_none">
+                                        <label for="dopamin_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">DORMİCUM AMPUL 5 MG /// 1 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="dormicum_bulb_there_is" name="dormicum_bulb" value="dormicum_bulb_there_is">
+                                        <label for="dormicum_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="dormicum_bulb_none" name="dormicum_bulb" value="dormicum_bulb_none">
+                                        <label for="dormicum_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ANTİEMETİK AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="antiemetik_bulb_there_is" name="antiemetik_bulb" value="antiemetik_bulb_there_is">
+                                        <label for="antiemetik_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="antiemetik_bulb_none" name="antiemetik_bulb" value="antiemetik_bulb_none">
+                                        <label for="antiemetik_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ANTİEPİLEPTİK AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="antiepileptik_bulb_there_is" name="antiepileptik_bulb" value="antiepileptik_bulb_there_is">
+                                        <label for="antiepileptik_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="antiepileptik_bulb_none" name="antiepileptik_bulb" value="antiepileptik_bulb_none">
+                                        <label for="antiepileptik_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ETİL CHLORİDE SPREY /// 1 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="etil_chloride_spray_there_is" name="etil_chloride_spray" value="etil_chloride_spray_there_is">
+                                        <label for="etil_chloride_spray_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="etil_chloride_spray_none" name="etil_chloride_spray" value="etil_chloride_spray_none">
+                                        <label for="etil_chloride_spray_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">JETOCAİNE AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="jetocaine_bulb_there_is" name="jetocaine_bulb" value="jetocaine_bulb_there_is">
+                                        <label for="jetocaine_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="jetocaine_bulb_none" name="jetocaine_bulb" value="jetocaine_bulb_none">
+                                        <label for="jetocaine_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">LASİX AMPUL (FUROSEMİDE) /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="lasix_bulb_there_is" name="lasix_bulb" value="lasix_bulb_there_is">
+                                        <label for="lasix_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="lasix_bulb_none" name="lasix_bulb" value="lasix_bulb_none">
+                                        <label for="lasix_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">AMİADARONE AMPUL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="amiadarone_bulb_there_is" name="amiadarone_bulb" value="amiadarone_bulb_there_is">
+                                        <label for="amiadarone_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="amiadarone_bulb_none" name="amiadarone_bulb" value="amiadarone_bulb_none">
+                                        <label for="amiadarone_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ANALJEZİK AMPUL /// 10 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="analjezik_bulb_there_is" name="analjezik_bulb" value="analjezik_bulb_there_is">
+                                        <label for="analjezik_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="analjezik_bulb_none" name="analjezik_bulb" value="analjezik_bulb_none">
+                                        <label for="analjezik_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">SODYUM BİKARBONAT AMPUL /// 10 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="sodium_bicarbonate_bulb_there_is" name="sodium_bicarbonate_bulb" value="sodium_bicarbonate_bulb_there_is">
+                                        <label for="sodium_bicarbonate_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sodium_bicarbonate_bulb_none" name="sodium_bicarbonate_bulb" value="sodium_bicarbonate_bulb_none">
+                                        <label for="sodium_bicarbonate_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">NALOKSAN AMPUL /// 1 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="naloksan_bulb_there_is" name="naloksan_bulb" value="naloksan_bulb_there_is">
+                                        <label for="naloksan_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="naloksan_bulb_none" name="naloksan_bulb" value="naloksan_bulb_none">
+                                        <label for="naloksan_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">NİTRODERM TTS 5 MG /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="nitroderm_tts_5_bulb_there_is" name="nitroderm_tts_5_bulb" value="nitroderm_tts_5_bulb_there_is">
+                                        <label for="nitroderm_tts_5_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="nitroderm_tts_5_bulb_none" name="nitroderm_tts_5_bulb" value="nitroderm_tts_5_bulb_none">
+                                        <label for="nitroderm_tts_5_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">NİTRODERM TTS 10 MG /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="nitroderm_tts_10_bulb_there_is" name="nitroderm_tts_10_bulb" value="nitroderm_tts_10_bulb_there_is">
+                                        <label for="nitroderm_tts_10_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="nitroderm_tts_10_bulb_none" name="nitroderm_tts_10_bulb" value="nitroderm_tts_10_bulb_none">
+                                        <label for="nitroderm_tts_10_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">H2 BLOKER AMPUL /// 4 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="h2_bloker_bulb_there_is" name="h2_bloker_bulb" value="h2_bloker_bulb_there_is">
+                                        <label for="h2_bloker_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="h2_bloker_bulb_none" name="h2_bloker_bulb" value="h2_bloker_bulb_none">
+                                        <label for="h2_bloker_bulb_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">SERUM FİZYOLOJİK AMPUL /// 10 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="saline_ampoule_there_is" name="saline_ampoule" value="saline_ampoule_there_is">
+                                        <label for="saline_ampoule_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="saline_ampoule_none" name="saline_ampoule" value="saline_ampoule_none">
+                                        <label for="saline_ampoule_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">İNHALER VEYA NEBUL(SALBUTAMOL) /// 1 İNHALER-6 NEBUL</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="inhaler_nebul_there_is" name="inhaler_nebul" value="inhaler_nebul_there_is">
+                                        <label for="inhaler_nebul_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="inhaler_nebul_none" name="inhaler_nebul" value="inhaler_nebul_none">
+                                        <label for="inhaler_nebul_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">ANESTEZİK POMAD /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="anestezik_pomad_there_is" name="anestezik_pomad" value="anestezik_pomad_there_is">
+                                        <label for="anestezik_pomad_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="anestezik_pomad_none" name="anestezik_pomad" value="anestezik_pomad_none">
+                                        <label for="anestezik_pomad_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">ANTİMİKROBİAL POMAD /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="antimikrobial_pomad_there_is" name="antimikrobial_pomad" value="antimikrobial_pomad_there_is">
+                                        <label for="antimikrobial_pomad_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="antimikrobial_pomad_none" name="antimikrobial_pomad" value="antimikrobial_pomad_none">
+                                        <label for="antimikrobial_pomad_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">SİLVERDİN POMAD /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="silverdin_pomad_there_is" name="silverdin_pomad" value="silverdin_pomad_there_is">
+                                        <label for="silverdin_pomad_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="silverdin_pomad_none" name="silverdin_pomad" value="silverdin_pomad_none">
+                                        <label for="silverdin_pomad_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">İSORDİL TABLET 55 MG /// 1 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="isordil_bulb_there_is" name="isordil_bulb" value="isordil_bulb_there_is">
+                                        <label for="isordil_bulb_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="isordil_bulb_none" name="isordil_bulb" value="isordil_bulb_none">
+                                        <label for="isordil_bulb_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">KARTOPİL TABLET 25 MG /// 1 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="kartopil_tablet_there_is" name="kartopil_tablet" value="kartopil_tablet_there_is">
+                                        <label for="kartopil_tablet_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="kartopil_tablet_none" name="kartopil_tablet" value="kartopil_tablet_none">
+                                        <label for="kartopil_tablet_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">%20 DEXTROSE 500 ML /// 3 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="dextrose_500_there_is" name="dextrose_500" value="dextrose_500_there_is">
+                                        <label for="dextrose_500_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="dextrose_500_none" name="dextrose_500" value="dextrose_500_none">
+                                        <label for="dextrose_500_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">İSOLYTE 500 ML /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="isolyte_500_there_is" name="isolyte_500" value="isolyte_500_there_is">
+                                        <label for="isolyte_500_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="isolyte_500_none" name="isolyte_500" value="isolyte_500_none">
+                                        <label for="isolyte_500_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">İSOLYTE P 500 MK /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="isolyte_p_500_there_is" name="isolyte_p_500" value="isolyte_p_500_there_is">
+                                        <label for="isolyte_p_500_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="isolyte_p_500_none" name="isolyte_p_500" value="isolyte_p_500_none">
+                                        <label for="isolyte_p_500_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">İSOLYTE S 500 ML /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="isolyte_s_500_there_is" name="isolyte_s_500" value="isolyte_s_500_there_is">
+                                        <label for="isolyte_s_500_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="isolyte_s_500_none" name="isolyte_s_500" value="isolyte_s_500_none">
+                                        <label for="isolyte_s_500_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">İZOTONİK 500 ML /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="izotonik_500_there_is" name="izotonik_500" value="izotonik_500_there_is">
+                                        <label for="izotonik_500_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="izotonik_500_none" name="izotonik_500" value="izotonik_500_none">
+                                        <label for="izotonik_500_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">MANNİTOL 500 ML /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="mannitol_500_there_is" name="mannitol_500" value="mannitol_500_there_is">
+                                        <label for="mannitol_500_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="mannitol_500_none" name="mannitol_500" value="mannitol_500_none">
+                                        <label for="mannitol_500_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">RİNGER LAKTAT 500 ML /// 5 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="ringer_laktat_there_is" name="ringer_laktat" value="ringer_laktat_there_is">
+                                        <label for="ringer_laktat_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="ringer_laktat_none" name="ringer_laktat" value="ringer_laktat_none">
+                                        <label for="ringer_laktat_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">MAGNEZYUM SÜLFAT /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="magnesium_sulphate_there_is" name="magnesium_sulphate" value="magnesium_sulphate_there_is">
+                                        <label for="magnesium_sulphate_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="magnesium_sulphate_none" name="magnesium_sulphate" value="magnesium_sulphate_none">
+                                        <label for="magnesium_sulphate_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">FLUMAZENİL /// 2 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="flumazenil_there_is" name="flumazenil" value="flumazenil_there_is">
+                                        <label for="flumazenil_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="flumazenil_none" name="flumazenil" value="flumazenil_none">
+                                        <label for="flumazenil_none" class="form-label">Yok</label>
+                                    </div>
+
+                                    <label for="" class="form-label">PARACETAMOL TABLET /// 10 ADET</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="paracetamol_tablet_there_is" name="paracetamol_tablet" value="paracetamol_tablet_there_is">
+                                        <label for="paracetamol_tablet_there_is" class="form-label">Var</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="paracetamol_tablet_none" name="paracetamol_tablet" value="paracetamol_tablet_none">
+                                        <label for="paracetamol_tablet_none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="responsible_username" class="form-label">SORUMLU SAĞLIK PERSONELİNİN ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="responsible_username" name="responsible_username">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="responsible_signature" class="form-label">İMZA</label>
+                                        <div class=" border border-5" id="responsible_signature">
+                                                    
+                                        </div>
+                                        <textarea name="responsible_signaturetext" id="responsible_signaturetext" cols="30" rows="10" style="display: none;"></textarea>                                       
+                                    </div>
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="responsible_signature_clear" name="responsible_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="responsible_signature_json" name="responsible_signature_json">İmzayı Kaydet</button>
+                                    </div>
+                            </div>
+                            <div class="mb-3 col"> 
+                                <label for="material_notes" class="form-label">NOTLAR</label>
+                                <textarea type="text" class="form-control" id="material_notes" name="material_notes" style="height: 200px"></textarea>
+                            </br>
+                            <button type="submit" name="materialSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                            &nbsp;
+                            <button type="button" name="materialPreview" onclick="ambulanceMaterialPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                        </br>
+                        </br>
+                            <button type="button" name="materialPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                            &nbsp;
+                            <button type="reset" name="materialClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

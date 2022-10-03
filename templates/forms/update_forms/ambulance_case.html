@@ -1,0 +1,1202 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+
+<script>
+   $(document).ready(function()
+   {
+        $('.isolation_status').click(function()
+        {
+            var text="";
+            $('.isolation_status:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txt').val(text);
+        });
+        $('.application').click(function()
+        {
+            var text="";
+            $('.application:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txt1').val(text);
+        });
+        $('.transfer').click(function()
+        {
+            var text="";
+            $('.transfer:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txt2').val(text);
+        });
+        $('.general').click(function()
+        {
+            var text="";
+            $('.general:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#txt3').val(text);
+        });
+   });
+</script>
+
+<script>
+    $(function() {
+    
+        if($('#sigtext').is(':contains("lines")'))
+        {
+            var sig =  $('#get_sig').signature();
+            sig.signature('draw', $('#sigtext').val());
+            sig.signature('disable'); 
+            $('#get_sig').signature({disabled:true});
+
+        }
+        else{
+            var sig =  $('#get_sig').signature(); 
+            sig.signature('disable'); 
+            $('#get_sig').signature({disabled:true});
+        }     
+    });
+    
+    $(function() {
+        if($('#hospital_rejection_sigtext').is(':contains("lines")')){
+            var sig = $('#hospital_signature').signature();
+            sig.signature('draw', $('#hospital_rejection_sigtext').val());
+            sig.signature('disable'); 
+            $('#hospital_signature').signature({disabled:true});
+
+        }else{
+            var sig = $('#hospital_signature').signature();
+            sig.signature('disable'); 
+            $('#hospital_signature').signature({disabled:true});
+
+        }    
+    });
+ 
+    $(function() {
+        if($('#patients_relative_signaturetext').is(':contains("lines")')){
+            var sig = $('#patients_relative_signature').signature();
+            sig.signature('draw', $('#patients_relative_signaturetext').val());
+            sig.signature('disable');
+            $('#patients_relative_signature').signature({disabled:true});
+
+        }else{
+            var sig = $('#patients_relative_signature').signature();
+            sig.signature('disable');
+            $('#patients_relative_signature').signature({disabled:true});
+        } 
+    });
+  
+
+    $(function() {
+        if($('#delivery_area_signaturetext').is(':contains("lines")')){
+            var sig=$('#delivery_area_signature').signature();
+            sig.signature('draw', $('#delivery_area_signaturetext').val());
+            sig.signature('disable');
+            $('#delivery_area_signature').signature({disabled:true});
+  
+        }else{
+            var sig=$('#delivery_area_signature').signature();
+            sig.signature('disable');
+            $('#delivery_area_signature').signature({disabled:true});
+        }
+               
+    });
+
+
+    $(function() {
+        if($('#doctor_signaturetext').is(':contains("lines")')){
+            var sig= $('#doctor_signature').signature();
+            sig.signature('draw', $('#doctor_signaturetext').val());
+            sig.signature('disable');
+            $('#doctor_signature').signature({disabled:true});
+
+        }else{
+            var sig= $('#doctor_signature').signature();
+            sig.signature('disable');
+            $('#doctor_signature').signature({disabled:true});
+        }      
+    });
+    
+
+    $(function() {
+        if($('#personal_signaturetext').is(':contains("lines")')){
+            var sig = $('#personal_signature').signature();
+            sig.signature('draw', $('#personal_signaturetext').val());
+            sig.signature('disable');
+            $('#personal_signature').signature({disabled:true});
+
+        }else {
+            var sig = $('#personal_signature').signature();
+            sig.signature('disable');
+            $('#personal_signature').signature({disabled:true}); 
+        }
+              
+    });
+    
+
+    $(function() {
+        if($('#pilot_signaturetext').is(':contains("lines")')){
+            var sig = $('#pilot_signature').signature();
+            sig.signature('draw', $('#pilot_signaturetext').val());
+            sig.signature('disable');
+            $('#pilot_signature').signature({disabled:true});
+
+        }else {
+            var sig = $('#pilot_signature').signature();
+            sig.signature('disable');
+            $('#pilot_signature').signature({disabled:true});
+
+        }      
+    });
+    
+
+    $(function() {
+        if($('#transfer_doctor_signaturetext').is(':contains("lines")')){
+            var sig = $('#transfer_doctor_signature').signature();
+            sig.signature('draw', $('#transfer_doctor_signaturetext').val());
+            sig.signature('disable');
+            $('#transfer_doctor_signature').signature({disabled:true});
+
+        }else{
+            var sig = $('#transfer_doctor_signature').signature();
+            sig.signature('disable');
+            $('#transfer_doctor_signature').signature({disabled:true});
+        }      
+    });
+    
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Ambulans Vaka Formu Duzenle</h4>
+                    <h6 class="text-center font-weight-light my-4">(Doldurulduğunda Hastaya Özeldir)</h6></div>
+                    <div class="card-body">
+                        <form action="{% url 'updateAmbulanceCaseForm' AmbulanceCase.id%}" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="date" class="form-label">TARIH</label>
+                                    <input type="date" class="form-control" id="date" name="date"  placeholder="Tarih" value="{{AmbulanceCase.date}}">
+                                </div> 
+                                <div class="mb-3 col">
+                                    <label for="sas_protokol" class="form-label">SAS PROKOL</label>
+                                    <input type="text" class="form-control" id="sas_protokol" name="sas_protokol" value="{{AmbulanceCase.sas_protokol}}">
+                                    <h8 class="text-center font-weight-light my-4">Çağrı Merkezinden Alınan Protokolü 34Ö-179- den Sonra Yazınız.</h8>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="username" class="form-label">ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="username" name="username" value="{{AmbulanceCase.username}}">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="identification_number" class="form-label">T.C. KIMLIK NO</label>
+                                    <input type="number" class="form-control" id="identification_number" name="identification_number" value="{{AmbulanceCase.identification_number}}" placeholder="orn:123">
+                                </div>                             
+                            </div>
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="gender" class="form-label">CINSIYET</label>
+                                    <input type="text" class="form-control" id="gender" name="gender" value="{{AmbulanceCase.gender}}">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="age" class="form-label">YAS</label>
+                                    <input type="text" class="form-control" id="age" name="age" value="{{AmbulanceCase.age}}"> 
+                                </div>
+                            </div>
+                            <div class="row">     
+                                <div class="mb-3 col">
+                                    <label for="case_call_clock" class="form-label">VAKA ÇAĞRI SAATİ</label>
+                                    <input type="time" class="form-control" id="case_call_clock" name="case_call_clock" value="{{AmbulanceCase.case_call_clock}}">
+                                </div>
+                                <div class="mb-3 col"> 
+                                    <label for="case_arrival_time" class="form-label">VAKA VARIŞ SAATİ</label>
+                                    <input type="time" class="form-control" id="case_arrival_time" name="case_arrival_time" value="{{AmbulanceCase.case_arrival_time}}">
+                                </div>
+                            </div>
+                            <div class="row">      
+                                <div class="mb-3 col"> 
+                                    <label for="time_of_leave_from_case" class="form-label">VAKADAN AYRILIŞ SAATİ</label>
+                                    <input type="time" class="form-control" id="time_of_leave_from_case" name="time_of_leave_from_case" value="{{AmbulanceCase.time_of_leave_from_case}}">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="hospital_arrival_time" class="form-label">HASTANEYE VARIŞ SAATİ</label>
+                                    <input type="time" class="form-control" id="hospital_arrival_time" name="hospital_arrival_time" value="{{AmbulanceCase.hospital_arrival_time}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="tel_number" class="form-label">TELEFON NUMARASI</label>
+                                    <input type="tel" class="form-control" id="tel_number" name="tel_number" value="{{AmbulanceCase.tel_number}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="adress" class="form-label">ADRES</label>
+                                    <textarea type="text" class="form-control" id="adress" name="adress" style="height: 100px">{{AmbulanceCase.adress}}</textarea>   
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="place_from_the_patient" class="form-label">HASTANIN ALINDIĞI YER</label>
+                                    <input type="text" class="form-control" id="place_from_the_patient" name="place_from_the_patient" value="{{AmbulanceCase.place_from_the_patient}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="1_place_the_patient_is_transported" class="form-label">HASTANIN NAKLEDİLDİĞİ 1.YER</label>
+                                    <input type="text" class="form-control" id="1_place_the_patient_is_transported" name="first_place_the_patient_is_transported" value="{{AmbulanceCase.first_place_the_patient_is_transported}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="2_place_the_patient_is_transported" class="form-label">HASTANIN NAKLEDİLDİĞİ 2.YER</label>
+                                    <input type="text" class="form-control" id="2_place_the_patient_is_transported" name="second_place_the_patient_is_transported" value="{{AmbulanceCase.second_place_the_patient_is_transported}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="patients_complaint" class="form-label">HASTANIN ŞİKAYETİ</label>
+                                    <input type="text" class="form-control" id="patients_complaint" name="patients_complaint" value="{{AmbulanceCase.patients_complaint}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="prediction" class="form-label">ÖN TANI</label>
+                                    <input type="text" class="form-control" id="prediction" name="prediction" value="{{AmbulanceCase.prediction}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="chronic_diseases" class="form-label">KRONİK HASTALIKLAR</label>
+                                    <input type="text" class="form-control" id="chronic_diseases" name="chronic_diseases" value="{{AmbulanceCase.chronic_diseases}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="explanation_application" class="form-label">AÇIKLAMA,HASTAYA YAPILAN UYGULAMA,KULLANILAN İLAÇLAR</label>
+                                    <textarea type="text" class="form-control" id="explanation_application" name="explanation_application" style="height: 100px">{{AmbulanceCase.explanation_application}}</textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col form-check" style="display: block;">  
+                                    <label for="" class="form-label">İZOLASYON DURUMU:</label> 
+                                    <div >                                       
+                                        <input class="isolation_status"type="checkbox" id="solunum_izolasyonu" name="isolationStatus" {% for case in AmbulanceCase.isolationStatus %}{% if case == 'solunum_izolasyonu' %} checked {%endif%}{%endfor%} value="solunum_izolasyonu">
+                                        <label for="solunum_izolasyonu" class="form-label">Solunum Izolasyonu</label>
+                                    </div> 
+                                    <div>
+                                        <input class="isolation_status"type="checkbox"  id="damlacik_izolasyonu" name="isolationStatus" {% for case in AmbulanceCase.isolationStatus %}{% if case == 'damlacik_izolasyonu' %} checked {%endif%}{%endfor%} value="damlacik_izolasyonu">
+                                        <label for="damlacik_izolasyonu" class="form-label">Damlacik Izolasyonu</label>
+                                    </div> 
+                                    <div>
+                                        <input class="isolation_status"type="checkbox" id="temas_izolasyonu" name="isolationStatus" {% for case in AmbulanceCase.isolationStatus %}{% if case == 'temas_izolasyonu' %} checked {%endif%}{%endfor%} value="temas_izolasyonu">
+                                        <label for="temas_izolasyonu" class="form-label">Temas Izolasyonu</label>
+                                    </div> 
+                                    <input id="txt" type="text" name="isolationStatus"value="{%for case in AmbulanceCase.isolationStatus%}{{case}},{%endfor%}" style="display: none;" readonly>
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="1_measurement" class="form-label">1. ÖLÇÜM</label>
+                                    <input type="time" class="form-control" id="1_measurement" name="one_measurement" value="{{AmbulanceCase.one_measurement}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="1_blood_pressure" class="form-label">1. TANSİYON</label>
+                                    <input type="text" class="form-control" id="1_blood_pressure" name="one_blood_pressure" value="{{AmbulanceCase.one_blood_pressure}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="1_pulse" class="form-label">1.NABIZ</label>
+                                    <input type="text" class="form-control" id="1_pulse" name="one_pulse" value="{{AmbulanceCase.one_pulse}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="1_spo2" class="form-label">1.SPO2</label>
+                                    <input type="text" class="form-control" id="1_spo2" name="one_spo2" value="{{AmbulanceCase.one_spo2}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="1_respirations_min" class="form-label">1.SOLUNUM/DK</label>
+                                    <input type="text" class="form-control" id="1_respirations_min" name="one_respirations_min" value="{{AmbulanceCase.one_respirations_min}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="1_fire" class="form-label">1.ATEŞ</label>
+                                    <input type="text" class="form-control" id="1_fire" name="one_fire" value="{{AmbulanceCase.one_fire}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="2_measurement" class="form-label">2. ÖLÇÜM</label>
+                                    <input type="time" class="form-control" id="second_measurement" name="second_measurement" value="{{AmbulanceCase.second_measurement}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="2_blood_pressure" class="form-label">2. TANSİYON</label>
+                                    <input type="text" class="form-control" id="2_blood_pressure" name="second_blood_pressure" value="{{AmbulanceCase.second_blood}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="2_pulse" class="form-label">2.NABIZ</label>
+                                    <input type="text" class="form-control" id="2_pulse" name="second_pulse" value="{{AmbulanceCase.second_pulse}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="2_spo2" class="form-label">2.SPO2</label>
+                                    <input type="text" class="form-control" id="2_spo2" name="second_spo2" value="{{AmbulanceCase.second_spo2}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="2_respirations_min" class="form-label">2.SOLUNUM/DK</label>
+                                    <input type="text" class="form-control" id="2_respirations_min" name="second_respirations_min" value="{{AmbulanceCase.second_respirations_min}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="2_fire" class="form-label">2.ATEŞ</label>
+                                    <input type="text" class="form-control" id="2_fire" name="second_fire" value="{{AmbulanceCase.second_fire}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="3_measurement" class="form-label">3. ÖLÇÜM</label>
+                                    <input type="time" class="form-control" id="3_measurement" name="third_measurement" value="{{AmbulanceCase.third_measurement}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="3_blood_pressure" class="form-label">3.TANSİYON</label>
+                                    <input type="text" class="form-control" id="3_blood_pressure" name="third_blood_pressure" value="{{AmbulanceCase.third_blood_pressure}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
+                                    <input type="text" class="form-control" id="2_pulse" name="third_pulse" value="{{AmbulanceCase.third_pulse}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="3_spo2" class="form-label">3.SPO2</label>
+                                    <input type="text" class="form-control" id="3_spo2" name="third_spo2" value="{{AmbulanceCase.third_spo2}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
+                                    <input type="text" class="form-control" id="2_pulse" name="third_pulse" value="{{AmbulanceCase.third_pulse}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="3_respirations_min" class="form-label">3.SOLUNUM/DK</label>
+                                    <input type="text" class="form-control" id="3_respirations_min" name="third_respirations_min" value="{{AmbulanceCase.third_respirations_min}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="3_fire" class="form-label">3.ATEŞ</label>
+                                    <input type="text" class="form-control" id="2_fire" name="third_fire" value="{{AmbulanceCase.third_fire}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col" style="display: block;">   
+                                    <label for="" class="form-label">EMESYONEL DURUM</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="normal" name="state" {% if AmbulanceCase.state == 'normal' %} checked {%endif%} value="normal" group="state">
+                                        <label for="normal" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sad" name="state" {% if AmbulanceCase.state == 'sad' %} checked {%endif%} value="sad" group="state">
+                                        <label for="sad" class="form-label">Uzuntulu</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="restless" name="state"{% if AmbulanceCase.state == 'restless' %} checked {%endif%} value="restless" group="state">
+                                        <label for="restless" class="form-label">Huzursuz</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="indifferent" name="state"{% if AmbulanceCase.state == 'indifferent' %} checked {%endif%} value="indifferent" group="state">
+                                        <label for="indifferent" class="form-label">Kayitsiz</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="other" name="state" {% if AmbulanceCase.state == 'other' %} checked {%endif%} value="other" group="state">
+                                        <label for="other" class="form-label">Diger</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col" style="display: block;">   
+                                    <label for="" class="form-label">PUPİLLER</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="normal1" name="pupils"{% if AmbulanceCase.pupils == 'normal1' %} checked {%endif%} value="normal1" group="pupils">
+                                        <label for="normal1" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="miotic" name="pupils" {% if AmbulanceCase.pupils == 'miotic' %} checked {%endif%} value="miotic" group="pupils">
+                                        <label for="miotic" class="form-label">Miyotik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="mydriatic" name="pupils" {% if AmbulanceCase.pupils == 'mydriatic' %} checked {%endif%} value="mydriatic" group="pupils">
+                                        <label for="mydriatic" class="form-label">Midriatik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="anisochoric" name="pupils" {% if AmbulanceCase.pupils == 'anisochoric' %} checked {%endif%} value="anisochoric" group="pupils">
+                                        <label for="anisochoric" class="form-label">Anizokorik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="no_reaction" name="pupils" {% if AmbulanceCase.pupils == 'no_reaction' %} checked {%endif%} value="no_reaction" group="pupils">
+                                        <label for="no_reaction" class="form-label">Reaksiyon Yok</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="fix_dilate" name="pupils" {% if AmbulanceCase.pupils == 'fix_dilate' %} checked {%endif%} value="fix_dilate" group="pupils">
+                                        <label for="fix_dilate" class="form-label">Fix Dilate</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col" style="display: block;">   
+                                    <label for="" class="form-label">DERİ</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="normal2" name="skin" {% if AmbulanceCase.skin == 'normal2' %} checked {%endif%} value="normal2" group="skin">
+                                        <label for="normal2" class="form-label">Normal</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="pale" name="skin" {% if AmbulanceCase.skin == 'pale' %} checked {%endif%} value="pale" group="skin">
+                                        <label for="pale" class="form-label">Soluk</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="cyanonic" name="skin" {% if AmbulanceCase.skin == 'cyanonic' %} checked {%endif%} value="cyanonic" group="skin">
+                                        <label for="cyanonic" class="form-label">Siyatonik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="hyperemic" name="skin" {% if AmbulanceCase.skin == 'hyperemic' %} checked {%endif%} value="hyperemic" group="skin">
+                                        <label for="hyperemic" class="form-label">Hiperemik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="icteric" name="skin" {% if AmbulanceCase.skin == 'icteric' %} checked {%endif%} value="icteric" group="skin">
+                                        <label for="icteric" class="form-label">Ikterik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="sweaty" name="skin" {% if AmbulanceCase.skin == 'sweaty' %} checked {%endif%} value="sweaty" group="skin">
+                                        <label for="sweaty" class="form-label">Terli</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col" style="display: block;">   
+                                    <label for="" class="form-label">SOLUNUM</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="comfortable" name="respiratory" {% if AmbulanceCase.respiratory == 'comfortable' %} checked {%endif%} value="comfortable" group="respiratory">
+                                        <label for="comfortable" class="form-label">Rahat</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="deep" name="respiratory" {% if AmbulanceCase.respiratory == 'deep' %} checked {%endif%} value="deep"  group="respiratory">
+                                        <label for="deep" class="form-label">Derin</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="superficial" name="respiratory" {% if AmbulanceCase.respiratory == 'superficial' %} checked {%endif%} value="superficial"  group="respiratory">
+                                        <label for="superficial" class="form-label">Yüzeysel</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="irregular" name="respiratory" {% if AmbulanceCase.respiratory == 'irregular' %} checked {%endif%} value="irregular" group="respiratory">
+                                        <label for="irregular" class="form-label">Düzensiz</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="dyspneic" name="respiratory" {% if AmbulanceCase.respiratory == 'dyspneic' %} checked {%endif%} value="dyspneic" group="respiratory">
+                                        <label for="dyspneic" class="form-label">Dispneik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="none" name="respiratory" {% if AmbulanceCase.respiratory == 'none' %} checked {%endif%} value="none" group="respiratory">
+                                        <label for="none" class="form-label">Yok</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col" style="display: block;">   
+                                    <label for="" class="form-label">NABIZ</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="organised" name="pulse" {% if AmbulanceCase.pulse == 'organised' %} checked {%endif%} value="organised" group="pulse">
+                                        <label for="organised" class="form-label">Düzenli</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="arrhythmic" name="pulse" {% if AmbulanceCase.pulse == 'arrhythmic' %} checked {%endif%} value="arrhythmic" group="pulse">
+                                        <label for="arrhythmic" class="form-label">Aritmik</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="filiform" name="pulse" {% if AmbulanceCase.pulse == 'filiform' %} checked {%endif%} value="filiform" group="pulse">
+                                        <label for="filiform" class="form-label">Filiform</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="not_received" name="pulse" {% if AmbulanceCase.pulse == 'not_received' %} checked {%endif%} value="not_received" group="pulse">
+                                        <label for="not_received" class="form-label">Alınmıyor</label>
+                                    </div> 
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="engine_response" class="form-label">MOTOR YANIT (A)</label>
+                                    <input type="text" class="form-control" id="engine_response" name="engine_response" value="{{AmbulanceCase.engine_response}}">
+                                    <label for="oral_response" class="form-label">SÖZLÜ YANIT (B)</label>
+                                    <input type="text" class="form-control" id="oral_response" name="oral_response" value="{{AmbulanceCase.oral_response}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label  for="eyes_open" class="form-label">GÖZ AÇMA (C)</label>
+                                    <input type="text" class="form-control" id="eyes_open" name="eyes_open" value="{{AmbulanceCase.eyes_open}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="gks_points" class="form-label">GKS PUANI</label>
+                                    <input type="text" class="form-control" id="gks_points" name="gks_points" value="{{AmbulanceCase.gks_points}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="cpr_doing" class="form-label">CPR YAPAN</label>
+                                    <input type="text" class="form-control" id="cpr_doing" name="cpr_doing" value="{{AmbulanceCase.cpr_doing}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="start_time" class="form-label">BAŞLAMA ZAMANI</label>
+                                    <input type="time" class="form-control" id="start_time" name="start_time" value="{{AmbulanceCase.start_time}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="finish_time" class="form-label">BİTİŞ ZAMANI</label>
+                                    <input type="time" class="form-control" id="finish_time" name="finish_time" value="{{AmbulanceCase.finish_time}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="reason_to_leave" class="form-label">BIRAKMA NEDENİ</label>
+                                    <input type="text" class="form-control" id="reason_to_leave" name="reason_to_leave" value="{{AmbulanceCase.reason_to_leave}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label for="" class="form-label">YAPILAN UYGULAMALAR VE İŞLEMLER</label> 
+                                <div class="mb-3 col form-check" style="display: block;">                          
+                                        <div>                                       
+                                            <input class="application" type="checkbox"  id="application1" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application1' %} checked {%endif%}{%endfor%} value="Maske ile hava yolu desteği">
+                                            <label for="application1" class="form-label">Maske ile hava yolu desteği</label>
+                                        </div>
+                                        <div>
+                                            <input class="application"type="checkbox"id="application2" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application2' %} checked {%endif%}{%endfor%}  value="Airway ile hava yolu desteği">
+                                            <label for="application2" class="form-label">Airway ile hava yolu desteği</label>
+                                        </div>  
+                                        <div>
+                                            <input class="application" type="checkbox" id="application3" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application3' %} checked {%endif%}{%endfor%}  value="Entübasyon uygulaması">
+                                            <label for="application3" class="form-label">Entübasyon uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application4" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application4' %} checked {%endif%}{%endfor%} value="Nazal Entübasyon uygulaması">
+                                            <label for="application4" class="form-label">Nazal Entübasyon uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application5" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application5' %} checked {%endif%}{%endfor%}  value="LMA uygulaması">
+                                            <label for="application5" class="form-label">LMA uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application6" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application6' %} checked {%endif%}{%endfor%} value="Combi tüp uygulaması">
+                                            <label for="application6" class="form-label">Combi tüp uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application7" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application7' %} checked {%endif%}{%endfor%}value="Acil trakeotomi açılması">
+                                            <label for="application7" class="form-label">Acil trakeotomi açılması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application8" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application8' %} checked {%endif%}{%endfor%} value="Mekanik ventilasyon">
+                                            <label for="application8" class="form-label">Mekanik ventilasyon</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application9" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application9' %} checked {%endif%}{%endfor%} value="Nebulizatör ile ilaç uygulama">
+                                            <label for="application9" class="form-label">Nebulizatör ile ilaç uygulama</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application10" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application10' %} checked {%endif%}{%endfor%} value="Oksijen inhalasyon tedavisi 1 Saat">
+                                            <label for="application10" class="form-label">Oksijen inhalasyon tedavisi 1 Saat</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application11" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application11' %} checked {%endif%}{%endfor%} value="Aspirasyon uygulaması">
+                                            <label for="application11" class="form-label">Aspirasyon uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application12" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application12' %} checked {%endif%}{%endfor%} value="Ventilatör ile takip (CPAP BİPAP dahil)">
+                                            <label for="application12" class="form-label">Ventilatör ile takip (CPAP BİPAP dahil)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application13" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application13' %} checked {%endif%}{%endfor%} value="Balon valf maske uygulaması">
+                                            <label for="application13" class="form-label">Balon valf maske uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application14" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application14' %} checked {%endif%}{%endfor%} value="CPR uygulaması">
+                                            <label for="application14" class="form-label">CPR uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application15" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application15' %} checked {%endif%}{%endfor%} value="Defibrilasyon">
+                                            <label for="application15" class="form-label">Defibrilasyon</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application16" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application16' %} checked {%endif%}{%endfor%} value="Kardiyoversiyon">
+                                            <label for="application16" class="form-label">Kardiyoversiyon</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application17" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application17' %} checked {%endif%}{%endfor%} value="Monitorizasyon">
+                                            <label for="application17" class="form-label">Monitorizasyon</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application18" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application18' %} checked {%endif%}{%endfor%} value="EKG uygulaması">
+                                            <label for="application18" class="form-label">EKG uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application19" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application19' %} checked {%endif%}{%endfor%} value="İlaçlı müdahale">
+                                            <label for="application19" class="form-label">İlaçlı müdahale</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application20" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application20' %} checked {%endif%}{%endfor%} value="Damar yolu açılması">
+                                            <label for="application20" class="form-label">Damar yolu açılması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application21" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application21' %} checked {%endif%}{%endfor%} value="Intravenöz uygulama">
+                                            <label for="application21" class="form-label">Intravenöz uygulama</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application22" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application22' %} checked {%endif%}{%endfor%}  value="Intra osseöz kiti uygulaması">
+                                            <label for="application22" class="form-label">Intra osseöz kiti uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application23" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application23' %} checked {%endif%}{%endfor%} value="Intra musculer uygulama">
+                                            <label for="application23" class="form-label">Intra musculer uygulama</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application24" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application24' %} checked {%endif%}{%endfor%} value="Subcutan uygulama">
+                                            <label for="application24" class="form-label">Subcutan uygulama</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application25" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application25' %} checked {%endif%}{%endfor%} value="Kanama durdurucu ajan uygulaması">
+                                            <label for="application25" class="form-label">Kanama durdurucu ajan uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input  class="application" type="checkbox" id="application" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application' %} checked {%endif%}{%endfor%} value="Cut down uygulaması">
+                                            <label for="application25" class="form-label">Cut down uygulaması</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col form-check" style="display: block;">
+                                        <div>                                       
+                                            <input class="application" type="checkbox" id="application26" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application26' %} checked {%endif%}{%endfor%} value="İnfüzyon pompası">
+                                            <label for="application26" class="form-label">İnfüzyon pompası</label>
+                                        </div> 
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application27" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application27' %} checked {%endif%}{%endfor%}value="Kanama kontrolü">
+                                            <label for="application27" class="form-label">Kanama kontrolü</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application28" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application28' %} checked {%endif%}{%endfor%}  value="Çubuk atel uygulaması">
+                                            <label for="application28" class="form-label">Çubuk atel uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application29"{% for case in AmbulanceCase.applicationList %}{% if case == 'application29' %} checked {%endif%}{%endfor%} name="application"
+                                              value="Vakum atel uygulaması">
+                                            <label for="application29" class="form-label">Vakum atel uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox"id="application30" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application30' %} checked {%endif%}{%endfor%} value="Şişme atel uygulaması">
+                                            <label for="application30" class="form-label">Şişme atel uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application31" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application31' %} checked {%endif%}{%endfor%} value="U atel uygulaması">
+                                            <label for="application31" class="form-label">U atel uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox"id="application32" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application32' %} checked {%endif%}{%endfor%} value="Traksiyon atel uygulaması">
+                                            <label for="application32" class="form-label">Traksiyon atel uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application33" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application33' %} checked {%endif%}{%endfor%} value="Pelvis kemeri uygulaması">
+                                            <label for="application33" class="form-label">Pelvis kemeri uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application34" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application34' %} checked {%endif%}{%endfor%} value="Sekiz bandaj uygulaması">
+                                            <label for="application34" class="form-label">Sekiz bandaj uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application35" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application35' %} checked {%endif%}{%endfor%} value="Elastik bandaj (velpa)">
+                                            <label for="application35" class="form-label">Elastik bandaj (velpa)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application36" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application36' %} checked {%endif%}{%endfor%} value="Femur(vücut) traksiyonu">
+                                            <label for="application36" class="form-label">Femur(vücut) traksiyonu</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application37" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application37' %} checked {%endif%}{%endfor%} value="Eklem çıkığı kapalı redüksiyonu">
+                                            <label for="application37" class="form-label">Eklem çıkığı kapalı redüksiyonu</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application38" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application38' %} checked {%endif%}{%endfor%} value="Servical collar uygulama">
+                                            <label for="application38" class="form-label">Servical collar uygulama</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application39" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application39' %} checked {%endif%}{%endfor%} value="Travma yeleği">
+                                            <label for="application39" class="form-label">Travma yeleği</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application41" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application41' %} checked {%endif%}{%endfor%} value="Sırt tahtası uygulaması">
+                                            <label for="application41" class="form-label">Sırt tahtası uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application42" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application42' %} checked {%endif%}{%endfor%} value="Vakum sedye uygulaması">
+                                            <label for="application42" class="form-label">Vakum sedye uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application43" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application43' %} checked {%endif%}{%endfor%} value="Atel+velpau">
+                                            <label for="application43" class="form-label">Atel+velpau</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application44" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application44' %} checked {%endif%}{%endfor%} value="Cilt traksiyonu uygulaması">
+                                            <label for="application44" class="form-label">Cilt traksiyonu uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application45" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application45' %} checked {%endif%}{%endfor%}value="Apse veya hematom drenajı (yüzeyel)">
+                                            <label for="application45" class="form-label">Apse veya hematom drenajı (yüzeyel)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application46" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application46' %} checked {%endif%}{%endfor%} value="Sütur atılması">
+                                            <label for="application46" class="form-label">Sütur atılması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application47" name="application" value="Sütur alınması" {% for case in AmbulanceCase.applicationList %}{% if case == 'application47' %} checked {%endif%}{%endfor%}>
+                                            <label for="application47" class="form-label">Sütur alınması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application48" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application48' %} checked {%endif%}{%endfor%} value="Mide lavajı">
+                                            <label for="application48" class="form-label">Mide lavajı</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application49" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application49' %} checked {%endif%}{%endfor%} value="Ng sonda takılması">
+                                            <label for="application49" class="form-label">Ng sonda takılması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application50" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application50' %} checked {%endif%}{%endfor%} value="Mesane sondası takılması">
+                                            <label for="application50" class="form-label">Mesane sondası takılması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application51" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application51' %} checked {%endif%}{%endfor%} value="Küçük cerrahi mudahale">
+                                            <label for="application51" class="form-label">Küçük cerrahi mudahale</label>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 col form-check" style="display: block;">
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application52" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application52' %} checked {%endif%}{%endfor%} value="Yanık pansuman (büyük)">
+                                            <label for="application52" class="form-label">Yanık pansuman (büyük)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application53" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application53' %} checked {%endif%}{%endfor%} value="Yanık pansuman (orta)">
+                                            <label for="application53" class="form-label">Yanık pansuman (orta)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application54" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application54' %} checked {%endif%}{%endfor%}value="Yanık pansuman (küçük)">
+                                            <label for="application54" class="form-label">Yanık pansuman (küçük)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application55" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application55' %} checked {%endif%}{%endfor%} value="Pansuman (büyük)">
+                                            <label for="application55" class="form-label">Pansuman (büyük)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application56" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application56' %} checked {%endif%}{%endfor%} value="Pansuman (küçük)">
+                                            <label for="application56" class="form-label">Pansuman (küçük)</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application57" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application57' %} checked {%endif%}{%endfor%} value="Burun tamponu uygulaması">
+                                            <label for="application57" class="form-label">Burun tamponu uygulaması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application58" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application58' %} checked {%endif%}{%endfor%} value="Burundan yabancı cisim çıkarma">
+                                            <label for="application58" class="form-label">Burundan yabancı cisim çıkarma</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application59" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application59' %} checked {%endif%}{%endfor%} value="Korneadan Yabancı cisim çıkarma">
+                                            <label for="application59" class="form-label">Korneadan Yabancı cisim çıkarma</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application60" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application60' %} checked {%endif%}{%endfor%}value="Dış Kulaktan yabancı cisim çıkarma">
+                                            <label for="application60" class="form-label">Dış Kulaktan yabancı cisim çıkarma</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application61" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application61' %} checked {%endif%}{%endfor%} value="Konjuktivadan yabancı cisim çıkarma">
+                                            <label for="application61" class="form-label">Konjuktivadan yabancı cisim çıkarma</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application62" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application62' %} checked {%endif%}{%endfor%} value="Larinksten yabancı cisim çıkarılması">
+                                            <label for="application62" class="form-label">Larinksten yabancı cisim çıkarılması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application63" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application64' %} checked {%endif%}{%endfor%}value="Dekübit yara debrimanı">
+                                            <label for="application63" class="form-label">Dekübit yara debrimanı</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application64" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application64' %} checked {%endif%}{%endfor%} value="Yara debrimanı">
+                                            <label for="application64" class="form-label">Yara debrimanı</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application65" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application65' %} checked {%endif%}{%endfor%}value="Yenidogan entübasyonu">
+                                            <label for="application65" class="form-label">Yenidogan entübasyonu</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application66" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application66' %} checked {%endif%}{%endfor%} value="Yenidogan IM.enjeksiyon">
+                                            <label for="application66" class="form-label">Yenidogan IM.enjeksiyon</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application67" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application67' %} checked {%endif%}{%endfor%} value="Yenidogan IV mayi takılması">
+                                            <label for="application67" class="form-label">Yenidogan IV mayi takılması</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application68" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application68' %} checked {%endif%}{%endfor%}value="Yeniogan IV enjeksiyon uyg.">
+                                            <label for="application68" class="form-label">Yeniogan IV enjeksiyon uyg.</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application" type="checkbox" id="application69" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application69' %} checked {%endif%}{%endfor%}value="Transport küvözü ile nakil">
+                                            <label for="application69" class="form-label">STransport küvözü ile nakil</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application70" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application70' %} checked {%endif%}{%endfor%}value="Yenidogan monitörizasyon">
+                                            <label for="application70" class="form-label">Yenidogan monitörizasyon</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application71" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application71' %} checked {%endif%}{%endfor%} value="Yenidoğan ventilasyon">
+                                            <label for="application71" class="form-label">Yenidoğan ventilasyon</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application72" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application72' %} checked {%endif%}{%endfor%} value="Yenidoğan canlandırma">
+                                            <label for="application72" class="form-label">Yenidoğan canlandırma</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application73" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application73' %} checked {%endif%}{%endfor%} value="Lokal anestezi">
+                                            <label for="application73" class="form-label">Lokal anestezi</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application74" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application74' %} checked {%endif%}{%endfor%} value="Komplikasyonlu doğum">
+                                            <label for="application74" class="form-label">Komplikasyonlu doğum</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application75" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application75' %} checked {%endif%}{%endfor%} value="Normal doğum">
+                                            <label for="application75" class="form-label">Normal doğum</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application76" name="application"{% for case in AmbulanceCase.applicationList %}{% if case == 'application76' %} checked {%endif%}{%endfor%} value="Transkutan pao² ölçümü">
+                                            <label for="application76" class="form-label">Transkutan pao² ölçümü</label>
+                                        </div>
+                                        <div >                                       
+                                            <input class="application"type="checkbox" id="application77" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application77' %} checked {%endif%}{%endfor%}value="Kan şekeri ölçümü">
+                                            <label for="application77" class="form-label">Kan şekeri ölçümü</label>
+                                        </div>
+                                        <input id="txt1" type="text" name="applicationList" value="{%for case in AmbulanceCase.applicationList%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                    </div>
+                            </div>
+                            <div class="row">
+                                <label for="" class="form-label">TRANSFER DURUMU</label>
+                                <div class="mb-3 col" style="display: block;">
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer1" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer1' %} checked {%endif%}{%endfor%} value="Evde Muayene">
+                                        <label for="transfer1" class="form-label">Evde Muayene</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox"id="transfer2" name="transfer"{% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer2' %} checked {%endif%}{%endfor%} value="Yerinde Muayene">
+                                        <label for="transfer2" class="form-label">Yerinde Muayene</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer" type="checkbox" id="transfer3" name="transfer"{% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer3' %} checked {%endif%}{%endfor%} value="Hastaneye Nakil">
+                                        <label for="transfer3" class="form-label">Hastaneye Nakil</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer4" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer4' %} checked {%endif%}{%endfor%} value="Hastaneler Arası Nakil)">
+                                        <label for="transfer4" class="form-label">Hastaneler Arası Nakil</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer5" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer5' %} checked {%endif%}{%endfor%} value="Tıbbi Tetkik İçin Nakil">
+                                        <label for="transfer5" class="form-label">Tıbbi Tetkik İçin Nakil</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer6" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer6' %} checked {%endif%}{%endfor%} value="Eve Nakil">
+                                        <label for="transfer6" class="form-label">Eve Nakil</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer7" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer7' %} checked {%endif%}{%endfor%} value="Şehirler Arası Nakil">
+                                        <label for="transfer7" class="form-label">Şehirler Arası Nakil</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col" style="display: block;">
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer8" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer8' %} checked {%endif%}{%endfor%} value="Uluslar Arası Nakil">
+                                        <label for="transfer8" class="form-label">Uluslar Arası Nakil</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer9" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer9' %} checked {%endif%}{%endfor%} value="İlçe Dışı Transporta">
+                                        <label for="transfer9" class="form-label">İlçe Dışı Transport</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer10" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer10' %} checked {%endif%}{%endfor%} value="İlçe İçi Transfer">
+                                        <label for="transfer10" class="form-label">İlçe İçi Transfer</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer11" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer11' %} checked {%endif%}{%endfor%} value="EX (Yerinde Bırakıldı)">
+                                        <label for="transfer11" class="form-label">EX (Yerinde Bırakıldı)</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer12" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer12' %} checked {%endif%}{%endfor%} value="Başka Araçla Nakil">
+                                        <label for="transfer12" class="form-label">Başka Araçla Nakil</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox" id="transfer13" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer13' %} checked {%endif%}{%endfor%} value="Sağlık Tedbir">
+                                        <label for="transfer13" class="form-label">Sağlık Tedbir</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="transfer"type="checkbox"id="transfer14" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer14' %} checked {%endif%}{%endfor%} value="Diğer">
+                                        <label for="transfer14" class="form-label">Diğer</label>
+                                    </div>
+                                    <input id="txt2" type="text" name="Casetransfer" value="{%for case in AmbulanceCase.Casetransfer%}{{case}},{%endfor%}" style="display: none;" readonly>
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="" class="form-label">GENEL UYGULAMA</label>
+                                <div class="mb-3 col form-check" style="display: block;">
+                                    <div >                                       
+                                        <input class="general"type="checkbox" id="general1" name="general" {% for case in AmbulanceCase.generalList %}{% if case == 'general1' %} checked {%endif%}{%endfor%} value="{{AmbulanceCase.general}}">
+                                        <label for="general1" class="form-label">Dekontaminasyon</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="general"type="checkbox" id="general2" name="general"{% for case in AmbulanceCase.generalList %}{% if case == 'general2' %} checked {%endif%}{%endfor%} value="{{AmbulanceCase.general}}">
+                                        <label for="general2" class="form-label">Refakatçı</label>
+                                    </div>
+                                    <div >                                       
+                                        <input class="general"type="checkbox" id="general3" name="general"{% for case in AmbulanceCase.generalList %}{% if case == 'general3' %} checked {%endif%}{%endfor%} value="{{AmbulanceCase.general}}">
+                                        <label for="general3" class="form-label">Vaka Değerlendirme</label>
+                                    </div>
+                                    <input id="txt3" type="text" name="generalList" value="{%for case in AmbulanceCase.generalList%}{{case}},{%endfor%}" style="display: none;" readonly>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="number_of_attendants" class="form-label">REFAKATÇI SAYISI</label>
+                                    <input type="text" class="form-control" id="number_of_attendants" name="number_of_attendants" value="{{AmbulanceCase.number_of_attendants}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="emergency_ambulance_waiting" class="form-label">ACİL YARDIM AMBULANSI BEKLEME</label>
+                                    <input type="time" class="form-control" id="emergency_ambulance_waiting" name="emergency_ambulance_waiting" value="{{AmbulanceCase.emergency_ambulance_waiting}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="patient_transport_ambulance_waiting" class="form-label">HASTA NAKİL AMBULANSI BEKLEME</label>
+                                    <input type="time" class="form-control" id="patient_transport_ambulance_waiting" name="patient_transport_ambulance_waiting" value="{{AmbulanceCase.patient_transport_ambulance_waiting}}">
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col" style="display:block">   
+                                    <h3>HASTA BİLGİLENDİRME ONAYI</h3>
+                                    <div>Hastamın nakli sırasında ambulansta bulunmamın ambulans ekibinin görevini zorlaştırdığı gibi personel ve ambulans sürüş güvenliği açısından olumsuz sonuçlar doğurabileceği, meydana gelebilecek birkazadan ve buna bağlı olarak ortaya çıkabilecek hukuki sorunlardan etkilenebileceğim, ambulansta bulunduğum sürece emniyet kemerini takmam gerektiği konusunda ambulans personeli tarafından ayrıntılıolarak bilgilendirildim. Ambulansa binmem durumunda ortaya çıkabilecek olası riskleri ve hukuki sorunları anladım. Buna rağmen hastamın ambulansla nakli sırasında, Hasta Hakları Yönetmeliği’nin 40. VeYataklı Tedavi Kurumları İşletme Yönetmeliği’nin 62. Maddesinde belirtilen Refakatçi kapsamında olmak üzere, kendi hür irademle ambulansta hastama refakatçi olarak ön kabinde bulunmayı, nakil sırasında ortaya çıkabilecek her türlü hukuksal sorunla ilgili, maddi, manevi ve hukuki tüm sorumluluk şahsıma ait olmak üzere kabul ediyorum. SAS ambulans (Star Ambulans Sağ. Hiz. Tur. Taş. Paz. Ltd. Şti.)hekimlerinin/param ediklerinin ve çalışma ekibinin uygulayacağı, hastalığım ın teşhis ve tedavisi için gerekli olan ilaçları, tetkikleri, verilecek anestezi ilaçlarını / transportu bilincim yerinde olarak kabulediyorum. Sağlık durumum a ilişkin, riskler ve komplikasyonlar tarafıma anlatılmıştır. Bu tedavi yerine uygulanabilecek bir başka yöntem in bulunup bulunmadığı konusunda da sağlık ekibim tarafından bilgilendirildim. Tedavi ya da transport sırasında oluşabilecek olumsuz gelişmelerden haberdar olarak tedavim in/transportum un yapılmasını onaylıyorum. Ayrıca aldığım hizmetin ödemesi transferi talepeden kurum tarafından kabul edilmez veya ben özel olarak talep ettiğim de tüm sağlık hizmetleri bedelini Sağlık Bakanlığının belirlemiş olduğu ambulans fiyat tarifesi üzerinden ve yapılan müdahalelerin bedelini SUT fiyat tarifesi üzerinden ödeyeceğimi kabul ve taahhüt ederim.</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="username1" class="form-label">ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="username1" name="patient_username" value="{{AmbulanceCase.patient_username}}">
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    
+                                        <label for="get_sig" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="get_sig" >
+                                            
+                                        </div>
+                                        <textarea name="sigtext" id="sigtext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.sigtext}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="row ">   
+                                    <h3>HASTANENİN HASTA REDDİ</h3>
+                                    <input type="text" class="form-control" id="patient_rejection" name="patient_rejection" value="{{AmbulanceCase.patient_rejection}}">
+                                   
+                                    <div>nedenlerle hastayı hastanemize kabul edemiyorum. Hastanın başka hastaneye nakil için gerekli stabilizasyon sağladım. Şu anda durumu başka birkuruma nakli için uygundur.</div>                           
+                                    
+                                    
+                                    <label for="hospital_rejection" class="form-label">ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="hospital_rejection" name="hospital_rejection" value="{{AmbulanceCase.hospital_rejection}}">
+                                   
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="hospital_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="hospital_signature" >
+                                                
+                                        </div>
+                                        <textarea name="hospital_rejection_sigtext" id="hospital_rejection_sigtext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.hospital_rejection_sigtext}}</textarea> 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <h3>HASTANIN HİZMET REDDİ</h3>
+                                    <div>Ambulansla gelen görevli bana hastanın hemen tedavisi / hastaneye nakli gerektiğini, aksi halde kötü sonuçlar doğurabileceğini anlayacağım şekilde ayrıntılı olarak anlattı. Buna rağmen tedaviyi /hasta naklini kabul etmiyorum.</div>
+                                <div class="mb-3 col">   
+                                    <label for="patients_relative_username" class="form-label">HASTANIN / YAKININ ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="patients_relative_username" name="patients_relative_username" value="{{AmbulanceCase.patients_relative_username}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="patients_relative_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="patients_relative_signature" >
+                                                
+                                        </div>
+                                        <textarea name="patients_relative_signaturetext" id="patients_relative_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.patients_relative_signaturetext}}</textarea>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="doctor_username" class="form-label">DOKTOR/PARAMEDİK ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="doctor_username" name="doctor_username" value="{{AmbulanceCase.doctor_username}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    <label for="doctor_signature" class="form-label">İMZA</label>
+                                    <div class="container border border-5" id="doctor_signature" >
+                                            
+                                    </div>
+                                    <textarea name="doctor_signaturetext" id="doctor_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.doctor_signaturetext}}</textarea>
+                                </div>
+                                </div>
+                                <div class="mb-3 col">  
+                                    <label for="delivery_area_username" class="form-label">HASTAYI TESLİM ALANIN ÜNVANI ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="delivery_area_username" name="delivery_area_username" value="{{AmbulanceCase.delivery_area_username}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    <label for="delivery_area_signature" class="form-label">İMZA</label>
+                                    <div class="container border border-5" id="delivery_area_signature" >
+                                            
+                                    </div>
+                                    <textarea name="delivery_area_signaturetext" id="delivery_area_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.delivery_area_signaturetext}}</textarea> 
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">  
+                                    <label for="personal_username" class="form-label">SAĞLIK PERSONELİ ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="personal_username" name="personal_username" value="{{AmbulanceCase.personal_username}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    <label for="personal_signature" class="form-label">İMZA</label>
+                                    <div class="container border border-5" id="personal_signature" >
+                                            
+                                    </div>
+                                    <textarea name="personal_signaturetext" id="personal_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.personal_signaturetext}}</textarea> 
+                                </div>                                    
+                                </div>
+                                <div class="mb-3 col">  
+                                    <label for="pilot_username" class="form-label">SÜRÜCÜ/PİLOT ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="pilot_username" name="pilot_username" value="{{AmbulanceCase.pilot_username}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    <label for="pilot_signature" class="form-label">İMZA</label>
+                                    <div class="container border border-5" id="pilot_signature" >
+                                            
+                                    </div>
+                                    <textarea name="pilot_signaturetext" id="pilot_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.pilot_signaturetext}}</textarea> 
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="car_info" class="form-label">TAŞIT BİLGİSİ</label>
+                                    <div></div>
+                                    <select name="car_info" id="car_info" class="form-select" aria-label="Default select example">
+                                        <option id="selectcar" {% if AmbulanceCase.car_info == 'selectcar' %} selected  {%endif%} value="selectcar">Lütfen Araç Seçiniz</option>
+                                        <option id="34SAS20" {% if AmbulanceCase.car_info == '34SAS20' %} selected  {%endif%} value="34SAS20">34 SAS 20</option>
+                                        <option id="34SAS30" {% if AmbulanceCase.car_info == '34SAS30' %} selected {%endif%} value="34SAS30">34 SAS 30</option>
+                                        <option id="34BF2904"  {% if AmbulanceCase.car_info == '34BF2904' %}selected  {%endif%} value="34BF2904">34 BF 2904</option>
+                                        <option id="34RE1140" {% if AmbulanceCase.car_info == '34RE1140' %} selected {%endif%} value="34RE1140">34 RE 1140</option>
+                                        <option id="34BF9529" {% if AmbulanceCase.car_info == '34BF9529' %} selected {%endif%} value="34BF9529">34 BF 9529</option>
+                                    </select>
+                                    <label for="start_km" class="form-label">Başlangıç KM Bilgisi</label>
+                                    <input type="number" class="form-control" id="start_km" name="start_km" value="{{AmbulanceCase.start_km}}">
+                                    <label for="finish_km" class="form-label">Bitiş KM Bilgisi</label>
+                                    <input type="number" class="form-control" id="finish_km" name="finish_km" value="{{AmbulanceCase.finish_km}}">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="protocol_number" class="form-label">112 PROTOKOL NUMARASI</label>
+                                    <input type="number" class="form-control" id="protocol_number" name="protocol_number" value="{{AmbulanceCase.protocol_number}}">
+                                    <label for="other" class="form-label">DİĞER</label>
+                                    <input type="text" class="form-control" id="other" name="other">
+
+                                    <label for="" class="form-label">CARİ</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="currentyes" name="current"{% if AmbulanceCase.current == 'currentyes' %} checked {%endif%} value="{{AmbulanceCase.current}}"  group="current" >
+                                        <label for="currentyes" class="form-label">Evet</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="currentno" name="current" {% if AmbulanceCase.current == 'currentno' %} checked {%endif%} value="{{AmbulanceCase.current}}" group="current">
+                                        <label for="currentno" class="form-label">Hayır</label>
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="finish_time" class="form-label">CARİ KURUM ADI</label>
+                                    <select name="current_institution_name" id="car_info" class="form-select" aria-label="Default select example">
+                                        <option id="selectinstitution"   {% if AmbulanceCase.current_institution_name == 'selectinstitution' %}  selected {%endif%} value="selectinstitution" >Lütfen Kurum Seçiniz</option>
+                                        <option id="selectinstitution1"  {% if AmbulanceCase.current_institution_name == 'BVÜTFHastanesiFatih' %}  selected {%endif%} value="BVÜTFHastanesiFatih">BVÜ TF Hastanesi Fatih</option>
+                                        <option id="selectinstitution2"  {% if AmbulanceCase.current_institution_name == 'BVÜTFHastanesiDragos' %}  selected {%endif%} value="BVÜTFHastanesiDragos">BVÜ TF Hastanesi Dragos</option>
+                                        <option id="selectinstitution3"  {% if AmbulanceCase.current_institution_name == 'MedicalParkFatih' %}  selected {%endif%} value="MedicalParkFatih">Medical Park Fatih</option>
+                                        <option id="selectinstitution4"  {% if AmbulanceCase.current_institution_name == 'BayParkHospital' %}  selected {%endif%} value="BayParkHospital">BayPark Hospital</option>
+                                        <option id="selectinstitution5"  {% if AmbulanceCase.current_institution_name == 'GaziosmanpaşaYYÜHastanesi' %}  selected {%endif%} value="GaziosmanpaşaYYÜHastanesi">Gaziosmnpaşa YYÜ Hastanesi</option>
+                                        <option id="selectinstitution6"  {% if AmbulanceCase.current_institution_name == 'BahatHospital' %} selected {%endif%} value="BahatHospital">Bahat Hospital</option>
+                                        <option id="selectinstitution7"  {% if AmbulanceCase.current_institution_name == 'EMT' %}  selected  {%endif%} value="EMT">EMT</option>
+                                        <option id="selectinstitution8"  {% if AmbulanceCase.current_institution_name == 'ApexEncore' %} selected {%endif%} value="ApexEncore">Apex Encore</option>
+                                        <option id="selectinstitution9"  {% if AmbulanceCase.current_institution_name == 'Merkez' %}  selected {%endif%} value="Merkez">Merkez</option>
+                                        <option id="selectinstitution10" {% if AmbulanceCase.current_institution_name == 'Medline' %}  selected {%endif%} value="Medline">Medline</option>
+                                        <option id="selectinstitution11" {% if AmbulanceCase.current_institution_name == 'AIDAssistance' %}  selected {%endif%} value="AIDAssistance">AID Assistance</option>
+                                        <option id="selectinstitution12" {% if AmbulanceCase.current_institution_name == 'RemedAssitance' %}  selected {%endif%} value="RemedAssitance">Remed Assitance</option>
+                                        <option id="selectinstitution13" {% if AmbulanceCase.current_institution_name == 'Medinistanbul' %}  selected {%endif%} value="Medinistanbul">Medinistanbul</option>
+                                        <option id="selectinstitution14" {% if AmbulanceCase.current_institution_name == 'PluresHavacılık' %}  selected {%endif%} value="PluresHavacılık">Plures Havacılık</option>
+                                        <option id="selectinstitution15" {% if AmbulanceCase.current_institution_name == 'RedStar' %}  selected {%endif%} value="RedStar">RedStar</option>
+                                        <option id="selectinstitution16" {% if AmbulanceCase.current_institution_name == 'HealMedy' %}  selected {%endif%} value="HealMedy">HealMedy</option>
+                                        <option id="selectinstitution17" {% if AmbulanceCase.current_institution_name == 'ABCassistance' %}  selected {%endif%} value="ABCassistance">ABC assistance</option>
+                                        <option id="selectinstitution18" {% if AmbulanceCase.current_institution_name == 'Yok' %}  selected {%endif%} value="Yok">Yok</option>
+                                    </select>
+                                    <label for="" class="form-label">GİDİŞ-DÖNÜŞ</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="yes" name="round_trip" {% if AmbulanceCase.round_trip == 'yes' %} checked {%endif%} value="{{AmbulanceCase.round_trip}}" group="round_trip">
+                                        <label for="yes" class="form-label">Evet</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="no" name="round_trip" {% if AmbulanceCase.round_trip == 'no' %} checked {%endif%}  value="{{AmbulanceCase.round_trip}}" group="round_trip">
+                                        <label for="no" class="form-label">Hayır</label>
+                                    </div> 
+
+                                    <label for="money" class="form-label">ÜCRET</label>
+                                    <input type="number" class="form-control" id="money" name="money" value="{{AmbulanceCase.money}}">
+
+                                    <label for="file_number" class="form-label">HASTANE PROTOKOL / DOSYA NO</label>
+                                    <input type="text" class="form-control" id="file_number" name="file_number" value="{{AmbulanceCase.file_number}}">
+
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="transfer_doctor_username" class="form-label">TRANSFER TALEP EDEN DOKTOR ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="transfer_doctor_username" name="transfer_doctor_username" value="{{AmbulanceCase.transfer_doctor_username}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                    <label for="transfer_doctor_signature" class="form-label">İMZA</label>
+                                    <div class="container border border-5" id="transfer_doctor_signature">
+                                            
+                                    </div>
+                                    <textarea name="transfer_doctor_signaturetext" id="transfer_doctor_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.transfer_doctor_signaturetext}}</textarea>
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">                                      
+                                </br> 
+                                    <button type="submit" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" onclick="updateAmbulanceCasePdf ()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>    
+                                    &nbsp;
+                                    <button type="button" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="submit" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                </div>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

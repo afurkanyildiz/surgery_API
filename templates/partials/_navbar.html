@@ -1,0 +1,104 @@
+{% csrf_token %}
+    <nav class="sb-topnav navbar navbar-expand navbar-light bg-green">
+
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3  text-light" href="{% url 'index'%}">Filyos Sağlık Merkezi</a>
+        
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-light btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Arama " aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-secondary bi bi-search" id="btnNavbarSearch" type="button"> Search</button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas text-light fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#!">Ayarlar</a></li>
+                    <li><a class="dropdown-item" href="#!">Aktiviteler</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" href="{% url 'logout'%}">Çıkış Yap</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion bg-green" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading"></div>
+                        <a class="nav-link link-light" href="{% url 'index'%}">
+                            <div class="sb-nav-link-icon "><i class="fas fa-tachometer-alt"></i></div>
+                            Ana Sayfa
+                        </a>
+                        <!-- <div class="sb-sidenav-menu-heading"></div> -->
+                        <!-- <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Duzen
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a> -->
+                        <!-- <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                                <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                            </nav>
+                        </div> -->
+                        <a class="nav-link collapsed link-light" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            Formlar
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link  link-light" href="{% url 'insertRecord'%}">Kayıt Ekleme</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_case_form'%}">Ambulans Vaka Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'pre_case_control_form'%}">Vaka Öncesi Kontrol Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_handover_form'%}">Ambulans Devir Teslim Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_daily_control_form'%}">Ambulans Günlük Kontrol ve Devir Teslim Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_material_control_form'%}">Ambulans, Cihaz, Malzeme ve İlaç Günlük Kontrol Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'medical_gas_request_form'%}">Medikal Gaz İstek Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'material_request_form'%}">Malzeme Talep Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'medication_request_form'%}">İlaç Talep Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'healmedy_case_form'%}">Healmedy Vaka Formu</a>
+                                <a class="nav-link  link-light" href="{% url 'call_center_form'%}">Çağrı Merkezi Formu</a>                              
+                            </nav>
+                        </div>
+                        <a class="nav-link collapsed link-light" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTables" aria-expanded="false" aria-controls="collapsePages">
+                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                            Tablolar
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseTables" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link  link-light" href="{% url 'tables' %}">Kayıt Görüntüleme</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_case_tables'%}">Ambulans Vaka Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'pre_case_control_tables'%}">Vaka Öncesi Kontrol Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_handover_tables'%}">Ambulans Devir Teslim Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_daily_control_tables'%}">Ambulans Günlük Kontrol ve Devir Teslim Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'ambulance_material_control_tables'%}">Ambulans, Cihaz, Malzeme ve İlaç Günlük Kontrol Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'medical_gas_request_tables'%}">Medikal Gaz İstek Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'material_request_tables'%}">Malzeme Talep Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'medication_request_tables'%}">İlaç Talep Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'healmedy_case_tables'%}">Healmedy Vaka Tablosu</a>
+                                <a class="nav-link  link-light" href="{% url 'call_center_tables'%}">Çağrı Merkezi Tablosu</a>                             
+                            </nav>
+                        </div>
+                        <!-- <div class="sb-sidenav-menu-heading"></div> -->
+                        <!-- <a class="nav-link  link-light" href="{% url 'chart' %}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                            Tablolar
+                        </a> -->
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer link-light">
+                    <div class="small link-light">Kullanıcı Ismi:</div>
+                    {{user.username}}
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">

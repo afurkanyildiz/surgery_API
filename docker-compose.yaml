@@ -1,0 +1,34 @@
+version: "3"
+
+  #networks:
+  # web:
+  #     external: true
+  # bridge:
+  #   driver: bridge
+
+services:
+    # CaddyServer reverse proxy
+    caddy:
+        restart: always
+        image: caddy:2-alpine
+        ports:
+            - "80:80"
+            - "443:443"
+        command: caddy reverse-proxy --from http://116.202.18.80 --to http://0.0.0.0:8000
+        #volumes:
+        #    - /local/path/to/Caddyfile:/path/inside/continer/to/Caddyfile
+        #     networks:
+        #   - web
+        #   - bridge
+
+    # Django web app
+    django:
+        restart: always
+        build: .
+        ports:
+          - "8000:8000"
+        #environment:
+        #    - url=https://api.backend.example.com
+        #command: "gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+        #networks:
+        #   - bridge

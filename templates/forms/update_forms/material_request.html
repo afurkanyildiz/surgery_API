@@ -1,0 +1,193 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+<script>
+    $(function() {
+        if($('#request_manager_signaturetext').is(':contains("lines")')){
+            var sig = $('#request_manager_signature').signature();
+            sig.signature('draw', $('#request_manager_signaturetext').val());
+            sig.signature('disable');
+            $('#request_manager_signature').signature({disabled:true})  
+        } else {
+            var sig = $('#request_manager_signature').signature();
+            sig.signature('disable');
+            $('#request_manager_signature').signature({disabled:true})
+        }    
+});
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Malzeme Talep ve Teslim Formu</h4></div>
+                    <div class="card-body">
+                        <form action="{% url 'updateMaterialRequest' MaterialRequest.id%}" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="material_name" class="form-label">1.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name" name="material_name" value="{{MaterialRequest.material_name}}">
+
+                                    <label for="material_name1" class="form-label">2.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name1" name="material_name1" value="{{MaterialRequest.material_name1}}">
+
+                                    <label for="material_name2" class="form-label">3.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name2" name="material_name2" value="{{MaterialRequest.material_name2}}">
+
+                                    <label for="material_name3" class="form-label">4.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name3" name="material_name3" value="{{MaterialRequest.material_name3}}">
+
+                                    <label for="material_name4" class="form-label">5.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name4" name="material_name4" value="{{MaterialRequest.material_name4}}">
+
+                                    <label for="material_name5" class="form-label">6.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name5" name="material_name5" value="{{MaterialRequest.material_name5}}">
+
+                                    <label for="material_name6" class="form-label">7.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name6" name="material_name6" value="{{MaterialRequest.material_name6}}">
+
+                                    <label for="material_name7" class="form-label">8.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name7" name="material_name7" value="{{MaterialRequest.material_name7}}">
+
+                                    <label for="material_name8" class="form-label">9.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name8" name="material_name8" value="{{MaterialRequest.material_name8}}">
+
+                                    <label for="material_name9" class="form-label">10.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name9" name="material_name9" value="{{MaterialRequest.material_name9}}">
+
+                                    <label for="material_name10" class="form-label">11.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name10" name="material_name10" value="{{MaterialRequest.material_name10}}">
+
+                                    <label for="material_name11" class="form-label">12.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name11" name="material_name11" value="{{MaterialRequest.material_name11}}">
+
+                                    <label for="material_name12" class="form-label">13.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name12" name="material_name12" value="{{MaterialRequest.material_name12}}">
+
+                                    <label for="material_name13" class="form-label">14.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name13" name="material_name13" value="{{MaterialRequest.material_name13}}">
+
+                                    <label for="material_name14" class="form-label">15.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name14" name="material_name14" value="{{MaterialRequest.material_name14}}">
+
+                                    <label for="material_name15" class="form-label">16.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name15" name="material_name15" value="{{MaterialRequest.material_name15}}">
+
+                                    <label for="material_name16" class="form-label">17.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name16" name="material_name16" value="{{MaterialRequest.material_name16}}">
+
+                                    <label for="material_name17" class="form-label">18.MALZEME ADI</label>
+                                    <input type="text" class="form-control" id="material_name17" name="material_name17" value="{{MaterialRequest.material_name17}}">
+
+                                    
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="quantity_request" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request" name="quantity_request" value="{{MaterialRequest.quantity_request}}">
+
+                                    <label for="quantity_request1" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request1" name="quantity_request1" value="{{MaterialRequest.quantity_request1}}">
+
+                                    <label for="quantity_request2" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request2" name="quantity_request2" value="{{MaterialRequest.quantity_request2}}">
+
+                                    <label for="quantity_request3" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request3" name="quantity_request3" value="{{MaterialRequest.quantity_request3}}">
+
+                                    <label for="quantity_request4" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request4" name="quantity_request4" value="{{MaterialRequest.quantity_request4}}">
+
+                                    <label for="quantity_request5" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request5" name="quantity_request5" value="{{MaterialRequest.quantity_request5}}">
+
+                                    <label for="quantity_request6" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request6" name="quantity_request6" value="{{MaterialRequest.quantity_request6}}">
+
+                                    <label for="quantity_request7" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request7" name="quantity_request7" value="{{MaterialRequest.quantity_request7}}">
+
+                                    <label for="quantity_request8" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request8" name="quantity_request8" value="{{MaterialRequest.quantity_request8}}">
+
+                                    <label for="quantity_request9" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request9" name="quantity_request9" value="{{MaterialRequest.quantity_request9}}">
+
+                                    <label for="quantity_request10" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request10" name="quantity_request10" value="{{MaterialRequest.quantity_request10}}">
+
+                                    <label for="quantity_request11" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request11" name="quantity_request11" value="{{MaterialRequest.quantity_request11}}">
+
+                                    <label for="quantity_request12" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request12" name="quantity_request12" value="{{MaterialRequest.quantity_request12}}">
+
+                                    <label for="quantity_request13" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request13" name="quantity_request13" value="{{MaterialRequest.quantity_request13}}">
+
+                                    <label for="quantity_request14" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request14" name="quantity_request14" value="{{MaterialRequest.quantity_request14}}">
+
+                                    <label for="quantity_request15" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request15" name="quantity_request15" value="{{MaterialRequest.quantity_request15}}">
+
+                                    <label for="quantity_request16" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request16" name="quantity_request16" value="{{MaterialRequest.quantity_request16}}">
+
+                                    <label for="quantity_request17" class="form-label">TALEP EDİLEN MİKTAR</label>
+                                    <input type="text" class="form-control" id="quantity_request17" name="quantity_request17" value="{{MaterialRequest.quantity_request17}}">
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="total_requested_material" class="form-label">TOPLAM TALEP EDİLEN MALZEME</label>
+                                    <input type="text" class="form-control" id="total_requested_material" name="total_requested_material" value="{{MaterialRequest.total_requested_material}}">
+
+                                    <label for="the_department_of_request_manager" class="form-label">İSTEĞİ YAPAN BÖLÜM YÖNETİCİSİ</label>
+                                    <input type="text" class="form-control" id="the_department_of_request_manager" name="the_department_of_request_manager" value="{{MaterialRequest.the_department_of_request_manager}}">
+
+                                    <label for="manager_title" class="form-label">ÜNVAN</label>
+                                    <input type="text" class="form-control" id="manager_title" name="manager_title" value="{{MaterialRequest.manager_title}}">
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="material_request_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="material_request_date" name="material_request_date" value="{{MaterialRequest.material_request_date}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="request_manager_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="request_manager_signature" >
+                                                    
+                                        </div>
+                                        <textarea name="request_manager_signaturetext" id="request_manager_signaturetext" cols="30" rows="10" style="display: none;">{{MaterialRequest.request_manager_signaturetext}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col">
+                                <button type="submit"  class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" onclick="updateMaterialRequestPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                    <button type="button" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="reset"  class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                            </div>  
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}

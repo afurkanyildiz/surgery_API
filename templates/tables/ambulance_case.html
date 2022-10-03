@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4">
+        {% csrf_token %}
+        <h1 class="mt-4">Ambulans Vaka Kayıtları Görüntüleme</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'index'%}">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Ambulans Vaka Tablosu</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Ambulans Vaka Kayıtları
+            </div>
+            <div class="card-body">
+                {% if AmbulanceCase %}
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarih</th>
+                            <th>SAS Protokol</th>
+                            <th>Adı Soyadı</th>
+                            <th>Cinsiyet</th>
+                            <th>Yaş</th>
+                            <th>Adres</th>
+                            <th>Duzenle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarih</th>
+                            <th>SAS Protokol</th>
+                            <th>Adı Soyadı</th>
+                            <th>Cinsiyet</th>
+                            <th>Yaş</th>
+                            <th>Adres</th>
+                            <th>Duzenle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for case in AmbulanceCase %}
+                        <tr>
+                            <th scope="row">{{case.id}}</th>
+                            <td >{{case.date}}</td>
+                            <td>{{case.sas_protokol}}</td>
+							<td>{{case.username}}</td>
+							<td>{{case.gender}}</td>
+							<td>{{case.age}}</td>
+							<td>{{case.adress}}</td>
+                    <td>
+						<a href="{% url 'editAmbulanceCaseForm' case.id %}" data-placement="top" data-toggle="tooltip" title="Edit">
+							<button class="bi bi-pencil-square btn btn-outline-warning" data-title="Edit" data-toggle="modal" data-target="#edit" > Düzenle</button></a></td>
+                    <td>
+                            <button type="button" class="bi bi-trash btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{case.id}}">
+                                Sil 
+                            </button>
+                         <div class="modal fade" id="exampleModal_{{case.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Kayit Sil</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{case.username}} Isimli Kaydı Silmek İstiyor musunuz?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Kapat</button>
+                                    <a href="{% url 'deleteAmbulanceCaseForm' case.id %}">
+                                        <button  type="button" class="btn  btn-outline-danger">Sil</button>
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div> 
+                       
+						</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+              <div class="alert alert-warning">
+                <p>
+                  No Records Table
+                </p>
+              </div>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

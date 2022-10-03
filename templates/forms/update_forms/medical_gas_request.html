@@ -1,0 +1,268 @@
+
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+<script>
+    $(function() {
+        if($('#gas_request_submitter_signaturetext').is(':contains("lines")')){
+            var sig = $('#gas_request_submitter_signature').signature();
+            sig.signature('draw', $('#gas_request_submitter_signaturetext').val());
+            sig.signature('disable');
+            $('#gas_request_submitter_signature').signature({disabled:true}); 
+        }  else {
+            var sig = $('#gas_request_submitter_signature').signature();
+            sig.signature('disable');
+            $('#gas_request_submitter_signature').signature({disabled:true}); 
+        }
+});
+    $(function() {
+        if($('#receiving_username_signaturetext').is(':contains("lines")')){
+            var sig = $('#receiving_username_signature').signature();
+            sig.signature('draw', $('#receiving_username_signaturetext').val());
+            sig.signature('disable');
+            $('#receiving_username_signature').signature({disabled:true});
+        }  else {
+            var sig = $('#receiving_username_signature').signature();
+            sig.signature('disable');
+            $('#receiving_username_signature').signature({disabled:true});
+        }   
+});
+    $(function() {
+        if($('#the_requesters_signaturetext').is(':contains("lines")')){
+            var sig = $('#the_requesters_signature').signature();
+            sig.signature('draw', $('#the_requesters_signaturetext').val());
+            sig.signature('disable');
+            $('#the_requesters_signature').signature({disabled:true});
+        } else {
+            var sig = $('#the_requesters_signature').signature();
+            sig.signature('disable');
+            $('#the_requesters_signature').signature({disabled:true});
+        }
+});
+    $(function() {
+        if($('#approver_signaturetext').is(':contains("lines")')){
+            var sig = $('#approver_signature').signature();
+            sig.signature('draw', $('#approver_signaturetext').val());
+            sig.signature('disable');
+            $('#approver_signature').signature({disabled:true});  
+        }  else {
+            var sig = $('#approver_signature').signature();
+            sig.signature('disable');
+            $('#approver_signature').signature({disabled:true});
+        } 
+});
+</script>
+<main>
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header"><h4 class="text-center font-weight-light my-4">Kayıt Ekle</h4></div>
+                    <div class="card-body">
+                        <form action="{% url 'updateMedicalGasRequest' MedicalGasRequest.id%}" method="POST">
+                            {% csrf_token%}
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="" class="form-label">KULLANILACAK BİRİM</label> 
+                                    <div >                                       
+                                        <input class="form-check-input" type="radio" id="inside_the_center" name="unit" {% if MedicalGasRequest.unit == 'inside_the_center' %} checked {%endif%} value="Merkez İçi İstem">
+                                        <label for="inside_the_center" class="form-label">Merkez İçi İstem</label>
+                                    </div> 
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="firm" name="unit" {% if MedicalGasRequest.unit == 'firm' %} checked {%endif%} value="Firmadan Gaz İsteği">
+                                        <label for="firm" class="form-label">Firmadan Gaz İsteği</label>
+                                    </div>
+
+                                    <label for="submitter_username" class="form-label">TESLİM EDEN ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="submitter_username" name="submitter_username" value="{{MedicalGasRequest.submitter_username}}">
+
+                                    <label for="gas_request_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="gas_request_date" name="gas_request_date" value="{{MedicalGasRequest.gas_request_date}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="gas_request_submitter_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="gas_request_submitter_signature" >
+                                                    
+                                        </div>
+                                        <textarea name="gas_request_submitter_signaturetext" id="gas_request_submitter_signaturetext" cols="30" rows="10" style="display: none;">{{MedicalGasRequest.gas_request_submitter_signaturetext}}</textarea> 
+                                    </div>
+                                </div>  
+                            
+                                <div class="mb-3 col">
+                                </br>
+                                </br>
+                                </br>
+                                </br>
+                                    <label for="receiving_username" class="form-label">TESLİM ALAN ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="receiving_username" name="receiving_username" value="{{MedicalGasRequest.receiving_username}}">
+
+                                    <label for="receiving_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="receiving_date" name="receiving_date" value="{{MedicalGasRequest.receiving_date}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="receiving_username_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="receiving_username_signature" >
+                                                    
+                                        </div>
+                                        <textarea name="receiving_username_signaturetext" id="receiving_username_signaturetext" cols="30" rows="10" style="display: none;">{{MedicalGasRequest.receiving_username_signaturetext}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">
+                                    <label for="amount_of_medical_oxygen" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen" name="amount_of_medical_oxygen" value="{{MedicalGasRequest.amount_of_medical_oxygen}}">
+
+                                    <label for="fixture_code" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code" name="fixture_code" value="{{MedicalGasRequest.fixture_code}}">
+
+                                    <label for="number_of_tubes" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes" name="number_of_tubes" value="{{MedicalGasRequest.number_of_tubes}}">
+
+                                    <label for="amount_of_medical_oxygen1" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen1" name="amount_of_medical_oxygen1" value="{{MedicalGasRequest.amount_of_medical_oxygen1}}">
+
+                                    <label for="fixture_code1" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code1" name="fixture_code1" value="{{MedicalGasRequest.fixture_code1}}">
+
+                                    <label for="number_of_tubes1" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes1" name="number_of_tubes1" value="{{MedicalGasRequest.number_of_tubes1}}">
+
+                                    <label for="amount_of_medical_oxygen2" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen2" name="amount_of_medical_oxygen2" value="{{MedicalGasRequest.amount_of_medical_oxygen2}}">
+
+                                    <label for="fixture_code2" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code2" name="fixture_code2" value="{{MedicalGasRequest.fixture_code2}}">
+
+                                    <label for="number_of_tubes2" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes2" name="number_of_tubes2" value="{{MedicalGasRequest.number_of_tubes2}}">
+
+                                    <label for="amount_of_medical_oxygen3" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen3" name="amount_of_medical_oxygen3" value="{{MedicalGasRequest.amount_of_medical_oxygen3}}">
+
+                                    <label for="fixture_code3" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code3" name="fixture_code3" value="{{MedicalGasRequest.fixture_code3}}">
+
+                                    <label for="number_of_tubes3" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes3" name="number_of_tubes3" value="{{MedicalGasRequest.number_of_tubes3}}">
+
+                                    <label for="amount_of_medical_oxygen4" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen4" name="amount_of_medical_oxygen4" value="{{MedicalGasRequest.amount_of_medical_oxygen4}}">
+
+                                    <label for="fixture_code4" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code4" name="fixture_code4" value="{{MedicalGasRequest.fixture_code4}}">
+
+                                    <label for="number_of_tubes4" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes4" name="number_of_tubes4" value="{{MedicalGasRequest.number_of_tubes4}}">
+
+
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="amount_of_medical_oxygen5" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen5" name="amount_of_medical_oxygen5" value="{{MedicalGasRequest.amount_of_medical_oxygen5}}">
+
+                                    <label for="fixture_code5" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code5" name="fixture_code5" value="{{MedicalGasRequest.fixture_code5}}">
+
+                                    <label for="number_of_tubes5" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes5" name="number_of_tubes5" value="{{MedicalGasRequest.number_of_tubes5}}">
+
+                                    <label for="amount_of_medical_oxygen6" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen6" name="amount_of_medical_oxygen6" value="{{MedicalGasRequest.amount_of_medical_oxygen6}}">
+
+                                    <label for="fixture_code6" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code6" name="fixture_code6" value="{{MedicalGasRequest.fixture_code6}}">
+
+                                    <label for="number_of_tubes6" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes6" name="number_of_tubes6" value="{{MedicalGasRequest.number_of_tubes6}}">
+
+                                    <label for="amount_of_medical_oxygen7" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen7" name="amount_of_medical_oxygen7" value="{{MedicalGasRequest.amount_of_medical_oxygen7}}">
+
+                                    <label for="fixture_code7" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code7" name="fixture_code7" value="{{MedicalGasRequest.fixture_code7}}">
+
+                                    <label for="number_of_tubes7" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes7" name="number_of_tubes7" value="{{MedicalGasRequest.number_of_tubes7}}">
+
+                                    <label for="amount_of_medical_oxygen8" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen8" name="amount_of_medical_oxygen8" value="{{MedicalGasRequest.amount_of_medical_oxygen8}}">
+
+                                    <label for="fixture_code8" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code8" name="fixture_code8" value="{{MedicalGasRequest.fixture_code8}}">
+
+                                    <label for="number_of_tubes8" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes8" name="number_of_tubes8" value="{{MedicalGasRequest.number_of_tubes8}}">
+
+                                    <label for="amount_of_medical_oxygen9" class="form-label">MEDİKAL OKSİJEN MİKTAR(LİTRE)</label>
+                                    <input type="text" class="form-control" id="amount_of_medical_oxygen9" name="amount_of_medical_oxygen9" value="{{MedicalGasRequest.amount_of_medical_oxygen9}}">
+
+                                    <label for="fixture_code9" class="form-label">DEMİRBAŞ KODU</label>
+                                    <input type="text" class="form-control" id="fixture_code9" name="fixture_code9" value="{{MedicalGasRequest.fixture_code9}}">
+
+                                    <label for="number_of_tubes9" class="form-label">TÜP ADEDİ</label>
+                                    <input type="text" class="form-control" id="number_of_tubes9" name="number_of_tubes9" value="{{MedicalGasRequest.number_of_tubes9}}">
+                                </div>                             
+                            </div>
+
+                            <div class="row">                         
+                                <div class="mb-3 col">
+                                    <label for="the_requesters_username" class="form-label">İSTEĞİ YAPANIN ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="the_requesters_username" name="the_requesters_username" value="{{MedicalGasRequest.the_requesters_username}}">
+
+                                    <label for="request_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="request_date" name="request_date" value="{{MedicalGasRequest.request_date}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="the_requesters_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="the_requesters_signature" >
+                                                    
+                                        </div>
+                                        <textarea name="the_requesters_signaturetext" id="the_requesters_signaturetext" cols="30" rows="10" style="display: none;">{{MedicalGasRequest.the_requesters_signaturetext}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col">
+                                    <label for="approver_username" class="form-label">ONAYLAYANIN ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="approver_username" name="approver_username" value="{{MedicalGasRequest.approver_username}}">
+
+                                    <label for="approved_date" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="approved_date" name="approved_date" value="{{MedicalGasRequest.approved_date}}">
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="approver_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="approver_signature" >
+                                                    
+                                        </div>
+                                        <textarea name="approver_signaturetext" id="approver_signaturetext" cols="30" rows="10" style="display: none;">{{MedicalGasRequest.approver_signaturetext}}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 col"> 
+                                <button type="submit" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    &nbsp;
+                                    <button type="button" onclick="updateMedicalRequestPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                </br>
+                                </br>
+                                    <button type="button" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                    &nbsp;
+                                    <button type="reset" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                            </div>
+                          </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+
+{% endblock%}
