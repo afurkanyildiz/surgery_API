@@ -4,7 +4,7 @@ ENV PYTHONUNBUFFERED=1
 
 COPY . .
 
-RUN pip install django gunicorn typing-extensions
+RUN pip install django gunicorn typing-extensions psycopg2-binary
 
 EXPOSE 8000
 

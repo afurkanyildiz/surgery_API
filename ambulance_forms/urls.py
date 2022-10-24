@@ -6,7 +6,7 @@ urlpatterns = [
     path('<int:id>/', views.editAmbulanceCaseForm, name='editAmbulanceCaseForm'),
     path('<int:id>', views.updateAmbulanceCaseForm, name='updateAmbulanceCaseForm'),
     path('delete/<int:id>', views.deleteAmbulanceCaseForm, name='deleteAmbulanceCaseForm'),
-    path('ambulance_case_tables/', views.ambulance_case_tables, name='ambulance_case_tables'),
+    path('ambulance_case_tables', views.ambulance_case_tables, name='ambulance_case_tables'),
 
     path('ambulance_daily_control_form', views.ambulance_daily_control_form, name='ambulance_daily_control_form'),
     path('ambulance_daily_control_tables', views.ambulance_daily_control_tables, name='ambulance_daily_control_tables'),

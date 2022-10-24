@@ -14,20 +14,20 @@
                             {% csrf_token%}
                             <div class="row">
                                 <div class="mb-3 col-6">
-                                    <input type="text" class="form-control" id="record_username" name="username" placeholder="Ad Soyad">
+                                    <input type="text" class="form-control" id="record_username" name="username" placeholder="Ad Soyad" required>
                                 </div> 
                                 <div class="mb-3 col-6">
-                                    <input type="text" class="form-control" id="record_tel" name="tel"  placeholder="Tel No">
+                                    <input type="text" class="form-control" id="record_tel" name="tel"  placeholder="Tel No" required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col-6">
                                     <label for="record_date" class="form-label">Kayıt Tarihi</label>
-                                    <input type="date" class="form-control" id="record_date" name="date"  placeholder="Tarih" >
+                                    <input type="date" class="form-control" id="record_date" name="date"  placeholder="Tarih" required>
                                 </div>
                                 <div class="mb-3 col-6">
                                     <label for="records_hour" class="form-label">Kayıt Saati</label>
-                                    <input type="time" class="form-control" id="records_hour" name="hours"  placeholder="Saat">
+                                    <input type="time" class="form-control" id="records_hour" name="hours"  placeholder="Saat" required>
                                 </div>
                               
                             </div>
@@ -35,38 +35,38 @@
 
                             <div class="row">                         
                                 <div class="mb-3 col">
-                                    <input type="text" class="form-control" id="record_tc_no" name="tcNo"  placeholder="TC Numarası" >
+                                    <input type="text" class="form-control" id="record_tc_no" name="tcNo"  placeholder="TC Numarası" required>
                                 </div>
                                 <div class="mb-3 col">
-                                    <input type="text" class="form-control" id="record_adress" name="adress"  placeholder="Adres/Köy">
+                                    <input type="text" class="form-control" id="record_adress" name="adress"  placeholder="Adres/Köy" required>
                                 </div>
                             </div>
                             <div class="row">     
                                 <div class="mb-3 col">
-                                    <input type="text" class="form-control" id="record_kurum" name="kurum"  placeholder="Kurum" >
+                                    <input type="text" class="form-control" id="record_kurum" name="kurum"  placeholder="Kurum" required>
                                 </div>
                                 <div class="mb-3 col"> 
-                                    <input type="text" class="form-control" id="record_doctor" name="doctor"  placeholder="Doktor"
+                                    <input type="text" class="form-control" id="record_doctor" name="doctor"  placeholder="Doktor" required>
                                 </div>
                             </div>
                             <div class="row">      
                                 <div class="mb-3 col"> 
-                                    <textarea type="text" class="form-control" id="record_diagnosis" name="diagnosis" style="height: 100px" placeholder="Tanı" ></textarea>
+                                    <textarea type="text" class="form-control" id="record_diagnosis" name="diagnosis" style="height: 100px" placeholder="Tanı" required></textarea>
    
                                 </div>
                                 <div class="mb-3 col">
-                                    <textarea type="text" class="form-control" id="record_intervention" name="intervention" style="height: 100px" placeholder="Müdahale"></textarea> 
+                                    <textarea type="text" class="form-control" id="record_intervention" name="intervention" style="height: 100px" placeholder="Müdahale" required></textarea> 
 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px" placeholder="İlaçlar"></textarea> 
+                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px" placeholder="İlaçlar" required></textarea> 
 
                                 </div>
                                 <div class="mb-3 col">
 
-                                  <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç"></textarea>
+                                  <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç" required></textarea>
                                 </div>
                             </div>
                             <div class="mb-3 col"> 

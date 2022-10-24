@@ -56,7 +56,7 @@
 
 <script>                                           
     $(function() {
-        var sig = $('#get_sig').signature();
+        var sig = $('#get_sig').signature({thickness : 4});
         $('#clear').click(function() {
             sig.signature('clear');
         });
@@ -66,7 +66,7 @@
         });
 });
     $(function() {
-            var sig = $('#hospital_signature').signature();
+            var sig = $('#hospital_signature').signature({thickness : 4});
             $('#hospital_clear').click(function() {
                 sig.signature('clear');
             });
@@ -77,7 +77,7 @@
 });
 
     $(function() {
-            var sig = $('#patients_relative_signature').signature();
+            var sig = $('#patients_relative_signature').signature({thickness : 4});
             $('#patients_clear').click(function() {
                 sig.signature('clear');
             });
@@ -88,7 +88,7 @@
 });
 
     $(function() {
-            var sig = $('#delivery_area_signature').signature();
+            var sig = $('#delivery_area_signature').signature({thickness : 4});
             $('#delivery_clear').click(function() {
                 sig.signature('clear');
             });
@@ -99,7 +99,7 @@
 });
 
     $(function() {
-            var sig = $('#doctor_signature').signature();
+            var sig = $('#doctor_signature').signature({thickness : 4});
             $('#doctor_1_clear').click(function() {
                 sig.signature('clear');
             });
@@ -110,7 +110,7 @@
 });
 
     $(function() {
-            var sig = $('#personal_signature').signature();
+            var sig = $('#personal_signature').signature({thickness : 4});
             $('#personal_clear').click(function() {
                 sig.signature('clear');
             });
@@ -121,7 +121,7 @@
 });
 
     $(function() {
-            var sig = $('#pilot_signature').signature();
+            var sig = $('#pilot_signature').signature({thickness : 4});
             $('#pilot_clear').click(function() {
                 sig.signature('clear');
             });
@@ -131,16 +131,16 @@
             });
 });
 
-    $(function() {
-            var sig = $('#transfer_doctor_signature').signature();
-            $('#doctorclear').click(function() {
-                sig.signature('clear');
-            });
+//     $(function() {
+//             var sig = $('#transfer_doctor_signature').signature();
+//             $('#doctorclear').click(function() {
+//                 sig.signature('clear');
+//             });
 
-            $('#doctorjson').click(function() {
-                $('#transfer_doctor_signaturetext').val(sig.signature('toJSON'));
-            });
-});
+//             $('#doctorjson').click(function() {
+//                 $('#transfer_doctor_signaturetext').val(sig.signature('toJSON'));
+//             });
+// });
 </script>
 
 <main>
@@ -173,22 +173,26 @@
             <!-- {%endfor%} -->
           <!-- </div> -->
         <div class="row justify-content-center">
+            <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
             <div class="col-lg-12">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h4 class="text-center font-weight-light my-4">Ambulans Vaka Formu</h4>
                     <h6 class="text-center font-weight-light my-4">(Doldurulduğunda Hastaya Özeldir)</h6></div>
                     <div class="card-body">
-                        <form class="signature-pad-form" action="" method="POST">
+                        <form class="signature-pad-form" action="" method="POST" enctype="multipart/form-data">
                             {% csrf_token%}
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label for="Casedate" class="form-label">TARIH</label>
-                                    <input type="date" class="form-control" id="Casedate" name="date"  placeholder="Tarih" >
+                                    <label for="casedate" class="form-label">TARİH</label>
+                                    <input type="date" class="form-control" id="casedate" name="date"  placeholder="Tarih" >
                                 </div> 
                                 <div class="mb-3 col">
-                                    <label for="sas_protokol" class="form-label">SAS PROKOL</label>
+                                    <label for="atn_no" class="form-label">ATN No:</label>
+                                    <input type="text" class="form-control" id="atn_no" name="atn_no" value="67 B 204617 ">
+
+                                    <label for="sas_protokol" class="form-label">HEALMEDY PROTOKOL</label>
                                     <input type="text" class="form-control" id="sas_protokol" name="sas_protokol">
-                                    <h8 class="text-center font-weight-light my-4">Çağrı Merkezinden Alınan Protokolü 34Ö-179- den Sonra Yazınız.</h8>
+                                    <!-- <h8 class="text-center font-weight-light my-4">Çağrı Merkezinden Alınan Protokolü 34Ö-179- den Sonra Yazınız.</h8> -->
                                 </div>
                             </div>
                             <div class="row">
@@ -197,17 +201,17 @@
                                     <input type="text" class="form-control" id="username" name="username">
                                 </div>
                                 <div class="mb-3 col">
-                                    <label for="identification_number" class="form-label">T.C. KIMLIK NO</label>
+                                    <label for="identification_number" class="form-label">T.C. KİMLİK NO</label>
                                     <input type="number" class="form-control" id="identification_number" name="identification_number" value=" " placeholder="orn:123">
                                 </div>                             
                             </div>
                             <div class="row">                         
                                 <div class="mb-3 col">
-                                    <label for="gender" class="form-label">CINSIYET</label>
+                                    <label for="gender" class="form-label">CİNSİYETİ</label>
                                     <input type="text" class="form-control" id="gender" name="gender">
                                 </div>
                                 <div class="mb-3 col">
-                                    <label for="age" class="form-label">YAS</label>
+                                    <label for="age" class="form-label">YAŞI</label>
                                     <input type="text" class="form-control" id="age" name="age"> 
                                 </div>
                             </div>
@@ -294,99 +298,96 @@
                                     </div> 
                                     <input id="txt" type="text" name="isolationStatus" style="display: none;"  readonly>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_measurement" class="form-label">1. ÖLÇÜM</label>
                                     <input type="time" class="form-control" id="1_measurement" name="one_measurement">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_blood_pressure" class="form-label">1. TANSİYON</label>
                                     <input type="text" class="form-control" id="1_blood_pressure" name="one_blood_pressure">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_pulse" class="form-label">1.NABIZ</label>
                                     <input type="text" class="form-control" id="1_pulse" name="one_pulse">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_spo2" class="form-label">1.SPO2</label>
                                     <input type="text" class="form-control" id="1_spo2" name="one_spo2">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_respirations_min" class="form-label">1.SOLUNUM/DK</label>
                                     <input type="text" class="form-control" id="1_respirations_min" name="one_respirations_min">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_fire" class="form-label">1.ATEŞ</label>
                                     <input type="text" class="form-control" id="1_fire" name="one_fire">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_measurement" class="form-label">2. ÖLÇÜM</label>
                                     <input type="time" class="form-control" id="second_measurement" name="second_measurement">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_blood_pressure" class="form-label">2. TANSİYON</label>
                                     <input type="text" class="form-control" id="2_blood_pressure" name="second_blood_pressure">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_pulse" class="form-label">2.NABIZ</label>
                                     <input type="text" class="form-control" id="2_pulse" name="secon_pulse">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_spo2" class="form-label">2.SPO2</label>
                                     <input type="text" class="form-control" id="2_spo2" name="second_spo2">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_respirations_min" class="form-label">2.SOLUNUM/DK</label>
                                     <input type="text" class="form-control" id="2_respirations_min" name="second_respirations_min">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_fire" class="form-label">2.ATEŞ</label>
                                     <input type="text" class="form-control" id="2_fire" name="second_fire">
+                                    
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="3_measurement" class="form-label">3. ÖLÇÜM</label>
                                     <input type="time" class="form-control" id="3_measurement" name="third_measurement">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="3_blood_pressure" class="form-label">3.TANSİYON</label>
                                     <input type="text" class="form-control" id="3_blood_pressure" name="third_blood_pressure">
                                 </div>
-                                <div class="mb-3 col">   
-                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
-                                    <input type="text" class="form-control" id="2_pulse" name="third_pulse">
-                                </div>
                             </div>
                             <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
+                                    <input type="text" class="form-control" id="3_pulse" name="third_pulse">
+                                </div>
                                 <div class="mb-3 col">   
                                     <label for="3_spo2" class="form-label">3.SPO2</label>
                                     <input type="text" class="form-control" id="3_spo2" name="third_spo2">
                                 </div>
-                                <div class="mb-3 col">   
-                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
-                                    <input type="text" class="form-control" id="2_pulse" name="third_pulse">
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">   
-                                    <label for="3_respirations_min" class="form-label">3.SOLUNUM/DK</label>
-                                    <input type="text" class="form-control" id="3_respirations_min" name="third_respirations_min">
-                                </div>
-                                <div class="mb-3 col">   
                                     <label for="3_fire" class="form-label">3.ATEŞ</label>
                                     <input type="text" class="form-control" id="2_fire" name="third_fire">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="3_respirations_min" class="form-label">3.SOLUNUM/DK</label>
+                                    <input type="text" class="form-control" id="3_respirations_min" name="third_respirations_min">
                                 </div>
                             </div>
                             <div class="row">
@@ -546,7 +547,7 @@
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">   
-                                    <label for="finish_time" class="form-label">BİTİŞ ZAMANI</label>
+                                    <label for="finish_time" class="form-label">BIRAKMA ZAMANI</label>
                                     <input type="time" class="form-control" id="finish_time" name="finish_time">
                                 </div>
                                 <div class="mb-3 col">   
@@ -658,8 +659,8 @@
                                             <label for="application25" class="form-label">Kanama durdurucu ajan uygulaması</label>
                                         </div>
                                         <div >                                       
-                                            <input  class="application" type="checkbox" id="application25" name="application" value="Cut down uygulaması">
-                                            <label for="application25" class="form-label">Cut down uygulaması</label>
+                                            <input  class="application" type="checkbox" id="application00" name="application" value="Cut down uygulaması">
+                                            <label for="application00" class="form-label">Cut down uygulaması</label>
                                         </div>
                                     </div>
                                     <div class="mb-3 col form-check" style="display: block;">
@@ -957,28 +958,46 @@
                                 <div class="mb-3 col">   
                                     <label for="number_of_attendants" class="form-label">REFAKATÇI SAYISI</label>
                                     <input type="text" class="form-control" id="number_of_attendants" name="number_of_attendants" placeholder="örn:23">
+
+                                    <label for="ambulance_waiting_hour" class="form-label">AMBULANS BEKLEME</label>
+                                    <input type="text" class="form-control" id="ambulance_waiting_hour" name="ambulance_waiting_hour" placeholder="Saat">
+                                    <input type="text" class="form-control" id="ambulance_waiting_minute" name="ambulance_waiting_minute" placeholder="Dakika">
                                 </div>
                                 <div class="mb-3 col">   
                                     <label for="emergency_ambulance_waiting" class="form-label">ACİL YARDIM AMBULANSI BEKLEME</label>
-                                    <input type="time" class="form-control" id="emergency_ambulance_waiting" name="emergency_ambulance_waiting">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="mb-3 col">   
+                                    <input type="text" class="form-control" id="emergency_ambulance_waiting" name="emergency_ambulance_waiting" placeholder="Saat">
+                                    <input type="text" class="form-control" id="emergency_ambulance_waiting_minute" name="emergency_ambulance_waitingminute" placeholder="Dakika">
+
                                     <label for="patient_transport_ambulance_waiting" class="form-label">HASTA NAKİL AMBULANSI BEKLEME</label>
-                                    <input type="time" class="form-control" id="patient_transport_ambulance_waiting" name="patient_transport_ambulance_waiting">
+                                    <input type="text" class="form-control" id="patient_transport_ambulance_waiting" name="patient_transport_ambulance_waiting" placeholder="Saat">
+                                    <input type="text" class="form-control" id="patient_transport_ambulance_waiting_minute" name="patient_transport_ambulance_waiting_minute" placeholder="Dakika">
+
+                                    <label for="organization_hour" class="form-label">ORGANİZASYON SAAT</label>
+                                    <input type="text" class="form-control" id="organization_hour" name="organization_hour" placeholder="Saat">
                                 </div>
-                                
                             </div>
                             <div class="row">
                                 <div class="mb-3 col" style="display:block">   
                                     <h3>HASTA BİLGİLENDİRME ONAYI</h3>
-                                    <div>Hastamın nakli sırasında ambulansta bulunmamın ambulans ekibinin görevini zorlaştırdığı gibi personel ve ambulans sürüş güvenliği açısından olumsuz sonuçlar doğurabileceği, meydana gelebilecek birkazadan ve buna bağlı olarak ortaya çıkabilecek hukuki sorunlardan etkilenebileceğim, ambulansta bulunduğum sürece emniyet kemerini takmam gerektiği konusunda ambulans personeli tarafından ayrıntılıolarak bilgilendirildim. Ambulansa binmem durumunda ortaya çıkabilecek olası riskleri ve hukuki sorunları anladım. Buna rağmen hastamın ambulansla nakli sırasında, Hasta Hakları Yönetmeliği’nin 40. VeYataklı Tedavi Kurumları İşletme Yönetmeliği’nin 62. Maddesinde belirtilen Refakatçi kapsamında olmak üzere, kendi hür irademle ambulansta hastama refakatçi olarak ön kabinde bulunmayı, nakil sırasında ortaya çıkabilecek her türlü hukuksal sorunla ilgili, maddi, manevi ve hukuki tüm sorumluluk şahsıma ait olmak üzere kabul ediyorum. SAS ambulans (Star Ambulans Sağ. Hiz. Tur. Taş. Paz. Ltd. Şti.)hekimlerinin/param ediklerinin ve çalışma ekibinin uygulayacağı, hastalığım ın teşhis ve tedavisi için gerekli olan ilaçları, tetkikleri, verilecek anestezi ilaçlarını / transportu bilincim yerinde olarak kabulediyorum. Sağlık durumum a ilişkin, riskler ve komplikasyonlar tarafıma anlatılmıştır. Bu tedavi yerine uygulanabilecek bir başka yöntem in bulunup bulunmadığı konusunda da sağlık ekibim tarafından bilgilendirildim. Tedavi ya da transport sırasında oluşabilecek olumsuz gelişmelerden haberdar olarak tedavim in/transportum un yapılmasını onaylıyorum. Ayrıca aldığım hizmetin ödemesi transferi talepeden kurum tarafından kabul edilmez veya ben özel olarak talep ettiğim de tüm sağlık hizmetleri bedelini Sağlık Bakanlığının belirlemiş olduğu ambulans fiyat tarifesi üzerinden ve yapılan müdahalelerin bedelini SUT fiyat tarifesi üzerinden ödeyeceğimi kabul ve taahhüt ederim.</div>
+                                    <div>Hastamın nakli sırasında ambulansta bulunmamın ambulans ekibinin görevini zorlaştırdığı gibi personel ve ambulans sürüş güvenliği açısından olumsuz sonuçlar doğurabileceği, meydana gelebilecek bir
+                                        kazadan ve buna bağlı olarak ortaya çıkabilecek hukuki sorunlardan etkilenebileceğim, ambulansta bulunduğum sürece emniyet kemerini takmam gerektiği konusunda ambulans personeli tarafından ayrıntılı
+                                        olarak bilgilendirildim. Ambulansa binmem durumunda ortaya çıkabilecek olası riskleri ve hukuki sorunları anladım. Buna rağmen hastamın ambulansla nakli sırasında, Hasta Hakları Yönetmeliği’nin 40. Ve
+                                        Yataklı Tedavi Kurumları İşletme Yönetmeliği’nin 62. Maddesinde belirtilen Refakatçi kapsamında olmak üzere, kendi hür irademle ambulansta hastama refakatçi olarak ön kabinde bulunmayı, nakil sırasında
+                                        ortaya çıkabilecek her türlü hukuksal sorunla ilgili, maddi, manevi ve hukuki tüm sorumluluk şahsıma ait olmak üzere kabul ediyorum. Healmedy (MHAcare Sağlık Turizm İnşaat Ticaret A.Ş.) hekimlerinin/
+                                        param ediklerinin ve çalışma ekibinin uygulayacağı, hastalığım ın teşhis ve tedavisi için gerekli olan ilaçları, tetkikleri, verilecek anestezi ilaçlarını / transportu bilincim yerinde olarak kabul ediyorum. Sağlık
+                                        durum um a ilişkin, riskler ve komplikasyonlar tarafıma anlatılmıştır. Bu tedavi yerine uygulanabilecek bir başka yöntem in bulunup bulunmadığı konusunda da sağlık ekibim tarafından bilgilendirildim. Tedavi
+                                        ya da transport sırasında oluşabilecek olumsuz gelişmelerden haberdar olarak tedavim in/transportum un yapılmasını onaylıyorum. Ayrıca aldığım hizmetin ödem esi transferi talep eden kurum tarafından
+                                        kabul edilmez veya ben özel olarak talep ettiğim de tüm sağlık hizmetleri bedelini Sağlık Bakanlığının belirlemiş olduğu ambulans fiyat tarifesi üzerinden ve yapılan müdahalelerin bedelini SUT fiyat tarifesi
+                                        üzerinden ödeyeceğimi kabul ve taahhüt ederim.
+                                        </div>
                                 </div>
                             <div class="row">
                                 <!-- <div class="mb-3 col">    -->
-                                    <label for="username1" class="form-label">ADI SOYADI</label>
+                                    <label for="username1" class="form-label">HASTA/HASTA YAKINI* (YASAL TEMSİLCİ)</label>
+                                    <label for="username1" class="form-label">ADI-SOYADI:</label>
                                     <input type="text" class="form-control" id="username1" name="patient_username">
+                                    <input type="text" class="form-control" id="get_sig_date" name="get_sig_date" style="display: none;">
+                                    <!-- <input type="time" class="form-control" id="get_sig_time" name="get_sig_time"> -->
                                     <div class="row">
                                         <div class="container row mb-3 col" style="display: block;">
                                             <label for="get_sig" class="form-label">İMZA</label>
@@ -998,10 +1017,38 @@
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col">
+                                        <h3>HASTANENİN HASTA REDDİ</h3>
+                                        <input type="text" class="form-control" id="patient_rejection" name="patient_rejection">                                   
+                                        <div>nedenlerle hastayı hastanemize kabul edemiyorum. Hastanın başka hastaneye nakil için gerekli stabilizasyon sağladım. Şu anda durumu başka bir
+                                            kuruma nakli için uygundur.</div>      
+                                            <label for="hospital_rejection" class="form-label">KURUMUN / HASTANENİN ADI</label> 
+                                            <input type="text" class="form-control" id="hospital_rejection" name="hospital_rejection">                   
+                                            <label for="hospital_rejection" class="form-label">HEKİMİN ADI SOYADI</label>
+                                            <input type="text" class="form-control" id="doctor_username" name="doctor_username">
+                                            <input type="text" class="form-control" id="hospital_rejection_datetime" name="hospital_rejection_datetime" style="display: none;">
+
+                                            <div class="container row mb-3 col" style="display: block;">
+                                                <label for="hospital_signature" class="form-label">İMZA</label>
+                                                <div class=" border border-5" id="hospital_signature">
+                                                    
+                                                </div>
+                                                <textarea name="hospital_rejection_sigtext" id="hospital_rejection_sigtext" cols="30" rows="10" style="display: none;"></textarea>                                       
+                                            </div>
+                                            <div class="mb-3 col" style="display: block;"> 
+                                                </br>   
+                                                <button class="btn btn-outline-danger" type="reset" id="hospital_clear" name="hospital_signature_clear">Temizle</button> 
+                                                &nbsp;
+                                                <button class="btn btn-outline-success" type="button" id="hospital_json" name="hospital_signature_json">İmzayı Kaydet</button>
+                                            </div>                                    
+                                        </div>
+                                    
+                                    <div class="mb-3 col ">   
                                         <h3>HASTANIN HİZMET REDDİ</h3>
-                                        <div>Ambulansla gelen görevli bana hastanın hemen tedavisi / hastaneye nakli gerektiğini, aksi halde kötü sonuçlar doğurabileceğini anlayacağım şekilde ayrıntılı olarak anlattı. Buna rağmen tedaviyi /hasta naklini kabul etmiyorum.</div>       
+                                        <div>Ambulansla gelen görevli bana hastanın hemen tedavisi / hastaneye nakli gerektiğini, aksi halde kötü sonuçlar doğurabileceğini anlayacağım şekilde ayrıntılı olarak anlattı. Buna rağmen tedaviyi /hasta
+                                            naklini kabul etmiyorum.</div>       
                                         <label for="patients_relative_username" class="form-label">HASTANIN / YAKININ ADI SOYADI</label>
                                         <input type="text" class="form-control" id="patients_relative_username" name="patients_relative_username">
+                                        <input type="text" class="form-control" id="patients_relative_username_datetime" name="patients_relative_username_datetime" style="display: none;">
                                         <div class="container row mb-3 col" style="display: block;">
                                             <label for="patients_relative_signature" class="form-label">İMZA</label>
                                             <div class=" border border-5" id="patients_relative_signature">
@@ -1016,35 +1063,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="mb-3 col ">   
-                                        <h3>HASTANENİN HASTA REDDİ</h3>
-                                        <input type="text" class="form-control" id="patient_rejection" name="patient_rejection">
-                                    
-                                        <div>nedenlerle hastayı hastanemize kabul edemiyorum. Hastanın başka hastaneye nakil için gerekli stabilizasyon sağladım. Şu anda durumu başka birkuruma nakli için uygundur.</div>                           
-                                            <!-- <div class="row"> -->
-                                                <label for="hospital_rejection" class="form-label">ADI SOYADI</label>
-                                                <input type="text" class="form-control" id="hospital_rejection" name="hospital_rejection">
-
-                                                <div class="container row mb-3 col" style="display: block;">
-                                                    <label for="hospital_signature" class="form-label">İMZA</label>
-                                                    <div class=" border border-5" id="hospital_signature">
-                                                        
-                                                    </div>
-                                                    <textarea name="hospital_rejection_sigtext" id="hospital_rejection_sigtext" cols="30" rows="10" style="display: none;"></textarea>                                       
-                                                </div>
-                                                <div class="mb-3 col" style="display: block;"> 
-                                                    </br>   
-                                                    <button class="btn btn-outline-danger" type="reset" id="hospital_clear" name="hospital_signature_clear">Temizle</button> 
-                                                    &nbsp;
-                                                    <button class="btn btn-outline-success" type="button" id="hospital_json" name="hospital_signature_json">İmzayı Kaydet</button>
-                                                </div>  
-                                            <!-- </div>                                    -->
-                                        </div>
-                                    </div>
+                                </div>
                             <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="delivery_area_username" class="form-label">HASTAYI TESLİM ALANIN ÜNVANI ADI SOYADI</label>
                                     <input type="text" class="form-control" id="delivery_area_username" name="delivery_area_username">
+                                    <input type="text" class="form-control" id="delivery_area_username_datetime" name="delivery_area_username_datetime" style="display: none;">
 
                                     <div class="container row mb-3 col" style="display: block;">
                                         <label for="delivery_area_signature" class="form-label">İMZA</label>
@@ -1061,8 +1085,10 @@
                                     </div>
                                 </div>
                                 <div class="mb-3 col">   
-                                    <label for="doctor_username" class="form-label">DOKTOR/PARAMEDİK ADI SOYADI</label>
-                                    <input type="text" class="form-control" id="doctor_username" name="doctor_username">
+                                    <label for="doctor_username1" class="form-label">DOKTOR/PARAMEDİK ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="doctor_username1" name="doctor_username1">
+                                    <input type="text" class="form-control" id="doctor_username_datetime" name="doctor_username_datetime" style="display: none;">
+
 
                                     <div class="container row mb-3 col" style="display: block;">
                                         <label for="doctor_signature" class="form-label">İMZA</label>
@@ -1083,6 +1109,8 @@
                                 <div class="mb-3 col">   
                                     <label for="personal_username" class="form-label">SAĞLIK PERSONELİ ADI SOYADI</label>
                                     <input type="text" class="form-control" id="personal_username" name="personal_username">
+                                    <input type="text" class="form-control" id="personal_username_datetime" name="personal_username_datetime" style="display: none;">
+
 
                                     <div class="container row mb-3 col" style="display: block;">
                                         <label for="personal_signature" class="form-label">İMZA</label>
@@ -1101,6 +1129,8 @@
                                 <div class="mb-3 col">   
                                     <label for="pilot_username" class="form-label">SÜRÜCÜ/PİLOT ADI SOYADI</label>
                                     <input type="text" class="form-control" id="pilot_username" name="pilot_username">
+                                    <input type="text" class="form-control" id="pilot_username_datetime" name="pilot_username_datetime" style="display: none;">
+
 
                                     <div class="container row mb-3 col" style="display: block;">
                                         <label for="pilot_signature" class="form-label">İMZA</label>
@@ -1122,42 +1152,23 @@
                                     <label for="car_info" class="form-label">TAŞIT BİLGİSİ</label>
                                     <div></div>
                                     <select name="car_info" id="car_info" class="form-select" aria-label="Default select example">
-                                        <option value="selectcar">Lütfen Araç Seçiniz</option>
-                                        <option value="34SAS20">34 SAS 20</option>
-                                        <option value="34SAS30">34 SAS 30</option>
-                                        <option value="34BF2904">34 BF 2904</option>
-                                        <option value="34RE1140">34 RE 1140</option>
-                                        <option value="34BF9529">34 BF 9529</option>
+                                        <option>Lütfen Araç Seçiniz</option>
+                                        <option value="34EZP267">34 EZP 267</option>
+                                        <option value="34EZP268">34 EZP 268</option>
+                                        <option value="06CHZ142">06 CHZ 142</option>
+                                        <option value="06CHZ146">06 CHZ 146</option>
+                                        <option value="06CHZ149">06 CHZ 149</option>
                                     </select>
                                     <label for="start_km" class="form-label">Başlangıç KM Bilgisi</label>
                                     <input type="number" class="form-control" id="start_km" name="start_km" placeholder="orn:23">
                                     <label for="finish_km" class="form-label">Bitiş KM Bilgisi</label>
                                     <input type="number" class="form-control" id="finish_km" name="finish_km" placeholder="orn:23">
 
-                                    <label for="finish_time" class="form-label">CARİ KURUM ADI</label>
-                                    <select name="current_institution_name" id="car_info" class="form-select" aria-label="Default select example">
-                                        <option value="selectinstitution">Lütfen Kurum Seçiniz</option>
-                                        <option value="BVÜTFHastanesi Fatih">BVÜ TF Hastanesi Fatih</option>
-                                        <option value="BVÜTFHastanesi Dragos">BVÜ TF Hastanesi Dragos</option>
-                                        <option value="MedicalParkFatih">Medical Park Fatih</option>
-                                        <option value="BayParkHospital">BayPark Hospital</option>
-                                        <option value="GaziosmanpaşaYYÜHastanesi">Gaziosmnpaşa YYÜ Hastanesi</option>
-                                        <option value="BahatHospital">Bahat Hospital</option>
-                                        <option value="EMT">EMT</option>
-                                        <option value="ApexEncore">Apex Encore</option>
-                                        <option value="Merkez">Merkez</option>
-                                        <option value="Medline">Medline</option>
-                                        <option value="AIDAssistance">AID Assistance</option>
-                                        <option value="RemedAssitance">Remed Assitance</option>
-                                        <option value="Medinistanbul">Medinistanbul</option>
-                                        <option value="PluresHavacılık">Plures Havacılık</option>
-                                        <option value="RedStar">RedStar</option>
-                                        <option value="HealMedy">HealMedy</option>
-                                        <option value="ABCassistance">ABC assistance</option>
-                                        <option value="Yok">Yok</option>
-                                    </select>
+                                    <label for="institution_name" class="form-label">KURUM ADI</label>
+                                    <input type="text" class="form-control" id="institution_name" name="institution_name">
+
                                     <label for="" class="form-label">GİDİŞ-DÖNÜŞ</label> 
-                                    <div >                                       
+                                    <div>                                       
                                         <input class="form-check-input" type="radio" id="yes" name="round_trip" value="yes" group="round_trip">
                                         <label for="yes" class="form-label">Evet</label>
                                     </div> 
@@ -1166,56 +1177,26 @@
                                         <label for="no" class="form-label">Hayır</label>
                                     </div>
                                     
-                                    <label for="money" class="form-label">ÜCRET</label>
-                                    <input type="number" class="form-control" id="money" name="money">
-
-                                    <label for="" class="form-label">CARİ</label> 
-                                    <div>                                       
-                                        <input class="form-check-input" type="radio" id="currentyes" name="current" value="currentyes"  group="current">
-                                        <label for="currentyes" class="form-label">Evet</label>
-                                    </div> 
-                                    <div>
-                                        <input class="form-check-input" type="radio" id="currentno" name="current" value="currentno" group="current">
-                                        <label for="currentno" class="form-label">Hayır</label>
-                                    </div> 
-
-                                </div>
+                                </div>  
                                 <div class="mb-3 col">   
                                     <label for="protocol_number" class="form-label">112 PROTOKOL NUMARASI</label>
-                                    <input type="number" class="form-control" id="protocol_number" name="protocol_number">
-                                    <label for="other" class="form-label">DİĞER</label>
-                                    <input type="text" class="form-control" id="other" name="other"> 
+                                    <input type="text" class="form-control" id="protocol_number" name="protocol_number">
                                     
-                                    <label for="transfer_doctor_username" class="form-label">TRANSFER TALEP EDEN DOKTOR ADI SOYADI</label>
-                                    <input type="text" class="form-control" id="transfer_doctor_username" name="transfer_doctor_username">
+                                    <label for="file_number" class="form-label">HASTANE PROTOKOL / DOSYA NO</label>
+                                    <input type="text" class="form-control" id="file_number" name="file_number">
+                                    
+                                    <label for="institution_information" class="form-label">VAKAYI VEREN KURUM BİLGİSİ</label>
+                                    <textarea type="text" class="form-control" id="institution_information" name="institution_information" style="height: 100px"></textarea>
 
-                                    <div class="container row mb-3 col" style="display: block;">
-                                        <label for="transfer_doctor_signature" class="form-label">İMZA</label>
-                                        <div class=" border border-5" id="transfer_doctor_signature">
-                                                
-                                        </div>
-                                        <textarea name="transfer_doctor_signaturetext" id="transfer_doctor_signaturetext" cols="30" rows="10" style="display: none;"></textarea>                                       
-                                    </div>
-                                    <div class="mb-3 col" style="display: block;"> 
-                                        </br>   
-                                        <button class="btn btn-outline-danger" type="reset" id="doctorclear" name="doctor_signature_clear">Temizle</button> 
-                                        &nbsp;
-                                        <button class="btn btn-outline-success" type="button" id="doctorjson" name="doctor_signature_json">İmzayı Kaydet</button>                                   
-                                    </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="mb-3 col">   
-                                    <label for="file_number" class="form-label">HASTANE PROTOKOL / DOSYA NO</label>
-                                    <input type="text" class="form-control" id="file_number" name="file_number">
-                                </div>
                                 <div class="mb-3 col">    
                                 </br> 
                                     <button type="submit" name="save" class="bi bi-save btn btn-outline-success"> Kaydet</button>
                                     &nbsp;
                                     <button type="button" name="preview" onclick="ambulanceCasePdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
-                                </br>
-                                </br>
+                                    &nbsp;
                                     <button type="button" name="print" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
                                     &nbsp;
                                     <button type="reset" name="clear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>

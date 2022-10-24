@@ -58,60 +58,89 @@
     
         if($('#sigtext').is(':contains("lines")'))
         {
-            var sig =  $('#get_sig').signature();
+            var sig =  $('#get_sig').signature({thickness : 4});
             sig.signature('draw', $('#sigtext').val());
             sig.signature('disable'); 
-            $('#get_sig').signature({disabled:true});
+            $('#get_sig').signature({disabled:true,thickness : 4});
+            
 
         }
         else{
-            var sig =  $('#get_sig').signature(); 
-            sig.signature('disable'); 
-            $('#get_sig').signature({disabled:true});
+            var sig =  $('#get_sig').signature({thickness : 4}); 
+            $('#clear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#json').click(function() {
+                $('#sigtext').val(sig.signature('toJSON'));
+            });
+            // sig.signature('disable'); 
+            // $('#get_sig').signature({disabled:true});
         }     
     });
     
     $(function() {
         if($('#hospital_rejection_sigtext').is(':contains("lines")')){
-            var sig = $('#hospital_signature').signature();
+            var sig = $('#hospital_signature').signature({thickness : 4});
             sig.signature('draw', $('#hospital_rejection_sigtext').val());
             sig.signature('disable'); 
-            $('#hospital_signature').signature({disabled:true});
+            $('#hospital_signature').signature({disabled:true,thickness : 4});
 
         }else{
-            var sig = $('#hospital_signature').signature();
-            sig.signature('disable'); 
-            $('#hospital_signature').signature({disabled:true});
+            var sig = $('#hospital_signature').signature({thickness : 4});
+            $('#hospital_clear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#hospital_json').click(function() {
+                $('#hospital_rejection_sigtext').val(sig.signature('toJSON'));
+            });
+            // sig.signature('disable'); 
+            // $('#hospital_signature').signature({disabled:true});
 
         }    
     });
  
     $(function() {
         if($('#patients_relative_signaturetext').is(':contains("lines")')){
-            var sig = $('#patients_relative_signature').signature();
+            var sig = $('#patients_relative_signature').signature({thickness : 4});
             sig.signature('draw', $('#patients_relative_signaturetext').val());
             sig.signature('disable');
-            $('#patients_relative_signature').signature({disabled:true});
+            $('#patients_relative_signature').signature({disabled:true,thickness : 4});
 
         }else{
-            var sig = $('#patients_relative_signature').signature();
-            sig.signature('disable');
-            $('#patients_relative_signature').signature({disabled:true});
+            var sig = $('#patients_relative_signature').signature({thickness : 4});
+            $('#patients_clear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#patients_json').click(function() {
+                $('#patients_relative_signaturetext').val(sig.signature('toJSON'));
+            });
+            // sig.signature('disable');
+            // $('#patients_relative_signature').signature({disabled:true});
         } 
     });
   
 
     $(function() {
         if($('#delivery_area_signaturetext').is(':contains("lines")')){
-            var sig=$('#delivery_area_signature').signature();
+            var sig=$('#delivery_area_signature').signature({thickness : 4});
             sig.signature('draw', $('#delivery_area_signaturetext').val());
             sig.signature('disable');
-            $('#delivery_area_signature').signature({disabled:true});
+            $('#delivery_area_signature').signature({disabled:true,thickness : 4});
   
         }else{
-            var sig=$('#delivery_area_signature').signature();
-            sig.signature('disable');
-            $('#delivery_area_signature').signature({disabled:true});
+            var sig=$('#delivery_area_signature').signature({thickness : 4});
+            $('#delivery_clear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#delivery_json').click(function() {
+                $('#delivery_area_signaturetext').val(sig.signature('toJSON'));
+            });
+            // sig.signature('disable');
+            // $('#delivery_area_signature').signature({disabled:true});
         }
                
     });
@@ -119,30 +148,44 @@
 
     $(function() {
         if($('#doctor_signaturetext').is(':contains("lines")')){
-            var sig= $('#doctor_signature').signature();
+            var sig= $('#doctor_signature').signature({thickness : 4});
             sig.signature('draw', $('#doctor_signaturetext').val());
             sig.signature('disable');
-            $('#doctor_signature').signature({disabled:true});
+            $('#doctor_signature').signature({disabled:true,thickness : 4});
 
         }else{
-            var sig= $('#doctor_signature').signature();
-            sig.signature('disable');
-            $('#doctor_signature').signature({disabled:true});
+            var sig= $('#doctor_signature').signature({thickness : 4});
+            $('#doctor_1_clear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#doctor_1_json').click(function() {
+                $('#doctor_signaturetext').val(sig.signature('toJSON'));
+            });
+            // sig.signature('disable');
+            // $('#doctor_signature').signature({disabled:true});
         }      
     });
     
 
     $(function() {
         if($('#personal_signaturetext').is(':contains("lines")')){
-            var sig = $('#personal_signature').signature();
+            var sig = $('#personal_signature').signature({thickness : 4});
             sig.signature('draw', $('#personal_signaturetext').val());
             sig.signature('disable');
-            $('#personal_signature').signature({disabled:true});
+            $('#personal_signature').signature({disabled:true,thickness : 4});
 
         }else {
-            var sig = $('#personal_signature').signature();
-            sig.signature('disable');
-            $('#personal_signature').signature({disabled:true}); 
+            var sig = $('#personal_signature').signature({thickness : 4});
+            $('#personal_clear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#personal_json').click(function() {
+                $('#personal_signaturetext').val(sig.signature('toJSON'));
+            });
+            // sig.signature('disable');
+            // $('#personal_signature').signature({disabled:true}); 
         }
               
     });
@@ -150,33 +193,40 @@
 
     $(function() {
         if($('#pilot_signaturetext').is(':contains("lines")')){
-            var sig = $('#pilot_signature').signature();
+            var sig = $('#pilot_signature').signature({thickness : 4});
             sig.signature('draw', $('#pilot_signaturetext').val());
             sig.signature('disable');
-            $('#pilot_signature').signature({disabled:true});
+            $('#pilot_signature').signature({disabled:true,thickness : 4});
 
         }else {
-            var sig = $('#pilot_signature').signature();
-            sig.signature('disable');
-            $('#pilot_signature').signature({disabled:true});
+            var sig = $('#pilot_signature').signature({thickness : 4});
+            $('#pilot_clear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#pilot_json').click(function() {
+                $('#pilot_signaturetext').val(sig.signature('toJSON'));
+            });
+            // sig.signature('disable');
+            // $('#pilot_signature').signature({disabled:true});
 
         }      
     });
     
 
-    $(function() {
-        if($('#transfer_doctor_signaturetext').is(':contains("lines")')){
-            var sig = $('#transfer_doctor_signature').signature();
-            sig.signature('draw', $('#transfer_doctor_signaturetext').val());
-            sig.signature('disable');
-            $('#transfer_doctor_signature').signature({disabled:true});
+    // $(function() {
+    //     if($('#transfer_doctor_signaturetext').is(':contains("lines")')){
+    //         var sig = $('#transfer_doctor_signature').signature();
+    //         sig.signature('draw', $('#transfer_doctor_signaturetext').val());
+    //         sig.signature('disable');
+    //         $('#transfer_doctor_signature').signature({disabled:true});
 
-        }else{
-            var sig = $('#transfer_doctor_signature').signature();
-            sig.signature('disable');
-            $('#transfer_doctor_signature').signature({disabled:true});
-        }      
-    });
+    //     }else{
+    //         var sig = $('#transfer_doctor_signature').signature();
+    //         sig.signature('disable');
+    //         $('#transfer_doctor_signature').signature({disabled:true});
+    //     }      
+    // });
     
 </script>
 <main>
@@ -191,11 +241,11 @@
                             {% csrf_token%}
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <label for="date" class="form-label">TARIH</label>
+                                    <label for="date" class="form-label">TARİH</label>
                                     <input type="date" class="form-control" id="date" name="date"  placeholder="Tarih" value="{{AmbulanceCase.date}}">
                                 </div> 
                                 <div class="mb-3 col">
-                                    <label for="sas_protokol" class="form-label">SAS PROKOL</label>
+                                    <label for="sas_protokol" class="form-label">HEALMEDY PROTOKOL</label>
                                     <input type="text" class="form-control" id="sas_protokol" name="sas_protokol" value="{{AmbulanceCase.sas_protokol}}">
                                     <h8 class="text-center font-weight-light my-4">Çağrı Merkezinden Alınan Protokolü 34Ö-179- den Sonra Yazınız.</h8>
                                 </div>
@@ -206,17 +256,17 @@
                                     <input type="text" class="form-control" id="username" name="username" value="{{AmbulanceCase.username}}">
                                 </div>
                                 <div class="mb-3 col">
-                                    <label for="identification_number" class="form-label">T.C. KIMLIK NO</label>
+                                    <label for="identification_number" class="form-label">T.C. KİMLİK NO</label>
                                     <input type="number" class="form-control" id="identification_number" name="identification_number" value="{{AmbulanceCase.identification_number}}" placeholder="orn:123">
                                 </div>                             
                             </div>
                             <div class="row">                         
                                 <div class="mb-3 col">
-                                    <label for="gender" class="form-label">CINSIYET</label>
+                                    <label for="gender" class="form-label">CİNSİYETİ</label>
                                     <input type="text" class="form-control" id="gender" name="gender" value="{{AmbulanceCase.gender}}">
                                 </div>
                                 <div class="mb-3 col">
-                                    <label for="age" class="form-label">YAS</label>
+                                    <label for="age" class="form-label">YAŞI</label>
                                     <input type="text" class="form-control" id="age" name="age" value="{{AmbulanceCase.age}}"> 
                                 </div>
                             </div>
@@ -300,92 +350,88 @@
                                     <div>
                                         <input class="isolation_status"type="checkbox" id="temas_izolasyonu" name="isolationStatus" {% for case in AmbulanceCase.isolationStatus %}{% if case == 'temas_izolasyonu' %} checked {%endif%}{%endfor%} value="temas_izolasyonu">
                                         <label for="temas_izolasyonu" class="form-label">Temas Izolasyonu</label>
-                                    </div> 
+                                    </div>
                                     <input id="txt" type="text" name="isolationStatus"value="{%for case in AmbulanceCase.isolationStatus%}{{case}},{%endfor%}" style="display: none;" readonly>
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_measurement" class="form-label">1. ÖLÇÜM</label>
                                     <input type="time" class="form-control" id="1_measurement" name="one_measurement" value="{{AmbulanceCase.one_measurement}}">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_blood_pressure" class="form-label">1. TANSİYON</label>
                                     <input type="text" class="form-control" id="1_blood_pressure" name="one_blood_pressure" value="{{AmbulanceCase.one_blood_pressure}}">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_pulse" class="form-label">1.NABIZ</label>
                                     <input type="text" class="form-control" id="1_pulse" name="one_pulse" value="{{AmbulanceCase.one_pulse}}">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_spo2" class="form-label">1.SPO2</label>
                                     <input type="text" class="form-control" id="1_spo2" name="one_spo2" value="{{AmbulanceCase.one_spo2}}">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_respirations_min" class="form-label">1.SOLUNUM/DK</label>
                                     <input type="text" class="form-control" id="1_respirations_min" name="one_respirations_min" value="{{AmbulanceCase.one_respirations_min}}">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="1_fire" class="form-label">1.ATEŞ</label>
                                     <input type="text" class="form-control" id="1_fire" name="one_fire" value="{{AmbulanceCase.one_fire}}">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_measurement" class="form-label">2. ÖLÇÜM</label>
                                     <input type="time" class="form-control" id="second_measurement" name="second_measurement" value="{{AmbulanceCase.second_measurement}}">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_blood_pressure" class="form-label">2. TANSİYON</label>
-                                    <input type="text" class="form-control" id="2_blood_pressure" name="second_blood_pressure" value="{{AmbulanceCase.second_blood}}">
+                                    <input type="text" class="form-control" id="2_blood_pressure" name="second_blood_pressure" value="{{AmbulanceCase.second_blood_pressure}}">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_pulse" class="form-label">2.NABIZ</label>
                                     <input type="text" class="form-control" id="2_pulse" name="second_pulse" value="{{AmbulanceCase.second_pulse}}">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_spo2" class="form-label">2.SPO2</label>
                                     <input type="text" class="form-control" id="2_spo2" name="second_spo2" value="{{AmbulanceCase.second_spo2}}">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_respirations_min" class="form-label">2.SOLUNUM/DK</label>
                                     <input type="text" class="form-control" id="2_respirations_min" name="second_respirations_min" value="{{AmbulanceCase.second_respirations_min}}">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="2_fire" class="form-label">2.ATEŞ</label>
                                     <input type="text" class="form-control" id="2_fire" name="second_fire" value="{{AmbulanceCase.second_fire}}">
                                 </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="3_measurement" class="form-label">3. ÖLÇÜM</label>
                                     <input type="time" class="form-control" id="3_measurement" name="third_measurement" value="{{AmbulanceCase.third_measurement}}">
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="mb-3 col">   
                                     <label for="3_blood_pressure" class="form-label">3.TANSİYON</label>
                                     <input type="text" class="form-control" id="3_blood_pressure" name="third_blood_pressure" value="{{AmbulanceCase.third_blood_pressure}}">
                                 </div>
-                                <div class="mb-3 col">   
-                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
-                                    <input type="text" class="form-control" id="2_pulse" name="third_pulse" value="{{AmbulanceCase.third_pulse}}">
-                                </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">   
-                                    <label for="3_spo2" class="form-label">3.SPO2</label>
-                                    <input type="text" class="form-control" id="3_spo2" name="third_spo2" value="{{AmbulanceCase.third_spo2}}">
+                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
+                                    <input type="text" class="form-control" id="3_pulse" name="third_pulse" value="{{AmbulanceCase.third_pulse}}">
                                 </div>
                                 <div class="mb-3 col">   
-                                    <label for="3_pulse" class="form-label">3.NABIZ</label>
-                                    <input type="text" class="form-control" id="2_pulse" name="third_pulse" value="{{AmbulanceCase.third_pulse}}">
+                                    <label for="3_spo2" class="form-label">3.SPO2</label>
+                                    <input type="text" class="form-control" id="3_spo2" name="third_spo2" value="{{AmbulanceCase.third_spo2}}">
                                 </div>
                             </div>
                             <div class="row">
@@ -967,123 +1013,197 @@
                                 <div class="mb-3 col">   
                                     <label for="number_of_attendants" class="form-label">REFAKATÇI SAYISI</label>
                                     <input type="text" class="form-control" id="number_of_attendants" name="number_of_attendants" value="{{AmbulanceCase.number_of_attendants}}">
+
+                                    <label for="ambulance_waiting_hour" class="form-label">AMBULANS BEKLEME</label>
+                                    <input type="text" class="form-control" id="ambulance_waiting_hour" name="ambulance_waiting_hour" value="{{AmbulanceCase.ambulance_waiting_hour}}" >
+                                    <input type="text" class="form-control" id="ambulance_waiting_minute" name="ambulance_waiting_minute" value="{{AmbulanceCase.ambulance_waiting_minute}}">
                                 </div>
                                 <div class="mb-3 col">   
                                     <label for="emergency_ambulance_waiting" class="form-label">ACİL YARDIM AMBULANSI BEKLEME</label>
-                                    <input type="time" class="form-control" id="emergency_ambulance_waiting" name="emergency_ambulance_waiting" value="{{AmbulanceCase.emergency_ambulance_waiting}}">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="mb-3 col">   
-                                    <label for="patient_transport_ambulance_waiting" class="form-label">HASTA NAKİL AMBULANSI BEKLEME</label>
-                                    <input type="time" class="form-control" id="patient_transport_ambulance_waiting" name="patient_transport_ambulance_waiting" value="{{AmbulanceCase.patient_transport_ambulance_waiting}}">
-                                </div>
+                                    <input type="text" class="form-control" id="emergency_ambulance_waiting" name="emergency_ambulance_waiting" value="{{AmbulanceCase.emergency_ambulance_waiting}}">
+                                    <input type="text" class="form-control" id="emergency_ambulance_waiting_minute" name="emergency_ambulance_waiting_minute" value="{{AmbulanceCase.emergency_ambulance_waiting_minute}}">
 
+                                    <label for="patient_transport_ambulance_waiting" class="form-label">HASTA NAKİL AMBULANSI BEKLEME</label>
+                                    <input type="text" class="form-control" id="patient_transport_ambulance_waiting" name="patient_transport_ambulance_waiting" value="{{AmbulanceCase.patient_transport_ambulance_waiting}}">
+                                    <input type="text" class="form-control" id="patient_transport_ambulance_waiting_minute" name="patient_transport_ambulance_waiting_minute" value="{{AmbulanceCase.patient_transport_ambulance_waiting_minute}}">
+
+                                    <label for="organization_hour" class="form-label">ORGANİZASYON SAAT</label>
+                                    <input type="text" class="form-control" id="organization_hour" name="organization_hour" value="{{AmbulanceCase.organization_hour}}">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col" style="display:block">   
                                     <h3>HASTA BİLGİLENDİRME ONAYI</h3>
-                                    <div>Hastamın nakli sırasında ambulansta bulunmamın ambulans ekibinin görevini zorlaştırdığı gibi personel ve ambulans sürüş güvenliği açısından olumsuz sonuçlar doğurabileceği, meydana gelebilecek birkazadan ve buna bağlı olarak ortaya çıkabilecek hukuki sorunlardan etkilenebileceğim, ambulansta bulunduğum sürece emniyet kemerini takmam gerektiği konusunda ambulans personeli tarafından ayrıntılıolarak bilgilendirildim. Ambulansa binmem durumunda ortaya çıkabilecek olası riskleri ve hukuki sorunları anladım. Buna rağmen hastamın ambulansla nakli sırasında, Hasta Hakları Yönetmeliği’nin 40. VeYataklı Tedavi Kurumları İşletme Yönetmeliği’nin 62. Maddesinde belirtilen Refakatçi kapsamında olmak üzere, kendi hür irademle ambulansta hastama refakatçi olarak ön kabinde bulunmayı, nakil sırasında ortaya çıkabilecek her türlü hukuksal sorunla ilgili, maddi, manevi ve hukuki tüm sorumluluk şahsıma ait olmak üzere kabul ediyorum. SAS ambulans (Star Ambulans Sağ. Hiz. Tur. Taş. Paz. Ltd. Şti.)hekimlerinin/param ediklerinin ve çalışma ekibinin uygulayacağı, hastalığım ın teşhis ve tedavisi için gerekli olan ilaçları, tetkikleri, verilecek anestezi ilaçlarını / transportu bilincim yerinde olarak kabulediyorum. Sağlık durumum a ilişkin, riskler ve komplikasyonlar tarafıma anlatılmıştır. Bu tedavi yerine uygulanabilecek bir başka yöntem in bulunup bulunmadığı konusunda da sağlık ekibim tarafından bilgilendirildim. Tedavi ya da transport sırasında oluşabilecek olumsuz gelişmelerden haberdar olarak tedavim in/transportum un yapılmasını onaylıyorum. Ayrıca aldığım hizmetin ödemesi transferi talepeden kurum tarafından kabul edilmez veya ben özel olarak talep ettiğim de tüm sağlık hizmetleri bedelini Sağlık Bakanlığının belirlemiş olduğu ambulans fiyat tarifesi üzerinden ve yapılan müdahalelerin bedelini SUT fiyat tarifesi üzerinden ödeyeceğimi kabul ve taahhüt ederim.</div>
+                                    <div>Hastamın nakli sırasında ambulansta bulunmamın ambulans ekibinin görevini zorlaştırdığı gibi personel ve ambulans sürüş güvenliği açısından olumsuz sonuçlar doğurabileceği, meydana gelebilecek bir
+                                        kazadan ve buna bağlı olarak ortaya çıkabilecek hukuki sorunlardan etkilenebileceğim, ambulansta bulunduğum sürece emniyet kemerini takmam gerektiği konusunda ambulans personeli tarafından ayrıntılı
+                                        olarak bilgilendirildim. Ambulansa binmem durumunda ortaya çıkabilecek olası riskleri ve hukuki sorunları anladım. Buna rağmen hastamın ambulansla nakli sırasında, Hasta Hakları Yönetmeliği’nin 40. Ve
+                                        Yataklı Tedavi Kurumları İşletme Yönetmeliği’nin 62. Maddesinde belirtilen Refakatçi kapsamında olmak üzere, kendi hür irademle ambulansta hastama refakatçi olarak ön kabinde bulunmayı, nakil sırasında
+                                        ortaya çıkabilecek her türlü hukuksal sorunla ilgili, maddi, manevi ve hukuki tüm sorumluluk şahsıma ait olmak üzere kabul ediyorum. Healmedy (MHAcare Sağlık Turizm İnşaat Ticaret A.Ş.) hekimlerinin/
+                                        param ediklerinin ve çalışma ekibinin uygulayacağı, hastalığım ın teşhis ve tedavisi için gerekli olan ilaçları, tetkikleri, verilecek anestezi ilaçlarını / transportu bilincim yerinde olarak kabul ediyorum. Sağlık
+                                        durum um a ilişkin, riskler ve komplikasyonlar tarafıma anlatılmıştır. Bu tedavi yerine uygulanabilecek bir başka yöntem in bulunup bulunmadığı konusunda da sağlık ekibim tarafından bilgilendirildim. Tedavi
+                                        ya da transport sırasında oluşabilecek olumsuz gelişmelerden haberdar olarak tedavim in/transportum un yapılmasını onaylıyorum. Ayrıca aldığım hizmetin ödem esi transferi talep eden kurum tarafından
+                                        kabul edilmez veya ben özel olarak talep ettiğim de tüm sağlık hizmetleri bedelini Sağlık Bakanlığının belirlemiş olduğu ambulans fiyat tarifesi üzerinden ve yapılan müdahalelerin bedelini SUT fiyat tarifesi
+                                        üzerinden ödeyeceğimi kabul ve taahhüt ederim.</div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="mb-3 col">   
-                                    <label for="username1" class="form-label">ADI SOYADI</label>
+                                <!-- <div class="mb-3 col">    -->
+                                    <label for="username1" class="form-label">HASTA/HASTA YAKINI* (YASAL TEMSİLCİ)</label>
+                                    <label for="username1" class="form-label">ADI-SOYADI:</label>
+                                    <!-- <input type="time" class="form-control" id="get_sig_time" name="get_sig_time" value="{{AmbulanceCase.get_sig_time}}"> -->
                                     <input type="text" class="form-control" id="username1" name="patient_username" value="{{AmbulanceCase.patient_username}}">
-                                    <div class="container row mb-3 col" style="display: block;">
-                                    
+                                    <input type="text" class="form-control" id="get_sig_date" name="get_sig_date" value="{{AmbulanceCase.get_sig_date}}" style="display: none;">
+
+                                    <div class="container row mb-3 col" style="display: block;">                      
                                         <label for="get_sig" class="form-label">İMZA</label>
                                         <div class="container border border-5" id="get_sig" >
                                             
                                         </div>
                                         <textarea name="sigtext" id="sigtext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.sigtext}}</textarea>
                                     </div>
-                                </div>
-                                <div class="row ">   
-                                    <h3>HASTANENİN HASTA REDDİ</h3>
-                                    <input type="text" class="form-control" id="patient_rejection" name="patient_rejection" value="{{AmbulanceCase.patient_rejection}}">
-                                   
-                                    <div>nedenlerle hastayı hastanemize kabul edemiyorum. Hastanın başka hastaneye nakil için gerekli stabilizasyon sağladım. Şu anda durumu başka birkuruma nakli için uygundur.</div>                           
-                                    
-                                    
-                                    <label for="hospital_rejection" class="form-label">ADI SOYADI</label>
-                                    <input type="text" class="form-control" id="hospital_rejection" name="hospital_rejection" value="{{AmbulanceCase.hospital_rejection}}">
-                                   
-                                    <div class="container row mb-3 col" style="display: block;">
-                                        <label for="hospital_signature" class="form-label">İMZA</label>
-                                        <div class="container border border-5" id="hospital_signature" >
-                                                
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="clear" name="signature_clear">Temizle</button> 
+                                        </br>
+                                        </br>
+                                        <button class="btn btn-outline-success" type="button" id="json" name="signature_json">İmzayı Kaydet</button>
+                                    </div>
+                                <!-- </div> -->
+                            </div>
+                                <div class="row "> 
+                                    <div class="mb-3 col">
+                                        <h3>HASTANENİN HASTA REDDİ</h3>
+                                        <input type="text" class="form-control" id="patient_rejection" name="patient_rejection" value="{{AmbulanceCase.patient_rejection}}">                                
+                                        <div>nedenlerle hastayı hastanemize kabul edemiyorum. Hastanın başka hastaneye nakil için gerekli stabilizasyon sağladım. Şu anda durumu başka bir
+                                            kuruma nakli için uygundur.</div>                           
+                                        <label for="hospital_rejection" class="form-label">KURUMUN / HASTANENİN ADI</label>
+                                        <input type="text" class="form-control" id="hospital_rejection" name="hospital_rejection" value="{{AmbulanceCase.hospital_rejection}}">                   
+                    
+                                        <label for="doctor_username" class="form-label">HEKİMİN ADI SOYADI</label>
+                                        <input type="text" class="form-control" id="doctor_username" name="doctor_username" value="{{AmbulanceCase.doctor_username}}">                            
+                                        <input type="text" class="form-control" id="hospital_rejection_datetime" name="hospital_rejection_datetime" value="{{AmbulanceCase.hospital_rejection_datetime}}" style="display: none;">
+
+                                        <div class="container row mb-3 col" style="display: block;">
+                                            <label for="hospital_signature" class="form-label">İMZA</label>
+                                            <div class="container border border-5" id="hospital_signature" >
+                                                    
+                                            </div>
+                                            <textarea name="hospital_rejection_sigtext" id="hospital_rejection_sigtext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.hospital_rejection_sigtext}}</textarea> 
+                                        </div> 
+                                        <div class="mb-3 col" style="display: block;"> 
+                                            </br>   
+                                            <button class="btn btn-outline-danger" type="reset" id="hospital_clear" name="hospital_signature_clear">Temizle</button> 
+                                            &nbsp;
+                                            <button class="btn btn-outline-success" type="button" id="hospital_json" name="hospital_signature_json">İmzayı Kaydet</button>
+                                        </div>                                        
+                                    </div>
+                                    <div class="mb-3 col">  
+                                        <h3>HASTANIN HİZMET REDDİ</h3>
+                                        <div>Ambulansla gelen görevli bana hastanın hemen tedavisi / hastaneye nakli gerektiğini, aksi halde kötü sonuçlar doğurabileceğini anlayacağım şekilde ayrıntılı olarak anlattı. Buna rağmen tedaviyi /hasta
+                                            naklini kabul etmiyorum.</div>
+                                        <div class="mb-3 col">   
+                                            <label for="patients_relative_username" class="form-label">HASTANIN / YAKININ ADI SOYADI</label>
+                                            <input type="text" class="form-control" id="patients_relative_username" name="patients_relative_username" value="{{AmbulanceCase.patients_relative_username}}">   
+                                            <input type="text" class="form-control" id="patients_relative_username_datetime" name="patients_relative_username_datetime" value="{{AmbulanceCase.patients_relative_username_datetime}}" style="display: none;">
+
+                                            <div class="container row mb-3 col" style="display: block;">
+                                                <label for="patients_relative_signature" class="form-label">İMZA</label>
+                                                <div class="container border border-5" id="patients_relative_signature" >
+                                                        
+                                                </div>
+                                                <textarea name="patients_relative_signaturetext" id="patients_relative_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.patients_relative_signaturetext}}</textarea>
+                                            </div>
+                                            <div class="mb-3 col" style="display: block;"> 
+                                                </br>   
+                                                <button class="btn btn-outline-danger" type="reset" id="patients_clear" name="patient_signature_clear">Temizle</button> 
+                                                &nbsp;
+                                                <button class="btn btn-outline-success" type="button" id="patients_json" name="patients_signature_json">İmzayı Kaydet</button>
+                                            </div>
                                         </div>
-                                        <textarea name="hospital_rejection_sigtext" id="hospital_rejection_sigtext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.hospital_rejection_sigtext}}</textarea> 
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <h3>HASTANIN HİZMET REDDİ</h3>
-                                    <div>Ambulansla gelen görevli bana hastanın hemen tedavisi / hastaneye nakli gerektiğini, aksi halde kötü sonuçlar doğurabileceğini anlayacağım şekilde ayrıntılı olarak anlattı. Buna rağmen tedaviyi /hasta naklini kabul etmiyorum.</div>
-                                <div class="mb-3 col">   
-                                    <label for="patients_relative_username" class="form-label">HASTANIN / YAKININ ADI SOYADI</label>
-                                    <input type="text" class="form-control" id="patients_relative_username" name="patients_relative_username" value="{{AmbulanceCase.patients_relative_username}}">
-
-                                    <div class="container row mb-3 col" style="display: block;">
-                                        <label for="patients_relative_signature" class="form-label">İMZA</label>
-                                        <div class="container border border-5" id="patients_relative_signature" >
-                                                
-                                        </div>
-                                        <textarea name="patients_relative_signaturetext" id="patients_relative_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.patients_relative_signaturetext}}</textarea>
-                                </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="mb-3 col">   
-                                    <label for="doctor_username" class="form-label">DOKTOR/PARAMEDİK ADI SOYADI</label>
-                                    <input type="text" class="form-control" id="doctor_username" name="doctor_username" value="{{AmbulanceCase.doctor_username}}">
-
-                                    <div class="container row mb-3 col" style="display: block;">
-                                    <label for="doctor_signature" class="form-label">İMZA</label>
-                                    <div class="container border border-5" id="doctor_signature" >
-                                            
-                                    </div>
-                                    <textarea name="doctor_signaturetext" id="doctor_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.doctor_signaturetext}}</textarea>
-                                </div>
-                                </div>
-                                <div class="mb-3 col">  
                                     <label for="delivery_area_username" class="form-label">HASTAYI TESLİM ALANIN ÜNVANI ADI SOYADI</label>
                                     <input type="text" class="form-control" id="delivery_area_username" name="delivery_area_username" value="{{AmbulanceCase.delivery_area_username}}">
+                                    <input type="text" class="form-control" id="delivery_area_username_datetime" name="delivery_area_username_datetime" value="{{AmbulanceCase.delivery_area_username_datetime}}" style="display: none;">
+
 
                                     <div class="container row mb-3 col" style="display: block;">
-                                    <label for="delivery_area_signature" class="form-label">İMZA</label>
-                                    <div class="container border border-5" id="delivery_area_signature" >
-                                            
+                                        <label for="delivery_area_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="delivery_area_signature" >
+                                                
+                                        </div>
+                                        <textarea name="delivery_area_signaturetext" id="delivery_area_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.delivery_area_signaturetext}}</textarea>
                                     </div>
-                                    <textarea name="delivery_area_signaturetext" id="delivery_area_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.delivery_area_signaturetext}}</textarea> 
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="delivery_clear" name="delivery_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="delivery_json" name="delivery_signature_json">İmzayı Kaydet</button>
+                                    </div>
                                 </div>
-                                </div>
+                                <div class="mb-3 col">  
+                                    <label for="doctor_username1" class="form-label">DOKTOR/PARAMEDİK ADI SOYADI</label>
+                                    <input type="text" class="form-control" id="doctor_username1" name="doctor_username1" value="{{AmbulanceCase.doctor_username1}}">
+                                    <input type="text" class="form-control" id="doctor_username_datetime" name="doctor_username_datetime" value="{{AmbulanceCase.doctor_username_datetime}}" style="display: none;">
+
+
+                                    <div class="container row mb-3 col" style="display: block;">
+                                        <label for="doctor_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="doctor_signature" >
+                                                
+                                        </div>
+                                        <textarea name="doctor_signaturetext" id="doctor_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.doctor_signaturetext}}</textarea>                                   
+                                    </div> 
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="doctor_1_clear" name="doctor_1_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="doctor_1_json" name="doctor_1_signature_json">İmzayı Kaydet</button>
+                                    </div>
+                                </div>                               
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">  
                                     <label for="personal_username" class="form-label">SAĞLIK PERSONELİ ADI SOYADI</label>
                                     <input type="text" class="form-control" id="personal_username" name="personal_username" value="{{AmbulanceCase.personal_username}}">
+                                    <input type="text" class="form-control" id="personal_username_datetime" name="personal_username_datetime" value="{{AmbulanceCase.personal_username_datetime}}" style="display: none;">
+
 
                                     <div class="container row mb-3 col" style="display: block;">
-                                    <label for="personal_signature" class="form-label">İMZA</label>
-                                    <div class="container border border-5" id="personal_signature" >
-                                            
+                                        <label for="personal_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="personal_signature" >
+                                                
+                                        </div>
+                                        <textarea name="personal_signaturetext" id="personal_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.personal_signaturetext}}</textarea> 
                                     </div>
-                                    <textarea name="personal_signaturetext" id="personal_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.personal_signaturetext}}</textarea> 
-                                </div>                                    
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="personal_clear" name="personal_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="personal_json" name="personal_signature_json">İmzayı Kaydet</button>
+                                    </div>                                    
                                 </div>
                                 <div class="mb-3 col">  
                                     <label for="pilot_username" class="form-label">SÜRÜCÜ/PİLOT ADI SOYADI</label>
                                     <input type="text" class="form-control" id="pilot_username" name="pilot_username" value="{{AmbulanceCase.pilot_username}}">
+                                    <input type="text" class="form-control" id="pilot_username_datetime" name="pilot_username_datetime" value="{{AmbulanceCase.pilot_username_datetime}}" style="display: none;">
+
 
                                     <div class="container row mb-3 col" style="display: block;">
-                                    <label for="pilot_signature" class="form-label">İMZA</label>
-                                    <div class="container border border-5" id="pilot_signature" >
-                                            
+                                        <label for="pilot_signature" class="form-label">İMZA</label>
+                                        <div class="container border border-5" id="pilot_signature" >
+                                                
+                                        </div>
+                                        <textarea name="pilot_signaturetext" id="pilot_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.pilot_signaturetext}}</textarea> 
                                     </div>
-                                    <textarea name="pilot_signaturetext" id="pilot_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.pilot_signaturetext}}</textarea> 
-                                </div>
+                                    <div class="mb-3 col" style="display: block;"> 
+                                        </br>   
+                                        <button class="btn btn-outline-danger" type="reset" id="pilot_clear" name="pilot_signature_clear">Temizle</button> 
+                                        &nbsp;
+                                        <button class="btn btn-outline-success" type="button" id="pilot_json" name="pilot_signature_json">İmzayı Kaydet</button>                                   
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -1091,59 +1211,26 @@
                                     <label for="car_info" class="form-label">TAŞIT BİLGİSİ</label>
                                     <div></div>
                                     <select name="car_info" id="car_info" class="form-select" aria-label="Default select example">
-                                        <option id="selectcar" {% if AmbulanceCase.car_info == 'selectcar' %} selected  {%endif%} value="selectcar">Lütfen Araç Seçiniz</option>
-                                        <option id="34SAS20" {% if AmbulanceCase.car_info == '34SAS20' %} selected  {%endif%} value="34SAS20">34 SAS 20</option>
-                                        <option id="34SAS30" {% if AmbulanceCase.car_info == '34SAS30' %} selected {%endif%} value="34SAS30">34 SAS 30</option>
-                                        <option id="34BF2904"  {% if AmbulanceCase.car_info == '34BF2904' %}selected  {%endif%} value="34BF2904">34 BF 2904</option>
-                                        <option id="34RE1140" {% if AmbulanceCase.car_info == '34RE1140' %} selected {%endif%} value="34RE1140">34 RE 1140</option>
-                                        <option id="34BF9529" {% if AmbulanceCase.car_info == '34BF9529' %} selected {%endif%} value="34BF9529">34 BF 9529</option>
+                                        <option >Lütfen Araç Seçiniz</option>
+                                        <option id="34EZP267" {% if AmbulanceCase.car_info == '34EZP267' %} selected  {%endif%} value="34SAS20">34 SAS 20</option>
+                                        <option id="34EZP268" {% if AmbulanceCase.car_info == '34EZP268' %} selected {%endif%} value="34SAS30">34 SAS 30</option>
+                                        <option id="06CHZ142"  {% if AmbulanceCase.car_info == '06CHZ142' %}selected  {%endif%} value="34BF2904">34 BF 2904</option>
+                                        <option id="06CHZ146" {% if AmbulanceCase.car_info == '06CHZ146' %} selected {%endif%} value="34RE1140">34 RE 1140</option>
+                                        <option id="06CHZ149" {% if AmbulanceCase.car_info == '06CHZ149' %} selected {%endif%} value="34BF9529">34 BF 9529</option>
                                     </select>
+                                </div>
+                                <div class="mb-3 col">
                                     <label for="start_km" class="form-label">Başlangıç KM Bilgisi</label>
                                     <input type="number" class="form-control" id="start_km" name="start_km" value="{{AmbulanceCase.start_km}}">
                                     <label for="finish_km" class="form-label">Bitiş KM Bilgisi</label>
-                                    <input type="number" class="form-control" id="finish_km" name="finish_km" value="{{AmbulanceCase.finish_km}}">
-                                </div>
-                                <div class="mb-3 col">
-                                    <label for="protocol_number" class="form-label">112 PROTOKOL NUMARASI</label>
-                                    <input type="number" class="form-control" id="protocol_number" name="protocol_number" value="{{AmbulanceCase.protocol_number}}">
-                                    <label for="other" class="form-label">DİĞER</label>
-                                    <input type="text" class="form-control" id="other" name="other">
-
-                                    <label for="" class="form-label">CARİ</label> 
-                                    <div >                                       
-                                        <input class="form-check-input" type="radio" id="currentyes" name="current"{% if AmbulanceCase.current == 'currentyes' %} checked {%endif%} value="{{AmbulanceCase.current}}"  group="current" >
-                                        <label for="currentyes" class="form-label">Evet</label>
-                                    </div> 
-                                    <div>
-                                        <input class="form-check-input" type="radio" id="currentno" name="current" {% if AmbulanceCase.current == 'currentno' %} checked {%endif%} value="{{AmbulanceCase.current}}" group="current">
-                                        <label for="currentno" class="form-label">Hayır</label>
-                                    </div> 
+                                    <input type="number" class="form-control" id="finish_km" name="finish_km" value="{{AmbulanceCase.finish_km}}"> 
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">   
-                                    <label for="finish_time" class="form-label">CARİ KURUM ADI</label>
-                                    <select name="current_institution_name" id="car_info" class="form-select" aria-label="Default select example">
-                                        <option id="selectinstitution"   {% if AmbulanceCase.current_institution_name == 'selectinstitution' %}  selected {%endif%} value="selectinstitution" >Lütfen Kurum Seçiniz</option>
-                                        <option id="selectinstitution1"  {% if AmbulanceCase.current_institution_name == 'BVÜTFHastanesiFatih' %}  selected {%endif%} value="BVÜTFHastanesiFatih">BVÜ TF Hastanesi Fatih</option>
-                                        <option id="selectinstitution2"  {% if AmbulanceCase.current_institution_name == 'BVÜTFHastanesiDragos' %}  selected {%endif%} value="BVÜTFHastanesiDragos">BVÜ TF Hastanesi Dragos</option>
-                                        <option id="selectinstitution3"  {% if AmbulanceCase.current_institution_name == 'MedicalParkFatih' %}  selected {%endif%} value="MedicalParkFatih">Medical Park Fatih</option>
-                                        <option id="selectinstitution4"  {% if AmbulanceCase.current_institution_name == 'BayParkHospital' %}  selected {%endif%} value="BayParkHospital">BayPark Hospital</option>
-                                        <option id="selectinstitution5"  {% if AmbulanceCase.current_institution_name == 'GaziosmanpaşaYYÜHastanesi' %}  selected {%endif%} value="GaziosmanpaşaYYÜHastanesi">Gaziosmnpaşa YYÜ Hastanesi</option>
-                                        <option id="selectinstitution6"  {% if AmbulanceCase.current_institution_name == 'BahatHospital' %} selected {%endif%} value="BahatHospital">Bahat Hospital</option>
-                                        <option id="selectinstitution7"  {% if AmbulanceCase.current_institution_name == 'EMT' %}  selected  {%endif%} value="EMT">EMT</option>
-                                        <option id="selectinstitution8"  {% if AmbulanceCase.current_institution_name == 'ApexEncore' %} selected {%endif%} value="ApexEncore">Apex Encore</option>
-                                        <option id="selectinstitution9"  {% if AmbulanceCase.current_institution_name == 'Merkez' %}  selected {%endif%} value="Merkez">Merkez</option>
-                                        <option id="selectinstitution10" {% if AmbulanceCase.current_institution_name == 'Medline' %}  selected {%endif%} value="Medline">Medline</option>
-                                        <option id="selectinstitution11" {% if AmbulanceCase.current_institution_name == 'AIDAssistance' %}  selected {%endif%} value="AIDAssistance">AID Assistance</option>
-                                        <option id="selectinstitution12" {% if AmbulanceCase.current_institution_name == 'RemedAssitance' %}  selected {%endif%} value="RemedAssitance">Remed Assitance</option>
-                                        <option id="selectinstitution13" {% if AmbulanceCase.current_institution_name == 'Medinistanbul' %}  selected {%endif%} value="Medinistanbul">Medinistanbul</option>
-                                        <option id="selectinstitution14" {% if AmbulanceCase.current_institution_name == 'PluresHavacılık' %}  selected {%endif%} value="PluresHavacılık">Plures Havacılık</option>
-                                        <option id="selectinstitution15" {% if AmbulanceCase.current_institution_name == 'RedStar' %}  selected {%endif%} value="RedStar">RedStar</option>
-                                        <option id="selectinstitution16" {% if AmbulanceCase.current_institution_name == 'HealMedy' %}  selected {%endif%} value="HealMedy">HealMedy</option>
-                                        <option id="selectinstitution17" {% if AmbulanceCase.current_institution_name == 'ABCassistance' %}  selected {%endif%} value="ABCassistance">ABC assistance</option>
-                                        <option id="selectinstitution18" {% if AmbulanceCase.current_institution_name == 'Yok' %}  selected {%endif%} value="Yok">Yok</option>
-                                    </select>
+                                    <label for="institution_name" class="form-label">KURUM ADI</label>
+                                    <input type="text" class="form-control" id="institution_name" name="institution_name" value="{{AmbulanceCase.institution_name}}">
+
                                     <label for="" class="form-label">GİDİŞ-DÖNÜŞ</label> 
                                     <div >                                       
                                         <input class="form-check-input" type="radio" id="yes" name="round_trip" {% if AmbulanceCase.round_trip == 'yes' %} checked {%endif%} value="{{AmbulanceCase.round_trip}}" group="round_trip">
@@ -1153,25 +1240,16 @@
                                         <input class="form-check-input" type="radio" id="no" name="round_trip" {% if AmbulanceCase.round_trip == 'no' %} checked {%endif%}  value="{{AmbulanceCase.round_trip}}" group="round_trip">
                                         <label for="no" class="form-label">Hayır</label>
                                     </div> 
-
-                                    <label for="money" class="form-label">ÜCRET</label>
-                                    <input type="number" class="form-control" id="money" name="money" value="{{AmbulanceCase.money}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="protocol_number" class="form-label">112 PROTOKOL NUMARASI</label>
+                                    <input type="text" class="form-control" id="protocol_number" name="protocol_number" value="{{AmbulanceCase.protocol_number}}">
 
                                     <label for="file_number" class="form-label">HASTANE PROTOKOL / DOSYA NO</label>
                                     <input type="text" class="form-control" id="file_number" name="file_number" value="{{AmbulanceCase.file_number}}">
 
-                                </div>
-                                <div class="mb-3 col">   
-                                    <label for="transfer_doctor_username" class="form-label">TRANSFER TALEP EDEN DOKTOR ADI SOYADI</label>
-                                    <input type="text" class="form-control" id="transfer_doctor_username" name="transfer_doctor_username" value="{{AmbulanceCase.transfer_doctor_username}}">
-
-                                    <div class="container row mb-3 col" style="display: block;">
-                                    <label for="transfer_doctor_signature" class="form-label">İMZA</label>
-                                    <div class="container border border-5" id="transfer_doctor_signature">
-                                            
-                                    </div>
-                                    <textarea name="transfer_doctor_signaturetext" id="transfer_doctor_signaturetext" cols="30" rows="10" style="display: none;">{{AmbulanceCase.transfer_doctor_signaturetext}}</textarea>
-                                </div>
+                                    <label for="institution_information" class="form-label">VAKAYI VEREN KURUM BİLGİSİ</label>
+                                    <textarea type="text" class="form-control" id="institution_information" name="institution_information" style="height: 100px">{{AmbulanceCase.institution_information}}</textarea>
                                 </div>
                             </div>
                             <div class="row">
