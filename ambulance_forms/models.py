@@ -101,6 +101,11 @@ class AmbulanceCase(models.Model):
     institution_information = models.CharField(max_length=200,blank=True,null=True)
     patient_rejection = models.CharField(max_length=200,blank=True,null=True)
     organization_hour = models.CharField(max_length=200,blank=True,null=True)
+    statetxt = models.CharField(max_length=200,blank=True,null=True)
+    pupilstxt = models.CharField(max_length=200,blank=True,null=True)
+    skintxt = models.CharField(max_length=200,blank=True,null=True)
+    respiratorytxt = models.CharField(max_length=200,blank=True,null=True)
+    pulsetxt = models.CharField(max_length=200,blank=True,null=True)
 
     # get_sig_time = models.TimeField(auto_now_add=True,null=True,blank=True)
 

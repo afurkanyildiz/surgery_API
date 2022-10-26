@@ -50,6 +50,56 @@
                 text = text.substring(0,text.length-1)
                 $('#txt3').val(text);
         });
+        $('.state').click(function()
+        {
+            var text="";
+            $('.state:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#statetxt').val(text);
+        });
+        $('.pupils').click(function()
+        {
+            var text="";
+            $('.pupils:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#pupilstxt').val(text);
+        });
+        $('.skin').click(function()
+        {
+            var text="";
+            $('.skin:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#skintxt').val(text);
+        });
+        $('.respiratory').click(function()
+        {
+            var text="";
+            $('.respiratory:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#respiratorytxt').val(text);
+        });
+        $('.pulse').click(function()
+        {
+            var text="";
+            $('.pulse:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#pulsetxt').val(text);
+        });
    });
 </script>
 
@@ -448,129 +498,134 @@
                                 <div class="mb-3 col" style="display: block;">   
                                     <label for="" class="form-label">EMESYONEL DURUM</label> 
                                     <div >                                       
-                                        <input class="form-check-input" type="radio" id="normal" name="state" {% if AmbulanceCase.state == 'normal' %} checked {%endif%} value="normal" group="state">
+                                        <input class="state" type="radio" id="normal" name="state" {% if AmbulanceCase.state == 'normal' %} checked {%endif%} value="normal" group="state">
                                         <label for="normal" class="form-label">Normal</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="sad" name="state" {% if AmbulanceCase.state == 'sad' %} checked {%endif%} value="sad" group="state">
+                                        <input class="state" type="radio" id="sad" name="state" {% if AmbulanceCase.state == 'sad' %} checked {%endif%} value="sad" group="state">
                                         <label for="sad" class="form-label">Uzuntulu</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="restless" name="state"{% if AmbulanceCase.state == 'restless' %} checked {%endif%} value="restless" group="state">
+                                        <input class="state" type="radio" id="restless" name="state"{% if AmbulanceCase.state == 'restless' %} checked {%endif%} value="restless" group="state">
                                         <label for="restless" class="form-label">Huzursuz</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="indifferent" name="state"{% if AmbulanceCase.state == 'indifferent' %} checked {%endif%} value="indifferent" group="state">
+                                        <input class="state" type="radio" id="indifferent" name="state"{% if AmbulanceCase.state == 'indifferent' %} checked {%endif%} value="indifferent" group="state">
                                         <label for="indifferent" class="form-label">Kayitsiz</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="other" name="state" {% if AmbulanceCase.state == 'other' %} checked {%endif%} value="other" group="state">
+                                        <input class="state" type="radio" id="other" name="state" {% if AmbulanceCase.state == 'other' %} checked {%endif%} value="other" group="state">
                                         <label for="other" class="form-label">Diger</label>
                                     </div> 
+                                    <input id="statetxt" type="text" name="statetxt" value="{{AmbulanceCase.statetxt}}" style="display: none;"  readonly>
                                 </div>
                                 <div class="mb-3 col" style="display: block;">   
                                     <label for="" class="form-label">PUPİLLER</label> 
                                     <div >                                       
-                                        <input class="form-check-input" type="radio" id="normal1" name="pupils"{% if AmbulanceCase.pupils == 'normal1' %} checked {%endif%} value="normal1" group="pupils">
+                                        <input class="pupils" type="radio" id="normal1" name="pupils"{% if AmbulanceCase.pupils == 'normal1' %} checked {%endif%} value="normal1" group="pupils">
                                         <label for="normal1" class="form-label">Normal</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="miotic" name="pupils" {% if AmbulanceCase.pupils == 'miotic' %} checked {%endif%} value="miotic" group="pupils">
+                                        <input class="pupils" type="radio" id="miotic" name="pupils" {% if AmbulanceCase.pupils == 'miotic' %} checked {%endif%} value="miotic" group="pupils">
                                         <label for="miotic" class="form-label">Miyotik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="mydriatic" name="pupils" {% if AmbulanceCase.pupils == 'mydriatic' %} checked {%endif%} value="mydriatic" group="pupils">
+                                        <input class="pupils" type="radio" id="mydriatic" name="pupils" {% if AmbulanceCase.pupils == 'mydriatic' %} checked {%endif%} value="mydriatic" group="pupils">
                                         <label for="mydriatic" class="form-label">Midriatik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="anisochoric" name="pupils" {% if AmbulanceCase.pupils == 'anisochoric' %} checked {%endif%} value="anisochoric" group="pupils">
+                                        <input class="pupils" type="radio" id="anisochoric" name="pupils" {% if AmbulanceCase.pupils == 'anisochoric' %} checked {%endif%} value="anisochoric" group="pupils">
                                         <label for="anisochoric" class="form-label">Anizokorik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="no_reaction" name="pupils" {% if AmbulanceCase.pupils == 'no_reaction' %} checked {%endif%} value="no_reaction" group="pupils">
+                                        <input class="pupils" type="radio" id="no_reaction" name="pupils" {% if AmbulanceCase.pupils == 'no_reaction' %} checked {%endif%} value="no_reaction" group="pupils">
                                         <label for="no_reaction" class="form-label">Reaksiyon Yok</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="fix_dilate" name="pupils" {% if AmbulanceCase.pupils == 'fix_dilate' %} checked {%endif%} value="fix_dilate" group="pupils">
+                                        <input class="pupils" type="radio" id="fix_dilate" name="pupils" {% if AmbulanceCase.pupils == 'fix_dilate' %} checked {%endif%} value="fix_dilate" group="pupils">
                                         <label for="fix_dilate" class="form-label">Fix Dilate</label>
                                     </div>
+                                    <input id="pupilstxt" type="text" name="pupilstxt" value="{{AmbulanceCase.pupilstxt}}" style="display: none;"  readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col" style="display: block;">   
                                     <label for="" class="form-label">DERİ</label> 
                                     <div >                                       
-                                        <input class="form-check-input" type="radio" id="normal2" name="skin" {% if AmbulanceCase.skin == 'normal2' %} checked {%endif%} value="normal2" group="skin">
+                                        <input class="skin" type="radio" id="normal2" name="skin" {% if AmbulanceCase.skin == 'normal2' %} checked {%endif%} value="normal2" group="skin">
                                         <label for="normal2" class="form-label">Normal</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="pale" name="skin" {% if AmbulanceCase.skin == 'pale' %} checked {%endif%} value="pale" group="skin">
+                                        <input class="skin" type="radio" id="pale" name="skin" {% if AmbulanceCase.skin == 'pale' %} checked {%endif%} value="pale" group="skin">
                                         <label for="pale" class="form-label">Soluk</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="cyanonic" name="skin" {% if AmbulanceCase.skin == 'cyanonic' %} checked {%endif%} value="cyanonic" group="skin">
+                                        <input class="skin" type="radio" id="cyanonic" name="skin" {% if AmbulanceCase.skin == 'cyanonic' %} checked {%endif%} value="cyanonic" group="skin">
                                         <label for="cyanonic" class="form-label">Siyatonik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="hyperemic" name="skin" {% if AmbulanceCase.skin == 'hyperemic' %} checked {%endif%} value="hyperemic" group="skin">
+                                        <input class="skin" type="radio" id="hyperemic" name="skin" {% if AmbulanceCase.skin == 'hyperemic' %} checked {%endif%} value="hyperemic" group="skin">
                                         <label for="hyperemic" class="form-label">Hiperemik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="icteric" name="skin" {% if AmbulanceCase.skin == 'icteric' %} checked {%endif%} value="icteric" group="skin">
+                                        <input class="skin" type="radio" id="icteric" name="skin" {% if AmbulanceCase.skin == 'icteric' %} checked {%endif%} value="icteric" group="skin">
                                         <label for="icteric" class="form-label">Ikterik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="sweaty" name="skin" {% if AmbulanceCase.skin == 'sweaty' %} checked {%endif%} value="sweaty" group="skin">
+                                        <input class="skin" type="radio" id="sweaty" name="skin" {% if AmbulanceCase.skin == 'sweaty' %} checked {%endif%} value="sweaty" group="skin">
                                         <label for="sweaty" class="form-label">Terli</label>
                                     </div>
+                                    <input id="skintxt" type="text" name="skintxt" value="{{AmbulanceCase.skintxt}}" style="display: none;"  readonly>
                                 </div>
                                 <div class="mb-3 col" style="display: block;">   
                                     <label for="" class="form-label">SOLUNUM</label> 
                                     <div >                                       
-                                        <input class="form-check-input" type="radio" id="comfortable" name="respiratory" {% if AmbulanceCase.respiratory == 'comfortable' %} checked {%endif%} value="comfortable" group="respiratory">
+                                        <input class="respiratory" type="radio" id="comfortable" name="respiratory" {% if AmbulanceCase.respiratory == 'comfortable' %} checked {%endif%} value="comfortable" group="respiratory">
                                         <label for="comfortable" class="form-label">Rahat</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="deep" name="respiratory" {% if AmbulanceCase.respiratory == 'deep' %} checked {%endif%} value="deep"  group="respiratory">
+                                        <input class="respiratory" type="radio" id="deep" name="respiratory" {% if AmbulanceCase.respiratory == 'deep' %} checked {%endif%} value="deep"  group="respiratory">
                                         <label for="deep" class="form-label">Derin</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="superficial" name="respiratory" {% if AmbulanceCase.respiratory == 'superficial' %} checked {%endif%} value="superficial"  group="respiratory">
+                                        <input class="respiratory" type="radio" id="superficial" name="respiratory" {% if AmbulanceCase.respiratory == 'superficial' %} checked {%endif%} value="superficial"  group="respiratory">
                                         <label for="superficial" class="form-label">Yüzeysel</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="irregular" name="respiratory" {% if AmbulanceCase.respiratory == 'irregular' %} checked {%endif%} value="irregular" group="respiratory">
+                                        <input class="respiratory" type="radio" id="irregular" name="respiratory" {% if AmbulanceCase.respiratory == 'irregular' %} checked {%endif%} value="irregular" group="respiratory">
                                         <label for="irregular" class="form-label">Düzensiz</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="dyspneic" name="respiratory" {% if AmbulanceCase.respiratory == 'dyspneic' %} checked {%endif%} value="dyspneic" group="respiratory">
+                                        <input class="respiratory" type="radio" id="dyspneic" name="respiratory" {% if AmbulanceCase.respiratory == 'dyspneic' %} checked {%endif%} value="dyspneic" group="respiratory">
                                         <label for="dyspneic" class="form-label">Dispneik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="none" name="respiratory" {% if AmbulanceCase.respiratory == 'none' %} checked {%endif%} value="none" group="respiratory">
+                                        <input class="respiratory" type="radio" id="none" name="respiratory" {% if AmbulanceCase.respiratory == 'none' %} checked {%endif%} value="none" group="respiratory">
                                         <label for="none" class="form-label">Yok</label>
                                     </div>
+                                    <input id="respiratorytxt" type="text" name="respiratorytxt" value="{{AmbulanceCase.respiratorytxt}}" style="display: none;"  readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col" style="display: block;">   
                                     <label for="" class="form-label">NABIZ</label> 
                                     <div >                                       
-                                        <input class="form-check-input" type="radio" id="organised" name="pulse" {% if AmbulanceCase.pulse == 'organised' %} checked {%endif%} value="organised" group="pulse">
+                                        <input class="pulse" type="radio" id="organised" name="pulse" {% if AmbulanceCase.pulse == 'organised' %} checked {%endif%} value="organised" group="pulse">
                                         <label for="organised" class="form-label">Düzenli</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="arrhythmic" name="pulse" {% if AmbulanceCase.pulse == 'arrhythmic' %} checked {%endif%} value="arrhythmic" group="pulse">
+                                        <input class="pulse" type="radio" id="arrhythmic" name="pulse" {% if AmbulanceCase.pulse == 'arrhythmic' %} checked {%endif%} value="arrhythmic" group="pulse">
                                         <label for="arrhythmic" class="form-label">Aritmik</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="filiform" name="pulse" {% if AmbulanceCase.pulse == 'filiform' %} checked {%endif%} value="filiform" group="pulse">
+                                        <input class="pulse" type="radio" id="filiform" name="pulse" {% if AmbulanceCase.pulse == 'filiform' %} checked {%endif%} value="filiform" group="pulse">
                                         <label for="filiform" class="form-label">Filiform</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="not_received" name="pulse" {% if AmbulanceCase.pulse == 'not_received' %} checked {%endif%} value="not_received" group="pulse">
+                                        <input class="pulse" type="radio" id="not_received" name="pulse" {% if AmbulanceCase.pulse == 'not_received' %} checked {%endif%} value="not_received" group="pulse">
                                         <label for="not_received" class="form-label">Alınmıyor</label>
                                     </div> 
+                                    <input id="pulsetxt" type="text" name="pulsetxt" value="{{AmbulanceCase.pulsetxt}}" style="display: none;"  readonly>
                                 </div>
                                 <div class="mb-3 col">   
                                     <label for="engine_response" class="form-label">MOTOR YANIT (A)</label>

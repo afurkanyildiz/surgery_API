@@ -98,6 +98,20 @@ function registrationFormPdf(){
 //     });
 //     return deferred.promise();
 // }
+// function signature(){
+//     const {jsPDF} = window.jspdf;
+
+//     var doc = new jsPDF(true);
+//     // var {CheckBox} = jsPDF.AcroForm;
+//     doc.setFont("OpenSans-Medium");
+
+//     const responsibleSignature  = document.getElementById('pilot_signature').getElementsByTagName('canvas');
+//     const responsibleSignaturectx = responsibleSignature[0].toDataURL();
+//     console.log(responsibleSignaturectx);
+//     doc.addImage(responsibleSignaturectx,"PNG",141,267,40,40);
+
+//     doc.output('pdfobjectnewwindow');
+// }
 function ambulanceCasePdf(){
     const {jsPDF} = window.jspdf;
 
@@ -118,11 +132,16 @@ function ambulanceCasePdf(){
     doc.text("(DOLDURULDUĞUNDA HASTAYA ÖZELDİR)",87,9);
 
     
-    var logo = document.getElementById("logo");
-    var imgData = 'data:image/png;base64,'+Base64.encode(logo);
-    console.log(imgData);
-    doc.addImage(imgData, 'PNG', 10, 2, 20, 10);
-  
+    // var logo = document.getElementById("logo");
+    // // var imgData = 'data:image/png;base64,'+Base64.encode(logo);
+    // // console.log(imgData);
+    // doc.addImage(logo, 'PNG', 10, 2, 20, 10);
+    // const responsibleSignature  = document.getElementById('pilot_signature').getElementsByTagName('canvas');
+    // const responsibleSignaturectx = responsibleSignature[0].toDataURL();
+    // console.log(responsibleSignaturectx);
+    // doc.addImage(responsibleSignaturectx,"PNG",10,2,40,40);
+
+
     doc.setFontSize(9);
     doc.text("Tarih:   ....../..../....",171,6);
     var casedate = document.getElementById("casedate").value;
@@ -509,62 +528,438 @@ function ambulanceCasePdf(){
 
     doc.setFontSize(9);
     doc.text("Normal",76,82);
+    var normal = new jspdf.AcroFormCheckBox();
+    var normalTxt = document.getElementById("statetxt").value;
+    console.log("Normal",normalTxt);
+    let hasnormalText = false;
+    console.log
+    if(normalTxt == 'normal') {
+        console.log("Girdi2");
+        hasnormalText = true;
+    }
+    normal.appearanceState = hasnormalText ? 'On' : 'Off';
+    normal.readOnly = false;
+    normal.fieldName = "Normal";
+    normal.Rect = [97, 78.5, 4, 4];
+    normal.value = 'normal';
+    doc.addField(normal);
+
     doc.setFontSize(9);
     doc.text("Üzüntülü",76,86);
+    var sad = new jspdf.AcroFormCheckBox();
+    var sadTxt = document.getElementById("statetxt").value;
+    let hassadText = false;
+    if(sadTxt == 'sad') {
+        console.log("Girdi2");
+        hassadText = true;
+    }
+    sad.appearanceState = hassadText ? 'On' : 'Off';
+    sad.readOnly = false;
+    sad.fieldName = "Üzüntülü";
+    sad.Rect = [97, 83.5, 4, 4];
+    sad.value = 'sad';
+    doc.addField(sad);
+
     doc.setFontSize(9);
     doc.text("Huzursuz",76,90);
+    var restless = new jspdf.AcroFormCheckBox();
+    var restlessTxt = document.getElementById("statetxt").value;
+    let hasrestlessText = false;
+    if(restlessTxt == 'restless') {
+        console.log("Girdi");
+        hasrestlessText = true;
+    }
+    restless.appearanceState = hasrestlessText ? 'On' : 'Off';
+    restless.readOnly = false;
+    restless.fieldName = "Huzursuz";
+    restless.Rect = [97, 87, 4, 4];
+    restless.value = 'restless';
+    doc.addField(restless);
+
     doc.setFontSize(9);
     doc.text("Kayıtsız",76,94);
+    var indifferent = new jspdf.AcroFormCheckBox();
+    var indifferentTxt = document.getElementById("statetxt").value;
+    let hasindifferentText = false;
+    if(indifferentTxt == 'indifferent') {
+        console.log("Girdi2");
+        hasindifferentText = true;
+    }
+    indifferent.appearanceState = hasindifferentText ? 'On' : 'Off';
+    indifferent.readOnly = false;
+    indifferent.fieldName = "Kayıtsız";
+    indifferent.Rect = [97, 91, 4, 4];
+    indifferent.value = 'indifferent';
+    doc.addField(indifferent);
+
     doc.setFontSize(9);
     doc.text("Diğer",76,98);
+    var other = new jspdf.AcroFormCheckBox();
+    var otherTxt = document.getElementById("statetxt").value;
+    let hasotherText = false;
+    if(otherTxt == 'other') {
+        console.log("Girdi2");
+        hasotherText = true;
+    }
+    other.appearanceState = hasotherText ? 'On' : 'Off';
+    other.readOnly = false;
+    other.fieldName = "Diğer";
+    other.Rect = [97, 95, 4, 4];
+    other.value = 'other';
+    doc.addField(other);
 
     doc.setFontSize(9);
     doc.text("Normal",103,82);
+    var normal1 = new jspdf.AcroFormCheckBox();
+    var otherTxt = document.getElementById("pupilstxt").value;
+    let hasnormal1Text = false;
+    if(otherTxt == 'normal1') {
+        console.log("Girdi2");
+        hasnormal1Text = true;
+    }
+    normal1.appearanceState = hasnormal1Text ? 'On' : 'Off';
+    normal1.readOnly = false;
+    normal1.fieldName = "Normal";
+    normal1.Rect = [122, 78.5, 4, 4];
+    normal1.value = 'normal1';
+    doc.addField(normal1);
+
     doc.setFontSize(9);
     doc.text("Miyotik",103,86);
+    var miotic = new jspdf.AcroFormCheckBox();
+    var mioticTxt = document.getElementById("pupilstxt").value;
+    let hasmioticText = false;
+    if(mioticTxt == 'miotic') {
+        console.log("Girdi2");
+        hasmioticText = true;
+    }
+    miotic.appearanceState = hasmioticText ? 'On' : 'Off';
+    miotic.readOnly = false;
+    miotic.fieldName = "Miyotik";
+    miotic.Rect = [122, 83.5, 4, 4];
+    miotic.value = 'miotic';
+    doc.addField(miotic);
+
     doc.setFontSize(9);
     doc.text("Midriatik",103,90);
+    var mydriatic = new jspdf.AcroFormCheckBox();
+    var mydriaticTxt = document.getElementById("pupilstxt").value;
+    let hasmydriaticText = false;
+    if(mydriaticTxt == 'mydriatic') {
+        console.log("Girdi2");
+        hasmydriaticText = true;
+    }
+    mydriatic.appearanceState = hasmydriaticText ? 'On' : 'Off';
+    mydriatic.readOnly = false;
+    mydriatic.fieldName = "Midriatik";
+    mydriatic.Rect = [122, 87, 4, 4];
+    mydriatic.value = 'mydriatic';
+    doc.addField(mydriatic);
+
     doc.setFontSize(9);
     doc.text("Anizokorik",103,94);
+    var anisochoric = new jspdf.AcroFormCheckBox();
+    var anisochoricTxt = document.getElementById("pupilstxt").value;
+    let hasanisochoricText = false;
+    if(anisochoricTxt == 'anisochoric') {
+        console.log("Girdi2");
+        hasanisochoricText = true;
+    }
+    anisochoric.appearanceState = hasanisochoricText ? 'On' : 'Off';
+    anisochoric.readOnly = false;
+    anisochoric.fieldName = "Anizokorik";
+    anisochoric.Rect = [122, 91, 4, 4];
+    anisochoric.value = 'anisochoric';
+    doc.addField(anisochoric);
+
     doc.setFontSize(7);
     doc.text("Reaksiyon Yok",103,98);
+    var no_reaction = new jspdf.AcroFormCheckBox();
+    var no_reactionTxt = document.getElementById("pupilstxt").value;
+    let hasno_reactionText = false;
+    if(no_reactionTxt == 'other') {
+        console.log("Girdi2");
+        hasno_reactionText = true;
+    }
+    no_reaction.appearanceState = hasno_reactionText ? 'On' : 'Off';
+    no_reaction.readOnly = false;
+    no_reaction.fieldName = "Reaksiyon Yok";
+    no_reaction.Rect = [122, 95, 4, 4];
+    no_reaction.value = 'no_reaction';
+    doc.addField(no_reaction);
+
     doc.setFontSize(9);
     doc.text("Fiks Dilate",103,102);
+    var fix_dilate = new jspdf.AcroFormCheckBox();
+    var fix_dilateTxt = document.getElementById("pupilstxt").value;
+    let hasfix_dilateText = false;
+    if(fix_dilateTxt == 'fix_dilate') {
+        console.log("Girdi2");
+        hasfix_dilateText = true;
+    }
+    fix_dilate.appearanceState = hasfix_dilateText ? 'On' : 'Off';
+    fix_dilate.readOnly = false;
+    fix_dilate.fieldName = "Fiks Dilate";
+    fix_dilate.Rect = [122, 99, 4, 4];
+    fix_dilate.value = 'fix_dilate';
+    doc.addField(fix_dilate);
 
     doc.setFontSize(9);
     doc.text("Normal",128,82);
+    var normal2 = new jspdf.AcroFormCheckBox();
+    var normal2Txt = document.getElementById("skintxt").value;
+    let hasnormal2Text = false;
+    if(normal2Txt == 'normal2') {
+        console.log("Girdi2");
+        hasnormal2Text = true;
+    }
+    normal2.appearanceState = hasnormal2Text ? 'On' : 'Off';
+    normal2.readOnly = false;
+    normal2.fieldName = "Normal";
+    normal2.Rect = [147, 78.5, 4, 4];
+    normal2.value = 'normal2';
+    doc.addField(normal2);
+
     doc.setFontSize(9);
     doc.text("Soluk",128,86);
+    var pale = new jspdf.AcroFormCheckBox();
+    var paleTxt = document.getElementById("skintxt").value;
+    let haspaleText = false;
+    if(paleTxt == 'other') {
+        console.log("Girdi2");
+        haspaleText = true;
+    }
+    pale.appearanceState = haspaleText ? 'On' : 'Off';
+    pale.readOnly = false;
+    pale.fieldName = "Soluk";
+    pale.Rect = [147, 83.5, 4, 4];
+    pale.value = 'pale';
+    doc.addField(pale);
+
     doc.setFontSize(9);
     doc.text("Siyanotik",128,90);
+    var cyanonic = new jspdf.AcroFormCheckBox();
+    var cyanonicTxt = document.getElementById("skintxt").value;
+    let hascyanonicText = false;
+    if(cyanonicTxt == 'cyanonic') {
+        console.log("Girdi2");
+        hascyanonicText = true;
+    }
+    cyanonic.appearanceState = hascyanonicText ? 'On' : 'Off';
+    cyanonic.readOnly = false;
+    cyanonic.fieldName = "Siyanotik";
+    cyanonic.Rect = [147, 87, 4, 4];
+    cyanonic.value = 'cyanonic';
+    doc.addField(cyanonic);
+
     doc.setFontSize(9);
     doc.text("Hiperemik",128,94);
+    var hyperemic = new jspdf.AcroFormCheckBox();
+    var hyperemicTxt = document.getElementById("skintxt").value;
+    let hashyperemicText = false;
+    if(hyperemicTxt == 'hyperemic') {
+        console.log("Girdi2");
+        hashyperemicText = true;
+    }
+    hyperemic.appearanceState = hashyperemicText ? 'On' : 'Off';
+    hyperemic.readOnly = false;
+    hyperemic.fieldName = "Hiperemik";
+    hyperemic.Rect = [147, 91, 4, 4];
+    hyperemic.value = 'hyperemic';
+    doc.addField(hyperemic);
+
     doc.setFontSize(9);
     doc.text("İkterik",128,98);
+    var icteric = new jspdf.AcroFormCheckBox();
+    var ictericTxt = document.getElementById("skintxt").value;
+    let hasictericText = false;
+    if(ictericTxt == 'icteric') {
+        console.log("Girdi2");
+        hasictericText = true;
+    }
+    icteric.appearanceState = hasictericText ? 'On' : 'Off';
+    icteric.readOnly = false;
+    icteric.fieldName = "İkterik";
+    icteric.Rect = [147, 95, 4, 4];
+    icteric.value = 'icteric';
+    doc.addField(icteric);
+
     doc.setFontSize(9);
     doc.text("Terli",128,102);
+    var sweaty = new jspdf.AcroFormCheckBox();
+    var sweatyTxt = document.getElementById("skintxt").value;
+    let hassweatyText = false;
+    if(sweatyTxt == 'other') {
+        console.log("Girdi2");
+        hassweatyText = true;
+    }
+    sweaty.appearanceState = hassweatyText ? 'On' : 'Off';
+    sweaty.readOnly = false;
+    sweaty.fieldName = "Terli";
+    sweaty.Rect = [147, 99, 4, 4];
+    sweaty.value = 'sweaty';
+    doc.addField(sweaty);
 
     doc.setFontSize(9);
     doc.text("Rahat",153,82);
+    var comfortable = new jspdf.AcroFormCheckBox();
+    var comfortableTxt = document.getElementById("respiratorytxt").value;
+    let hascomfortableText = false;
+    if(comfortableTxt == 'comfortable') {
+        console.log("Girdi2");
+        hascomfortableText = true;
+    }
+    comfortable.appearanceState = hascomfortableText ? 'On' : 'Off';
+    comfortable.readOnly = false;
+    comfortable.fieldName = "Rahat";
+    comfortable.Rect = [171, 78.5, 4, 4];
+    comfortable.value = 'comfortable';
+    doc.addField(comfortable);
+
     doc.setFontSize(9);
     doc.text("Derin",153,86);
+    var deep = new jspdf.AcroFormCheckBox();
+    var deepTxt = document.getElementById("respiratorytxt").value;
+    let hasdeepText = false;
+    if(deepTxt == 'deep') {
+        console.log("Girdi2");
+        hasdeepText = true;
+    }
+    deep.appearanceState = hasdeepText ? 'On' : 'Off';
+    deep.readOnly = false;
+    deep.fieldName = "Derin";
+    deep.Rect = [171, 83.5, 4, 4];
+    deep.value = 'deep';
+    doc.addField(deep);
+
     doc.setFontSize(9);
     doc.text("Yüzeysel",153,90);
+    var superficial = new jspdf.AcroFormCheckBox();
+    var superficialTxt = document.getElementById("respiratorytxt").value;
+    let hassuperficialText = false;
+    if(superficialTxt == 'superficial') {
+        console.log("Girdi2");
+        hassuperficialText = true;
+    }
+    superficial.appearanceState = hassuperficialText ? 'On' : 'Off';
+    superficial.readOnly = false;
+    superficial.fieldName = "Yüzeysel";
+    superficial.Rect = [171, 87, 4, 4];
+    superficial.value = 'superficial';
+    doc.addField(superficial);
+
     doc.setFontSize(9);
     doc.text("Düzensiz",153,94);
+    var irregular = new jspdf.AcroFormCheckBox();
+    var irregularTxt = document.getElementById("respiratorytxt").value;
+    let hasirregularText = false;
+    if(irregularTxt == 'irregular') {
+        console.log("Girdi2");
+        hasirregularText = true;
+    }
+    irregular.appearanceState = hasirregularText ? 'On' : 'Off';
+    irregular.readOnly = false;
+    irregular.fieldName = "Düzensiz";
+    irregular.Rect = [171, 91, 4, 4];
+    irregular.value = 'irregular';
+    doc.addField(irregular);
+
     doc.setFontSize(9);
     doc.text("Dispneik",153,98);
+    var dyspneic = new jspdf.AcroFormCheckBox();
+    var dyspneicTxt = document.getElementById("respiratorytxt").value;
+    let hasdyspneicText = false;
+    if(dyspneicTxt == 'dyspneic') {
+        console.log("Girdi2");
+        hasdyspneicText = true;
+    }
+    dyspneic.appearanceState = hasdyspneicText ? 'On' : 'Off';
+    dyspneic.readOnly = false;
+    dyspneic.fieldName = "Dispneik";
+    dyspneic.Rect = [171, 95, 4, 4];
+    dyspneic.value = 'dyspneic';
+    doc.addField(dyspneic);
+
     doc.setFontSize(9);
     doc.text("Yok",153,102);
+    var none = new jspdf.AcroFormCheckBox();
+    var noneTxt = document.getElementById("respiratorytxt").value;
+    let hasnoneText = false;
+    if(noneTxt == 'none') {
+        console.log("Girdi2");
+        hasnoneText = true;
+    }
+    none.appearanceState = hasnoneText ? 'On' : 'Off';
+    none.readOnly = false;
+    none.fieldName = "Yok";
+    none.Rect = [171, 99, 4, 4];
+    none.value = 'none';
+    doc.addField(none);
+
 
     doc.setFontSize(9);
     doc.text("Düzenli",178,82);
+    var organised = new jspdf.AcroFormCheckBox();
+    var organisedTxt = document.getElementById("pulsetxt").value;
+    let hasorganisedText = false;
+    if(organisedTxt == 'organised') {
+        console.log("Girdi2");
+        hasorganisedText = true;
+    }
+    organised.appearanceState = hasorganisedText ? 'On' : 'Off';
+    organised.readOnly = false;
+    organised.fieldName = "Düzenli";
+    organised.Rect = [200, 78.5, 4, 4];
+    organised.value = 'organised';
+    doc.addField(organised);
+
     doc.setFontSize(9);
     doc.text("Aritmik",178,86);
+    var arrhythmic = new jspdf.AcroFormCheckBox();
+    var arrhythmicTxt = document.getElementById("pulsetxt").value;
+    let haarrhythmicText = false;
+    if(arrhythmicTxt == 'arrhythmic') {
+        console.log("Girdi2");
+        haarrhythmicText = true;
+    }
+    arrhythmic.appearanceState = haarrhythmicText ? 'On' : 'Off';
+    arrhythmic.readOnly = false;
+    arrhythmic.fieldName = "Aritmik";
+    arrhythmic.Rect = [200, 83.5, 4, 4];
+    arrhythmic.value = 'arrhythmic';
+    doc.addField(arrhythmic);
+
     doc.setFontSize(9);
     doc.text("Filiform",178,90);
+    var filiform = new jspdf.AcroFormCheckBox();
+    var filiformTxt = document.getElementById("pulsetxt").value;
+    let hasfiliformText = false;
+    if(filiformTxt == 'filiform') {
+        console.log("Girdi2");
+        hasfiliformText = true;
+    }
+    filiform.appearanceState = hasfiliformText ? 'On' : 'Off';
+    filiform.readOnly = false;
+    filiform.fieldName = "Filiform";
+    filiform.Rect = [200, 87, 4, 4];
+    filiform.value = 'filiform';
+    doc.addField(filiform);
+
     doc.setFontSize(9);
     doc.text("Alınmıyor",178,94);
+    var not_received = new jspdf.AcroFormCheckBox();
+    var not_receivedTxt = document.getElementById("pulsetxt").value;
+    let hasnot_receivedText = false;
+    if(not_receivedTxt == 'not_received') {
+        console.log("Girdi2");
+        hasnot_receivedText = true;
+    }
+    not_received.appearanceState = hasnot_receivedText ? 'On' : 'Off';
+    not_received.readOnly = false;
+    not_received.fieldName = "Alınmıyor";
+    not_received.Rect = [200, 91, 4, 4];
+    not_received.value = 'not_received';
+    doc.addField(not_received);
 
     doc.setFontSize(9);
     doc.text("GKS",6,106);
@@ -2696,7 +3091,7 @@ function ambulanceCasePdf(){
 
     const getSig = document.getElementById('get_sig').getElementsByTagName('canvas');
     const getSigCtx = getSig[0].toDataURL();
-    console.log(getSigCtx);
+    // console.log(getSigCtx);
     
 
 // =================================
@@ -3087,61 +3482,22 @@ function callCenterPdf(){
     const {jsPDF} = window.jspdf;
 
     var doc = new jsPDF();
-    doc.setFont("BigShouldersDisplay-Medium");
+    doc.setFont("OpenSans-Medium");
 
-    doc.setFontSize(30);
-    doc.text("FİLYOS SAĞLIK MERKEZİ",70,15);
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, "PNG", 14,10,45,25);
 
     doc.setFontSize(20);
-    doc.text("Çağrı Merkezi Formu",85,30);
+    doc.text("Çağrı Mekezi Formu",85,30);
 
-    doc.setFontSize(25);
-    doc.text("Çağrıyı Yapan",45,45);
-
-    doc.setFontSize(17);
-    doc.text("Kurum Adı:",45,55);
-    var institutionName = document.getElementById("institution_name").value;
-    doc.setFontSize(15);
-    doc.text(institutionName,80,55).value;
-
-    doc.setFontSize(17);
-    doc.text("Adı - Soyadı:",45,65);
-    var callerUsername = document.getElementById("caller_username").value;
-    doc.setFontSize(15);
-    doc.text(callerUsername,80,65).value;
-
-    doc.setFontSize(17);
-    doc.text("Yakınlığı:",45,75);
-    var proximity = document.getElementById("proximity").value;
-    doc.setFontSize(15);
-    doc.text(proximity,80,75).value;
-
-    doc.setFontSize(17);
-    doc.text("Telefon Numarası:",45,85);
-    var callerTelNo = document.getElementById("caller_tel_no").value;
-    doc.setFontSize(15);
-    doc.text(callerTelNo,80,85).value;
-
-    doc.setFontSize(25);
-    doc.text("Hasta",45,105);
-
-    doc.setFontSize(17);
-    doc.text("Adı - Soyad:",45,115);
-    var patientUsername = document.getElementById("patient_username").value;
-    doc.setFontSize(15);
-    doc.text(patientUsername,80,115).value;
-
-    doc.setFontSize(17);
-    doc.text("Yaş:",45,125);
-    var patientAge = document.getElementById("patient_age").value;
-    doc.setFontSize(15);
-    doc.text(patientAge,80,125).value;
-
-    doc.setFontSize(17);
-    doc.text("Tarih:",45,135);
-    var caseDate = document.getElementById("case_date").value;
-    doc.setFontSize(15);
-    doc.text(caseDate,80,135).value;
+    doc.line(5,40,205,40)
+    doc.line(25,55,120,55)
+    doc.line(25,63,120,63)
+    doc.line(140,55,205,55)
+    doc.line(140,63,205,63)
+    doc.line(25,80,205,80)
+    doc.line(25,85,85,85)
+    doc.line(95,85,205,85)
     
     doc.output('pdfobjectnewwindow');
 }
@@ -3953,62 +4309,412 @@ function updateAmbulanceCasePdf(){
 
     doc.setFontSize(9);
     doc.text("Normal",76,82);
+    var normal = new jspdf.AcroFormCheckBox();
+    var normalTxt = document.getElementById("statetxt").value;
+    console.log(normalTxt);
+    let hasnormalText = false;
+    console.log
+    if(normalTxt == 'normal') {
+        hasnormalText = true;
+    }
+    normal.appearanceState = hasnormalText ? 'On' : 'Off';
+    normal.readOnly = false;
+    normal.fieldName = "Normal";
+    normal.Rect = [97, 78.5, 4, 4];
+    normal.value = 'normal';
+    doc.addField(normal);
+
     doc.setFontSize(9);
     doc.text("Üzüntülü",76,86);
+    var sad = new jspdf.AcroFormCheckBox();
+    var sadTxt = document.getElementById("statetxt").value;
+    let hassadText = false;
+    if(sadTxt == 'sad') {
+        hassadText = true;
+    }
+    sad.appearanceState = hassadText ? 'On' : 'Off';
+    sad.readOnly = false;
+    sad.fieldName = "Üzüntülü";
+    sad.Rect = [97, 83.5, 4, 4];
+    sad.value = 'sad';
+    doc.addField(sad);
+
     doc.setFontSize(9);
     doc.text("Huzursuz",76,90);
+    var restless = new jspdf.AcroFormCheckBox();
+    var restlessTxt = document.getElementById("statetxt").value;
+    let hasrestlessText = false;
+    if(restlessTxt == 'restless') {
+        hasrestlessText = true;
+    }
+    restless.appearanceState = hasrestlessText ? 'On' : 'Off';
+    restless.readOnly = false;
+    restless.fieldName = "Huzursuz";
+    restless.Rect = [97, 87, 4, 4];
+    restless.value = 'restless';
+    doc.addField(restless);
+
     doc.setFontSize(9);
     doc.text("Kayıtsız",76,94);
+    var indifferent = new jspdf.AcroFormCheckBox();
+    var indifferentTxt = document.getElementById("statetxt").value;
+    let hasindifferentText = false;
+    if(indifferentTxt == 'indifferent') {
+        hasindifferentText = true;
+    }
+    indifferent.appearanceState = hasindifferentText ? 'On' : 'Off';
+    indifferent.readOnly = false;
+    indifferent.fieldName = "Kayıtsız";
+    indifferent.Rect = [97, 91, 4, 4];
+    indifferent.value = 'indifferent';
+    doc.addField(indifferent);
+
     doc.setFontSize(9);
     doc.text("Diğer",76,98);
+    var other = new jspdf.AcroFormCheckBox();
+    var otherTxt = document.getElementById("statetxt").value;
+    let hasotherText = false;
+    if(otherTxt == 'other') {
+        hasotherText = true;
+    }
+    other.appearanceState = hasotherText ? 'On' : 'Off';
+    other.readOnly = false;
+    other.fieldName = "Diğer";
+    other.Rect = [97, 95, 4, 4];
+    other.value = 'other';
+    doc.addField(other);
 
     doc.setFontSize(9);
     doc.text("Normal",103,82);
+    var normal1 = new jspdf.AcroFormCheckBox();
+    var otherTxt = document.getElementById("pupilstxt").value;
+    let hasnormal1Text = false;
+    if(otherTxt == 'normal1') {
+        hasnormal1Text = true;
+    }
+    normal1.appearanceState = hasnormal1Text ? 'On' : 'Off';
+    normal1.readOnly = false;
+    normal1.fieldName = "Normal";
+    normal1.Rect = [122, 78.5, 4, 4];
+    normal1.value = 'normal1';
+    doc.addField(normal1);
+
     doc.setFontSize(9);
     doc.text("Miyotik",103,86);
+    var miotic = new jspdf.AcroFormCheckBox();
+    var mioticTxt = document.getElementById("pupilstxt").value;
+    let hasmioticText = false;
+    if(mioticTxt == 'miotic') {
+        hasmioticText = true;
+    }
+    miotic.appearanceState = hasmioticText ? 'On' : 'Off';
+    miotic.readOnly = false;
+    miotic.fieldName = "Miyotik";
+    miotic.Rect = [122, 83.5, 4, 4];
+    miotic.value = 'miotic';
+    doc.addField(miotic);
+
     doc.setFontSize(9);
     doc.text("Midriatik",103,90);
+    var mydriatic = new jspdf.AcroFormCheckBox();
+    var mydriaticTxt = document.getElementById("pupilstxt").value;
+    let hasmydriaticText = false;
+    if(mydriaticTxt == 'mydriatic') {
+        hasmydriaticText = true;
+    }
+    mydriatic.appearanceState = hasmydriaticText ? 'On' : 'Off';
+    mydriatic.readOnly = false;
+    mydriatic.fieldName = "Midriatik";
+    mydriatic.Rect = [122, 87, 4, 4];
+    mydriatic.value = 'mydriatic';
+    doc.addField(mydriatic);
+
     doc.setFontSize(9);
     doc.text("Anizokorik",103,94);
+    var anisochoric = new jspdf.AcroFormCheckBox();
+    var anisochoricTxt = document.getElementById("pupilstxt").value;
+    let hasanisochoricText = false;
+    if(anisochoricTxt == 'anisochoric') {
+        hasanisochoricText = true;
+    }
+    anisochoric.appearanceState = hasanisochoricText ? 'On' : 'Off';
+    anisochoric.readOnly = false;
+    anisochoric.fieldName = "Anizokorik";
+    anisochoric.Rect = [122, 91, 4, 4];
+    anisochoric.value = 'anisochoric';
+    doc.addField(anisochoric);
+
     doc.setFontSize(7);
     doc.text("Reaksiyon Yok",103,98);
+    var no_reaction = new jspdf.AcroFormCheckBox();
+    var no_reactionTxt = document.getElementById("pupilstxt").value;
+    let hasno_reactionText = false;
+    if(no_reactionTxt == 'other') {
+        hasno_reactionText = true;
+    }
+    no_reaction.appearanceState = hasno_reactionText ? 'On' : 'Off';
+    no_reaction.readOnly = false;
+    no_reaction.fieldName = "Reaksiyon Yok";
+    no_reaction.Rect = [122, 95, 4, 4];
+    no_reaction.value = 'no_reaction';
+    doc.addField(no_reaction);
+
     doc.setFontSize(9);
     doc.text("Fiks Dilate",103,102);
+    var fix_dilate = new jspdf.AcroFormCheckBox();
+    var fix_dilateTxt = document.getElementById("pupilstxt").value;
+    let hasfix_dilateText = false;
+    if(fix_dilateTxt == 'fix_dilate') {
+        hasfix_dilateText = true;
+    }
+    fix_dilate.appearanceState = hasfix_dilateText ? 'On' : 'Off';
+    fix_dilate.readOnly = false;
+    fix_dilate.fieldName = "Fiks Dilate";
+    fix_dilate.Rect = [122, 99, 4, 4];
+    fix_dilate.value = 'fix_dilate';
+    doc.addField(fix_dilate);
 
     doc.setFontSize(9);
     doc.text("Normal",128,82);
+    var normal2 = new jspdf.AcroFormCheckBox();
+    var normal2Txt = document.getElementById("skintxt").value;
+    let hasnormal2Text = false;
+    if(normal2Txt == 'normal2') {
+        hasnormal2Text = true;
+    }
+    normal2.appearanceState = hasnormal2Text ? 'On' : 'Off';
+    normal2.readOnly = false;
+    normal2.fieldName = "Normal";
+    normal2.Rect = [147, 78.5, 4, 4];
+    normal2.value = 'normal2';
+    doc.addField(normal2);
+
     doc.setFontSize(9);
     doc.text("Soluk",128,86);
+    var pale = new jspdf.AcroFormCheckBox();
+    var paleTxt = document.getElementById("skintxt").value;
+    let haspaleText = false;
+    if(paleTxt == 'other') {
+        haspaleText = true;
+    }
+    pale.appearanceState = haspaleText ? 'On' : 'Off';
+    pale.readOnly = false;
+    pale.fieldName = "Soluk";
+    pale.Rect = [147, 83.5, 4, 4];
+    pale.value = 'pale';
+    doc.addField(pale);
+
     doc.setFontSize(9);
     doc.text("Siyanotik",128,90);
+    var cyanonic = new jspdf.AcroFormCheckBox();
+    var cyanonicTxt = document.getElementById("skintxt").value;
+    let hascyanonicText = false;
+    if(cyanonicTxt == 'cyanonic') {
+        hascyanonicText = true;
+    }
+    cyanonic.appearanceState = hascyanonicText ? 'On' : 'Off';
+    cyanonic.readOnly = false;
+    cyanonic.fieldName = "Siyanotik";
+    cyanonic.Rect = [147, 87, 4, 4];
+    cyanonic.value = 'cyanonic';
+    doc.addField(cyanonic);
+
     doc.setFontSize(9);
     doc.text("Hiperemik",128,94);
+    var hyperemic = new jspdf.AcroFormCheckBox();
+    var hyperemicTxt = document.getElementById("skintxt").value;
+    let hashyperemicText = false;
+    if(hyperemicTxt == 'hyperemic') {
+        hashyperemicText = true;
+    }
+    hyperemic.appearanceState = hashyperemicText ? 'On' : 'Off';
+    hyperemic.readOnly = false;
+    hyperemic.fieldName = "Hiperemik";
+    hyperemic.Rect = [147, 91, 4, 4];
+    hyperemic.value = 'hyperemic';
+    doc.addField(hyperemic);
+
     doc.setFontSize(9);
     doc.text("İkterik",128,98);
+    var icteric = new jspdf.AcroFormCheckBox();
+    var ictericTxt = document.getElementById("skintxt").value;
+    let hasictericText = false;
+    if(ictericTxt == 'icteric') {
+        hasictericText = true;
+    }
+    icteric.appearanceState = hasictericText ? 'On' : 'Off';
+    icteric.readOnly = false;
+    icteric.fieldName = "İkterik";
+    icteric.Rect = [147, 95, 4, 4];
+    icteric.value = 'icteric';
+    doc.addField(icteric);
+
     doc.setFontSize(9);
     doc.text("Terli",128,102);
+    var sweaty = new jspdf.AcroFormCheckBox();
+    var sweatyTxt = document.getElementById("skintxt").value;
+    let hassweatyText = false;
+    if(sweatyTxt == 'other') {
+        hassweatyText = true;
+    }
+    sweaty.appearanceState = hassweatyText ? 'On' : 'Off';
+    sweaty.readOnly = false;
+    sweaty.fieldName = "Terli";
+    sweaty.Rect = [147, 99, 4, 4];
+    sweaty.value = 'sweaty';
+    doc.addField(sweaty);
 
     doc.setFontSize(9);
     doc.text("Rahat",153,82);
+    var comfortable = new jspdf.AcroFormCheckBox();
+    var comfortableTxt = document.getElementById("respiratorytxt").value;
+    let hascomfortableText = false;
+    if(comfortableTxt == 'comfortable') {
+        hascomfortableText = true;
+    }
+    comfortable.appearanceState = hascomfortableText ? 'On' : 'Off';
+    comfortable.readOnly = false;
+    comfortable.fieldName = "Rahat";
+    comfortable.Rect = [171, 78.5, 4, 4];
+    comfortable.value = 'comfortable';
+    doc.addField(comfortable);
+
     doc.setFontSize(9);
     doc.text("Derin",153,86);
+    var deep = new jspdf.AcroFormCheckBox();
+    var deepTxt = document.getElementById("respiratorytxt").value;
+    let hasdeepText = false;
+    if(deepTxt == 'deep') {
+        hasdeepText = true;
+    }
+    deep.appearanceState = hasdeepText ? 'On' : 'Off';
+    deep.readOnly = false;
+    deep.fieldName = "Derin";
+    deep.Rect = [171, 83.5, 4, 4];
+    deep.value = 'deep';
+    doc.addField(deep);
+
     doc.setFontSize(9);
     doc.text("Yüzeysel",153,90);
+    var superficial = new jspdf.AcroFormCheckBox();
+    var superficialTxt = document.getElementById("respiratorytxt").value;
+    let hassuperficialText = false;
+    if(superficialTxt == 'superficial') {
+        hassuperficialText = true;
+    }
+    superficial.appearanceState = hassuperficialText ? 'On' : 'Off';
+    superficial.readOnly = false;
+    superficial.fieldName = "Yüzeysel";
+    superficial.Rect = [171, 87, 4, 4];
+    superficial.value = 'superficial';
+    doc.addField(superficial);
+
     doc.setFontSize(9);
     doc.text("Düzensiz",153,94);
+    var irregular = new jspdf.AcroFormCheckBox();
+    var irregularTxt = document.getElementById("respiratorytxt").value;
+    let hasirregularText = false;
+    if(irregularTxt == 'irregular') {
+        hasirregularText = true;
+    }
+    irregular.appearanceState = hasirregularText ? 'On' : 'Off';
+    irregular.readOnly = false;
+    irregular.fieldName = "Düzensiz";
+    irregular.Rect = [171, 91, 4, 4];
+    irregular.value = 'irregular';
+    doc.addField(irregular);
+
     doc.setFontSize(9);
     doc.text("Dispneik",153,98);
+    var dyspneic = new jspdf.AcroFormCheckBox();
+    var dyspneicTxt = document.getElementById("respiratorytxt").value;
+    let hasdyspneicText = false;
+    if(dyspneicTxt == 'dyspneic') {
+        hasdyspneicText = true;
+    }
+    dyspneic.appearanceState = hasdyspneicText ? 'On' : 'Off';
+    dyspneic.readOnly = false;
+    dyspneic.fieldName = "Dispneik";
+    dyspneic.Rect = [171, 95, 4, 4];
+    dyspneic.value = 'dyspneic';
+    doc.addField(dyspneic);
+
     doc.setFontSize(9);
     doc.text("Yok",153,102);
+    var none = new jspdf.AcroFormCheckBox();
+    var noneTxt = document.getElementById("respiratorytxt").value;
+    let hasnoneText = false;
+    if(noneTxt == 'none') {
+        hasnoneText = true;
+    }
+    none.appearanceState = hasnoneText ? 'On' : 'Off';
+    none.readOnly = false;
+    none.fieldName = "Yok";
+    none.Rect = [171, 99, 4, 4];
+    none.value = 'none';
+    doc.addField(none);
+
 
     doc.setFontSize(9);
     doc.text("Düzenli",178,82);
+    var organised = new jspdf.AcroFormCheckBox();
+    var organisedTxt = document.getElementById("pulsetxt").value;
+    let hasorganisedText = false;
+    if(organisedTxt == 'organised') {
+        hasorganisedText = true;
+    }
+    organised.appearanceState = hasorganisedText ? 'On' : 'Off';
+    organised.readOnly = false;
+    organised.fieldName = "Düzenli";
+    organised.Rect = [200, 78.5, 4, 4];
+    organised.value = 'organised';
+    doc.addField(organised);
+
     doc.setFontSize(9);
     doc.text("Aritmik",178,86);
+    var arrhythmic = new jspdf.AcroFormCheckBox();
+    var arrhythmicTxt = document.getElementById("pulsetxt").value;
+    let haarrhythmicText = false;
+    if(arrhythmicTxt == 'arrhythmic') {
+        haarrhythmicText = true;
+    }
+    arrhythmic.appearanceState = haarrhythmicText ? 'On' : 'Off';
+    arrhythmic.readOnly = false;
+    arrhythmic.fieldName = "Aritmik";
+    arrhythmic.Rect = [200, 83.5, 4, 4];
+    arrhythmic.value = 'arrhythmic';
+    doc.addField(arrhythmic);
+
     doc.setFontSize(9);
     doc.text("Filiform",178,90);
+    var filiform = new jspdf.AcroFormCheckBox();
+    var filiformTxt = document.getElementById("pulsetxt").value;
+    let hasfiliformText = false;
+    if(filiformTxt == 'filiform') {
+        hasfiliformText = true;
+    }
+    filiform.appearanceState = hasfiliformText ? 'On' : 'Off';
+    filiform.readOnly = false;
+    filiform.fieldName = "Filiform";
+    filiform.Rect = [200, 87, 4, 4];
+    filiform.value = 'filiform';
+    doc.addField(filiform);
+
     doc.setFontSize(9);
     doc.text("Alınmıyor",178,94);
+    var not_received = new jspdf.AcroFormCheckBox();
+    var not_receivedTxt = document.getElementById("pulsetxt").value;
+    let hasnot_receivedText = false;
+    if(not_receivedTxt == 'not_received') {
+        hasnot_receivedText = true;
+    }
+    not_received.appearanceState = hasnot_receivedText ? 'On' : 'Off';
+    not_received.readOnly = false;
+    not_received.fieldName = "Alınmıyor";
+    not_received.Rect = [200, 91, 4, 4];
+    not_received.value = 'not_received';
+    doc.addField(not_received);
+
 
     doc.setFontSize(9);
     doc.text("GKS",6,106);
@@ -6257,10 +6963,10 @@ function updateAmbulanceCasePdf(){
     doc.text(pilot_username_datetime,183,260);
     doc.setFontSize(7);
     doc.text("İmza:",140,266);
-    const responsibleSignature  = document.getElementById('pilot_signaturetext').value;
-    const responsibleSignaturectx = responsibleSignature[0].toDataURL();
-    console.log(responsibleSignaturectx);
-    doc.addImage(responsibleSignaturectx,"PNG",141,267,5,5);
+    // const responsibleSignature  = document.getElementById('pilot_signaturetext').value;
+    // const responsibleSignaturectx = responsibleSignature[0].toDataURL();
+    // console.log(responsibleSignaturectx);
+    // doc.addImage(responsibleSignaturectx,"PNG",141,267,5,5);
 // ==============================
     doc.setLineWidth(0.1);
     doc.line(41, 267, 41, 295);

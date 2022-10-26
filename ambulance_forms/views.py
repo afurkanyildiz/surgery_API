@@ -111,6 +111,11 @@ def ambulance_case_form(request):
         ambulanceCase.institution_information = request.POST.get('institution_information')
         ambulanceCase.patient_rejection = request.POST.get('patient_rejection')
         ambulanceCase.organization_hour = request.POST.get('organization_hour')
+        ambulanceCase.statetxt = request.POST.get('statetxt')
+        ambulanceCase.pupilstxt = request.POST.get('pupilstxt')
+        ambulanceCase.skintxt = request.POST.get('skintxt')
+        ambulanceCase.respiratorytxt = request.POST.get('respiratorytxt')
+        ambulanceCase.pulsetxt = request.POST.get('pulsetxt')
         # ambulanceCase.get_sig_time = request.POST.get('get_sig_time')
               
         ambulanceCase.save()

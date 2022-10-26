@@ -45,7 +45,7 @@ def updateRecords(request, id):
         form.save()
         messages.success(request,"Kayit Basarili...")
         print("basarili")
-        context={'records':Records.objects.all()}
+        context={"Records":Records.objects.all()}
         return render(request,"tables.html", context)
     else:
         print("basarisiz")
@@ -58,9 +58,8 @@ def index_page(request):
 
 @login_required(login_url='redirect')
 def tables_page(request):
-    records = Records.objects.all()
-    # serializer = RecordSerializer(records, many=True)
-    return render(request,"tables.html", {'records' : records})
+    context={'records':Records.objects.all()}
+    return render(request,"tables.html",context)
     
 @login_required(login_url='redirect')
 def charts_page(request):
@@ -70,7 +69,7 @@ def charts_page(request):
 def deleteData(request, id):
     record = Records.objects.get(pk=id)
     record.delete()
-    return redirect('/index/tables')
+    return redirect('/index//tables')
 
 
 

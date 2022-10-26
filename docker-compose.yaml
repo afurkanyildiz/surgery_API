@@ -13,7 +13,7 @@ services:
         image: caddy:2-alpine
         ports:
             - "443:443"
-        command: caddy reverse-proxy --from https://filyossaglikmerkezi.com --to http://0.0.0.0:8000
+        command: caddy reverse-proxy --from https://filyosaglikmerkezi.com --to http://0.0.0.0:8000
         #volumes:
         #    - /local/path/to/Caddyfile:/path/inside/continer/to/Caddyfile
         #     networks:
