@@ -113,7 +113,6 @@
             sig.signature('disable'); 
             $('#get_sig').signature({disabled:true,thickness : 4});
             
-
         }
         else{
             var sig =  $('#get_sig').signature({thickness : 4}); 
@@ -295,6 +294,9 @@
                                     <input type="date" class="form-control" id="date" name="date"  placeholder="Tarih" value="{{AmbulanceCase.date}}">
                                 </div> 
                                 <div class="mb-3 col">
+                                    <label for="atn_no" class="form-label">ATN No:</label>
+                                    <input type="text" class="form-control" id="atn_no" name="atn_no" value="67 B 204617 ">
+                                    
                                     <label for="sas_protokol" class="form-label">HEALMEDY PROTOKOL</label>
                                     <input type="text" class="form-control" id="sas_protokol" name="sas_protokol" value="{{AmbulanceCase.sas_protokol}}">
                                     <h8 class="text-center font-weight-light my-4">Çağrı Merkezinden Alınan Protokolü 34Ö-179- den Sonra Yazınız.</h8>
@@ -1118,7 +1120,7 @@
                                     </div>
                                     <div class="mb-3 col" style="display: block;"> 
                                         </br>   
-                                        <button class="btn btn-outline-danger" type="reset" id="clear" name="signature_clear">Temizle</button> 
+                                        <button class="btn btn-outline-danger" type="button" id="clear" name="signature_clear">Temizle</button> 
                                         </br>
                                         </br>
                                         <button class="btn btn-outline-success" type="button" id="json" name="signature_json">İmzayı Kaydet</button>
@@ -1147,7 +1149,7 @@
                                         </div> 
                                         <div class="mb-3 col" style="display: block;"> 
                                             </br>   
-                                            <button class="btn btn-outline-danger" type="reset" id="hospital_clear" name="hospital_signature_clear">Temizle</button> 
+                                            <button class="btn btn-outline-danger" type="button" id="hospital_clear" name="hospital_signature_clear">Temizle</button> 
                                             &nbsp;
                                             <button class="btn btn-outline-success" type="button" id="hospital_json" name="hospital_signature_json">İmzayı Kaydet</button>
                                         </div>                                        
@@ -1170,7 +1172,7 @@
                                             </div>
                                             <div class="mb-3 col" style="display: block;"> 
                                                 </br>   
-                                                <button class="btn btn-outline-danger" type="reset" id="patients_clear" name="patient_signature_clear">Temizle</button> 
+                                                <button class="btn btn-outline-danger" type="button" id="patients_clear" name="patient_signature_clear">Temizle</button> 
                                                 &nbsp;
                                                 <button class="btn btn-outline-success" type="button" id="patients_json" name="patients_signature_json">İmzayı Kaydet</button>
                                             </div>
@@ -1193,7 +1195,7 @@
                                     </div>
                                     <div class="mb-3 col" style="display: block;"> 
                                         </br>   
-                                        <button class="btn btn-outline-danger" type="reset" id="delivery_clear" name="delivery_signature_clear">Temizle</button> 
+                                        <button class="btn btn-outline-danger" type="button" id="delivery_clear" name="delivery_signature_clear">Temizle</button> 
                                         &nbsp;
                                         <button class="btn btn-outline-success" type="button" id="delivery_json" name="delivery_signature_json">İmzayı Kaydet</button>
                                     </div>
@@ -1213,7 +1215,7 @@
                                     </div> 
                                     <div class="mb-3 col" style="display: block;"> 
                                         </br>   
-                                        <button class="btn btn-outline-danger" type="reset" id="doctor_1_clear" name="doctor_1_signature_clear">Temizle</button> 
+                                        <button class="btn btn-outline-danger" type="button" id="doctor_1_clear" name="doctor_1_signature_clear">Temizle</button> 
                                         &nbsp;
                                         <button class="btn btn-outline-success" type="button" id="doctor_1_json" name="doctor_1_signature_json">İmzayı Kaydet</button>
                                     </div>
@@ -1235,7 +1237,7 @@
                                     </div>
                                     <div class="mb-3 col" style="display: block;"> 
                                         </br>   
-                                        <button class="btn btn-outline-danger" type="reset" id="personal_clear" name="personal_signature_clear">Temizle</button> 
+                                        <button class="btn btn-outline-danger" type="button" id="personal_clear" name="personal_signature_clear">Temizle</button> 
                                         &nbsp;
                                         <button class="btn btn-outline-success" type="button" id="personal_json" name="personal_signature_json">İmzayı Kaydet</button>
                                     </div>                                    
@@ -1255,7 +1257,7 @@
                                     </div>
                                     <div class="mb-3 col" style="display: block;"> 
                                         </br>   
-                                        <button class="btn btn-outline-danger" type="reset" id="pilot_clear" name="pilot_signature_clear">Temizle</button> 
+                                        <button class="btn btn-outline-danger" type="button" id="pilot_clear" name="pilot_signature_clear">Temizle</button> 
                                         &nbsp;
                                         <button class="btn btn-outline-success" type="button" id="pilot_json" name="pilot_signature_json">İmzayı Kaydet</button>                                   
                                     </div>
@@ -1312,11 +1314,11 @@
                                 </br> 
                                     <button type="submit" class="bi bi-save btn btn-outline-success"> Kaydet</button>
                                     &nbsp;
-                                    <button type="button" onclick="updateAmbulanceCasePdf ()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>    
+                                    <button type="button" onclick="updateAmbulanceCasePdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>    
                                     &nbsp;
                                     <button type="button" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
                                     &nbsp;
-                                    <button type="submit" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                    <button type="reset" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
                                 </div>
                             </div>
                           </form>
