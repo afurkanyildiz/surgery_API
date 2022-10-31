@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
+    
     path('ambulance_case_form', views.ambulance_case_form, name='ambulance_case_form'),
     path('<int:id>/', views.editAmbulanceCaseForm, name='editAmbulanceCaseForm'),
     path('<int:id>', views.updateAmbulanceCaseForm, name='updateAmbulanceCaseForm'),
@@ -64,4 +68,4 @@ urlpatterns = [
     path('editPreCaseControl/<int:id>', views.editPreCaseControl, name='editPreCaseControl'),
     path('updatePreCaseControl/<int:id>', views.updatePreCaseControl, name='updatePreCaseControl'),
     path('deletePreCaseControl/<int:id>', views.deletePreCaseControl, name='deletePreCaseControl'),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

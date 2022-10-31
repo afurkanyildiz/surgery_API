@@ -6,7 +6,7 @@ from .forms import AmbulanceCaseForm,AmbulanceDailyControlForm,AmbulanceHandover
 from django.contrib.auth.decorators import login_required
 from django.contrib import  messages
 
-
+   
 @login_required(login_url='redirect')
 def ambulance_case_form(request): 
     if request.method == "POST" and 'save' in request.POST:
@@ -116,8 +116,9 @@ def ambulance_case_form(request):
         ambulanceCase.skintxt = request.POST.get('skintxt')
         ambulanceCase.respiratorytxt = request.POST.get('respiratorytxt')
         ambulanceCase.pulsetxt = request.POST.get('pulsetxt')
-        # ambulanceCase.get_sig_time = request.POST.get('get_sig_time')
-              
+        if len(request.FILES) != 0:           
+            ambulanceCase.barkod = request.FILES['barkod']
+  
         ambulanceCase.save()
         return redirect('/forms/ambulance_case_tables')
         

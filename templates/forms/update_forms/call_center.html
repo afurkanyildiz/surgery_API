@@ -4,6 +4,7 @@
 
 {% block content%}
 <main>
+    <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
     <div class="container-fluid px-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -81,11 +82,12 @@
                                     <div></div>
                                     <select name="car_info" id="car_info" class="form-select" aria-label="Default select example">
                                         <option>Lütfen Araç Seçiniz</option>
-                                        <option id="34EZP267" {% if CallCenter.car_info == '34EZP267' %} selected  {%endif%} value="34SAS20">34 SAS 20</option>
-                                        <option id="34EZP268" {% if CallCenter.car_info == '34EZP268' %} selected {%endif%} value="34SAS30">34 SAS 30</option>
-                                        <option id="06CHZ142"  {% if CallCenter.car_info == '06CHZ142' %}selected  {%endif%} value="34BF2904">34 BF 2904</option>
-                                        <option id="06CHZ146" {% if CallCenter.car_info == '06CHZ146' %} selected {%endif%} value="34RE1140">34 RE 1140</option>
-                                        <option id="06CHZ149" {% if CallCenter.car_info == '06CHZ149' %} selected {%endif%} value="34BF9529">34 BF 9529</option>
+                                        <option id="34EZP267" {% if CallCenter.car_info == '34EZP267' %} selected  {%endif%} value="34EZP267">34 EZP 267</option>
+                                        <option id="34EZP268" {% if CallCenter.car_info == '34EZP268' %} selected {%endif%} value="34EZP268">34 EZP 268</option>
+                                        <option id="06CHZ142"  {% if CallCenter.car_info == '06CHZ142' %}selected  {%endif%} value="06CHZ142">06 CHZ 142</option>
+                                        <option id="06CHZ146" {% if CallCenter.car_info == '06CHZ146' %} selected {%endif%} value="06CHZ146">06 CHZ 146</option>
+                                        <option id="06CHZ149" {% if CallCenter.car_info == '06CHZ149' %} selected {%endif%} value="06CHZ149">06 CHZ 149</option>
+                                        <option id="34FTU336" {% if CallCenter.car_info == '34FTU336' %} selected {%endif%} value="34FTU336">34 FTU 336</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col">
@@ -102,6 +104,10 @@
                                     <div>
                                         <input class="form-check-input" type="radio" id="case_yes" name="case_yes" {% if CallCenter.case_yes == 'evet' %} checked {%endif%} value="evet">
                                         <label for="case_yes" class="form-label">Evet</label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input" type="radio" id="case_no" name="case_yes" {% if CallCenter.case_yes == 'hayır' %} checked {%endif%} value="hayır">
+                                        <label for="case_yes" class="form-label">Hayır</label>
                                     </div>
                                 </div>
                                 <div class="mb-3 col">

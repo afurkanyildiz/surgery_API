@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 # from jsignature.fields import JSignatureField
 
@@ -96,7 +97,7 @@ class AmbulanceCase(models.Model):
     doctor_username_datetime = models.DateTimeField(auto_now_add=True,null=True,blank=True)
     personal_username_datetime = models.DateTimeField(auto_now_add=True,null=True,blank=True)
     pilot_username_datetime = models.DateTimeField(auto_now_add=True,null=True,blank=True)
-    # barcode_image = models.ImageField(null=True,blank=True,upload_to="images/")
+    barkod = models.FileField(null=True,blank=True,upload_to="templates/barkod")
     doctor_username1 = models.CharField(max_length=200,blank=True,null=True)
     institution_information = models.CharField(max_length=200,blank=True,null=True)
     patient_rejection = models.CharField(max_length=200,blank=True,null=True)
@@ -106,6 +107,7 @@ class AmbulanceCase(models.Model):
     skintxt = models.CharField(max_length=200,blank=True,null=True)
     respiratorytxt = models.CharField(max_length=200,blank=True,null=True)
     pulsetxt = models.CharField(max_length=200,blank=True,null=True)
+    
 
     # get_sig_time = models.TimeField(auto_now_add=True,null=True,blank=True)
 

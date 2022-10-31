@@ -281,12 +281,13 @@
 <main>
     <div class="container-fluid px-4">
         <div class="row justify-content-center">
+            <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
             <div class="col-lg-12">
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h4 class="text-center font-weight-light my-4">Ambulans Vaka Formu Duzenle</h4>
                     <h6 class="text-center font-weight-light my-4">(Doldurulduğunda Hastaya Özeldir)</h6></div>
                     <div class="card-body">
-                        <form action="{% url 'updateAmbulanceCaseForm' AmbulanceCase.id%}" method="POST">
+                        <form action="{% url 'updateAmbulanceCaseForm' AmbulanceCase.id%}" method="POST" enctype="multipart/form-data">
                             {% csrf_token%}
                             <div class="row">
                                 <div class="mb-3 col">
@@ -1023,7 +1024,7 @@
                                         <label for="transfer8" class="form-label">Uluslar Arası Nakil</label>
                                     </div>
                                     <div >                                       
-                                        <input class="transfer"type="checkbox" id="transfer9" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer9' %} checked {%endif%}{%endfor%} value="İlçe Dışı Transporta">
+                                        <input class="transfer"type="checkbox" id="transfer9" name="transfer" {% for case in AmbulanceCase.Casetransfer %}{% if case == 'transfer9' %} checked {%endif%}{%endfor%} value="İlçe Dışı Transport">
                                         <label for="transfer9" class="form-label">İlçe Dışı Transport</label>
                                     </div>
                                     <div >                                       
@@ -1269,11 +1270,12 @@
                                     <div></div>
                                     <select name="car_info" id="car_info" class="form-select" aria-label="Default select example">
                                         <option >Lütfen Araç Seçiniz</option>
-                                        <option id="34EZP267" {% if AmbulanceCase.car_info == '34EZP267' %} selected  {%endif%} value="34SAS20">34 SAS 20</option>
-                                        <option id="34EZP268" {% if AmbulanceCase.car_info == '34EZP268' %} selected {%endif%} value="34SAS30">34 SAS 30</option>
-                                        <option id="06CHZ142"  {% if AmbulanceCase.car_info == '06CHZ142' %}selected  {%endif%} value="34BF2904">34 BF 2904</option>
-                                        <option id="06CHZ146" {% if AmbulanceCase.car_info == '06CHZ146' %} selected {%endif%} value="34RE1140">34 RE 1140</option>
-                                        <option id="06CHZ149" {% if AmbulanceCase.car_info == '06CHZ149' %} selected {%endif%} value="34BF9529">34 BF 9529</option>
+                                        <option id="34EZP267" {% if AmbulanceCase.car_info == '34EZP267' %} selected  {%endif%} value="34EZP267">34 EZP 267</option>
+                                        <option id="34EZP268" {% if AmbulanceCase.car_info == '34EZP268' %} selected {%endif%} value="34EZP268">34 EZP 268</option>
+                                        <option id="06CHZ142"  {% if AmbulanceCase.car_info == '06CHZ142' %}selected  {%endif%} value="06CHZ142">06 CHZ 142</option>
+                                        <option id="06CHZ146" {% if AmbulanceCase.car_info == '06CHZ146' %} selected {%endif%} value="06CHZ146">06 CHZ 146</option>
+                                        <option id="06CHZ149" {% if AmbulanceCase.car_info == '06CHZ149' %} selected {%endif%} value="06CHZ149">06 CHZ 149</option>
+                                        <option id="34FTU336" {% if AmbulanceCase.car_info == '34FTU336' %} selected {%endif%} value="34FTU336">34 FTU 336</option>
                                     </select>
                                 </div>
                                 <div class="mb-3 col">
@@ -1297,6 +1299,12 @@
                                         <input class="form-check-input" type="radio" id="no" name="round_trip" {% if AmbulanceCase.round_trip == 'no' %} checked {%endif%}  value="{{AmbulanceCase.round_trip}}" group="round_trip">
                                         <label for="no" class="form-label">Hayır</label>
                                     </div> 
+                                    <h6>*Bu Alanın Girilmesi Zorunludur.</h6>
+                                    <!-- <label for="barkod" class="form-label">BARKOD:</label>
+                                    <input type="file" id="barkod" name="barkod">
+
+                                    <input type="text" id="barkod_url" name="barkod_url" value="{{AmbulanceCase.barkod}}" > -->
+
                                 </div>
                                 <div class="mb-3 col">   
                                     <label for="protocol_number" class="form-label">112 PROTOKOL NUMARASI</label>
@@ -1314,7 +1322,9 @@
                                 </br> 
                                     <button type="submit" class="bi bi-save btn btn-outline-success"> Kaydet</button>
                                     &nbsp;
-                                    <button type="button" onclick="updateAmbulanceCasePdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>    
+                                    
+                                    <button type="button" onclick="updateAmbulanceCasePdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                    
                                     &nbsp;
                                     <button type="button" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
                                     &nbsp;
