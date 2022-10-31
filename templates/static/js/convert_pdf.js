@@ -8183,12 +8183,12 @@ function updateAmbulanceCasePdf(){
     // doc.text(delivery_area_username_datetime,42,294);
 
 
-    // doc.setFontSize(10);
-    // doc.text("VAKAYI VEREN KURUM BİLGİSİ:",83,273);
-    // // var institution_information = document.getElementById("institution_information").value;
+    doc.setFontSize(10);
+    doc.text("VAKAYI VEREN KURUM BİLGİSİ:",83,273);
     // var institution_information = document.getElementById("institution_information").value;
-    // textlines = doc.setFontSize(8).splitTextToSize(institution_information,67);
-    // doc.text(textlines,77,277);
+    var institution_information = document.getElementById("institution_information").value;
+    textlines = doc.setFontSize(8).splitTextToSize(institution_information,70);
+    doc.text(textlines,77,277);
 
     // const barkod = document.getElementById("barkod_url");
     // const barkodFile = barkod.files[0];
