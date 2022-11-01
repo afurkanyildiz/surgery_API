@@ -296,7 +296,7 @@
                                 </div> 
                                 <div class="mb-3 col">
                                     <label for="atn_no" class="form-label">ATN No:</label>
-                                    <input type="text" class="form-control" id="atn_no" name="atn_no" value="67 B 204617 ">
+                                    <input type="text" class="form-control" id="atn_no" name="atn_no" value="{{AmbulanceCase.atn_no}}">
                                     
                                     <label for="sas_protokol" class="form-label">HEALMEDY PROTOKOL</label>
                                     <input type="text" class="form-control" id="sas_protokol" name="sas_protokol" value="{{AmbulanceCase.sas_protokol}}">
@@ -404,7 +404,7 @@
                                         <input class="isolation_status"type="checkbox" id="temas_izolasyonu" name="isolationStatus" {% for case in AmbulanceCase.isolationStatus %}{% if case == 'temas_izolasyonu' %} checked {%endif%}{%endfor%} value="temas_izolasyonu">
                                         <label for="temas_izolasyonu" class="form-label">Temas Izolasyonu</label>
                                     </div>
-                                    <input id="txt" type="text" name="isolationStatus"value="{%for case in AmbulanceCase.isolationStatus%}{{case}},{%endfor%}" style="display: none;" readonly>
+                                    <input id="txt" type="text" name="isolationStatus"value="{%for case in AmbulanceCase.isolationStatus%}{{case}},{%endfor%}" readonly>
                                 </div>
                             </div>
                             <div class="row">

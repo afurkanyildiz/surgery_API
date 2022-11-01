@@ -278,6 +278,7 @@ function ambulanceCasePdf(){
     // var checkBox = new jspdf.AcroFormCheckBox();
     var isolationStatus = document.getElementById("txt").value;
     var splitTxt = isolationStatus.split(",");
+    console.log(splitTxt);
     // let hasText = false;
     for (let i = 0; i < splitTxt.length; i++){
 
@@ -4928,6 +4929,7 @@ function updateAmbulanceCasePdf(){
     // var checkBox = new jspdf.AcroFormCheckBox();
     var isolationStatus = document.getElementById("txt").value;
     var splitTxt = isolationStatus.split(",");
+    console.log(splitTxt);
     // let hasText = false;
     for (let i = 0; i < splitTxt.length; i++){
 

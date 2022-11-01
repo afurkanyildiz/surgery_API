@@ -107,7 +107,7 @@ class AmbulanceCase(models.Model):
     skintxt = models.CharField(max_length=200,blank=True,null=True)
     respiratorytxt = models.CharField(max_length=200,blank=True,null=True)
     pulsetxt = models.CharField(max_length=200,blank=True,null=True)
-    
+    atn_no = models.CharField(max_length=200,blank=True,null=True)
 
     # get_sig_time = models.TimeField(auto_now_add=True,null=True,blank=True)
 

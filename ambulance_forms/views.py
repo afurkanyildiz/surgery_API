@@ -116,6 +116,7 @@ def ambulance_case_form(request):
         ambulanceCase.skintxt = request.POST.get('skintxt')
         ambulanceCase.respiratorytxt = request.POST.get('respiratorytxt')
         ambulanceCase.pulsetxt = request.POST.get('pulsetxt')
+        ambulanceCase.atn_no = request.POST.get('atn_no')
         if len(request.FILES) != 0:           
             ambulanceCase.barkod = request.FILES['barkod']
   
