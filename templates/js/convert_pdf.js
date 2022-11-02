@@ -4165,7 +4165,7 @@ function callCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Hastanın İlk Bırakıldığı Yer  :",5,222)
-    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped_out").value;
+    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped").value;
     doc.setFontSize(9);
     doc.text(where_patient_first_dropped,65,222)
 
@@ -8596,7 +8596,7 @@ function updateCallCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Hastanın İlk Bırakıldığı Yer  :",5,222)
-    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped_out").value;
+    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped").value;
     doc.setFontSize(9);
     doc.text(where_patient_first_dropped,65,222)
 

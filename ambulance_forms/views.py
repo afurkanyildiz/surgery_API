@@ -502,7 +502,7 @@ def call_center_form(request):
         callCenter.time_out_hospital = request.POST.get('time_out_hospital')
         callCenter.point_return_time = request.POST.get('point_return_time')
         callCenter.patient_taken_place = request.POST.get('patient_taken_place')
-        callCenter.where_patient_first_dropped_out = request.POST.get('where_patient_first_dropped_out')
+        callCenter.where_patient_first_dropped = request.POST.get('where_patient_first_dropped')
         callCenter.patient_last_off_place = request.POST.get('patient_last_off_place')
         callCenter.ambulance = request.POST.get('ambulance')
         callCenter.assurance = request.POST.get('assurance')
@@ -515,6 +515,8 @@ def call_center_form(request):
         callCenter.confirmation_code = request.POST.get('confirmation_code')
         callCenter.fee = request.POST.get('fee')
         callCenter.call_domain_username = request.POST.get('call_domain_username')
+        callCenter.patient_tel_no = request.POST.get('patient_tel_no')
+        callCenter.explanation = request.POST.get('explanation')
 
         callCenter.save()
         return redirect('/forms/call_center_tables')

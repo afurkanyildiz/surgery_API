@@ -53,6 +53,10 @@
                                         <input class="form-check-input" type="radio" id="female" name="gender" {% if CallCenter.gender == 'kadın' %} checked {%endif%} value="kadın">
                                         <label for="female" class="form-label">Kadın</label>
                                     </div>
+
+                                    <label for="patient_tel_no" class="form-label">HASTANIN TELEFON NUMARASI</label>
+                                    <input type="tel" class="form-control" id="patient_tel_no" name="patient_tel_no" value="{{CallCenter.patient_tel_no}}" data-component="phone" inputmode="text" maskvalue="(###) ###-####">
+                                    <label class="form-sub-label" style="min-height: 13px;" for="caller_tel_no_sub">Lütfen geçerli bir telefon numarası girin.</label>
                                 </div>
                             </div>
                             <div class="row">     
@@ -196,7 +200,7 @@
                                     <input type="text" class="form-control" name="patient_taken_place" id="patient_taken_place" value="{{CallCenter.patient_taken_place}}">
 
                                     <label for="where_patient_first_dropped out" class="form-label">HASTANIN İLK BIRAKILDIĞI YER</label>
-                                    <input type="text" class="form-control" name="where_patient_first_dropped" id="where_patient_first_dropped_out" value="{{CallCenter.where_patient_first_dropped_out}}">
+                                    <input type="text" class="form-control" name="where_patient_first_dropped" id="where_patient_first_dropped" value="{{CallCenter.where_patient_first_dropped}}">
                                 </div>
                                 <div class="mb-3 col">
                                     <label for="patient_last_off_place" class="form-label">HASTANIN SON BIRAKILDIĞI YER</label>
@@ -226,6 +230,14 @@
                                         <label for="contracted_institution_no" class="form-label">Hayır</label>
                                     </div>
                                 </div>
+                                <div class="mb-3 col">
+                                    <label for="confirmation_code" class="form-label">K.K ONAY KODU</label>
+                                    <input type="text" class="form-control" name="confirmation_code" id="confirmation_code" value="{{CallCenter.confirmation_code}}">
+
+                                    <label for="call_domain_username" class="form-label">ÇAĞRIYI ALAN ADI SOYADI</label>
+                                    <input type="text" class="form-control" name="call_domain_username" id="call_domain_username" value="{{CallCenter.call_domain_username}}">
+
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">
@@ -238,11 +250,9 @@
 
                                 </div>
                                 <div class="mb-3 col">
-                                    <label for="confirmation_code" class="form-label">K.K ONAY KODU</label>
-                                    <input type="text" class="form-control" name="confirmation_code" id="confirmation_code" value="{{CallCenter.confirmation_code}}">
-
-                                    <label for="call_domain_username" class="form-label">ÇAĞRIYI ALAN ADI SOYADI</label>
-                                    <input type="text" class="form-control" name="call_domain_username" id="call_domain_username" value="{{CallCenter.call_domain_username}}">
+                                    
+                                    <label for="explanation" class="form-label">AÇIKLAMA</label>
+                                    <textarea type="text" class="form-control" id="explanation" name="explanation" style="height: 100px">{{CallCenter.explanation}}</textarea>
 
                                     </br> 
                                     <button type="submit" class="bi bi-save btn btn-outline-success"> Kaydet</button>

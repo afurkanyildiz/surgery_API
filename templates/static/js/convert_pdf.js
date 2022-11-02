@@ -3997,9 +3997,9 @@ function callCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Telefon:",5,113)
-    // var casedate = document.getElementById("casedate").value;
-    // doc.setFontSize(9);
-    // doc.text(casedate,180,4).value
+    var casedate = document.getElementById("patient_tel_no").value;
+    doc.setFontSize(9);
+    doc.text(casedate,25,113).value
 
     doc.setFontSize(10);
     doc.text("Adres Tarifi:",5,120)
@@ -4222,7 +4222,7 @@ function callCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Hastanın İlk Bırakıldığı Yer  :",5,222)
-    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped_out").value;
+    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped").value;
     doc.setFontSize(9);
     doc.text(where_patient_first_dropped,65,222)
 
@@ -4293,9 +4293,9 @@ function callCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Açıklama",102,254)
-    // var casedate = document.getElementById("casedate").value;
-    // doc.setFontSize(9);
-    // doc.text(casedate,180,4).value
+    var casedate = document.getElementById("explanation").value;
+    textlines3 = doc.setFontSize(8).splitTextToSize(casedate,90);
+    doc.text(textlines3,104,258)
 
     doc.setFontSize(10);
     doc.text("Çağrıyı Alan Adı Soyadı:",5,275)
@@ -8499,9 +8499,9 @@ function updateCallCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Telefon:",5,113)
-    // var casedate = document.getElementById("casedate").value;
-    // doc.setFontSize(9);
-    // doc.text(casedate,180,4).value
+    var casedate = document.getElementById("patient_tel_no").value;
+    doc.setFontSize(9);
+    doc.text(casedate,25,113).value
 
     doc.setFontSize(10);
     doc.text("Adres Tarifi:",5,120)
@@ -8724,7 +8724,7 @@ function updateCallCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Hastanın İlk Bırakıldığı Yer  :",5,222)
-    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped_out").value;
+    var where_patient_first_dropped = document.getElementById("where_patient_first_dropped").value;
     doc.setFontSize(9);
     doc.text(where_patient_first_dropped,65,222)
 
@@ -8795,9 +8795,9 @@ function updateCallCenterPdf(){
 
     doc.setFontSize(10);
     doc.text("Açıklama",102,254)
-    // var casedate = document.getElementById("casedate").value;
-    // doc.setFontSize(9);
-    // doc.text(casedate,180,4).value
+    var casedate = document.getElementById("explanation").value;
+    textlines3 = doc.setFontSize(8).splitTextToSize(casedate,90);
+    doc.text(textlines3,104,258)
 
     doc.setFontSize(10);
     doc.text("Çağrıyı Alan Adı Soyadı:",5,275)

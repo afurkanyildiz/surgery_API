@@ -337,7 +337,7 @@ class CallCenter(models.Model):
     time_out_hospital = models.CharField(max_length=200,blank=True,null=True)
     point_return_time = models.CharField(max_length=200,blank=True,null=True)
     patient_taken_place = models.CharField(max_length=200,blank=True,null=True)
-    where_patient_first_dropped_out = models.CharField(max_length=200,blank=True,null=True)
+    where_patient_first_dropped = models.CharField(max_length=200,blank=True,null=True)
     patient_last_off_place = models.CharField(max_length=200,blank=True,null=True)
     ambulance = models.CharField(max_length=200,blank=True,null=True)
     assurance = models.CharField(max_length=200,blank=True,null=True)
@@ -350,6 +350,8 @@ class CallCenter(models.Model):
     confirmation_code = models.CharField(max_length=200,blank=True,null=True)
     fee = models.CharField(max_length=200,blank=True,null=True)
     call_domain_username = models.CharField(max_length=200, blank=True,null=True)
+    patient_tel_no = models.CharField(max_length=200,blank=True,null=True)
+    explanation = models.CharField(max_length=200,blank=True,null=True)
 
     def __str__(self):
         return self.institution_name
