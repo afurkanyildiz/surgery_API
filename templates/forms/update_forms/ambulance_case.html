@@ -404,7 +404,7 @@
                                         <input class="isolation_status"type="checkbox" id="temas_izolasyonu" name="isolationStatus" {% for case in AmbulanceCase.isolationStatus %}{% if case == 'temas_izolasyonu' %} checked {%endif%}{%endfor%} value="temas_izolasyonu">
                                         <label for="temas_izolasyonu" class="form-label">Temas Izolasyonu</label>
                                     </div>
-                                    <input id="txt" type="text" name="isolationStatus"value="{%for case in AmbulanceCase.isolationStatus%}{{case}},{%endfor%}" readonly>
+                                    <input id="txt" type="text" name="isolationStatus"value="{%for case in AmbulanceCase.isolationStatus%}{{case}},{%endfor%}" style="display: none;" readonly>
                                 </div>
                             </div>
                             <div class="row">
