@@ -58,22 +58,22 @@ function registrationFormPdf(){
 
 
     doc.setFontSize(17);
-    doc.text("Müdahale:",45,130);  
+    doc.text("Müdahale:",45,155);  
     var intervention = document.getElementById("record_intervention").value;
     textlines = doc.setFontSize(15).splitTextToSize(intervention,120);
-    doc.text(textlines,80,130);
-
-    doc.setFontSize(17);
-    doc.text("İlaçlar:",45,155);
-    var medications = document.getElementById("record_medications").value;
-    textlines = doc.setFontSize(15).splitTextToSize(medications,120);
     doc.text(textlines,80,155);
 
     doc.setFontSize(17);
-    doc.text("Sonuç:",45,185);
+    doc.text("İlaçlar:",45,195);
+    var medications = document.getElementById("record_medications").value;
+    textlines = doc.setFontSize(15).splitTextToSize(medications,120);
+    doc.text(textlines,80,195);
+
+    doc.setFontSize(17);
+    doc.text("Sonuç:",45,240);
     var cocnlusion = document.getElementById("record_conclusion").value;
     textlines = doc.setFontSize(15).splitTextToSize(cocnlusion,120);
-    doc.text(textlines,75,185);
+    doc.text(textlines,75,240);
     
     doc.output('pdfobjectnewwindow');
 }
@@ -4721,22 +4721,22 @@ function updateregistrationFormPdf(){
 
 
     doc.setFontSize(17);
-    doc.text("Müdahale:",45,130);  
+    doc.text("Müdahale:",45,155);  
     var intervention = document.getElementById("record_intervention").value;
     textlines = doc.setFontSize(15).splitTextToSize(intervention,120);
-    doc.text(textlines,80,130);
-
-    doc.setFontSize(17);
-    doc.text("İlaçlar:",45,155);
-    var medications = document.getElementById("record_medications").value;
-    textlines = doc.setFontSize(15).splitTextToSize(medications,120);
     doc.text(textlines,80,155);
 
     doc.setFontSize(17);
-    doc.text("Sonuç:",45,185);
+    doc.text("İlaçlar:",45,195);
+    var medications = document.getElementById("record_medications").value;
+    textlines = doc.setFontSize(15).splitTextToSize(medications,120);
+    doc.text(textlines,80,195);
+
+    doc.setFontSize(17);
+    doc.text("Sonuç:",45,240);
     var cocnlusion = document.getElementById("record_conclusion").value;
     textlines = doc.setFontSize(15).splitTextToSize(cocnlusion,120);
-    doc.text(textlines,75,185);
+    doc.text(textlines,75,240);
     
     
     doc.output('pdfobjectnewwindow');
