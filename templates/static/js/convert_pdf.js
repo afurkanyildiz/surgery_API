@@ -6,104 +6,243 @@ function registrationFormPdf(){
     // var img = new Image();
     doc.setFont("OpenSans-Medium");
 
-    doc.setFontSize(30);
-    doc.text("FİLYOS SAĞLIK MERKEZİ",65,15);
+    doc.setFontSize(19);
+    doc.text("FİLYOS SAĞLIK MERKEZİ",65,7);
 
     // img.src="/root/hasta_kayit/surgery_API-main/templates/static/images/filyos-logo.jpeg";
     // doc.addImage(img.src,"JPEG",40,15,60,60);
 
-    doc.setFontSize(20);
-    doc.text("Kayıt Ekleme Formu",82,30);
+    doc.setFontSize(14);
+    doc.text("Kayıt Ekleme Formu",82,11);
 
-    doc.setFontSize(17);
-    doc.text("İsim Soyisim:",45,55);
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,12,200,110)
+
+    // ================================================   
+    doc.setLineWidth(0.1);
+    doc.line(45, 12, 45, 28);
+
+    doc.setLineWidth(0.1);
+    doc.line(115, 12, 115, 28);
+
+    doc.setLineWidth(0.1);
+    doc.line(155, 12, 155, 28);
+
+    doc.line(5,16,205,16)
+    doc.line(5,20,205,20)
+    doc.line(5,24,205,24)
+    doc.line(5,28,205,28)
+
+    doc.setFontSize(9);
+    doc.text("Adı Soyadı:",6,15);
     var username = document.getElementById("record_username").value;
-    doc.setFontSize(15);
-    doc.text(username,85,55);
+    doc.setFontSize(9);
+    doc.text(username,46,15).value;
+
+    doc.setFontSize(9);
+    doc.text("T.C Kimlik No:",6,19);
+    var record_tc_no = document.getElementById("record_tc_no").value;
+    doc.setFontSize(9);
+    doc.text(record_tc_no,46,19).value;
+
+    doc.setFontSize(9);
+    doc.text("Kurum:",6,23);
+    var record_kurum = document.getElementById("record_kurum").value;
+    doc.setFontSize(9);
+    doc.text(record_kurum,46,23).value;
+
+    doc.setFontSize(9);
+    doc.text("Telefon Numarası:",6,27);
+    var record_tel = document.getElementById("record_tel").value;
+    doc.setFontSize(9);
+    doc.text(record_tel,46,27).value;
+
+    doc.setFontSize(9);
+    doc.text("Kayıt Tarihi:",116,15);
+    var record_date = document.getElementById("record_date").value;
+    doc.setFontSize(9);
+    doc.text(record_date,156,15).value;
+
+    doc.setFontSize(9);
+    doc.text("Kayıt Saati:",116,19);
+    var records_hour = document.getElementById("records_hour").value;
+    doc.setFontSize(9);
+    doc.text(records_hour,156,19).value;
+
+    doc.setFontSize(9);
+    doc.text("Doktor:",116,23); 
+    var record_doctor = document.getElementById("record_doctor").value;
+    doc.setFontSize(9);
+    doc.text(record_doctor,156,23).value;
 
 
-    doc.setFontSize(17);
-    doc.text("Telefon Numarası:",45,65);
-    var tel = document.getElementById("record_tel").value;
-    doc.setFontSize(15);
-    doc.text(tel,100,65);
+    doc.setFontSize(9);
+    doc.text("Adresi:",6,33);
+    var record_adress = document.getElementById("record_adress").value;
+    doc.setFontSize(9);
+    doc.text(record_adress,20,33).value;
+// ================================================
+    doc.setLineWidth(0.1);
+    doc.line(52, 46, 52, 71);
+
+    doc.setLineWidth(0.1);
+    doc.line(64, 46, 64, 71);
+
+    doc.line(5,42,205,42)
+
+    doc.line(40,46,75,46)
+    doc.line(5,51,75,51)
+    doc.line(5,55,75,55)
+    doc.line(5,59,75,59)
+    doc.line(5,63,75,63)
+    doc.line(5,67,75,67)
+    doc.line(5,71,205,71)
 
 
-    doc.setFontSize(17);
-    doc.text("Kayıt Tarihi:",45,75);
-    var date = document.getElementById("record_date").value;
-    doc.setFontSize(15);
-    doc.text(date,80,75);
+    doc.line(5,100,205,100)
 
 
-    doc.setFontSize(17);
-    doc.text("Tc Kimlik Numarası:",45,85);
-    var no = document.getElementById("record_tc_no").value;
-    doc.setFontSize(15);
-    doc.text(no,105,85);
+    // ================================================
+    doc.setLineWidth(0.1);
+    doc.line(40, 42, 40, 71);
 
-    doc.setFontSize(17);
-    doc.text("Adres:",45,95);
-    var adress = document.getElementById("record_adress").value;
-    textlines = doc.setFontSize(15).splitTextToSize(adress, 120);
-    doc.text(75,95,textlines);
+    doc.setLineWidth(0.1);
+    doc.line(75, 42, 75, 71);
 
+    doc.setLineWidth(0.1);
+    doc.line(100, 71, 100, 100);
 
-
-    doc.setFontSize(17);
-    doc.text("Tanı:",45,110);
-    var diagnosis = document.getElementById("record_diagnosis").value;
-    textlines= doc.setFontSize(15).splitTextToSize(diagnosis,120);
-    doc.text(textlines,75,110);
+// ====================================
 
 
-    doc.setFontSize(17);
-    doc.text("Müdahale:",45,155);  
-    var intervention = document.getElementById("record_intervention").value;
-    textlines = doc.setFontSize(15).splitTextToSize(intervention,120);
-    doc.text(textlines,80,155);
+    doc.setFontSize(10);
+    doc.text("VİTAL BULGULAR",10,47);
 
-    doc.setFontSize(17);
-    doc.text("İlaçlar:",45,195);
-    var medications = document.getElementById("record_medications").value;
-    textlines = doc.setFontSize(15).splitTextToSize(medications,120);
-    doc.text(textlines,80,195);
+    doc.setFontSize(7);
+    doc.text("ÖLÇÜ ZAMANI",52,45);
 
-    doc.setFontSize(17);
-    doc.text("Sonuç:",45,240);
-    var cocnlusion = document.getElementById("record_conclusion").value;
-    textlines = doc.setFontSize(15).splitTextToSize(cocnlusion,120);
-    doc.text(textlines,75,240);
+    var record_one_measurement = document.getElementById("record_one_measurement").value;
+    doc.setFontSize(9);
+    doc.text(record_one_measurement,42,50).value;
+
+    var record_second_measurement = document.getElementById("record_second_measurement").value;
+    doc.setFontSize(9);
+    doc.text(record_second_measurement,53,50).value;
+
+    var record_third_measurement = document.getElementById("record_third_measurement").value;
+    doc.setFontSize(9);
+    doc.text(record_third_measurement,65,50).value;
+
+    doc.setFontSize(9);
+    doc.text("Tansiyon",6,54);
+
+    var record_one_blood_pressure = document.getElementById("record_one_blood_pressure").value;
+    doc.setFontSize(9);
+    doc.text(record_one_blood_pressure,42,54).value;
+
+    var record_second_blood_pressure = document.getElementById("record_second_blood_pressure").value;
+    doc.setFontSize(9);
+    doc.text(record_second_blood_pressure,53,54).value;
+
+    var record_third_blood_pressure = document.getElementById("record_third_blood_pressure").value;
+    doc.setFontSize(9);
+    doc.text(record_third_blood_pressure,65,54).value;
+
+    doc.setFontSize(9);
+    doc.text("Nabız",6,58);
+
+    var record_one_pulse = document.getElementById("record_one_pulse").value;
+    doc.setFontSize(9);
+    doc.text(record_one_pulse,42,58).value;
+
+    var record_second_pulse = document.getElementById("record_second_pulse").value;
+    doc.setFontSize(9);
+    doc.text(record_second_pulse,53,58).value;
+
+    var record_third_pulse = document.getElementById("record_third_pulse").value;
+    doc.setFontSize(9);
+    doc.text(record_third_pulse,65,58).value;
+    
+    doc.setFontSize(9);
+    doc.text("SpO2",6,62);
+
+    var record_one_spo2 = document.getElementById("record_one_spo2").value;
+    doc.setFontSize(9);
+    doc.text(record_one_spo2,42,62).value;
+
+    var record_second_spo2 = document.getElementById("record_second_spo2").value;
+    doc.setFontSize(9);
+    doc.text(record_second_spo2,53,62).value;
+
+    var record_third_spo2 = document.getElementById("record_third_spo2").value;
+    doc.setFontSize(9);
+    doc.text(record_third_spo2,65,62).value;
+
+    doc.setFontSize(9);
+    doc.text("Solunum/dk",6,66);
+
+    var record_one_respirations_min = document.getElementById("record_one_respirations_min").value;
+    doc.setFontSize(9);
+    doc.text(record_one_respirations_min,42,66).value;
+
+    var record_second_respirations_min = document.getElementById("record_second_respirations_min").value;
+    doc.setFontSize(9);
+    doc.text(record_second_respirations_min,53,66).value;
+
+    var record_third_respirations_min = document.getElementById("record_third_respirations_min").value;
+    doc.setFontSize(9);
+    doc.text(record_third_respirations_min,65,66).value;
+
+    doc.setFontSize(9);
+    doc.text("Ateş",6,70);
+
+    var record_one_fire = document.getElementById("record_one_fire").value;
+    doc.setFontSize(9);
+    doc.text(record_one_fire,42,70).value;
+
+    var record_second_fire = document.getElementById("record_second_fire").value;
+    doc.setFontSize(9);
+    doc.text(record_second_fire,53,70).value;
+
+    var record_third_fire = document.getElementById("record_third_fire").value;
+    doc.setFontSize(9);
+    doc.text(record_third_fire,65,70).value;
+
+    doc.setFontSize(9);
+    doc.text("Tanı:",78,47);
+    var record_diagnosis = document.getElementById("record_diagnosis").value;
+    doc.setFontSize(9);
+    doc.text(record_diagnosis,89,47).value;
+
+    doc.setFontSize(9);
+    doc.text("Müdahale:",6,77);
+    var record_intervention = document.getElementById("record_intervention").value;
+    doc.setFontSize(9);
+    doc.text(record_intervention,24,77).value;
+
+    doc.setFontSize(9);
+    doc.text("İlaçlar:",101,77);
+    var record_medications = document.getElementById("record_medications").value;
+    doc.setFontSize(9);
+    doc.text(record_medications,113,77).value;
+
+    doc.setFontSize(9);
+    doc.text("Sonuç:",6,104);
+    var record_conclusion = document.getElementById("record_conclusion").value;
+    doc.setFontSize(9);
+    doc.text(record_conclusion,18,104).value;
+
     
     doc.output('pdfobjectnewwindow');
 }
-// function resizeBase64Img(base64,width,height){
-//     var canvas = document.createElement("canvas");
-//     canvas.width = width;
-//     canvas.height = height;
-//     var context = canvas.getContext("2d");
-//     var deferred = $.Deferred();
-//     $("<img/>").attr("src", base64).load(function(){
-//         context.scale(width/this.width, height/this.height);
-//         context.drawImage(this,0,0);
-//         deferred.resolve($("<img/>").attr("src", canvas.toDataURL()));
-//     });
-//     return deferred.promise();
-// }
 
 function ambulanceCasePdf(){
     const {jsPDF} = window.jspdf;
 
     var doc = new jsPDF(true);
-    // var {CheckBox} = jsPDF.AcroForm;
     doc.setFont("OpenSans-Medium");
-    
-    //doc.setFont("SourceSansPro-Regular");
-    // doc.setFont("Roboto-Light");
-
-
-    // doc.setFontSize(12);
-    // doc.text("FİLYOS SAĞLIK MERKEZİ",90,10);
 
     doc.setFontSize(12);
     doc.text("AMBULANS VAKA FORMU",90,5);
@@ -502,7 +641,7 @@ function ambulanceCasePdf(){
     doc.setFontSize(9);
     doc.text(fire_2,53,102).value;
 
-    var fire_3 = document.getElementById("2_fire").value;
+    var fire_3 = document.getElementById("3_fire").value;
     doc.setFontSize(9);
     doc.text(fire_3,65,102).value;
 
@@ -4661,83 +4800,235 @@ function updateregistrationFormPdf(){
     var doc = new jsPDF();
     // var img = new Image();
     doc.setFont("OpenSans-Medium");
-    doc.setFontSize(30);
-    doc.text("FİLYOS SAĞLIK MERKEZİ",65,15);
+
+    doc.setFontSize(19);
+    doc.text("FİLYOS SAĞLIK MERKEZİ",65,7);
 
     // img.src="/root/hasta_kayit/surgery_API-main/templates/static/images/filyos-logo.jpeg";
     // doc.addImage(img.src,"JPEG",40,15,60,60);
 
-    doc.setFontSize(20);
-    doc.text("Kayıt Ekleme Formu",82,30);
+    doc.setFontSize(14);
+    doc.text("Kayıt Ekleme Formu",82,11);
 
-    doc.setFontSize(17);
-    doc.text("İsim Soyisim:",45,55);
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,12,200,110)
+
+    // ================================================   
+    doc.setLineWidth(0.1);
+    doc.line(45, 12, 45, 28);
+
+    doc.setLineWidth(0.1);
+    doc.line(115, 12, 115, 28);
+
+    doc.setLineWidth(0.1);
+    doc.line(155, 12, 155, 28);
+
+    doc.line(5,16,205,16)
+    doc.line(5,20,205,20)
+    doc.line(5,24,205,24)
+    doc.line(5,28,205,28)
+
+    doc.setFontSize(9);
+    doc.text("Adı Soyadı:",6,15);
     var username = document.getElementById("record_username").value;
-    doc.setFontSize(15);
-    doc.text(username,85,55);
+    doc.setFontSize(9);
+    doc.text(username,46,15).value;
+
+    doc.setFontSize(9);
+    doc.text("T.C Kimlik No:",6,19);
+    var record_tc_no = document.getElementById("record_tc_no").value;
+    doc.setFontSize(9);
+    doc.text(record_tc_no,46,19).value;
+
+    doc.setFontSize(9);
+    doc.text("Kurum:",6,23);
+    var record_kurum = document.getElementById("record_kurum").value;
+    doc.setFontSize(9);
+    doc.text(record_kurum,46,23).value;
+
+    doc.setFontSize(9);
+    doc.text("Telefon Numarası:",6,27);
+    var record_tel = document.getElementById("record_tel").value;
+    doc.setFontSize(9);
+    doc.text(record_tel,46,27).value;
+
+    doc.setFontSize(9);
+    doc.text("Kayıt Tarihi:",116,15);
+    var record_date = document.getElementById("record_date").value;
+    doc.setFontSize(9);
+    doc.text(record_date,156,15).value;
+
+    doc.setFontSize(9);
+    doc.text("Kayıt Saati:",116,19);
+    var records_hour = document.getElementById("records_hour").value;
+    doc.setFontSize(9);
+    doc.text(records_hour,156,19).value;
+
+    doc.setFontSize(9);
+    doc.text("Doktor:",116,23); 
+    var record_doctor = document.getElementById("record_doctor").value;
+    doc.setFontSize(9);
+    doc.text(record_doctor,156,23).value;
 
 
-    doc.setFontSize(17);
-    doc.text("Telefon Numarası:",45,65);
-    var tel = document.getElementById("record_tel").value;
-    doc.setFontSize(15);
-    doc.text(tel,100,65);
+    doc.setFontSize(9);
+    doc.text("Adresi:",6,33);
+    var record_adress = document.getElementById("record_adress").value;
+    doc.setFontSize(9);
+    doc.text(record_adress,20,33).value;
+// ================================================
+    doc.setLineWidth(0.1);
+    doc.line(52, 46, 52, 71);
+
+    doc.setLineWidth(0.1);
+    doc.line(64, 46, 64, 71);
+
+    doc.line(5,42,205,42)
+
+    doc.line(40,46,75,46)
+    doc.line(5,51,75,51)
+    doc.line(5,55,75,55)
+    doc.line(5,59,75,59)
+    doc.line(5,63,75,63)
+    doc.line(5,67,75,67)
+    doc.line(5,71,205,71)
 
 
-    doc.setFontSize(17);
-    doc.text("Kayıt Tarihi:",45,75);
-    var date = document.getElementById("record_date").value;
-    doc.setFontSize(15);
-    doc.text(date,80,75);
+    doc.line(5,100,205,100)
 
 
-    doc.setFontSize(17);
-    doc.text("Tc Kimlik Numarası:",45,85);
-    var no = document.getElementById("record_tc_no").value;
-    doc.setFontSize(15);
-    doc.text(no,105,85);
+    // ================================================
+    doc.setLineWidth(0.1);
+    doc.line(40, 42, 40, 71);
 
-    // const text= "deneme1 deneme2 deneme3 deneme4 deneme5 deneme6 deneme7 deneme8 deneme9 deneme 10 deneme11 deneme12 deneme13 deneme14 deneme15 denem16 deneme17 deneme18 deneme19 deneme20";
-    // textlines = doc.setFontSize(14)
-    // .splitTextToSize(text, 120);
+    doc.setLineWidth(0.1);
+    doc.line(75, 42, 75, 71);
 
-    // let verticalOffset = 0.5;
-    // doc.text(80,95, textlines)
-    // verticalOffset += (textlines.length + 0.5) * 12 / 72;
+    doc.setLineWidth(0.1);
+    doc.line(100, 71, 100, 100);
 
-    doc.setFontSize(17);
-    doc.text("Adres:",45,95);
-    var adress = document.getElementById("record_adress").value;
-    textlines = doc.setFontSize(15).splitTextToSize(adress, 120);
-    doc.text(75,95,textlines);
+// ====================================
 
 
+    doc.setFontSize(10);
+    doc.text("VİTAL BULGULAR",10,47);
 
-    doc.setFontSize(17);
-    doc.text("Tanı:",45,110);
-    var diagnosis = document.getElementById("record_diagnosis").value;
-    textlines= doc.setFontSize(15).splitTextToSize(diagnosis,120);
-    doc.text(textlines,75,110);
+    doc.setFontSize(7);
+    doc.text("ÖLÇÜ ZAMANI",52,45);
 
+    var record_one_measurement = document.getElementById("record_one_measurement").value;
+    doc.setFontSize(9);
+    doc.text(record_one_measurement,42,50).value;
 
-    doc.setFontSize(17);
-    doc.text("Müdahale:",45,155);  
-    var intervention = document.getElementById("record_intervention").value;
-    textlines = doc.setFontSize(15).splitTextToSize(intervention,120);
-    doc.text(textlines,80,155);
+    var record_second_measurement = document.getElementById("record_second_measurement").value;
+    doc.setFontSize(9);
+    doc.text(record_second_measurement,53,50).value;
 
-    doc.setFontSize(17);
-    doc.text("İlaçlar:",45,195);
-    var medications = document.getElementById("record_medications").value;
-    textlines = doc.setFontSize(15).splitTextToSize(medications,120);
-    doc.text(textlines,80,195);
+    var record_third_measurement = document.getElementById("record_third_measurement").value;
+    doc.setFontSize(9);
+    doc.text(record_third_measurement,65,50).value;
 
-    doc.setFontSize(17);
-    doc.text("Sonuç:",45,240);
-    var cocnlusion = document.getElementById("record_conclusion").value;
-    textlines = doc.setFontSize(15).splitTextToSize(cocnlusion,120);
-    doc.text(textlines,75,240);
+    doc.setFontSize(9);
+    doc.text("Tansiyon",6,54);
+
+    var record_one_blood_pressure = document.getElementById("record_one_blood_pressure").value;
+    doc.setFontSize(9);
+    doc.text(record_one_blood_pressure,42,54).value;
+
+    var record_second_blood_pressure = document.getElementById("record_second_blood_pressure").value;
+    doc.setFontSize(9);
+    doc.text(record_second_blood_pressure,53,54).value;
+
+    var record_third_blood_pressure = document.getElementById("record_third_blood_pressure").value;
+    doc.setFontSize(9);
+    doc.text(record_third_blood_pressure,65,54).value;
+
+    doc.setFontSize(9);
+    doc.text("Nabız",6,58);
+
+    var record_one_pulse = document.getElementById("record_one_pulse").value;
+    doc.setFontSize(9);
+    doc.text(record_one_pulse,42,58).value;
+
+    var record_second_pulse = document.getElementById("record_second_pulse").value;
+    doc.setFontSize(9);
+    doc.text(record_second_pulse,53,58).value;
+
+    var record_third_pulse = document.getElementById("record_third_pulse").value;
+    doc.setFontSize(9);
+    doc.text(record_third_pulse,65,58).value;
     
+    doc.setFontSize(9);
+    doc.text("SpO2",6,62);
+
+    var record_one_spo2 = document.getElementById("record_one_spo2").value;
+    doc.setFontSize(9);
+    doc.text(record_one_spo2,42,62).value;
+
+    var record_second_spo2 = document.getElementById("record_second_spo2").value;
+    doc.setFontSize(9);
+    doc.text(record_second_spo2,53,62).value;
+
+    var record_third_spo2 = document.getElementById("record_third_spo2").value;
+    doc.setFontSize(9);
+    doc.text(record_third_spo2,65,62).value;
+
+    doc.setFontSize(9);
+    doc.text("Solunum/dk",6,66);
+
+    var record_one_respirations_min = document.getElementById("record_one_respirations_min").value;
+    doc.setFontSize(9);
+    doc.text(record_one_respirations_min,42,66).value;
+
+    var record_second_respirations_min = document.getElementById("record_second_respirations_min").value;
+    doc.setFontSize(9);
+    doc.text(record_second_respirations_min,53,66).value;
+
+    var record_third_respirations_min = document.getElementById("record_third_respirations_min").value;
+    doc.setFontSize(9);
+    doc.text(record_third_respirations_min,65,66).value;
+
+    doc.setFontSize(9);
+    doc.text("Ateş",6,70);
+
+    var record_one_fire = document.getElementById("record_one_fire").value;
+    doc.setFontSize(9);
+    doc.text(record_one_fire,42,70).value;
+
+    var record_second_fire = document.getElementById("record_second_fire").value;
+    doc.setFontSize(9);
+    doc.text(record_second_fire,53,70).value;
+
+    var record_third_fire = document.getElementById("record_third_fire").value;
+    doc.setFontSize(9);
+    doc.text(record_third_fire,65,70).value;
+
+    doc.setFontSize(9);
+    doc.text("Tanı:",78,47);
+    var record_diagnosis = document.getElementById("record_diagnosis").value;
+    doc.setFontSize(9);
+    doc.text(record_diagnosis,89,47).value;
+
+    doc.setFontSize(9);
+    doc.text("Müdahale:",6,77);
+    var record_intervention = document.getElementById("record_intervention").value;
+    doc.setFontSize(9);
+    doc.text(record_intervention,24,77).value;
+
+    doc.setFontSize(9);
+    doc.text("İlaçlar:",101,77);
+    var record_medications = document.getElementById("record_medications").value;
+    doc.setFontSize(9);
+    doc.text(record_medications,113,77).value;
+
+    doc.setFontSize(9);
+    doc.text("Sonuç:",6,104);
+    var record_conclusion = document.getElementById("record_conclusion").value;
+    doc.setFontSize(9);
+    doc.text(record_conclusion,18,104).value;
+
     
     doc.output('pdfobjectnewwindow');
 }

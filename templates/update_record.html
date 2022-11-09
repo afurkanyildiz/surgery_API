@@ -4,6 +4,7 @@
 
 {% block content%}
 <main>
+    <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
     <div class="container-fluid px-4">
         <div class="row justify-content-center">
             <div class="col-lg-12">
@@ -59,7 +60,97 @@
                                 </div>
                             </div>
                             <div class="row">
-  
+                                <div class="mb-3 col">   
+                                    <label for="record_one_measurement" class="form-label">1. ÖLÇÜM</label>
+                                    <input type="time" class="form-control" id="record_one_measurement" name="record_one_measurement" value="{{Records.record_one_measurement}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_one_blood_pressure" class="form-label">1. TANSİYON</label>
+                                    <input type="text" class="form-control" id="record_one_blood_pressure" name="record_one_blood_pressure"  value="{{Records.record_one_blood_pressure}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_one_pulse" class="form-label">1.NABIZ</label>
+                                    <input type="text" class="form-control" id="record_one_pulse" name="record_one_pulse" value="{{Records.record_one_pulse}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_one_spo2" class="form-label">1.SPO2</label>
+                                    <input type="text" class="form-control" id="record_one_spo2" name="record_one_spo2" value="{{Records.record_one_spo2}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_one_respirations_min" class="form-label">1.SOLUNUM/DK</label>
+                                    <input type="text" class="form-control" id="record_one_respirations_min" name="record_one_respirations_min" value="{{Records.record_one_respirations_min}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_one_fire" class="form-label">1.ATEŞ</label>
+                                    <input type="text" class="form-control" id="record_one_fire" name="record_one_fire" value="{{Records.record_one_fire}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_second_measurement" class="form-label">2. ÖLÇÜM</label>
+                                    <input type="time" class="form-control" id="record_second_measurement" name="record_second_measurement" value="{{Records.record_second_measurement}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_second_blood_pressure" class="form-label">2. TANSİYON</label>
+                                    <input type="text" class="form-control" id="record_second_blood_pressure" name="record_second_blood_pressure" value="{{Records.record_second_blood_pressure}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_second_pulse" class="form-label">2.NABIZ</label>
+                                    <input type="text" class="form-control" id="record_second_pulse" name="record_second_pulse" value="{{Records.record_second_pulse}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_second_spo2" class="form-label">2.SPO2</label>
+                                    <input type="text" class="form-control" id="record_second_spo2" name="record_second_spo2" value="{{Records.record_second_spo2}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_second_respirations_min" class="form-label">2.SOLUNUM/DK</label>
+                                    <input type="text" class="form-control" id="record_second_respirations_min" name="record_second_respirations_min" value="{{Records.record_second_respirations_min}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_second_fire" class="form-label">2.ATEŞ</label>
+                                    <input type="text" class="form-control" id="record_second_fire" name="record_second_fire" value="{{Records.record_second_fire}}">
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_third_measurement" class="form-label">3. ÖLÇÜM</label>
+                                    <input type="time" class="form-control" id="record_third_measurement" name="record_third_measurement" value="{{Records.record_third_measurement}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_third_blood_pressure" class="form-label">3.TANSİYON</label>
+                                    <input type="text" class="form-control" id="record_third_blood_pressure" name="record_third_blood_pressure" value="{{Records.record_third_blood_pressure}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_third_pulse" class="form-label">3.NABIZ</label>
+                                    <input type="text" class="form-control" id="record_third_pulse" name="record_third_pulse" value="{{Records.record_third_pulse}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_third_spo2" class="form-label">3.SPO2</label>
+                                    <input type="text" class="form-control" id="record_third_spo2" name="record_third_spo2" value="{{Records.record_third_spo2}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col">   
+                                    <label for="record_third_fire" class="form-label">3.ATEŞ</label>
+                                    <input type="text" class="form-control" id="record_third_fire" name="record_third_fire" value="{{Records.record_third_fire}}">
+                                </div>
+                                <div class="mb-3 col">   
+                                    <label for="record_third_respirations_min" class="form-label">3.SOLUNUM/DK</label>
+                                    <input type="text" class="form-control" id="record_third_respirations_min" name="record_third_respirations_min" value="{{Records.record_third_respirations_min}}">
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="mb-3 col"> 
                                     <label for="record_diagnosis" class="form-label">Tanı</label>
                                     <textarea type="text" class="form-control" id="record_diagnosis" name="diagnosis" style="height: 100px">{{Records.diagnosis}}</textarea>   
