@@ -11,7 +11,7 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h4 class="text-center font-weight-light my-4">Kayıt Ekle</h4></div>
                     <div class="card-body" id="convert">
-                        <form action="" method="POST" id="registrationForm">
+                        <form action="{% url 'insertRecord'%}" method="POST" id="registrationForm">
                             {% csrf_token%}
                             <div class="row">
                                 <div class="mb-3 col-6">
@@ -42,7 +42,46 @@
                             </div>
                             <div class="row">     
                                 <div class="mb-3 col">
-                                    <input type="text" class="form-control" id="record_kurum" name="kurum"  placeholder="Kurum" required>
+                                    <div class="row justify-content-start">
+                                        <div class="col-4">
+                                        <!-- <input type="text" class="form-control" id="record_kurum" name="kurum"  placeholder="Kurum" required> -->
+                                            <select class="form-select form-select-lg" name="kurum" id="record_kurum">
+                                                <option>Lütfen Kurum Seçiniz</option>
+                                                {% if institutionName%}
+                                                    {% for name in institutionName %}
+                                                        <option value="{{name.institutionName}}">{{name.institutionName}}</option>
+                                                    {%endfor%}
+                                                {%endif%}
+                                            </select>
+                                        </div>
+                                        <!-- <div class="col-4">
+                                           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#institutionModal" data-bs-whatever="@mdo">Kurum Ekle</button>
+                                            <div class="modal fade" id="institutionModal" tabindex="-1" aria-labelledby="institutionModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                  <div class="modal-content">
+                                                    <div class="modal-header">
+                                                      <h5 class="modal-title" id="institutionModalLabel">Kurum Ekleme</h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                      <form>
+                                                        <div class="mb-3">
+                                                          <label for="institutionName" class="col-form-label">Kurum Adi:</label>
+                                                          <input type="text" class="form-control" id="institutionName" name="institutionName">
+                                                        </div>
+                                                    </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                                        <a href="{% url 'saveInstitutionName'%}">
+                                                            <button type="button" class="btn btn-primary">Kaydet</button>
+                                                        </a>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
                                 </div>
                                 <div class="mb-3 col"> 
                                     <input type="text" class="form-control" id="record_doctor" name="doctor"  placeholder="Doktor" required>
@@ -151,8 +190,32 @@
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px" placeholder="İlaçlar" required></textarea> 
-
+                                    <!-- <form id="medications_form"> -->
+                                        <!-- <div class="row" id="row1"> -->
+                                            <!-- <div class="row justify-content-start"> -->
+                                                <!-- <div class="col-4"> -->
+                                                <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px" placeholder="İlaçlar" required></textarea> 
+                                                    <!-- <label for="">İlaç Adı:</label>
+                                                    <select class="form-select form-select-lg" name="medications" id="medications">
+                                                        <option>Lütfen İlaç Seçiniz</option>
+                                                        {% if medicationName%}
+                                                            {% for medicationName in medicationName %}
+                                                                <option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>
+                                                            {%endfor%}
+                                                        {%endif%}
+                                                    </select>
+                                                </div> -->
+                                                <!-- <div class="col-4">
+                                                    <label for="scale_used" class="form-label">Kullanılan Ölçek</label>
+                                                    <input type="text" class="form-control" id="scale_used" name="scale_used">
+                                                </div>
+                                                <div class="col-4">
+                                                </br>
+                                                    <button type="button" class="btn btn-primary" id="add_medications" onclick="add_more_field()">İlaç Ekle+</button>
+                                                </div> -->
+                                            <!-- </div> -->
+                                        <!-- </div> -->
+                                    <!-- </form> -->
                                 </div>
                                 <div class="mb-3 col">
 
@@ -181,6 +244,33 @@
         window.print();
     }
 </script>
+<!-- <script>
+    var countre=1;
+     function add_more_field(){
+        countre+=1
+        html = '<div class="row" id="row1'+countre+'"> \
+            <div class="row justify-content-start">\
+                <div class="col-4">\
+                    <label for="">İlaç Adı:</label>\
+                    <select class="form-select form-select-lg" name="medications'+countre+'" id="medications">\
+                        <option>Lütfen İlaç Seçiniz</option>\
+                        {% if institutionName%}\
+                            {% for name in institutionName %}\
+                                <option value="{{name.institutionName}}">{{name.institutionName}}</option>\
+                            {%endfor%}\
+                        {%endif%}\
+                    </select>\
+                </div>\
+                <div class="col-4">\
+                    <label for="scale_used" class="form-label">Kullanılan Ölçek</label>\
+                    <input type="text" class="form-control" id="scale_used" name="scale_used'+countre+'">\
+                </div>\
+            </div>\
+        </div>'
+        var form = document.getElementById('medications_form')
+        form.innerHTML+=html
+     }
+</script> -->
 
 
 

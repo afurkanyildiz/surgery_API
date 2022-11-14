@@ -213,26 +213,26 @@ function registrationFormPdf(){
     doc.setFontSize(9);
     doc.text("Tanı:",78,47);
     var record_diagnosis = document.getElementById("record_diagnosis").value;
-    doc.setFontSize(9);
-    doc.text(record_diagnosis,89,47).value;
+    textlines = doc.setFontSize(7).splitTextToSize(record_diagnosis,75);
+    doc.text(textlines,89,47).value;
 
     doc.setFontSize(9);
     doc.text("Müdahale:",6,77);
     var record_intervention = document.getElementById("record_intervention").value;
-    doc.setFontSize(9);
-    doc.text(record_intervention,24,77).value;
+    textlines1 = doc.setFontSize(7).splitTextToSize(record_intervention,75);
+    doc.text(textlines1,24,77).value;
 
     doc.setFontSize(9);
     doc.text("İlaçlar:",101,77);
     var record_medications = document.getElementById("record_medications").value;
-    doc.setFontSize(9);
-    doc.text(record_medications,113,77).value;
+    textlines2 = doc.setFontSize(7).splitTextToSize(record_medications,75);
+    doc.text(textlines2,113,77).value;
 
     doc.setFontSize(9);
     doc.text("Sonuç:",6,104);
     var record_conclusion = document.getElementById("record_conclusion").value;
-    doc.setFontSize(9);
-    doc.text(record_conclusion,18,104).value;
+    textlines3 = doc.setFontSize(7).splitTextToSize(record_conclusion,75);
+    doc.text(textlines3,18,104).value;
 
     
     doc.output('pdfobjectnewwindow');
@@ -5008,27 +5008,26 @@ function updateregistrationFormPdf(){
     doc.setFontSize(9);
     doc.text("Tanı:",78,47);
     var record_diagnosis = document.getElementById("record_diagnosis").value;
-    doc.setFontSize(9);
-    doc.text(record_diagnosis,89,47).value;
+    textlines = doc.setFontSize(7).splitTextToSize(record_diagnosis,75);
+    doc.text(textlines,89,47).value;
 
     doc.setFontSize(9);
     doc.text("Müdahale:",6,77);
     var record_intervention = document.getElementById("record_intervention").value;
-    doc.setFontSize(9);
-    doc.text(record_intervention,24,77).value;
+    textlines1 = doc.setFontSize(7).splitTextToSize(record_intervention,75);
+    doc.text(textlines1,24,77).value;
 
     doc.setFontSize(9);
     doc.text("İlaçlar:",101,77);
     var record_medications = document.getElementById("record_medications").value;
-    doc.setFontSize(9);
-    doc.text(record_medications,113,77).value;
+    textlines2 = doc.setFontSize(7).splitTextToSize(record_medications,75);
+    doc.text(textlines2,113,77).value;
 
     doc.setFontSize(9);
     doc.text("Sonuç:",6,104);
     var record_conclusion = document.getElementById("record_conclusion").value;
-    doc.setFontSize(9);
-    doc.text(record_conclusion,18,104).value;
-
+    textlines3 = doc.setFontSize(7).splitTextToSize(record_conclusion,75);
+    doc.text(textlines3,18,104).value;
     
     doc.output('pdfobjectnewwindow');
 }
