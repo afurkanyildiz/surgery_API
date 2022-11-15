@@ -983,7 +983,7 @@
                                             <input class="application"type="checkbox" id="application77" name="application" {% for case in AmbulanceCase.applicationList %}{% if case == 'application77' %} checked {%endif%}{%endfor%}value="Kan şekeri ölçümü">
                                             <label for="application77" class="form-label">Kan şekeri ölçümü</label>
                                         </div>
-                                        <input id="txt1" type="text" name="applicationList" value="{%for case in AmbulanceCase.applicationList%}{{case}},{%endfor%}" style="display: none;"  readonly>
+                                        <input id="txt1" type="text" name="applicationList" value="{%for case in AmbulanceCase.applicationList%}{{case}},{%endfor%}" style="display: none;" readonly>
                                     </div>
                             </div>
                             <div class="row">

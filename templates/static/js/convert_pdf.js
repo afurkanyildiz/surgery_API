@@ -406,7 +406,7 @@ function ambulanceCasePdf(){
     doc.text("Hastaya Yapılan Uygulama :",6,64);
     doc.text("Kullanılan İlaçlar",6,69);
     var explanation_application = document.getElementById("explanation_application").value;
-    textlines = doc.setFontSize(9).splitTextToSize(explanation_application,90);
+    textlines = doc.setFontSize(6).splitTextToSize(explanation_application,90);
     doc.text(textlines,48,57).value;
     
     doc.setFontSize(8);
@@ -3626,7 +3626,7 @@ function ambulanceCasePdf(){
     // let hasYesText = false;
     if(roundYes == 'yes') {
         doc.setFontSize(7)
-        doc.text("X",50,290.5)
+        doc.text("[X]",50,290.5)
     //     console.log("Girdi");
     //     hasYesText = true;
     }
@@ -3644,7 +3644,7 @@ function ambulanceCasePdf(){
     // let hasNoText = false;
     if(roundNo == 'no') {
         doc.setFontSize(7)
-        doc.text("X",63,290.5)
+        doc.text("[X]",63,290.5)
         //     console.log("Girdi");
     //     hasNoText = true;
     }
@@ -5208,7 +5208,7 @@ function updateAmbulanceCasePdf(){
     doc.text("Hastaya Yapılan Uygulama :",6,64);
     doc.text("Kullanılan İlaçlar",6,69);
     var explanation_application = document.getElementById("explanation_application").value;
-    textlines = doc.setFontSize(9).splitTextToSize(explanation_application,90);
+    textlines = doc.setFontSize(6).splitTextToSize(explanation_application,90);
     doc.text(textlines,48,57).value;
     
     doc.setFontSize(8);
@@ -8433,13 +8433,13 @@ function updateAmbulanceCasePdf(){
     doc.text("Gidiş Dönüş:",6,290); 
 
     doc.setFontSize(8);
-    doc.text("Evet[   ]",42,290);
+    doc.text("Evet",42,290);
     // var yesCheckbox = new jspdf.AcroFormCheckBox();
     var roundYes = document.querySelector('input[name="round_trip"]:checked').value;
     // let hasYesText = false;
     if(roundYes == 'yes') {
         doc.setFontSize(7)
-        doc.text("X",50,290.5)
+        doc.text("[X]",50,290.5)
     //     console.log("Girdi");
     //     hasYesText = true;
     }
@@ -8451,13 +8451,13 @@ function updateAmbulanceCasePdf(){
     // doc.addField(yesCheckbox);
 
     doc.setFontSize(8);
-    doc.text("Hayır[   ]",55,290);
+    doc.text("Hayır",55,290);
     // var noCheckBox = new jspdf.AcroFormCheckBox();
     var roundNo = document.querySelector('input[name="round_trip"]:checked').value;
     // let hasNoText = false;
     if(roundNo == 'no') {
         doc.setFontSize(7)
-        doc.text("X",63,290.5)
+        doc.text("[X]",63,290.5)
         //     console.log("Girdi");
     //     hasNoText = true;
     }
