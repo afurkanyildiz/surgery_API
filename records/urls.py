@@ -16,4 +16,5 @@ urlpatterns = [
     path('', views.index_page, name='index'),    
     path('chart', views.charts_page, name='chart'),
     path('saveInstitutionName', views.saveInstitutionName, name='saveInstitutionName'),
+    path('record_page/saveMedication', views.saveNewMedicationName, name='saveNewMedicationName'),
 ]

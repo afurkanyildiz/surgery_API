@@ -224,9 +224,33 @@ function registrationFormPdf(){
 
     doc.setFontSize(9);
     doc.text("İlaçlar:",101,77);
-    var record_medications = document.getElementById("record_medications").value;
-    textlines2 = doc.setFontSize(7).splitTextToSize(record_medications,75);
-    doc.text(textlines2,113,77).value;
+    var record_medication = document.getElementsByName("medications");
+    console.log(record_medication.length);
+    var x = 115;
+    var y =73;
+    for(var i=1; i<= record_medication.length; i++){
+        var record_medications = document.getElementsByTagName('select')[i].options[0].innerHTML;   
+        doc.setFontSize(7)
+        y = y+4
+        doc.text(record_medications,x,y).value;
+    }
+
+    doc.setFontSize(7);
+    doc.text("Kullanım Miktarı:",175,73);
+    var scale_used = document.getElementsByName("scale_used");
+    console.log(scale_used);
+    var a = 180;
+    var b =72;
+
+    for(var x=0; x<scale_used.length; x++){
+        
+        var scale_useds = document.getElementsByClassName("scale_used")[x];
+        console.log(scale_useds.value);
+        doc.setFontSize(7)
+        b = b+4
+        doc.text(scale_useds.value,a,b);
+        
+    }
 
     doc.setFontSize(9);
     doc.text("Sonuç:",6,104);
@@ -5019,9 +5043,33 @@ function updateregistrationFormPdf(){
 
     doc.setFontSize(9);
     doc.text("İlaçlar:",101,77);
-    var record_medications = document.getElementById("record_medications").value;
-    textlines2 = doc.setFontSize(7).splitTextToSize(record_medications,75);
-    doc.text(textlines2,113,77).value;
+    var record_medication = document.getElementsByName("medications");
+    console.log(record_medication.length);
+    var x = 115;
+    var y =73;
+    for(var i=1; i<= record_medication.length; i++){
+        var record_medications = document.getElementsByTagName('select')[i].options[0].innerHTML;   
+        doc.setFontSize(7)
+        y = y+4
+        doc.text(record_medications,x,y).value;
+    }
+
+    doc.setFontSize(7);
+    doc.text("Kullanım Miktarı:",175,73);
+    var scale_used = document.getElementsByName("scale_used");
+    console.log(scale_used);
+    var a = 180;
+    var b =72;
+
+    for(var x=0; x<scale_used.length; x++){
+        
+        var scale_useds = document.getElementsByClassName("scale_used")[x];
+        console.log(scale_useds.value);
+        doc.setFontSize(7)
+        b = b+4
+        doc.text(scale_useds.value,a,b);
+        
+    }
 
     doc.setFontSize(9);
     doc.text("Sonuç:",6,104);

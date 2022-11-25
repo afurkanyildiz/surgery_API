@@ -3,6 +3,8 @@
 {% load humanize %}
 
 {% block content%}
+
+
 <main>
     <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
     <div class="container-fluid px-4" id="container-content">
@@ -190,47 +192,74 @@
                             </div>
                             <div class="row">
                                 <div class="mb-3 col">
-                                    <!-- <form id="medications_form"> -->
-                                        <!-- <div class="row" id="row1"> -->
-                                            <!-- <div class="row justify-content-start"> -->
-                                                <!-- <div class="col-4"> -->
-                                                <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px" placeholder="İlaçlar" required></textarea> 
-                                                    <!-- <label for="">İlaç Adı:</label>
-                                                    <select class="form-select form-select-lg" name="medications" id="medications">
-                                                        <option>Lütfen İlaç Seçiniz</option>
-                                                        {% if medicationName%}
-                                                            {% for medicationName in medicationName %}
-                                                                <option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>
-                                                            {%endfor%}
-                                                        {%endif%}
-                                                    </select>
-                                                </div> -->
+                                    <!-- <form id="forms"></form> -->
+                                   <!-- <form id="medications_form"> -->
+                                    <div class="row" id="InputsWrapper">
+                                        <div class="row justify-content-start">
+                                            <div class="col-4">
+                                                <!-- <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px" placeholder="İlaçlar" required></textarea>  -->
+                                                <label for="">İlaç Adı:</label>
+                                                <select class="form-select form-select-lg" name="medications" id="medications">
+                                                    <option>Lütfen İlaç Seçiniz</option>
+                                                    {% if medicationName%}
+                                                        {% for medicationName in medicationName %}
+                                                            <option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>
+                                                        {%endfor%}
+                                                    {%endif%}
+                                                </select>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="scale_used" class="form-label">Kullanılan Ölçek</label>
+                                                <input type="text" class="form-control scale_used" id="scale_useds" name="scale_used">
+                                            </div>
+                                            <div class="col-4">
+                                            </br>
+                                                <button type="button" class="btn btn-primary" id="add_medications">İlaç Ekle+</button>
+                                            </div>
                                                 <!-- <div class="col-4">
-                                                    <label for="scale_used" class="form-label">Kullanılan Ölçek</label>
-                                                    <input type="text" class="form-control" id="scale_used" name="scale_used">
+                                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newMedicationModal" data-bs-whatever="@mdo">Yeni İlaç Ekle</button>
+                                                    <div class="modal fade" id="newMedicationModal" tabindex="-1" aria-labelledby="newmedicationModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="newmedicationModalLabel">Yeni Ilac Ekleme</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            <form method="POST">
+                                                                <div class="mb-3">
+                                                                <label for="medicationName" class="col-form-label">Ilac Adi:</label>
+                                                                <input type="text" class="form-control" id="medicationName" name="medicationName">
+                                                                </div>
+                                                            </form>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                                                <a href="{% url 'saveNewMedicationName'%}">
+                                                                    <button type="button" class="btn btn-primary">Kaydet</button>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-4">
-                                                </br>
-                                                    <button type="button" class="btn btn-primary" id="add_medications" onclick="add_more_field()">İlaç Ekle+</button>
-                                                </div> -->
-                                            <!-- </div> -->
-                                        <!-- </div> -->
+                                            </div> -->
+                                        </div>
+                                    </div>
                                     <!-- </form> -->
                                 </div>
                                 <div class="mb-3 col">
-
                                   <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç" required></textarea>
                                 </div>
                             </div>
                             <div class="mb-3 col"> 
-                                <button type="submit" name="registrationSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                <button type="submit" name="registrationSave"  class="bi bi-save btn btn-outline-success"> Kaydet</button>
                                 &nbsp;
-                                <button type="button" id="registrationPreview" onclick="registrationFormPdf()"  class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                <button type="button" id="registrationPreview"   onclick="registrationFormPdf()"  class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
                                 </br>
                                 </br>
-                                <button type="button" name="registrationPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                <button type="button" name="registrationPrint"  onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
                                 &nbsp;
-                                <button type="reset" name="registrationClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                <button type="reset" name="registrationClear"  class="bi bi-basket btn btn-outline-warning"> Temizle</button>
                             </div>
                         </form>
                     </div>
@@ -244,34 +273,30 @@
         window.print();
     }
 </script>
-<!-- <script>
-    var countre=1;
-     function add_more_field(){
-        countre+=1
-        html = '<div class="row" id="row1'+countre+'"> \
-            <div class="row justify-content-start">\
-                <div class="col-4">\
-                    <label for="">İlaç Adı:</label>\
-                    <select class="form-select form-select-lg" name="medications'+countre+'" id="medications">\
-                        <option>Lütfen İlaç Seçiniz</option>\
-                        {% if institutionName%}\
-                            {% for name in institutionName %}\
-                                <option value="{{name.institutionName}}">{{name.institutionName}}</option>\
-                            {%endfor%}\
-                        {%endif%}\
-                    </select>\
-                </div>\
-                <div class="col-4">\
-                    <label for="scale_used" class="form-label">Kullanılan Ölçek</label>\
-                    <input type="text" class="form-control" id="scale_used" name="scale_used'+countre+'">\
-                </div>\
-            </div>\
-        </div>'
-        var form = document.getElementById('medications_form')
-        form.innerHTML+=html
-     }
-</script> -->
 
+<script>
+    $(document).ready(function() {
+        var MaxInputs = 20;
+        var InputsWrapper =$("#InputsWrapper");
+        var AddButton  =$("#add_medications");
 
+        var x = InputsWrapper.length;
+        var FieldCount = 1;
 
+        $(AddButton).click(function(e)
+        {
+            if(x <= MaxInputs)
+            {
+                FieldCount++;
+                $(InputsWrapper).append('<div class="row justify-content-start"><div class="col-4"><label for="">İlaç Adı:</label><select class="form-select form-select-lg" name="medications" id="medicationss_'+FieldCount+'"><option>Lütfen İlaç Seçiniz</option>{% if medicationName%}{% for medicationName in medicationName %}<option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>{%endfor%}{%endif%}</select></div><div class="col-4"><label for="scale_used" class="form-label">Kullanılan Ölçek</label><input type="text" class="form-control" id="scale_useds_'+FieldCount+'" name="scale_used"></div></div>');
+                x++;
+            }
+        return false;
+        });
+    });
+</script>
+<script>
+    var inputName = document.getElementById("record_username");
+    localStorage.setItem("record_username",inputName.value);
+</script>
 {% endblock%}

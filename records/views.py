@@ -1,9 +1,10 @@
 from multiprocessing import context
 from django.shortcuts import redirect, render
 from django.contrib import  messages
+import string
 
 from .models import Records,Institution,MedicationName
-from .forms import RecordsForm,InstitutionForm
+from .forms import RecordsForm,InstitutionForm,MedicationForm
 from django.http import HttpResponse, JsonResponse
 
 
@@ -14,8 +15,7 @@ def record_page(request):
     return render(request,'registration_form.html',context)
 
 @login_required(login_url='redirect')
-def record_form(request):
-    
+def record_form(request): 
     if request.method == "POST" and 'registrationSave' in request.POST:
         records = Records()
         records.username = request.POST.get('username')
@@ -27,7 +27,7 @@ def record_form(request):
         records.kurum = request.POST.get('kurum')
         records.diagnosis = request.POST.get('diagnosis')
         records.intervention = request.POST.get('intervention')
-        records.medications = request.POST.get('medications')
+        # records.medications = request.POST.get('medications')
         records.conclusion = request.POST.get('conclusion')
         records.doctor = request.POST.get('doctor')
         records.record_one_measurement = request.POST.get('record_one_measurement')
@@ -48,8 +48,9 @@ def record_form(request):
         records.record_third_spo2 = request.POST.get('record_third_spo2')
         records.record_third_fire = request.POST.get('record_third_fire')
         records.record_third_respirations_min = request.POST.get('record_third_respirations_min')
-
-        # records = Records( username = username,date = date,hours = hours, tel = tel, tcNo = tcNo, adress = adress,kurum=kurum,diagnosis=diagnosis,intervention=intervention,medications=medications,conclusion=conclusion,doctor=doctor)
+        records.medications = request.POST.getlist('medications')
+        records.scale_used = request.POST.getlist('scale_used')
+        
         records.save()
         return redirect('/index/tables')
     else:
@@ -59,16 +60,24 @@ def record_form(request):
 @login_required(login_url='redirect')
 def editRecords(request,id):
     edit_records = Records.objects.get(id=id)
+    print(type(edit_records.medications))
+    print(edit_records.medications)
+    if edit_records.medications is not None:
+        edit_records.medications = edit_records.medications.strip('"]["').split(',')
+    if edit_records.scale_used is not None:
+        edit_records.scale_used = edit_records.scale_used.strip('"]["').split(',')
     institutionName = Institution.objects.all()
-    return render(request,"update_record.html",{"Records": edit_records, "institutionName":institutionName})
+    medicationName = MedicationName.objects.all()
+    return render(request,"update_record.html",{"Records": edit_records, "institutionName":institutionName,"medicationName":medicationName})
     
 @login_required(login_url='redirect')
 def updateRecords(request, id):  
     record = Records.objects.get(id=id)
     form = RecordsForm(data=request.POST, instance=record)
-    # form1 = InstitutionForm(data=request.POST, instance=record)
     if form.is_valid():
-        # form1.save()
+        record.medications = request.POST.getlist('medications')
+        record.scale_used = request.POST.getlist('scale_used')
+        # record.save()
         form.save()
         messages.success(request,"Kayit Basarili...")
         print("basarili")
@@ -110,3 +119,14 @@ def saveInstitutionName(request):
         return redirect('record_page')
     print(form.errors.as_data())
     return redirect('tables')
+
+def saveNewMedicationName(request):
+    medicationName = MedicationName()
+    medicationName.medicationName = request.POST.get('medicationName')
+    print(medicationName.medicationName)
+    medicationName.save()
+
+    print('Kayit Basarili')
+    return redirect('/index/record_page')
+   
+    

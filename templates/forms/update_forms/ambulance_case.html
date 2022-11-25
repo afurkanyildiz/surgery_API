@@ -1292,11 +1292,11 @@
 
                                     <label for="" class="form-label">GİDİŞ-DÖNÜŞ</label> 
                                     <div >                                       
-                                        <input class="form-check-input" type="radio" id="yes" name="round_trip" {% if AmbulanceCase.round_trip == 'yes' %} checked {%endif%} value="{{AmbulanceCase.round_trip}}" group="round_trip">
+                                        <input class="round_trip" type="radio" id="yes" name="round_trip" {% if AmbulanceCase.round_trip == 'yes' %} checked {%endif%} value="yes" group="round_trip">
                                         <label for="yes" class="form-label">Evet</label>
                                     </div> 
                                     <div>
-                                        <input class="form-check-input" type="radio" id="no" name="round_trip" {% if AmbulanceCase.round_trip == 'no' %} checked {%endif%}  value="{{AmbulanceCase.round_trip}}" group="round_trip">
+                                        <input class="round_trip" type="radio" id="no" name="round_trip" {% if AmbulanceCase.round_trip == 'no' %} checked {%endif%}  value="no" group="round_trip">
                                         <label for="no" class="form-label">Hayır</label>
                                     </div> 
                                     <h6>*Bu Alanın Girilmesi Zorunludur.</h6>

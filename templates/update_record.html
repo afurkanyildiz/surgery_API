@@ -196,11 +196,47 @@
                                 </div>
                             </div>
                             <div class="row">
+                               
                                 <div class="mb-3 col">
-                                    <label for="record_intervention" class="form-label">İlaçlar</label>
-                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px">{{Records.medications}}</textarea> 
-                                   
+                                    
+                                    <!-- <label for="record_intervention" class="form-label">İlaçlar</label>
+                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px">{{Records.medications}}</textarea>  -->
+                                    <div class="row" id="InputsWrapper">
+                                        <div class="row justify-content-start">
+                                            <!-- {% if Records.medications|length  %} -->
+                                           
+                                            <div class="col-4">
+                                                {% for medication in Records.medications%}
+                                                <div class="mb-3 col">
+                                                    <label for="">İlaç Adı:</label>
+                                                    <select class="form-select" name="medications" id="medications">
+                                                        <option {% if medication == '{{medicationName.medicationName}}' %} selected  {%endif%}>{{medication}}</option>        
+                                                        {% if medicationName%}
+                                                            {% for medicationName in medicationName %}
+                                                                <option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>
+                                                            {%endfor%}
+                                                        {%endif%}
+                                                    </select>
+                                                </div>
+                                                {%endfor%}
+                                            </div>            
+                                            <!-- {%endif%} -->
+                                            <div class="col-4">
+                                            {% for scale_used in Records.scale_used%}
+                                                
+                                                <label for="scale_used" class="form-label">Kullanılan Ölçek</label>
+                                                <input type="text" class="form-control scale_used" id="scale_used" name="scale_used" value="{{scale_used}}">
+                                            {%endfor%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                    <div class="col-4">
+                                    </br>
+                                        <button type="button" class="btn btn-primary" id="add_medications">İlaç Ekle+</button>
+                                    </div>
                                 </div>
+
                                 <div class="mb-3 col"> 
                                     <label for="record_conclusion" class="form-label">Sonuç</label>
                                     <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç">{{Records.conclusion}}</textarea>
@@ -222,12 +258,33 @@
             </div>
         </div>
     </div>
-    <script>
-        function printForm(){
-            window.print();
-        }
-    </script>
 </main>
+<script>
+    function printForm(){
+        window.print();
+    }
+</script>
+<script>
+    $(document).ready(function() {
+        var MaxInputs = 20;
+        var InputsWrapper =$("#InputsWrapper");
+        var AddButton  =$("#add_medications");
+
+        var x = InputsWrapper.length;
+        var FieldCount = 1;
+
+        $(AddButton).click(function(e)
+        {
+            if(x <= MaxInputs)
+            {
+                FieldCount++;
+                $(InputsWrapper).append('<div class="row justify-content-start"><div class="col-4"><label for="">İlaç Adı:</label><select class="form-select form-select-lg" name="medications" id="medications_'+FieldCount+'"><option>Lütfen İlaç Seçiniz</option>{% if medicationName%}{% for medicationName in medicationName %}<option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>{%endfor%}{%endif%}</select></div><div class="col-4"><label for="scale_used" class="form-label">Kullanılan Ölçek</label><input type="text" class="form-control" id="scale_used_'+FieldCount+'" name="scale_used"></div></div>');
+                x++;
+            }
+        return false;
+        });
+    });
+</script>
 
 
 {% endblock%}

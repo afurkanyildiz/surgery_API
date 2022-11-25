@@ -1,5 +1,5 @@
 from django import forms
-from .models import Records,Institution
+from .models import Records,Institution,MedicationName
 
 class RecordsForm(forms.ModelForm):
     class Meta:
@@ -13,3 +13,8 @@ class InstitutionForm(forms.ModelForm):
     class Meta:
         model = Institution
         fields="__all__"
+        
+class MedicationForm(forms.ModelForm):
+    class Meta:
+        model = MedicationName
+        fields=['medicationName']
