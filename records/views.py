@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.contrib import  messages
 import string
 
-from .models import Records,Institution,MedicationName
+from .models import Records,Institution,MedicationName,WayOfApplication
 from .forms import RecordsForm,InstitutionForm,MedicationForm
 from django.http import HttpResponse, JsonResponse
 
@@ -11,7 +11,7 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 @login_required(login_url='redirect')
 def record_page(request):
-    context = {'institutionName':Institution.objects.all(),'medicationName':MedicationName.objects.all()} 
+    context = {'institutionName':Institution.objects.all(),'medicationName':MedicationName.objects.all(),'way_of_application':WayOfApplication.objects.all()} 
     return render(request,'registration_form.html',context)
 
 @login_required(login_url='redirect')
@@ -50,6 +50,7 @@ def record_form(request):
         records.record_third_respirations_min = request.POST.get('record_third_respirations_min')
         records.medications = request.POST.getlist('medications')
         records.scale_used = request.POST.getlist('scale_used')
+        records.way_of_application = request.POST.getlist('way_of_application')
         
         records.save()
         return redirect('/index/tables')
@@ -66,9 +67,12 @@ def editRecords(request,id):
         edit_records.medications = edit_records.medications.strip('"]["').split(',')
     if edit_records.scale_used is not None:
         edit_records.scale_used = edit_records.scale_used.strip('"]["').split(',')
+    if  edit_records.way_of_application is not None:
+        edit_records.way_of_application = edit_records.way_of_application.strip('"]["').split(',')
     institutionName = Institution.objects.all()
     medicationName = MedicationName.objects.all()
-    return render(request,"update_record.html",{"Records": edit_records, "institutionName":institutionName,"medicationName":medicationName})
+    way_of_application = WayOfApplication.objects.all()
+    return render(request,"update_record.html",{"Records": edit_records, "institutionName":institutionName,"medicationName":medicationName,"way_of_application":way_of_application})
     
 @login_required(login_url='redirect')
 def updateRecords(request, id):  
@@ -77,6 +81,7 @@ def updateRecords(request, id):
     if form.is_valid():
         record.medications = request.POST.getlist('medications')
         record.scale_used = request.POST.getlist('scale_used')
+        record.way_of_application = request.POST.getlist('way_of_application')
         # record.save()
         form.save()
         messages.success(request,"Kayit Basarili...")

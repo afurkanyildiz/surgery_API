@@ -195,19 +195,12 @@
                                    
                                 </div>
                             </div>
-                            <div class="row">
-                               
+                            <div class="row" >     
                                 <div class="mb-3 col">
-                                    
-                                    <!-- <label for="record_intervention" class="form-label">İlaçlar</label>
-                                    <textarea type="text" class="form-control" id="record_medications" name="medications" style="height: 100px">{{Records.medications}}</textarea>  -->
                                     <div class="row" id="InputsWrapper">
                                         <div class="row justify-content-start">
-                                            <!-- {% if Records.medications|length  %} -->
-                                           
                                             <div class="col-4">
                                                 {% for medication in Records.medications%}
-                                                <div class="mb-3 col">
                                                     <label for="">İlaç Adı:</label>
                                                     <select class="form-select" name="medications" id="medications">
                                                         <option {% if medication == '{{medicationName.medicationName}}' %} selected  {%endif%}>{{medication}}</option>        
@@ -217,47 +210,55 @@
                                                             {%endfor%}
                                                         {%endif%}
                                                     </select>
-                                                </div>
                                                 {%endfor%}
-                                            </div>            
-                                            <!-- {%endif%} -->
+                                            </div>              
                                             <div class="col-4">
-                                            {% for scale_used in Records.scale_used%}
-                                                
+                                            {% for scale_used in Records.scale_used%}                                               
                                                 <label for="scale_used" class="form-label">Kullanılan Ölçek</label>
                                                 <input type="text" class="form-control scale_used" id="scale_used" name="scale_used" value="{{scale_used}}">
                                             {%endfor%}
                                             </div>
+                                            <div class="col-4">
+                                                {% for way_of in Records.way_of_application %}
+                                                    <label for="">Uygulama Yolu</label>
+                                                    <select class="form-select" name="way_of_application" id="way_of_application">
+                                                        <option {% if way_of == '{{way_of_application.way_of_application}}' %} selected  {%endif%}>{{way_of}}</option>
+                                                    {% if way_of_application%}
+                                                        {% for way in way_of_application%}
+                                                            <option value="{{way.way_of_application}}">{{way.way_of_application}}</option>
+                                                        {%endfor%}
+                                                        {%endif%}
+                                                    </select>
+                                                {%endfor%}
+                                            </div>
                                         </div>
+                                    </div> 
                                     </div>
-                                  
+                                    <div class="mb-3 col"> 
+                                        <label for="record_conclusion" class="form-label">Sonuç</label>
+                                        <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç">{{Records.conclusion}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="mb-3 col"> 
                                     <div class="col-4">
-                                    </br>
                                         <button type="button" class="btn btn-primary" id="add_medications">İlaç Ekle+</button>
                                     </div>
-                                </div>
-
-                                <div class="mb-3 col"> 
-                                    <label for="record_conclusion" class="form-label">Sonuç</label>
-                                    <textarea type="text" class="form-control" id="record_conclusion" name="conclusion" style="height: 100px"  placeholder="Sonuç">{{Records.conclusion}}</textarea>
-                                </div>
-                            </div>
-                            <div class="mb-3 col"> 
-                                <button type="submit" name="uregistrationSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                    </br>
+                                    <button type="submit" name="uregistrationSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                        &nbsp;
+                                    <button type="button" name="uregistrationPreview" onclick="updateregistrationFormPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                    </br>
+                                    </br>
+                                    <button type="button" name="uregistrationPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
                                     &nbsp;
-                                <button type="button" name="uregistrationPreview" onclick="updateregistrationFormPdf()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
-                                </br>
-                                </br>
-                                <button type="button" name="uregistrationPrint" onclick="printForm()" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
-                                &nbsp;
-                                <button type="reset" name="uregistrationClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
-                            </div>
-                        </form>
+                                    <button type="reset" name="uregistrationClear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </main>
 <script>
     function printForm(){
@@ -278,7 +279,7 @@
             if(x <= MaxInputs)
             {
                 FieldCount++;
-                $(InputsWrapper).append('<div class="row justify-content-start"><div class="col-4"><label for="">İlaç Adı:</label><select class="form-select form-select-lg" name="medications" id="medications_'+FieldCount+'"><option>Lütfen İlaç Seçiniz</option>{% if medicationName%}{% for medicationName in medicationName %}<option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>{%endfor%}{%endif%}</select></div><div class="col-4"><label for="scale_used" class="form-label">Kullanılan Ölçek</label><input type="text" class="form-control" id="scale_used_'+FieldCount+'" name="scale_used"></div></div>');
+                $(InputsWrapper).append('<div class="row justify-content-start"><div class="col-4"><label for="">İlaç Adı:</label><select class="form-select" name="medications" id="medicationss_'+FieldCount+'"><option>Lütfen İlaç Seçiniz</option>{% if medicationName%}{% for medicationName in medicationName %}<option value="{{medicationName.medicationName}}">{{medicationName.medicationName}}</option>{%endfor%}{%endif%}</select></div><div class="col-4"><label for="scale_used" class="form-label">Kullanılan Ölçek</label><input type="text" class="form-control" id="scale_useds_'+FieldCount+'" name="scale_used"></div><div class="col-4"><label for="">Uygulama Yolu</label><select class="form-select" name="way_of_application" id="way_of_application'+FieldCount+'"><option value="">Uygulama Yolunu Seçiniz</option>{% if way_of_application%}{% for way in way_of_application %}<option value="{{way.way_of_application}}">{{way.way_of_application}}</option>{%endfor%}{%endif%}</select></div></div>');
                 x++;
             }
         return false;

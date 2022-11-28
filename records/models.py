@@ -34,6 +34,7 @@ class Records(models.Model):
     record_third_respirations_min = models.CharField(max_length=1000, verbose_name='3.Solunum/DK',null=True,blank=True)
     medications = models.CharField(max_length=1000, null=True,blank=True)
     scale_used = models.CharField(max_length=1000, null=True,blank=True)
+    way_of_application = models.CharField(max_length=1000,null=True,blank=True)
 
     def __str__(self):
        return self.username
@@ -50,5 +51,11 @@ class MedicationName(models.Model):
     
     def __str__(self):
         return self.medicationName
+
+class WayOfApplication(models.Model):
+    way_of_application = models.CharField(max_length=200,blank=True,null=True)
+    
+    def __str__(self):
+        return self.way_of_application
     
     
