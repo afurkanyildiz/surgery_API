@@ -1,0 +1,199 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+<script>
+    $(document).ready(function()
+   {
+        $('.expression').click(function()
+        {
+            var text="";
+            $('.expression:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#expressionTxt').val(text);
+        });
+
+        $('.declaration').click(function()
+        {
+            var text="";
+            $('.declaration:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#declarationTxt').val(text);
+        });
+    });
+</script>
+<script>
+    $(function() {
+        if($('#kvkkPatientSignatureText').is(':contains("lines")'))
+        {
+            var sig = $('#kvkkPatientSignature').signature({thickness:4});
+            sig.signature('draw',$('#kvkkPatientSignatureText').val());
+            sig.signature('disable');
+            $('#kvkkPatientSignature').signature({disabled:true,thickness:4})
+        }
+        else{
+            var sig = $('#kvkkPatientSignature').signature({thickness : 4});
+            $('#kvkkPatientSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#kvkkPatientSignatureJson').click(function() {
+                $('#kvkkPatientSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+});
+</script>
+<main>
+    <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h4 class="text-center font-weight-light my-4">KİŞİSEL VERİLERİN KORUNMASI HAKKINDA BİLGİLENDİRİLMİŞ ONAM FORMU</h4>
+                        <div class="card-body">
+                            <form action="{% url 'updateKvkkConsent' kvkkConsent.id%}" method="POST">
+                                {% csrf_token%}
+                                <div class="row">
+                                    <p class="fw-bold fs-5">Sayın Hasta/Vasi/Veli</p>
+                                    <p class="fw-normal fs-5">6698 Sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve 29863 Sayılı Kişisel Sağlık Verilerinin İşlenmesi ve mahremiyetinin Sağlanması Hakkında 
+                                        Yönetmelik Kapsamında Oruçreis Mahallesi Tekstilkent Caddesi Koza Plaza A Blok Kat:20 Daire:75 Esenler/İstanbul adresinde faaliyet gösteren MHACARE SAĞLIK TURİZM İNŞAAT TİCARET
+                                        ANONİM ŞİRKETİ "Veri Sorumlusu" sıfatına sahiptir.</p>
+                                    <p class="fw-normal fs-5">"Veri Sorumlusu" sıfatına sahip yukarıda adı geçen kişilerce, kişisel verileriniz aşağıda açıklandığı şekilde, tamamen veya kısmen otomatik olan yada
+                                        herhangi bir veri kayıt sisteminin parçası olmak kaydıyla otomatik olmayan yollarla elde edilebilir,kaydedilebilir, depolanabilir, muhafaza edilebilir, değiştirilebilir, yeniden düzenlenebilir,
+                                        açıklanabilir, aktarılabilir, devralınabilir,elde edilebilir hale getirilebilir, sınıflandırılabilir ya da kullanılması engellenebilir ve KVKK ve 29863 sayılı Yönetmelikte sayılan şekillerde işlenebilecektir.</p>
+                                    <p class="fw-bold fs-5">Kişisel Verilerin Hangi Amaçla İşlenebileceği;</p>
+                                    <p class="fw-normal fs-5">Şirketimiz 6698 Sayılı Kişisel Verilerin Korunması Kanunun 5.maddesinin 2.fıkrasında ve 6.maddenin 3.fıkrasında belirtilen kişisel veri işleme şartları içerisindeki amaçlarla ve koşullarla sınırlı olarak
+                                        kişisel veriler işlemektedir.</p>
+                                    <p class="fw-normal fs-5">Şirketimiz kişisel verileri, bunlarla sınırlı olmamak üzere aşağıdaki amaçlarla işleyebilmektedir.</p>
+                                    <ul>
+                                        <li>Kamu sağlığının korunması,koruyucu hekimlik, tıbbi teşhis, tedavi ve bakım hizmetlerinin yürütülmesi, Sağlık hizmetleri ile finansmanının planlanması ve yönetimi amacıyla</li>
+                                        <li>Elektronik(internet/mobil vs.) veya kağıt ortamında sağlanan hizmetlere dayanak olacak tüm kayıt ve belgeleri düzenlemek,</li>
+                                        <li>Mevzuat gereği T.C. Sağlık Bakanlığı ve diğer kamu kurum ve kuruluşlarına aktarmak,</li>
+                                        <li>Kamu ve özel hukuk kişileriyle yapılmış olan anlaşmalarda öngörülen yükümlülüklere uymak,</li>
+                                        <li>Talep edilen diğer hizmetleri sunabilmek,</li>
+                                        <li>Hizmet alan ile oluşan hukuki ilişkinin gereğini yerine getirmektedir.</li>
+                                        <li>Sağlık hizmetlerinin finansmanı kapsamında özel sigorta şirketleri tarafından talep edilen her türlü bilgileri paylaşma</li>
+                                    </ul>
+                                    <p class="fw-normal fs-5"><b> Kimlere ve hangi amaçla aktarılabileceği:</b>Açıklanan amaçlar kapsamında işlenen verileriniz; KVKK'da öngörülen temel ilkelere uygun olarak ve KVKK'nın 
+                                        8. ve 9. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları dahilinde, Sağlık bakanlığı ve bağlı alt birimleri, Yetki vermiş olduğunuz temsilcileriniz, Özel sigorta
+                                        şirketleri, Sosyal Güvenlik Kurumu, Emniyet Genel Müdürlüğü ve sair kolluk kuvvetleri, Nüfus Genel Müdürlüğü, Türkiye Eczacılar Birliği,Mahkemeler ve her türlü yargı makamı, merkezi 
+                                        ve sair üçüncü kişiler, Avukatlar,Tıbbi teşhis ve tedavi için iş birliği içerisinde olduğumuz laboratuvarlar,tıp merkezleri, ambulans, tıbbi cihaz ve sağlık hizmeti sunan kurumlar, hizmetlerin
+                                        sağlanabilmesi amacıyla sınırlı olarak tedarikçilerimiz ile paylaşılabilecektir.</p>
+                                    <p class="fw-bold fs-5">Kişisel Veri Toplamanın Yöntemi ve Hukuki Sebebi</p>
+                                    <p class="fw-normal fs-5">Kişisel verileriniz Şirket tarafından müşteri temsilcileri, ilgli internet siteleri, mobil uygulama gibi kanallardan, Şirket erişimine imkan verdiğiniz sosyal medya hesapları üzerinden
+                                        elektronik ortamda ve/veya çağrı merkezi kanalıyla otomatik yada otomatik olmayan yöntemlerle toplanmaktadır. İşbu toplanan kişisel verileri hukuki sebebi; 6698 sayılı Kişisel Verilerin Korunması Kanunu,
+                                        Özel Hastaneler Yönetmeliği,Sağlık Bakanlığı düzenlemeleri ve sair mevzuat hükümleridir.</p>
+                                    <p class="fw-bold fs-5">MHACARE SAĞLIK TURİZM İNŞAAT TİCARET ANONİM ŞİRKETİ'ne Başvurarak Kişisel Verilerinizin;</p>
+                                    <ul>
+                                        <li>İşlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme,</li>
+                                        <li>İşlenme amacını ve amacına uygun kullanıp kullanılmadığını öğrenme,</li>
+                                        <li>Yurt içinde/yurt dışında aktarıldığı 3.kişileri bilme, eksik/yanlış işlenmişse düzeltilmesini isteme</li>
+                                        <li>KVKK'nın 7. ve 29863 sayılı yönetmeliğinin 9.maddesinde öngörülen şartlar çerçevesinde silinmesini/yok edilmesini siteme</li>
+                                        <li>Aktarıldığı 3.kişilere yukarıda sayılı işlemlerin bildirilmesini isteme,</li>
+                                        <li>Münhasıran otomatik sistemler ile analiz edilmesi nedeniyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme ve kanuna aykırı olarak işlenmesi sebebiyle zarara uğramanız halinde
+                                            zararın giderilmesini talep etme haklarına sahipsiniz.</li>
+                                    </ul>
+                                    <p class="fw-normal fs-5">Şirketimize KVKK Kanunu'nun 11.maddesi kapsamında yapacağımız başvuruların sağlıklı ve hızlı şekilde yönetilmesi için, internet sitemizin Kişisel Verilerin
+                                        Korunması başlığı altında yer alan *İlgili Kişi Bilgi Talep Başvuru Farmu* belgesini kullanmanızı, talebinize göre istenebilecek belge/bilgileri ve kimliğinizi tespit edici gerekli
+                                        belgeleri de sağlayarak bizzat elden ya da iadeli taahhütlü mektup ile yapılmasını öneriyoruz. Ayrıca, ilgili kişi bilgi talep formunu Çevrimiçi kullanıcı olarak (Şirketimize daha önce
+                                        bildirdiği ve şirketimizin sisteminde kayıtlı bulunan Elektronik Posta Adresi ile) info@healmedy.com üzerinden yine bizlere talebinizi iletebilirsiniz.</p>
+                                    <p class="fw-bold fs-5">"Kişisel Verilerin Korunması Hakkında Aydınlatılmış Onam Formunda" yer alan bilgi ve açıklamaların Veri Sorumlusunca tarafıma doğru ve anlaşılır biçimde</p>
+                                   
+                                    <div>
+                                        <input class="expression" type="radio" id="told" name="expression" {% if kvkkConsent.expression == 'told'%} checked {%endif%} value="told" group="expression">
+                                        <label for="told" class="col-form-label-lg">Anlatıldığını</label>
+                                    </div>
+                                    <div>
+                                        <input class="expression" type="radio" id="notTold" name="expression" {% if kvkkConsent.expression == 'notTold'%} checked {%endif%} value="notTold" group="expression">
+                                        <label for="notTold" class="col-form-label-lg">Anlatılmadığını</label>
+                                    </div>
+                                    <input id="expressionTxt" type="text" name="expressionTxt" style="display: none;"  readonly>
+
+                                   
+                                    <p class="fw-normal fs-5">Beyan eder ve bana/ vesi/vasisi bulunduğum <input type="text" id="kvkkName" name="kvkkName" value="{{kvkkConsent.kvkkName}}" style="width: auto;">'a ait kişisel verilerin, ben Aksini bildirmedikçe 
+                                        MHACARE Sağlık tarafından her türlü pazarlama faaliyetleri, bilgilendirmeler, tanıtımlar, anketler, açılış, davet, etkinlik ve iletişim çalışmaları uygulamalarında kullanılmasına, saklanmasına ve bu 
+                                        uygulamalar ile ilgili olarak tarafıma ve/veya adına işlem gerçekleştirdiğim temsilcisi bulunduğum kişilere MHACARE Sağlık tarafından SMS, E-posta, posta,telefon ve her türlü iletişim yolu ile ulaşılmasına 
+                                        hiç bir baskı altında kalmaksızın açıkca</p>
+                                    
+                                    <div>
+                                        <input class="declaration" type="radio" id="approve" name="declaration" {% if kvkkConsent.declaration == 'approve'%} checked {%endif%} value="approve" group="declaration">
+                                        <label for="approve" class="col-form-label-lg">Onay verdiğimi</label>
+                                    </div>
+                                    <div>
+                                        <input class="declaration" type="radio" id="notApprove" name="declaration" {% if kvkkConsent.declaration == 'notApprove'%} checked {%endif%} value="notApprove" group="declaration">
+                                        <label for="notApprove" class="col-form-label-lg">Onay vermediğimi Beyan Ederim</label>
+                                    </div>
+                                    <input id="declarationTxt" type="text" name="declarationTxt" style="display: none;"  readonly>
+
+                                    
+                                    <p class="fs-6 fs-5">*Onay verdiğimi* kutusunun işaretlenmesi halinde anılan maddeye rıza gösterildiği anlamına gelmektedir.</p>
+                                    <p class="fs-6 fs-5">*Onay vermediğimi* kutusunun işaretlenmesi halinde anılan maddeye rıza gösterilmediği anlamına gelmektedir.</p>
+                                    <div class="col mb-3">
+                                        <p class="fw-bold fs-5">Kişisel Verilerimin Aktarılmasına Onay Verdiğim Yakınlarım;</p>
+                                        <textarea type="text" class="form-control" name="myRelatives" id="myRelatives" cols="100" rows="5">{{kvkkConsent.myRelatives}}</textarea>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <p class="fw-bold fs-5">Kişisel Verilerimin Aktarılmasına Onay Verdiğim Diğer Özel Hukuk Kişileri Yakınlarım;</p>
+                                        <textarea type="text" class="form-control" name="legalPerson" id="legalPerson" cols="100" rows="5">{{kvkkConsent.legalPerson}}</textarea>
+                                    </div>
+                                    <p class="fw-bold fs-5">Hastanın ve/veya Velisi/Vasisi</p>
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label for="kvkkPatientUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="kvkkPatientUsername" id="kvkkPatientUsername" value="{{kvkkConsent.kvkkPatientUsername}}">
+
+                                                <label for="kvkkPatientDate" class="form-label">Tarih</label>
+                                                <input type="date" class="form-control" name="kvkkPatientDate" id="kvkkPatientDate" value="{{kvkkConsent.kvkkPatientDate}}">
+                                        </div>
+                                        <div class="col mb-3">
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    <label for="kvkkPatientSignature" class="form-label">İmza</label>
+                                                    </br> 
+                                                    <div class=" border border-5" id="kvkkPatientSignature">
+                                                            
+                                                    </div>
+                                                    <textarea type="text" class="form-control" name="kvkkPatientSignatureText" id="kvkkPatientSignatureText" cols="30" rows="10" style="display: none;">{{kvkkConsent.kvkkPatientSignatureText}}</textarea>
+                                                </div>
+                                                <div class="mb-3 col" style="display: block;"> 
+                                                    </br>   
+                                                    <button class="btn btn-outline-danger" type="button" id="kvkkPatientSignatureClear" name="kvkkPatientSignatureClear">Temizle</button> 
+                                                    </br>
+                                                    </br>
+                                                    <button class="btn btn-outline-success" type="button" id="kvkkPatientSignatureJson" name="kvkkPatientSignatureJson">İmzayı Kaydet</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <button type="submit" name="injectionSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                            &nbsp;
+                                            <button type="button" name="İnjectionpreview" onclick="KVKKConsentPDF()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                            &nbsp;
+                                            <button type="button" name="İnjectionprint" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                            &nbsp;
+                                            <button type="reset" name="İnjectionclear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock%}

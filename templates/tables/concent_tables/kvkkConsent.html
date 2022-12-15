@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<main>
+    <div class="container-fluid px-4">
+        {% csrf_token %}
+        <h1 class="mt-4">KVKK HAKKINDA BİLGİLENDİRİLMİŞ ONAM FORMU GÖRÜNTÜLEME</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'index'%}">Ana Sayfa</a></li>
+            <li class="breadcrumb-item active">Onam Formu Tablosu</li>
+            <li class="breadcrumb-item active">KVKK Hakkında Bilgilendirilmiş Onam Formu Görüntüleme</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                KVKK Hakkında Bilgilendirilmiş Onam Formu Görüntüleme
+            </div>
+            <div class="card-body">
+                {% if kvkkConsent %}
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarih</th>
+                            <th>Adı-Soyadı</th>
+                            <th>Duzenle</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tarih</th>
+                            <th>Adı-Soyadı</th>
+                            <th>Duzenle</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        {% for kvkk in kvkkConsent %}
+                        <tr>
+                            <th scope="row">{{kvkk.id}}</th>
+                            <td >{{kvkk.kvkkPatientDate}}</td>
+                            <td>{{kvkk.kvkkPatientUsername}}</td>
+
+                    <td>
+						<a href="{% url 'getKvkkConsent' kvkk.id%}" data-placement="top" data-toggle="tooltip" title="Edit">
+							<button class="bi bi-pencil-square btn btn-outline-warning" data-title="Edit" data-toggle="modal" data-target="#edit" > Düzenle</button></a></td>
+                    <!-- <td>
+                            <button type="button" class="bi bi-trash btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal_{{case.id}}">
+                                Sil 
+                            </button>
+                         <div class="modal fade" id="exampleModal_{{case.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Kayit Sil</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>{{case.username}} Isimli Kaydı Silmek İstiyor musunuz?</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Kapat</button>
+                                    <a href="">
+                                        <button  type="button" class="btn  btn-outline-danger">Sil</button>
+                                    </a>
+                                </div>
+                            </div>
+                            </div>
+                        </div> 
+                       
+						</td> -->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+              <div class="alert alert-warning">
+                <p>
+                  No Records Table
+                </p>
+              </div>
+              {% endif %}
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

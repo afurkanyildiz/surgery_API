@@ -1,0 +1,270 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+<script>
+    $(document).ready(function()
+   {
+        $('.minorApproval').click(function()
+        {
+            var text="";
+            $('.minorApproval:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#minorApprovalTxt').val(text);
+        });
+    });
+</script>
+<script>
+    $(function() {
+        var sig = $('#minorPatientSignature').signature({thickness : 4});
+        $('#minorPatientSignatureClear').click(function() {
+            sig.signature('clear');
+        });
+
+        $('#minorPatientSignatureJson').click(function() {
+            $('#minorPatientSignatureText').val(sig.signature('toJSON'));
+        });
+});
+    $(function() {
+            var sig = $('#minorDoctorSignature').signature({thickness : 4});
+            $('#minorDoctorSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#minorDoctorSignatureJson').click(function() {
+                $('#minorDoctorSignatureText').val(sig.signature('toJSON'));
+            });
+});
+    $(function() {
+        var sig = $('#minorlegalRepresentativeSignature').signature({thickness : 4});
+        $('#minorlegalRepresentativeSignatureClear').click(function() {
+            sig.signature('clear');
+        });
+
+        $('#minorlegalRepresentativeSignatureJson').click(function() {
+            $('#minorlegalRepresentativeSignatureText').val(sig.signature('toJSON'));
+        });
+});
+    $(function() {
+            var sig = $('#minorinterpreterSignature').signature({thickness : 4});
+            $('#minorinterpreterSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#minorinterpreterSignatureJson').click(function() {
+                $('#minorinterpreterSignatureText').val(sig.signature('toJSON'));
+            });
+});
+</script>
+<main>
+    <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h4 class="text-center font-weight-light my-4">KÜÇÜK CERRAHİ GİRİŞİM BİLGİLENDİRİLMİŞ ONAM FORMU</h4>
+                        <div class="card-body">
+                            <form action="" method="POST">
+                                {% csrf_token%}
+                                <div class="row">
+                                    <p class="fw-bold">Sayın Hasta, Sayın Veli/Vasi</p>
+                                    <p class="fw-normal">Lütfen bu formu dikkatle okuyun. Bu form sizi işlem hakkında bilgilendirme amacıyla oluşturulmuştur. Bilgilendirme sonucunda tamamen serbest iradenizle
+                                        işlemi yaptırma veya reddetme hakkına sahipsiniz. Yapılan tetkik ve değerlendirmeler sonucu size <input type="text" class="form-control" id="minorDiagnosis" name="minorDiagnosis" style="width: auto;">tanısı ile size küçük cerrahi girişim 
+                                        yapılmasını uygun görmekteyiz. Bu tedaviye siz tedavi için uygun koşulları sağladığınız ve tedaviyi kabul etmeniz halinde yapacağız. Sizin bu tedaviden yararlanmanızı öneriyoruz. Kararınızdan önce aşağıda yazılı olan 
+                                        metni okumanızı ve tedavi hakkında bilgilenmenizi istiyoruz. Bilgileri okuyup anladıktan sonra bu tedaviyi almayı kabul ederseniz formu imzalayınız.</p>
+                                    <p class="fw-normal">Eğer kabul ederseniz size,doktorunuz tarafından küçük cerrahi girişim uygulanacaktır. Tedavi süresince yaşayacağınız problemleri doktorunuzla paylaşmanız uygun olacaktır.</p>
+                                    <p class="fw-normal">Bu işlem doktorunuzun tanısını koyduğu lezyonu, lokal anestezik madde ile uyuşturulduktan sonra, cerrahi ile keserek uzaklaştırmak amacıyla yapılmaktadır. Yapılan kesi, girişim
+                                        sonrası uygun sütür materyali ile dikilmektedir.</p>
+                                    <p class="fw-bold">Girişimin Tanımı ve Amacı</p>
+                                    <p class="fw-normal">Planlanan girişim ile cilt,ciltaltı,kas,bağ ve kirişlerin bütünlüğünün sağlanması ve bu dokuların fonksiyonunu sürdürmek hedeflenmektedir. Açık yaralanmalarda;
+                                        kötü-kirli dokular ve yabancı cisimler uzaklaştırılır, yara temizlenir ve uygunsa kapatılarak infeksiyon ihtimali en aza indirilmeye çalışılır.</p>
+                                    <p class="fw-bold">Hastalık Hakkında Bilgi</p>
+                                    <p class="fw-normal"><b>Yumuşak doku onarımı:</b> Açık yaralanmalarda,cilt,cilt altı, kas kılıfları, bağ ve kirişler uygun debridman ve yara bölgesinin temizlenmesini takiben
+                                        cerrahi olarak onarılabilir. Tam kopmalarda fonksiyonların geri kazanılması için cerrahi tedavi gerekebilir. Kopan bağ veya kirişe cerrahi bir kesi yardımı ile ulaşılıp yaralanmış parça
+                                        onarılabilir. Sinirler geç dönemde de onarılabilir(belirli bir süre sonra sinir fonksiyonları geri gelebilir).</p>
+                                    <p class="fw-normal"><b>Debridman ve Irrigasyon:</b>Özellikle açık yaralanmalarda infeksiyon ihtimalini azaltmak için dolaşımı bozulmuş(ölü) dokular ve yabancı cisim ve kirlenmeler cerrahi
+                                        olarak uzaklaştırılır(debridman). Bol streil sıvılarla yıkanır(irrigasyon)</p>
+                                    <p class="fw-normal"><b>Travmatik uzuv kaybı ve güdük onarımı:</b>Yaralanma sonucu uzvun kopması durumunda ilgili konsültasyonlar(diğer bölümlerle görüşülerek) sonucu tekrar yerine dikilmesi mümkün 
+                                        olmadığında, bölgeye debridman-irrigasyon uygulanarak kopan bölge kapatılır.</p>
+                                    <p class="fw-bold">Diğer: <input type="text" class="form-control" id="minorOther" name="minorOther" style="width: auto;"></p>
+                                    <p class="fw-normal"><b>İşlemin Uygulanmaması Durumunda Olabilecekler:</b> Bu işlem yapılmaması yaranızın açık kalması ve infekte olmasına yol açar. Onarım yapılmadığı takdirde yaralanan bölgede fonksiyon kaybı meydana gelir.</p>
+                                    <p class="fw-bold">İşlemin Varsa Alternatifleri: <textarea name="minorAlternative" id="minorAlternative" cols="70" rows="2"></textarea></p>
+                                    <p class="fw-bold">İşlemin Riskleri ve Komplikasyonları:</p>
+                                    <p class="fw-normal">Tıbbi tüm girişimlerde olduğu gibi, bu işlemde de bazı komplikasyon riskleri mevcuttur. Uygulanan anestezik maddeye bağlı enerjik reaksiyonlar, kanama, yara yeri enfeksiyonu, iz kalması, iyileşme sonrası 
+                                        ciltte açık veya koyu renk değişiklikleri, lezyonun tamamen çıkarılamayıp kısmen sebat etmesi ya da tekrarlanması, işlem sırasında veya sonrasında ağrı, işlem bölgesine komşu doku ve organlarda kısmi hasar,
+                                        kullanılan dikiş materyaline karşı alerjik reaksiyonlar, dikiş açılması, kan toplanması, şişlik, duyu ve his kayıpları gibi komplikasyonlar gelişebilmektedir. Onarılan cilt,cilt altı, kas, bağ ve kirişler aşırı
+                                        zorlandığı takdirde ayrılabilir veya hareketsiz kalmaya bağlı yapışıklıklar oluşabilir.</p>
+                                    <p class="fw-bold">Girişimden Önce Dikkat Edilmesi Gerekenler:</p>
+                                    <p class="fw-normal">Daha önce bu girişimin yapılıp yapılmadığı, hastanın kullandığı ilaçlar, eşlik eden hastalıklar, kanama bozukluğu veya alerjisi olup olmadığı hakkında yeterli bilgi verilmelidir.
+                                        Öncelikle aspirin,kumadin,omege3,yeşil çay vb. bitki çayları gibi pıhtılaşma önleyiciler olmak üzere kullandığınız tüm ilaçları, mevcut sistemik hastalıklarımızı işlem yapılmadan önce doktorunuza 
+                                        mutlaka bildiriniz.</p>
+                                    <p class="fw-bold">Girişimden Sonra Dikkat Edilmesi Gerekenler:</p>
+                                    <p class="fw-normal">Yapılan işlem sonrası gerekli görüldüğünde verilecek tedavileri düzenli olarak kullanınız. Pansuman veya kontrol amacıyla verilen randevularınıza mutlaka geliniz.</p>
+                                    <div class="col mb-3">
+                                        <div class="col-xs-2 input-group mb-3 ">
+                                            <span class="input-group-text" id="processing_time"><b>İşlem Tahmini Süresi:</b></span>
+                                            <input type="text" class="form-control" name="processing_time" id="processing_time" aria-describedby="basic-processing_time">
+                                            <span class="input-group-text" id="processing_time"><b>dakikadır.</b></span>
+                                        </div>
+                                    </div>
+                                    <div class="col mb-3"></div>
+                                    <p class="fw-normal"><b>Hastanın Sağlığı İçin Kritik Olan Yaşam Tarzı Önerileri:</b> İşlem sonrasında yaşam tarzım için yapmam gerekenleri(Diyet,banyo,ilaç kullanımı,hareket durumu ve/veya kısıtlama durumu)
+                                        ile ilgili bilgi aldım.</p>
+                                    <p class="fw-normal"><b>Gerektiğinde Aynı Konuda Tıbbi Yardıma Nasıl Ulaşılabileceği:</b>Gerektiğinde aynı konuda tıbbi yardıma(Kendi hekimine,farklı bir hekime,tedavi gördüğü kliniğe ve acil durumlarda da 112'ye)
+                                        nasıl ulaşacağım konusunda bilgi aldım.</p>
+                                    <p class="fw-normal"><b>Bize Ulaşabileceğiniz Telefon Numaraları: Sağlık Merkezi Tel:</b> 444 61 01</p>
+                                    <p class="fw-bold">Hasta Onamı:</p>
+                                    <p class="fw-normal">Aşağıda adımın yazılı olduğu yeri imzalayarak bu bilgilendirme ve onam formunu okuduğumu, doktorum tarafından bana yapılacak işlemler konusunda sözlü ve yazılı olarak anlayabileceğim
+                                        bir dilde bilgi verildiğini, bütün sorularımın yanıtlandığını ve benim için gerekli olan tüm bilgileri edindim. Lütfen; size anlatılanları ve okuduklarınızı anladığınızı beyan ediniz:</p>
+                                        
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <input class="minorApproval" type="radio" id="minorApproval" name="minorApproval" value="minorApproval" group="minorApproval">
+                                            <label for="minorApproval" class="col-form-label-lg">Okudum, Anladım Onaylıyorum</label>
+                                            <input id="minorApprovalTxt" type="text" name="minorApprovalTxt" style="display: none;"  readonly>
+
+
+                                            <label for="minorDate" class="form-label">Tarih</label>
+                                            <input type="date" class="form-control" id="minorDate" name="minorDate">
+                                        </div>
+                                        <div class="col mb-3">        
+                                            <label for="minorHour" class="form-label">Saat</label>
+                                            <input type="time" class="form-control" id="minorHour" name="minorHour">
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <p class="fw-bold">Hastanın Bilinci Açık ve Reşit ise;</p>
+                                                <label for="minorPatientUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="minorPatientUsername" id="minorPatientUsername">
+
+                                                <label for="minorPatientAdress" class="form-label">Adresi</label>
+                                                <input type="text" class="form-control" name="minorPatientAdress" id="minorPatientAdress">
+
+                                                <label for="minorPatientTel" class="form-label">Tel. No</label>
+                                                <input type="text" class="form-control" name="minorPatientTel" id="minorPatientTel">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="minorPatientSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="minorPatientSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="minorPatientSignatureText" id="minorPatientSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="minorPatientSignatureClear" name="minorPatientSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="minorPatientSignatureJson" name="minorPatientSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            
+                                                <p class="fw-bold">Ameliyat, İşlem/Tedaviyi Yapan</p>
+                                                <label for="minorDoctorUsername" class="form-label">Doktor Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="minorDoctorUsername" id="minorDoctorUsername">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="minorDoctorSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="minorDoctorSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="minorDoctorSignatureText" id="minorDoctorSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="minorDoctorSignatureClear" name="minorDoctorSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="minorDoctorSignatureJson" name="minorDoctorSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-3">
+                                                <p class="fw-bold">Hastanın Bilinci Kapalı ve Yanında Yasal Temsilcisi Var ise:</p>
+                                                <label for="minorlegalRepresentativeUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="minorlegalRepresentativeUsername" id="minorlegalRepresentativeUsername">
+
+                                                <label for="minorlegalRepresentativeAdress" class="form-label">Adresi</label>
+                                                <input type="text" class="form-control" name="minorlegalRepresentativeAdress" id="minorlegalRepresentativeAdress">
+
+                                                <label for="minorlegalRepresentativeTel" class="form-label">Tel. No</label>
+                                                <input type="text" class="form-control" name="minorlegalRepresentativeTel" id="minorlegalRepresentativeTel">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="minorlegalRepresentativeSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="minorlegalRepresentativeSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="minorlegalRepresentativeSignatureText" id="minorlegalRepresentativeSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="minorlegalRepresentativeSignatureClear" name="minorlegalRepresentativeSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="minorlegalRepresentativeSignatureJson" name="minorlegalRepresentativeSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            
+                                                <p class="fw-bold">Hasta Yabancı ve Çeviri Yapılmış ise:</p>
+                                                <label for="minorinterpreterUsername" class="form-label">Tercüman Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="minorinterpreterUsername" id="minorinterpreterUsername">
+
+                                                <label for="minorinterpreterTel" class="form-label">Tel. No</label>
+                                                <input type="text" class="form-control" name="minorinterpreterTel" id="minorlegalinterpreterTel">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="minorinterpreterSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="minorinterpreterSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="minorinterpreterSignatureText" id="minorinterpreterSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="minorinterpreterSignatureClear" name="minorinterpreterSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="minorinterpreterSignatureJson" name="minorinterpreterSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <button type="submit" name="injectionSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                                &nbsp;
+                                                <!-- <button type="button" name="İnjectionpreview" onclick="minorConsentPDF()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button> -->
+                                                &nbsp;
+                                                <button type="button" name="İnjectionprint" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                                &nbsp;
+                                                <button type="reset" name="İnjectionclear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock%}

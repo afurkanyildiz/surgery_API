@@ -9507,3 +9507,1388 @@ function updatePreCasePdf(){
     doc.output('pdfobjectnewwindow');
 
 }
+
+function generalConsentPDF(){
+    const {jsPDF} = window.jspdf;
+
+    var doc = new jsPDF();
+    doc.setFont("OpenSans-Medium");
+
+    doc.setFontSize(14);
+    doc.text("GENEL BİLGİLENDİRME VE ONAM FORMU",65,11);
+
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,1,200,290)
+
+    // doc.setLineWidth(0.1);
+    // doc.line(155, 12, 155, 28);
+    doc.line(5,16,205,16)
+
+    doc.setFontSize(7);
+    doc.text("Tarih:..../..../....",180,5);
+    var date = document.getElementById('generalDate').value
+    doc.setFontSize(6)
+    doc.text(date,185,4)
+
+    doc.setFontSize(7);
+    doc.text("Saat:........",180,10);
+    var generalHour = document.getElementById('generalHour').value
+    doc.setFontSize(6)
+    doc.text(generalHour,185,9)
+
+    doc.setFontSize(7);
+    doc.text("Adı-Soyadı:............................",10,20)
+    var generalPatientUsername1 = document.getElementById('generalPatientUsername').value
+    doc.setFontSize(7)
+    doc.text(generalPatientUsername1,24,19)
+
+    doc.setFontSize(7);
+    doc.text("Protokol No:............................",10,25)
+    var generalPatientAdress = document.getElementById('generalProtocolNumber').value
+    doc.setFontSize(7)
+    doc.text(generalPatientAdress,26,24)
+
+
+    doc.setFontSize(7);
+    doc.text("Doğum Tarihi:............................",10,30)
+    var generalPatientTel = document.getElementById('generalPatientBirthDate').value
+    doc.setFontSize(7)
+    doc.text(generalPatientTel,26,29)
+
+
+    doc.setFontSize(7);
+    doc.text("Cinsiyet:",10,35)
+
+    doc.setFontSize(7)
+    doc.text("[ ] Erkek",25,35)
+    var generalGender = document.querySelector('input[name="generalGender"]:checked').value
+    console.log(generalGender)
+    if(generalGender == 'erkek') {
+        doc.setFontSize(6)
+        doc.text("X",25.5,35)
+    }
+
+    doc.setFontSize(7)
+    doc.text("[ ] Kadın",40,35)
+    // var generalGender = document.getElementById("generalGender")
+    if(generalGender == 'kadın') {
+        doc.setFontSize(6)
+        doc.text("X",40.5,35)
+    }
+
+
+
+    doc.setFontSize(9);
+    doc.text("SAYIN HASTA,SAYIN VELİ/VASİ",10,40)
+
+    generalText = "Sunduğumuz sağlık hizmetinden yararlanmak üzere sağlık merkezimize başvurmuş bulunuyorsunz. Ülkemiz yasalarının hastalara tanıdığı bütün haklardan yararlanma hakkına sahipsiniz."+
+    "Bu belge bilgilendirme ve aydınlatılmış onam haklarınızdan yararlanabilmenizi amaçlamaktadır. Sağlık merkezi hizmetlerinden nasıl yararlanacağınız hakkında bil alma hakkınız vardır."+
+    "Sağlık durumunuz hakkında anlayabileceğiniz şekilde bilgi alma hakkınız vardır. Size gerçekleştirilebilecek tanı veya tedavi amaçlı girişimler konusunda tüm seçenekler ile bu girişimlerin"+
+    "yarar ve muhtemel zararları konusunda anlayabilceğiniz şekilde bilgi alma hakkınız vardır. Yasal ve tıbbi zorunluluk taşıyan durumlar dışında bilgilendirilmeyi reddebilirsiniz. Yazılı bildirmek"+
+    "koşulu  ile bilgi almama ya da yerinize güvendiğiniz bir kimsenin bilgilendirilmesini talep etme hakkına sahipsiniz. Sağlık durumunuz veya size uygulanacak tanı ve tedavi amaçlı girişimler konusunda"+
+    "bilgilendirildikten sonra bu tanı ve tedavi amaçlı girişimlerden birini seçerek size uygulanmasını kabul edebilirsiniz. Bazı istisnalar hariç onamınızı(rızanız/kabulünüz) olmadığı sürece size tanı"+
+    "veya tedavi amaçlı hiçbir girişim gerçekleştirilemez. Size önerilen tanı veya tedavi amaçlı girişimleri kabul etmediğinizi yazılı bir belgeyle bildirmeniz gerekmektedir. Acil durumlarda hayatınızı ya da"+
+    "hayati organınızı tehdit eden durumlarda onamınız alınmadan tanı ve tedavi amaçlı girişimler gerçekleştirilebilir."
+
+    var generalText = doc.setFontSize(8).splitTextToSize(generalText,195)
+    doc.text(generalText,10,45)
+
+    generalText1= "Doktorum tarafından sağlık durumum ve bana uygulanacak tıbbi -cerrahi tedavi- tanı amaçlı girişim - alternatif girişim veya tedavi yöntemleri konusunda, bu tanı/tedavi yöntemlerin"+
+    "neler olabileceği, sağlayacağı yararlar, bu tanı-tedavi yöntemlerinin olası zararları, beklenmeyen ya da önlenemeyen durumlar tüm komplikasyonlar ve olası riskleri ayrıntıları ile anlatıldı. Bu tanı"+
+    "ve tedavi yerine uygulanabilecek bir başka tıbbi yöntemin bulunup bulunmadığı konusunda bilgilendirildim."
+
+    var generalText1 = doc.setFontSize(8).splitTextToSize(generalText1,195)
+    doc.text(generalText,10,80)
+
+    generalText2="Doktorlarımın planladıkları girişim ve/veya operasyonlarda planladıklarına ek operasyon gerekebilecek durumlar ile karşılaşabileceğimi biliyorum ayrıca uygulanabilecek yöntemler konusunda"+
+    "ek sorular sorabileceğim ve bunlarında yanıtlanabilceği tedavi yöntemlerine karar vermeden uygun bir süre düşünebileceğim ve önerilen tanı yöntemleri arasından seçim yapabilceğim konusunda seçtiğim"+
+    "tanı yönteminden hayati bir organımı ya da hayatımı tehdit eden bir durum olmadığı sürece diledğim zaman vazgeçebileceğim hususunda  anlayabileceğim bir şekilde sözlü-yazılı olarak bilgilendirildim,"+
+    "tüm bu tanı-tedavi yöntemlerinin uygulanmasını serbest irademle hiçbir baskı altında kalmadan kabul ediyorum."
+
+    var generalText2 = doc.setFontSize(8).splitTextToSize(generalText2,195)
+    doc.text(generalText2,10,115)
+
+    generalText3="Hastalığımın nedeni ile hastanede uygulanacak tüm tanı ve tedavi yöntemlerinin olası yararları ve riskleri anlatıldı."
+
+    var generalText3 = doc.setFontSize(8).splitTextToSize(generalText3,195)
+    doc.text(generalText3,10,135)
+
+    generalText9="İşlemin Tahmini Süresi:............... dakikadır."
+    var generalText9 = doc.setFontSize(8).splitTextToSize(generalText9,195)
+    doc.text(generalText9,10,139)
+    var generalprocessingTime = document.getElementById('GeneralprocessingTime').value
+    console.log(generalprocessingTime)
+    doc.setFontSize(7)
+    doc.text(generalprocessingTime,45,139)
+
+    generalText4="Kullanılacak İlaçların Önemli Özellikleri: Sağlık Merkezinde bulunduğum süre içerisinde tanı ve tedavi için kullanılacak ilaçlarla ilgili önemli özellikler(ne için kullanıldığı,faydaları"+
+    ",yan etkileri,nasıl kullanılacağı) konusunda bilgi aldım."
+
+    var generalText4 = doc.setFontSize(8).splitTextToSize(generalText4,195)
+    doc.text(generalText4,10,143)
+
+    generalText5="Hastanın Sağlığı için Kritik Olan Yaşam Tarzı Önerileri: Tedavim/Ameliyatım sonrasında yaşam tarzım için yapmam gerekenleri(Diyet,banyo,ilaç kullanımı,hareket durumu ve/veya kısıtlama durumu)"+
+    "ile ilgili bilgi aldım."
+
+    var generalText5 = doc.setFontSize(8).splitTextToSize(generalText5,195)
+    doc.text(generalText5,10,153)
+
+    generalText6="Gerektiğinde Aynı Konuda Tıbbi Yardıma Nasıl Ulaşabileceği: Gerektiğinde aynı konuda tıbbi yardıma(Kendi hekimine, farklı bir hekime,tedavi gördüğü kliniğe ve acil durumlarda 112'ye)"+
+    "nasıl ulaşacağım konusunda bilgi aldım."
+
+    var generalText6 = doc.setFontSize(8).splitTextToSize(generalText6,195)
+    doc.text(generalText6,10,163)
+
+    generalText7="Bize Ulaşabileceğiniz Telefon Numaraları: Sağlık Merkezi Tel: 444 61 01"
+
+    var generalText7 = doc.setFontSize(8).splitTextToSize(generalText7,195)
+    doc.text(generalText7,10,173)
+
+    generalText8="Yapılacak İşlemlerle ilgili daha detaylı bilgi almak için hekiminize danışabilirsiniz."
+    var generalText8 = doc.setFontSize(8).splitTextToSize(generalText8,195)
+    doc.text(generalText8,10,178)
+
+    doc.setFontSize(10);
+    doc.text("[  ] Okudum Anladım Onaylıyorum", 10,183);
+    var generalApproval = document.getElementById('generalApproval').value
+    console.log(generalApproval)
+    if(generalApproval == 'generalApproval') {
+        doc.setFontSize(10)
+        doc.text("X",11,183)
+    }
+
+    doc.rect(15,188,180,95)
+
+    doc.line(15,198,195,198)
+
+    doc.setLineWidth(0.1);
+    doc.line(100, 283, 100, 188);
+
+    doc.line(15,235,195,235)
+
+    doc.line(15,260,195,260)
+
+    doc.setFontSize(10);
+    doc.text("HASTANIN BİLİNCİ AÇIK İSE;",33,194)
+
+    doc.setFontSize(10);
+    var docText ="HASTANIN BİLİNCİ KAPALI VE YANINDA"
+    doc.setFontSize(10);
+    var docText1 ="YASAL TEMSİLCİSİ VAR İSE;"
+    doc.text(docText,115,192)
+    doc.text(docText1,125,196)
+
+    doc.setFontSize(8);
+    doc.text("Hastanın:",17,201)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,206)
+    var generalPatientUsername1 = document.getElementById('generalPatientUsername1').value
+    doc.setFontSize(8)
+    doc.text(generalPatientUsername1,33,206)
+
+    doc.setFontSize(8);
+    doc.text("Adresi:",17,211)
+    var generalPatientAdress = document.getElementById('generalPatientAdress').value
+    doc.setFontSize(8)
+    doc.text(generalPatientAdress,27,211)
+
+    doc.setFontSize(8);
+    doc.text("Tel.No:",17,218)
+    var generalPatientTel = document.getElementById('generalPatientTel').value
+    doc.setFontSize(8)
+    doc.text(generalPatientTel,27,218)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,223)
+    const generalPatientSignature  = document.getElementById('generalPatientSignature').getElementsByTagName('canvas');
+    const generalPatientSignaturectx = generalPatientSignature[0].toDataURL();
+    console.log(generalPatientSignaturectx);
+    doc.addImage(generalPatientSignaturectx,"PNG",27,221,15,10);
+
+
+    doc.setFontSize(8);
+    doc.text("Doktor:",17,239)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,244)
+    var generalDoctorUsername = document.getElementById('generalDoctorUsername').value
+    doc.setFontSize(8)
+    doc.text(generalDoctorUsername,33,244)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,249)
+    const generalDoctorSignature  = document.getElementById('generalDoctorSignature').getElementsByTagName('canvas');
+    const generalDoctorSignaturectx = generalDoctorSignature[0].toDataURL();
+    console.log(generalDoctorSignaturectx);
+    doc.addImage(generalDoctorSignaturectx,"PNG",27,247,15,10);
+
+    doc.setFontSize(8);
+    doc.text("Şahit**:",17,264)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,269)
+    var generalWitnessUsername = document.getElementById('generalWitnessUsername').value
+    doc.setFontSize(8)
+    doc.text(generalWitnessUsername,33,269)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,274)
+    const generalWitnessSignature  = document.getElementById('generalWitnessSignature').getElementsByTagName('canvas');
+    const generalWitnessSignaturectx = generalWitnessSignature[0].toDataURL();
+    console.log(generalWitnessSignaturectx);
+    doc.addImage(generalWitnessSignaturectx,"PNG",27,272,15,10);
+
+    doc.setFontSize(8);
+    doc.text("Yasal Temsilcisi*(Vasi) veya Veli:",102,201)
+
+    doc.setFontSize(8);
+    doc.text("Hasta Adı-Soyadı:",102,206)
+    var generalRepresentativeUsername = document.getElementById('generalRepresentativeUsername').value
+    doc.setFontSize(8)
+    doc.text(generalRepresentativeUsername,126,206)
+
+    doc.setFontSize(8);
+    doc.text("Adresi:",102,211)
+    var generalRepresentativeAdress = document.getElementById('generalRepresentativeAdress').value
+    doc.setFontSize(8)
+    doc.text(generalRepresentativeAdress,113,211)
+
+    doc.setFontSize(8);
+    doc.text("Tel. No:",102,218)
+    var generalRepresentativeTel = document.getElementById('generalRepresentativeTel').value
+    doc.setFontSize(8)
+    doc.text(generalRepresentativeTel,113,218)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,223)
+    const generalRepresentativeSignature  = document.getElementById('generalRepresentativeSignature').getElementsByTagName('canvas');
+    const generalRepresentativeSignaturectx = generalRepresentativeSignature[0].toDataURL();
+    console.log(generalRepresentativeSignaturectx);
+    doc.addImage(generalRepresentativeSignaturectx,"PNG",115,221,15,10);
+
+    doc.setFontSize(8);
+    doc.text("Doktor:",102,239)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",102,244)
+    var generalRepresentativeDoctorUsername = document.getElementById('generalRepresentativeDoctorUsername').value
+    doc.setFontSize(8)
+    doc.text(generalRepresentativeDoctorUsername,117,244)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,249)
+    const generalRepresentativeDoctorSignature  = document.getElementById('generalRepresentativeDoctorSignature').getElementsByTagName('canvas');
+    const generalRepresentativeDoctorSignaturectx = generalRepresentativeDoctorSignature[0].toDataURL();
+    console.log(generalRepresentativeDoctorSignaturectx);
+    doc.addImage(generalRepresentativeDoctorSignaturectx,"PNG",115,247,15,10);
+
+    doc.setFontSize(8);
+    doc.text("Şahit**:",102,264)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",102,269)
+    var generalRepresentativeWitnessUsername = document.getElementById('generalRepresentativeWitnessUsername').value
+    doc.setFontSize(8)
+    doc.text(generalRepresentativeWitnessUsername,117,269)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,274)
+    const generalRepresentativeWitnessSignature  = document.getElementById('generalRepresentativeWitnessSignature').getElementsByTagName('canvas');
+    const generalRepresentativeWitnessSignaturectx = generalRepresentativeWitnessSignature[0].toDataURL();
+    console.log(generalRepresentativeWitnessSignaturectx);
+    doc.addImage(generalRepresentativeWitnessSignaturectx,"PNG",115,272,15,10);
+
+    var bloburi = doc.output('bloburi');
+    window.open(bloburi);
+}
+
+function InjectionConsentPDF()
+{
+    const {jsPDF} = window.jspdf;
+
+    var doc = new jsPDF();
+    doc.setFont("OpenSans-Medium");
+
+    doc.setFontSize(14);
+    doc.text("ENJEKSİYON BİLGİLENDİRİLMİŞ ONAM FORMU",65,11);
+
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,1,200,290)
+
+    doc.line(5,16,205,16)
+
+    doc.setFontSize(7);
+    doc.text("Tarih:..../..../....",180,5);
+    var date = document.getElementById('injectionDate').value
+    doc.setFontSize(6)
+    doc.text(date,185,4)
+
+    doc.setFontSize(7);
+    doc.text("Saat:........",180,10);
+    var generalHour = document.getElementById('injectionHour').value
+    doc.setFontSize(6)
+    doc.text(generalHour,185,9)
+
+    doc.setFontSize(9);
+    doc.text("SAYIN HASTA,SAYIN VELİ/VASİ",10,20)
+
+    generalText = "1. Intramüsküler enjeksiyon kas içine(kaba ete), Damar içine intra venöz, ciltaltına subcutan ve cilt arasına intra dermal"+
+    "ve uygulanması gereken ilaçların uygulanması için bir yöntemdir."
+
+    var generalText = doc.setFontSize(8).splitTextToSize(generalText,195)
+    doc.text(generalText,10,25)
+
+    generalText1= "2.Deneyimli bir sağlık personeli tarafından(doktor nezaretinde) küçük çocuk ve bebeklerin uyluk ön yüzüne, daha büyüklerin"+
+    "klaçasına bir enjektör(iğne) aracılığı ile yapılır."
+
+    var generalText1 = doc.setFontSize(8).splitTextToSize(generalText1,195)
+    doc.text(generalText,10,35)
+
+    generalText2="3.İşlemin bazen çok nadir görülen istenmeyen etkileri olabilir. Bunlar enjeksiyon yerinde şişlik, kızarıklık, enfeksiyon,kas ve"+
+    "sinir zedelenmesi ve alerjidir. Bu durumlar deneyimli bir sağlık personeli tarafından donanımlı bir sağlık kuruluşunda yapıldığında oldukça"+
+    "nadirdir ve tedavisi mümkündür."
+
+    var generalText2 = doc.setFontSize(8).splitTextToSize(generalText2,195)
+    doc.text(generalText2,10,45)
+
+    generalText3="4. Sağlık merkezimizde penisilin kas içi uygulaması öncesinde(doktor istemediği sürece) test yapılmamaktadır. Çünkü hayati tehdit"+
+    "edecek düzeyde penisilin alerjisi test sırasında da gerçekleşebilir ve test sırasında alerji olmaması %100 enjeksiyon sırasında alerji olmayacağı"+
+    "anlamına gelmez. Alerji açısından en önemli çocuğun veya birinci dereceden akrablarının(anne,baba,kardeş) daha önce bir ilaca karşı alerjisinin"+
+    "olmasıdır. Böyle bir durum var ise sağlık personelimize bildiriniz."
+
+    var generalText3 = doc.setFontSize(8).splitTextToSize(generalText3,195)
+    doc.text(generalText3,10,58)
+
+    generalText9="5.Enjeksiyonunuz reçeteniz uygun düzenlenmiş ise yapılacaktır. Eğer reçetenizde doktor kaşesi yoksa, kaşe okunaklı değil ise,"+
+    "reçete bir haftadan eskiyse, ilaç dozunda bir sorun varsa sağlık personelimiz sizi yeniden değerlendirme için doktora yönlendirecektir ve bu"+
+    "durumda sizden ek olarak muayene ücreti alınacaktır."
+    var generalText9 = doc.setFontSize(8).splitTextToSize(generalText9,195)
+    doc.text(generalText9,10,75)
+
+    generalText4="6.Akut romatizmal ateş, B12 vitamini eksikliği gibi belli aralıklarla düzenli enjeksiyon olması gereken hastalara durumlarnı"+
+    "bildirir raporları var ise reçete sorulmadan enjeksiyonu yapılacaktır."
+
+    var generalText4 = doc.setFontSize(8).splitTextToSize(generalText4,195)
+    doc.text(generalText4,10,90)
+
+    generalText5="7.Enjeksiyon sonrasında alerjik reaksiyon oluşup oluşmadığının izlenmesi açısından yarım saat bekletileceksiniz. Bu süre sonunda"+
+    "sağlık personeli tarafından tekrar görüldükten sonra gidebilirsiniz."
+
+    var generalText5 = doc.setFontSize(8).splitTextToSize(generalText5,195)
+    doc.text(generalText5,10,100)
+
+    generalText6="8. Enjeksiyon acil bir işlem değildir. İşleminiz acil hastaların işlerini aksatmayacak şekilde en kısa sürede yapılacaktır."
+
+    var generalText6 = doc.setFontSize(8).splitTextToSize(generalText6,195)
+    doc.text(generalText6,10,110)
+
+    generalText7="9. Size yapılacak enjeksiyon .......................'dır."
+
+    var generalText7 = doc.setFontSize(8).splitTextToSize(generalText7,195)
+    doc.text(generalText7,10,120)
+
+    var injection1 = document.getElementById('injection1').value
+    doc.setFontSize(8)
+    doc.text(injection1,48,120)
+
+    generalText8="Bu onam formunu okuyup-anladım, anlamadığım yerler hakkında sağlık personelinden yeterli açıklamayı aldım. Bu işlemin bana/hastama "+
+    "uygulanmasına izin veriyorum."
+    var generalText8 = doc.setFontSize(8).splitTextToSize(generalText8,195)
+    doc.text(generalText8,10,130)
+
+    doc.rect(15,140,180,45)
+
+    doc.line(15,150,195,150)
+
+    doc.setLineWidth(0.1);
+    doc.line(100, 140, 100, 185);
+
+    doc.setFontSize(10);
+    doc.text("HASTA/VASİ",35,145)
+
+    doc.setFontSize(10);
+    var docText ="BİLGİLENDİRME YAPAN SAĞLIK ÇALIŞANI"
+    doc.text(docText,115,145)
+
+
+    doc.setFontSize(8);
+    doc.text("Hastanın:",17,153)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,158)
+    var patientUsername = document.getElementById('patientUsername').value
+    doc.setFontSize(8)
+    doc.text(patientUsername,33,158)
+
+    doc.setFontSize(8);
+    doc.text("Adresi:",17,163)
+    var patientAdress = document.getElementById('patientAdress').value
+    doc.setFontSize(8)
+    doc.text(patientAdress,27,163)
+
+    doc.setFontSize(8);
+    doc.text("Tel.No:",17,170)
+    var patientTelNo = document.getElementById('patientTelNo').value
+    doc.setFontSize(8)
+    doc.text(patientTelNo,27,170)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,175)
+    const patientSignature  = document.getElementById('patientSignature').getElementsByTagName('canvas');
+    const patientSignaturectx = patientSignature[0].toDataURL();
+    console.log(patientSignaturectx);
+    doc.addImage(patientSignaturectx,"PNG",27,173,15,10);
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",102,153)
+    var employeeUsername = document.getElementById('employeeUsername').value
+    doc.setFontSize(8)
+    doc.text(employeeUsername,118,153)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,162)
+    const employeeSignature  = document.getElementById('employeeSignature').getElementsByTagName('canvas');
+    const employeeSignaturectx = employeeSignature[0].toDataURL();
+    console.log(employeeSignaturectx);
+    doc.addImage(employeeSignaturectx,"PNG",110,162,15,10);
+
+    generalText9="NOT: Bir enjeksiyondan daha uzun süreli bir tedaviniz varsa; imzaladığınız formun fotokopisini alıp, diğer enjeksiyonlar için"+
+    "geldiğinde getirdiğiniz taktirde tedavi bitene kadar tekrar imzalamanıza gerek olmayacaktır."
+    var generalText9 = doc.setFontSize(7).splitTextToSize(generalText9,195)
+    doc.text(generalText9,10,190)
+
+    var bloburi = doc.output('bloburi');
+    window.open(bloburi);
+}
+
+function KVKKConsentPDF()
+{
+    const {jsPDF} = window.jspdf;
+
+    var doc = new jsPDF();
+    doc.setFont("OpenSans-Medium");
+
+    doc.setFontSize(14);
+    doc.text("KİŞİSEL VERİLERİN KORUNMASI HAKKINDA BİLGİLENDİRİLMİŞ ONAM FORMU",65,11);
+
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,1,200,290)
+
+    doc.line(5,16,205,16)
+
+    doc.setFontSize(9);
+    doc.text("SAYIN HASTA,SAYIN VELİ/VASİ",10,20)
+
+    generalText ="6698 Sayılı Kişisel Verilerin Korunması Kanunu (KVKK) ve 29863 Sayılı Kişisel Sağlık Verilerinin İşlenmesi ve "+
+    "mahremiyetinin Sağlanması Hakkında Yönetmelik Kapsamında Oruçreis Mahallesi Tekstilkent Caddesi Koza Plaza A Blok Kat:20 Daire:75"+
+    " Esenler/İstanbul adresinde faaliyet gösteren MHACARE SAĞLIK TURİZM İNŞAAT TİCARET ANONİM ŞİRKETİ 'Veri Sorumlusu' sıfatına sahiptir."
+
+    var generalText = doc.setFontSize(8).splitTextToSize(generalText,195)
+    doc.text(generalText,10,25)
+
+    generalText1= "'Veri Sorumlusu' sıfatına sahip yukarıda adı geçen kişilerce, kişisel verileriniz aşağıda açıklandığı şekilde, tamamen veya"+
+    "kısmen otomatik olan yada herhangi bir veri kayıt sisteminin parçası olmak kaydıyla otomatik olmayan yollarla elde edilebilir, kaydedilebilir"+
+    "depolanabilir,muhafaza edilebilir, değiştirilebilir, yeniden düzenlenebilir, açıklanabilir,aktarılabilir,devranılabilir,elde edilebilir hale getirilebilir"+
+    "sınıflandırılabilir ya da kullanılması engellenebilir ve KVKK ve 29863 sayılı Yönetmelikte sayılan şekillerde işlenebilecektir."
+
+    var generalText1 = doc.setFontSize(8).splitTextToSize(generalText1,195)
+    doc.text(generalText1,10,36)
+
+    generalText2="Kişisel Verilerin Hangi Amaçla İşlenebileceği;"
+
+    var generalText2 = doc.setFontSize(8).splitTextToSize(generalText2,195)
+    doc.text(generalText2,10,50)
+
+    generalText3="Şirketimiz 6698 Sayılı Kişisel Verilerin Korunması Kanunun 5.maddesinin 2.fıkrasında ve 6.maddenin 3.fıkrasında belirtilen kişisel veri işleme"+
+    "şartları içerisindeki amaçla ve koşullarla sınırlı olarak kişisel veriler işlemektedir."
+
+    var generalText3 = doc.setFontSize(8).splitTextToSize(generalText3,195)
+    doc.text(generalText3,10,54)
+
+    generalText9="-Kamu sağlığının korunması, koruyucu hekimlik, tıbbi teşhis, tedavi ve bakım hizmetlerinin yürütülmesi, Sağlık hizmetleri ile finansmanının planlanması "+
+    "ve yönetim amacıyla"
+    var generalText9 = doc.setFontSize(7).splitTextToSize(generalText9,195)
+    doc.text(generalText9,10,61)
+
+    generalText91="-Elektronik(internet/mobil vs.) veya kağıt ortamında sağlanan hizmetlere dayanak olacak tüm kayıt ve belgeleri düzenlemek,"
+    var generalText91 = doc.setFontSize(7).splitTextToSize(generalText91,195)
+    doc.text(generalText91,10,66)
+
+    generalText92="-Mevzuat gereği T.C. Sağlık Bakanlığı ve diğer kamu kurum ve kuruluşlarına aktarmak,"
+    var generalText92 = doc.setFontSize(7).splitTextToSize(generalText92,195)
+    doc.text(generalText92,10,70)
+
+    generalText93="-Kamu ve özel hukuk kişileriyle yapılmış olan anlaşmalarda öngörülen yükümlülüklere uymak,"
+    var generalText93 = doc.setFontSize(7).splitTextToSize(generalText93,195)
+    doc.text(generalText93,10,74)
+
+    generalText94="-Talep edilen diğer hizmetleri sunabilmek,"
+    var generalText94 = doc.setFontSize(7).splitTextToSize(generalText94,195)
+    doc.text(generalText94,10,78)
+
+    generalText95="-Hizmet alan ile oluşan hukuki ilişkinin gereğini yerine getirmektedir."
+    var generalText95 = doc.setFontSize(7).splitTextToSize(generalText95,195)
+    doc.text(generalText95,10,82)
+
+    generalText96="-Sağlık hizmetlerinin finansmanı kapsamında özel sigorta şirketleri tarafından talep edilen her türlü bilgileri paylaşma"
+    var generalText96 = doc.setFontSize(7).splitTextToSize(generalText96,195)
+    doc.text(generalText96,10,86)
+
+    generalText4="Kimlere ve hangi amaçla aktarılabileceği: Açıklanan amaçlar kapsamında işlenen verileriniz; KVKK'da öngörülen temel ilkelere uygun olarak ve KVKK'nın"+
+    "8. ve 9. maddelerinde belirtilen kişisel veri işleme şartları ve amaçları dahilinde, Sağlık Bakanlığı ve bağlı alt birimleri, Yetki vermiş olduğunuz temsilcileriniz,"+
+    "Özel Sigorta şirketleri, Sosyal Güvenlik Kurumu, Emniyet Genel Müdürlüğü ve sair kolluk kuvvetleri, Nüfus Genel Müdürlüğü, Türkiye Eczacılar Birliği, Mahkemeler ve her türlü"+
+    "yargı makamı, merkezi ve sair üçüncü kişiler, Avukatlar, Tıbbi teşhis ve tedavi için iş birliği içerisinde olduğumuz laboratuvarlar, tıp merkezleri, ambulans, tıbbi cihaz"+
+    "ve sağlık hizmet sunan kurumlar, hizmetlerin sağlanabilmesi amacıyla sınırlı olarak tedarikçilerimiz ile paylaşılabilecektir."
+
+    var generalText4 = doc.setFontSize(8).splitTextToSize(generalText4,195)
+    doc.text(generalText4,10,90)
+
+    generalText5="Kişisel Veri Toplanmanın Yöntemi ve Hukuki Sebebi"
+
+    var generalText5 = doc.setFontSize(8).splitTextToSize(generalText5,195)
+    doc.text(generalText5,10,110)
+
+    generalText6="Kişisel verileriniz Şirket tarafından müşteri temsilcileri, ilgi internet siteleri, mobil uygulama gibi kanallardan, Şirket erişimine imkan verdiğiniz sosyal"+
+    "medya hesapları üzerinden elektronik ortamda ve/veya çağrı merkezi kanalıyla otomatik yada otomatik olmayan yöntemlerle toplanmaktadır. İşbu toplanan kişisel verileri hukuki sebebi;"+
+    "6698 sayılı Kişisel Verilerin Korunması Kanunu, Özel Hastaneler Yönetmeliği, Sağlık Bakanlığı düzenlemeleri ve sair mevzuat hükümleridir."
+
+    var generalText6 = doc.setFontSize(8).splitTextToSize(generalText6,195)
+    doc.text(generalText6,10,115)
+
+    generalText7="MHACARE SAĞLIK TURİZM İNŞAAT TİCARET ANONİM ŞİRKETİ'ne Başvurarak Kişisel Verilerinizin;"
+    doc.setFontSize(8)
+    doc.text(generalText7,10,130)
+ 
+    generalText8="-İşlenip işlenmediğini öğrenme, işlenmişse bilgi talep etme,"
+    var generalText8 = doc.setFontSize(7).splitTextToSize(generalText8,195)
+    doc.text(generalText8,10,133)
+
+    generalText81="-İşlenme amacını ve amacına uygun kullanıp kullanılmadığını öğrenme,"
+    var generalText81 = doc.setFontSize(7).splitTextToSize(generalText81,195)
+    doc.text(generalText81,10,136)
+    
+    generalText82="-Yurt içinde/yurt dışında aktarıldığı 3.kişileri bilme, eksik/yanlış işlenmişse düzeltilmesini isteme"
+    var generalText82 = doc.setFontSize(7).splitTextToSize(generalText82,195)
+    doc.text(generalText82,10,139)
+
+    generalText83="-KVKK'nın 7. ve 29863 sayılı yönetmeliğinin 9.maddesinde öngörülen şartlar çerçevesinde silinmesini/yok edilmesini isteme"
+    var generalText83 = doc.setFontSize(7).splitTextToSize(generalText83,195)
+    doc.text(generalText83,10,142)
+
+    generalText84="-Aktarıldığı 3.kişilere yukarıda sayılı işlemlerin bildirilmesini isteme,"
+    var generalText84 = doc.setFontSize(7).splitTextToSize(generalText84,195)
+    doc.text(generalText84,10,145)
+
+    generalText85="-Münhasıran otomatik sistemler ile analiz edilmesi nedeniyle aleyhinize bir sonucun ortaya çıkmasına itiraz etme ve kanuna aykırı olarak işlenmesi sebebiyle zarara uğramanız"+
+    "halinde zararın giderilmesini talep etme haklarına sahipsiniz"
+    var generalText85 = doc.setFontSize(7).splitTextToSize(generalText85,195)
+    doc.text(generalText85,10,148)
+
+    generalText9="Şirketimize KVKK Kanunu'nun 11.maddesi kapsamında yapacağımız başvuruların sağlıklı ve hızlı şekilde yönetilmesi için, internet sitemizin Kişisel Verilerin Korunması başlığı "+
+    "altında yer alan *İlgili Kişi Bilgi Talep Başvuru Formu* belgesini kullanmanızı, talebinize göre istenebilecek belge/bilgileri ve kimliğinizi tespit edici gerekli belgeleri de sağlayacak "+
+    "bizzat elden ya da iadeli taahhütlü mektup ile yapılmasını öneriyoruz. Ayrıca, ilgili kişi bilgi talep formunu Çevrimiçi kullanıcı olarak(Şirketimize daha önce bildirdiği ve şirketimizin "+
+    "sisteminde kayıtlı bulunan Elektronik Posta Adresi ile) info@healmedy.com üzerinden yine bizlere talebinizi iletebilirsiniz."
+    var generalText9 = doc.setFontSize(8).splitTextToSize(generalText9,195)
+    doc.text(generalText9,10,155)
+
+    generalText10="'Kişisel Verilerin Korunması Hakkında Aydınlatılmış Onam Formunda' yer alan bilgi ve açıklamaların Veri Sorumlusunca tarafıma doğru ve anlaşılır biçimde"
+    var generalText10 = doc.setFontSize(8).splitTextToSize(generalText10,195)
+    doc.text(generalText10,10,172)
+
+    doc.setFontSize(8);
+    var docText ="[ ] Anlatıldığını"
+    doc.text(docText,10,180)
+    var expressionTxt = document.querySelector('input[name="expression"]:checked').value
+    console.log(expressionTxt)
+    if(expressionTxt == 'told') {
+        doc.setFontSize(8)
+        doc.text("X",10.5,180)
+    }
+
+    doc.setFontSize(8);
+    var docText ="[ ] Anlatılmadığını"
+    doc.text(docText,45,180)
+    var expressionTxt = document.querySelector('input[name="expression"]:checked').value
+    console.log(expressionTxt)
+    if(expressionTxt == 'notTold') {
+        doc.setFontSize(8)
+        doc.text("X",45.5,180)
+    }
+
+    generalText11="Beyan eder ve bana/vesi/vasisi bulunduğum ..............................'a ait kişisel verilerin, ben Aksini bildirmedikçe MHACARE Sağlık tarafıdan her türlü pazarlama faaliyetleri,"+
+    "bilgilendirmeler, tanıtımlar, anketler, açılış, davet, etkinlik ve iletişim çalışmaları uygulamalarında kullanılmasına, saklanmasına ve bu uygulamalar ile ilgili olarak tarafıma ve/veya adına işlem"+
+    "gerçekleştirdiğim temsilcisi bulunduğum kişilere MHACARE Sağlık tarafından SMS, E-posta, telefon ve her türlü iletişim yolu ile ulaşılmasına hiç bir baskı altında kalmaksızın açıkca"
+    var generalText11 = doc.setFontSize(8).splitTextToSize(generalText11,195)
+    doc.text(generalText11,10,185)
+    var kvkkName = document.getElementById('kvkkName').value
+    doc.setFontSize(7)
+    doc.text(kvkkName,70,185)
+
+    doc.setFontSize(8);
+    var docText ="[ ] Onay Verdiğimi"
+    doc.text(docText,10,200)
+    var declarationTxt = document.querySelector('input[name="declaration"]:checked').value
+    console.log(declarationTxt)
+    if(declarationTxt == 'approve') {
+        doc.setFontSize(8)
+        doc.text("X",10.5,200)
+    }
+
+    doc.setFontSize(8);
+    var docText ="[ ] Onay Vermediğimi Beyan Ederim"
+    doc.text(docText,45,200)
+    var declarationTxt =document.querySelector('input[name="declaration"]:checked').value
+    console.log(declarationTxt)
+    if(declarationTxt == 'notApprove') {
+        doc.setFontSize(8)
+        doc.text("X",45.5,200)
+    }
+
+    generalText12="*Onay Verdiğimi* kutusunun işaretlenmesi halinde anılan maddeye rıza gösterildiği anlamına gelmektedir"
+    doc.setFontSize(7)
+    doc.text(generalText12,10,205)
+
+    generalText12="*Onay Verdiğimi* kutusunun işaretlenmesi halinde anılan maddeye rıza gösterilmediği anlamına gelmektedir."
+    doc.setFontSize(7)
+    doc.text(generalText12,10,208)
+
+    doc.setFontSize(8);
+    var docText ="Kişisel Verilerimin Aktarılmasına Onay Verdiğim Yakınlarım;"
+    doc.text(docText,10,212)
+    var myRelatives = document.getElementById('myRelatives').value
+    var myRelatives = doc.setFontSize(7).splitTextToSize(myRelatives,195)
+    doc.text(myRelatives,15,215)
+
+    doc.setFontSize(8);
+    var docText ="Kişisel Verilerimin Aktarılmasına Onay Verdiğim Diğer Özel Hukuk Kişileri Yakınlarım;"
+    doc.text(docText,10,232)
+    var legalPerson = document.getElementById('legalPerson').value
+    var legalPerson = doc.setFontSize(7).splitTextToSize(legalPerson,195)
+    doc.text(legalPerson,15,235)
+
+
+    doc.rect(15,255,180,25)
+
+    doc.line(15,263,195,263)
+
+    doc.setLineWidth(0.1);
+    doc.line(100, 263, 100, 280);
+
+    doc.setFontSize(10);
+    doc.text("Hastanın ve/veya Velisei/Vasisi",80,261)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,267)
+    var kvkkPatientUsername = document.getElementById('kvkkPatientUsername').value
+    doc.setFontSize(8)
+    doc.text(kvkkPatientUsername,32,267)
+
+
+    doc.setFontSize(8);
+    doc.text("Tarih:",17,275)
+    var kvkkPatientDate = document.getElementById('kvkkPatientDate').value
+    doc.setFontSize(8)
+    doc.text(kvkkPatientDate,25,275)
+
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,267)
+    const kvkkPatientSignature  = document.getElementById('kvkkPatientSignature').getElementsByTagName('canvas');
+    const kvkkPatientSignaturectx = kvkkPatientSignature[0].toDataURL();
+    console.log(kvkkPatientSignature);
+    doc.addImage(kvkkPatientSignaturectx,"PNG",113,267,15,10);
+
+
+
+    var bloburi = doc.output('bloburi');
+    window.open(bloburi);
+}
+
+function minorConsentPDF()
+{
+    const {jsPDF} = window.jspdf;
+
+    var doc = new jsPDF();
+    doc.setFont("OpenSans-Medium");
+
+    doc.setFontSize(14);
+    doc.text("KÜÇÜK CERRAHİ GİRİŞİM BİLGİLENDİRİLMİŞ ONAM FORMU",40,11);
+
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,1,200,290)
+
+    doc.line(5,16,205,16)
+
+    doc.setFontSize(7);
+    doc.text("Tarih:..../..../....",180,5);
+    var minorDate = document.getElementById('minorDate').value
+    doc.setFontSize(6)
+    doc.text(minorDate,185.5,4)
+
+    doc.setFontSize(7);
+    doc.text("Saat:........",180,10);
+    var minorHour = document.getElementById('minorHour').value
+    doc.setFontSize(6)
+    doc.text(minorHour,185.5,9)
+
+    doc.setFontSize(9);
+    doc.text("SAYIN HASTA,SAYIN VELİ/VASİ",10,20)
+
+    generalText ="Lütfen bu formu dikkatle okuyun. Bu form sizi işlem hakkında bilgilendirme amacıyla oluşturulmuştur. Bilgilendirme sonucunda tamamen serbest iradenizle işlmei yaptırma veya reddetme hakkına sahipsiniz."+
+    "Yapılan tetkik ve değerlendirmeler sonucu size ......................................... tanısı ile küçük cerrahi girişim yapılmasını uygun görmekteyiz. Bu tedaviyi siz tedavi için uygun koşulları sağladığınızda"+
+    "ve tedaviyi kabul etmeniz halinde yapacağız. Sizin bu tedaviden yararlanmanızı öneriyoruz. Kararınızdan önce aşağıda yazılı olan metni okumanızı ve tedavi hakkında bilgilenmenizi istiyoruz. Bu bilgileri"+
+    "okuyup anladıktan sonra bu tedaviyi almayı kabul ederseniz formu imzalayınız. Eğer kabul ederseniz size, doktrunuz tarafından küçük cerrahi girişim uygulanacaktır. Tedavi süresince yaşayacağınız problemleri"+
+    "doktorunuzla paylaşmanız uygun olacaktır. Bu işlem doktorunuzun tanısını koyduğu lezyonu, lokal anestezik madde ile uyuşturulduktan sonra cerrahi ile keserek uzaklaştırmak amacıyla yapılmaktadır."+
+    "Yapılan kesi, girişim sonrasu uygun sütür materyali ile dikilmektedir."
+
+    var generalText = doc.setFontSize(8).splitTextToSize(generalText,195)
+    doc.text(generalText,10,23)
+
+    var minorDiagnosis = document.getElementById('minorDiagnosis').value
+    doc.setFontSize(8)
+    doc.text(minorDiagnosis,154,25.5)
+
+    generalText1= "Girişimin Tanımı ve Amacı"
+
+    var generalText1 = doc.setFontSize(8).splitTextToSize(generalText1,195)
+    doc.text(generalText1,10,49)
+
+    generalText2="Planlanan girişim ile cilt,ciltaltı,kas,bağ ve kirişlerin bütünlüğünün sağlanması ve bu dokuların fonksiyonunu sürdürmek hedeflenmektedir. Açık yaralanmalarda; kötü-kirli dokular ve yabancı"+
+    "cisimler uzaklaştırılır,yara temizlenir ve uygunsa kapatılarak infeksiyon ihtimali en aza indirilmeye çalışılır."
+
+    var generalText2 = doc.setFontSize(8).splitTextToSize(generalText2,195)
+    doc.text(generalText2,10,52)
+
+    generalText3="Hastalık Hakkında Bilgi"
+
+    var generalText3 = doc.setFontSize(8).splitTextToSize(generalText3,195)
+    doc.text(generalText3,10,62)
+
+    generalText4="Yumuşak Doku Onarımı: Açık yaralanmalarda cilt,cilt altı, kas kılıfları, bağ ve kirişler uygun debridman ve yara bölgesinin temizlenmesini takiben cerrahi olarak onarılabilir. Tam kopmalarda"+
+    "fonksiyonların geri kazanılması için cerrahi tedavi gerekebilir. Kopan bağ veya kirişe cerrahi bir kesi yardımı ile ulaşılıp yaralanmış parça onarılabilir. Sinirler geç dönemde de onarılabilir(belirli"+
+    "bir süre sonra sinir fonksiyonları geri gelebilir)."
+
+    var generalText4 = doc.setFontSize(8).splitTextToSize(generalText4,195)
+    doc.text(generalText4,10,65)
+
+    generalText5="Debridman ve Irrigasyon: Özellikle açık yaralanmalarda infeksiyon ihtimalini azaltmak için dolaşımı bozulmuş(ölü) dokular ve yabancı cisim ve kirlenmeler cerrahi olarak uzaklaştırılır(debridman)."+
+    "Bol streil sıvılarda yıkanır(irrigasyon)."
+
+    var generalText5 = doc.setFontSize(8).splitTextToSize(generalText5,195)
+    doc.text(generalText5,10,75)
+
+    generalText6="Trawmatik uzuv kaybı ve güdük onarımı: Yaralanma sonucu uzvun kopması durumunda ilgili konsültasyonlar(diğer bölümlerle görüşürülerek) sonucu tekrar yerine dikilmesi mümkün olmadığında,"+
+    "bölgeye debridman-irrigasyon uygulanarak kopan bölge kapatılır."
+
+    var generalText6 = doc.setFontSize(8).splitTextToSize(generalText6,195)
+    doc.text(generalText6,10,81)
+
+    generalText7="Diğer:"
+    doc.setFontSize(8)
+    doc.text(generalText7,10,87)
+    var minorOther = document.getElementById('minorOther').value
+    doc.setFontSize(8)
+    doc.text(minorOther,13,90)
+
+    generalText9="İşlemin Uygulanmaması Durumunda Olabilecekler: Bu işlem yapılmaması yaranızın açık kalması ve infekte olmasına yol açar. Onarım yapılmadığı takdirde yaralanan bölgede fonksiyon kaybı meydana gelir."
+    var generalText9 = doc.setFontSize(8).splitTextToSize(generalText9,195)
+    doc.text(generalText9,10,100)
+
+    generalText10="İşlemin Varsa Alternatifleri:"
+    var generalText10 = doc.setFontSize(8).splitTextToSize(generalText10,195)
+    doc.text(generalText10,10,107)
+    var minorAlternative = document.getElementById('minorAlternative').value
+    doc.setFontSize(8)
+    doc.text(minorAlternative,13,110)
+
+    generalText11="İşlemin Riskleri ve Komplikasyonları:"
+    var generalText11 = doc.setFontSize(8).splitTextToSize(generalText11,195)
+    doc.text(generalText11,10,123)
+
+    generalText12="Tıbbi tüm girişimlerde olduğu gibi, bu işlemde de bazı komplikasyon riskleri mevcuttur. Uygulanan anestezik maddeye bağlı enerjik reaksiyonlar, kanama, yara yeri enfeksiyonu, iz kalması"+
+    "iyileşme sonrası ciltte açık veya koyu renkli değişiklikleri, lezyonun tamamen çıkarılamayıp kısmne sebat etmesi ya da tekrarlanması, işlem sırasında veya sonrasında ağrı, işlem bölgesine komşu doku ve"+
+    "organlarda kısmi hasar, kullanılan dikiş materyaline karşı alerjik reaksiyonlar, dikiş açılması, kan toplanması, şişlik, duyu ve his kayıpları gibi komplikasyonlar gelişebilmektedir. Onarılan cilt,"+
+    "cilt altı, kas, bağ ve kirişler aşırı zorlandığı takdirde ayrılabilir veya hareketsiz kalmaya bağlı yapışıklıklar oluşabilir."
+    var generalText12 = doc.setFontSize(8).splitTextToSize(generalText12,195)
+    doc.text(generalText12,10,127)
+
+    generalText13="Girişimden Önce Dikkat Edilmesi Gerekenler:"
+    var generalText13 = doc.setFontSize(8).splitTextToSize(generalText13,195)
+    doc.text(generalText13,10,144)
+
+    generalText14="Daha önce bu girişimin yapılıp yapılmadığı, hastanın kullandığı ilaçlar, eşlik eden hastalıklar, kanama bozukluğu veya alerjisi olup olmadığı hakkında yeterli bilgi verilmelidir. Öncelikle"+
+    "aspirin,kumadin, omega3, yeşil çay vb. bitki çayları gibi pıhtılaşma önleyiciler olmak üzere kullandığınız tüm ilaçları, mevcut sistemik hastalıklarımızı işlem yapılmadan önce doktorunuza mutlaka bildiriniz."
+    var generalText14 = doc.setFontSize(8).splitTextToSize(generalText14,195)
+    doc.text(generalText14,10,148)
+
+    generalText15="Girişimden Sonra Dikkat Edilmesi Gerekenler:"
+    var generalText15 = doc.setFontSize(8).splitTextToSize(generalText15,195)
+    doc.text(generalText15,10,159)
+
+    generalText16="Yapılan işlem sonrası gerekli görüldüğünde verilecek tedavileri düzenli olarak kullanınız. Pansuman veya kontrol amacıyla verilen randevularınıza mutlaka geliniz."
+    var generalText16 = doc.setFontSize(8).splitTextToSize(generalText16,195)
+    doc.text(generalText16,10,163)
+
+    generalText17="İşlem Tahimini Süresi: .......................... dakikadır."
+    var generalText17 = doc.setFontSize(8).splitTextToSize(generalText17,195)
+    doc.text(generalText17,10,170)
+    var minorProcessingTime = document.getElementById('minorProcessingTime').value
+    console.log(minorProcessingTime)
+    doc.setFontSize(8)
+    doc.text(minorProcessingTime,50,170)
+    
+
+    generalText18="Hastanın Sağlığı İçin Kritik Olan Yaşam Tarzı Önerileri: İşlem sonrasında yaşam tarzım için yapmam gerekenleri(Diyet,banyo,ilaç kullanımı,hareket durumu ve/veya kısıtlama durumu) ile ilgili bilgi aldım."
+    var generalText18 = doc.setFontSize(8).splitTextToSize(generalText18,195)
+    doc.text(generalText18,10,174)
+
+    generalText19="Gerektiğinde Aynı Konuda Tıbbi Yardıma Nasıl Ulaşılabileceği: Gerektiğinde aynı konuda tıbbi yardıma (Kendi hekimine,farklı bir hekime,tedavi gördüğü kliniğe ve acil durumlarda 112'ye)"+
+    "nasıl ulaşacağım konusunda bilgi aldım."
+    var generalText19 = doc.setFontSize(8).splitTextToSize(generalText19,195)
+    doc.text(generalText19,10,181)
+
+    generalText20="Bize Ulaşabileceğiniz Telefon Numaraları: Sağlık Merkezi Tel: 444 61 01"
+    var generalText20 = doc.setFontSize(8).splitTextToSize(generalText20,195)
+    doc.text(generalText20,10,189)
+
+    generalText21="Hasta Onamı:"
+    doc.setFontSize(8)
+    doc.text(generalText21,10,193)
+
+    generalText22="Aşağıda adımın yazılı olduğu yeri imzalayarak bu bilgilendirme ve onam formunu okuduğumu, doktorum tarafından bana yapılacak işlemler konusunda sözlü ve yazılı olarak anlayabileceğim"+
+    "bir dilde bilgi verildiğini, bütün sorularımın yanıtlandığını ve benim için gerekli olan tüm bilgileri edindim. Lütfe; size anlatılanları ve okuduklarınızı anladığınızı beyan ediniz."
+    var generalText22 = doc.setFontSize(8).splitTextToSize(generalText22,195)
+    doc.text(generalText22,10,197)
+
+    doc.setFontSize(8)
+    doc.text("[ ]  Okudum,Anladım Onaylıyorum",10,210)
+    var minorApprovalTxt = document.getElementById('minorApproval').value
+    console.log(minorApprovalTxt)
+    if(minorApprovalTxt == 'minorApproval') {
+        doc.setFontSize(9)
+        doc.text("X",10.5,210.5)
+    }
+
+    doc.rect(15,215,180,75)
+
+    doc.line(15,225,195,225)
+
+    doc.setLineWidth(0.1);
+    doc.line(100, 290, 100, 215);
+
+    doc.line(15,265,195,265)
+
+
+    doc.setFontSize(10);
+    doc.text("Hastanın Bilinci Açık ve Reşit İse;",33,220)
+
+    doc.setFontSize(10);
+    var docText ="Hastanın Bilinci Kapalı ve Yanında"
+    doc.setFontSize(10);
+    var docText1 ="Yasal Temsilcisi Var İse;"
+    doc.text(docText,115,219)
+    doc.text(docText1,125,223)
+
+    doc.setFontSize(8);
+    doc.text("Hastanın:",17,228)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,232)
+    var minorPatientUsername = document.getElementById('minorPatientUsername').value
+    doc.setFontSize(8)
+    doc.text(minorPatientUsername,33,232)
+
+    doc.setFontSize(8);
+    doc.text("Adresi:",17,236)
+    var minorPatientAdress = document.getElementById('minorPatientAdress').value
+    doc.setFontSize(8)
+    doc.text(minorPatientAdress,27,236)
+
+    doc.setFontSize(8);
+    doc.text("Tel.No:",17,244)
+    var minorPatientTel = document.getElementById('minorPatientTel').value
+    doc.setFontSize(8)
+    doc.text(minorPatientTel,27,244)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,250)
+    const minorPatientSignature  = document.getElementById('minorPatientSignature').getElementsByTagName('canvas');
+    const minorPatientSignaturectx = minorPatientSignature[0].toDataURL();
+    console.log(minorPatientSignaturectx);
+    doc.addImage(minorPatientSignaturectx,"PNG",27,250,15,10);
+
+    doc.setFontSize(8);
+    doc.text("Ameliyat, İşlem/Tedaviyi Yapan Doktor:",17,268)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,272)
+    var minorDoctorUsername = document.getElementById('minorDoctorUsername').value
+    doc.setFontSize(8)
+    doc.text(minorDoctorUsername,33,272)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,276)
+    const minorDoctorSignature  = document.getElementById('minorDoctorSignature').getElementsByTagName('canvas');
+    const minorDoctorSignaturectx = minorDoctorSignature[0].toDataURL();
+    console.log(minorDoctorSignaturectx);
+    doc.addImage(minorDoctorSignaturectx,"PNG",27,276,15,10);
+
+
+    doc.setFontSize(8);
+    doc.text("Veli/Vasi:",102,228)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",102,232)
+    var minorlegalRepresentativeUsername = document.getElementById('minorlegalRepresentativeUsername').value
+    doc.setFontSize(8)
+    doc.text(minorlegalRepresentativeUsername,117,232)
+
+    doc.setFontSize(8);
+    doc.text("Adresi:",102,236)
+    var minorlegalRepresentativeAdress = document.getElementById('minorlegalRepresentativeAdress').value
+    doc.setFontSize(8)
+    doc.text(minorlegalRepresentativeAdress,113,236)
+
+    doc.setFontSize(8);
+    doc.text("Tel. No:",102,244)
+    var minorlegalRepresentativeTel = document.getElementById('minorlegalRepresentativeTel').value
+    doc.setFontSize(8)
+    doc.text(minorlegalRepresentativeTel,113,244)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,250)
+    const minorlegalRepresentativeSignature  = document.getElementById('minorlegalRepresentativeSignature').getElementsByTagName('canvas');
+    const minorlegalRepresentativeSignaturectx = minorlegalRepresentativeSignature[0].toDataURL();
+    console.log(minorlegalRepresentativeSignaturectx);
+    doc.addImage(minorlegalRepresentativeSignaturectx,"PNG",115,250,15,10);
+
+    doc.setFontSize(8);
+    doc.text("Hasta Yabancı ve Çeviri Yapılmışsa Tercüman:",102,268)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",102,272)
+    var minorinterpreterUsername = document.getElementById('minorinterpreterUsername').value
+    doc.setFontSize(8)
+    doc.text(minorinterpreterUsername,117,272)
+
+    doc.setFontSize(8);
+    doc.text("Tel. No:",102,276)
+    var minorinterpreterTel = document.getElementById('minorinterpreterTel').value
+    doc.setFontSize(8)
+    doc.text(minorinterpreterTel,113,276)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,280)
+    const minorinterpreterSignature  = document.getElementById('minorinterpreterSignature').getElementsByTagName('canvas');
+    const minorinterpreterSignaturectx = minorinterpreterSignature[0].toDataURL();
+    console.log(minorinterpreterSignaturectx);
+    doc.addImage(minorinterpreterSignaturectx,"PNG",112,280,15,10);
+
+    var bloburi = doc.output('bloburi');
+    window.open(bloburi);
+}
+
+function punctureConsentPDF()
+{
+    const {jsPDF} = window.jspdf;
+
+    var doc = new jsPDF();
+    doc.setFont("OpenSans-Medium");
+
+    doc.setFontSize(10);
+    doc.text("İNTRAARTİKÜLER,KAS İÇİ,KAS ÇEVRESİ ENJEKSİYON ve PONKSİYON",55,7);
+
+    doc.setFontSize(10);
+    doc.text("BİLGİLENDİRİLMİŞ ONAM FORMU",75,12);
+
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,1,200,290)
+
+    doc.line(5,16,205,16)
+
+    doc.setFontSize(7);
+    doc.text("Tarih:..../..../....",180,5);
+    var punctureDate = document.getElementById('punctureDate').value
+    doc.setFontSize(6)
+    doc.text(punctureDate,185.5,4)
+
+    doc.setFontSize(7);
+    doc.text("Saat:........",180,10);
+    var punctureHour = document.getElementById('punctureHour').value
+    doc.setFontSize(6)
+    doc.text(punctureHour,185.5,9)
+
+    doc.setFontSize(9);
+    doc.text("SAYIN HASTA,SAYIN VELİ/VASİ",10,20)
+
+    generalText ="Sistemik romatizmal hastalıklar, lokal ve/veya genel trawmalar, metabolik hastalıklar, beyinomurilik yaralanmaları, ilhtihabi hastalıklar, psikolojik rahatsızlıklar, herhangi bir ameliyat"+
+    "ve tıbbi girişimin istenmeyen etkisi gibi olaylara bağlı olarak kaslar, kemikler, sinirler, eklem ve çevresindeki yapıların fonksiyon ve yapılarında bozulma olabilir. Bu gibi durumlarda; ağrı, uyuşma karıncalanma"+
+    "his ve hareket kaybı, uyku bozukluğu, eklem ve kaslarda şişme,sıvı toplanması, eklam-kas için veya diğer vücut boluk ve dokuları içine kanama, iltihabi durumlar kaslarda spazmlar-spastisite, tüm vücut veya bir bölgede"+
+    "kısmi ve/veya tam kuvvet kaybı(felç), hayat kalitesinde düşme gibi durumlar ortaya çıkabilir. Bu durumların tanı ve tedavisinde enjeksiyon tedavisi(iğne yapma) veya ponksiyon(sıvının boşaltılması) sık kullanılan,"+
+    "faydalı bir yöntemdir."
+
+    var generalText = doc.setFontSize(8).splitTextToSize(generalText,195)
+    doc.text(generalText,10,25)
+
+
+
+    generalText1= "Enjeksiyon Tedavisi(iğne tedavisi) yukarıda belirtilen durumların tanısını deteklemek veya tedavi etmek için kas, eklem içi ve çevresel ile diğer yumuşak dokulara(tendon,tetil nokta ganglion kisti"+
+    "nöroma,bursa,fasiya(kas kılıfı),calt altı gibi.) lokal anestezik, steroid(kortizon),botulinum toksin tip A, fenol,alkol,dektroz,hyalüronik asit ve benzerleri, serum fizyolojik gibi maddelerin bir veya "+
+    "birkaçının karışımının bir enjektör ve iğne vasıtası ile uygulanmasıdır."
+
+    var generalText1 = doc.setFontSize(8).splitTextToSize(generalText1,195)
+    doc.text(generalText1,10,48)
+
+    generalText2="Ponksiyon/Aspirasyon(sıvının boşaltılması) eklem içi veya başka dokular arasında sıvının(eklem sıvısı, kan, iltihap vb.) bir iğne yardımı ile boşaltılmasıdır. Bu işlemler tek başlarına veya"+
+    "beraber yapılabilir. Bu uygulama sırasında gerektiğinde elektrik stimülatörü, ultrason, tomografi gibi yardımcı tekniklerden faydalanılabilir."
+
+    var generalText2 = doc.setFontSize(8).splitTextToSize(generalText2,195)
+    doc.text(generalText2,10,66)
+
+    generalText8="-Hem tanı hemde tedaviye yardımcı olması,"
+    var generalText8 = doc.setFontSize(7).splitTextToSize(generalText8,195)
+    doc.text(generalText8,15,80)
+
+    generalText81="-Aynı seansta analiz için sıvı almanın mümkün olması,"
+    var generalText81 = doc.setFontSize(7).splitTextToSize(generalText81,195)
+    doc.text(generalText81,15,84)
+    
+    generalText82="-Eklem içi iltihabı süreci durdurması"
+    var generalText82 = doc.setFontSize(7).splitTextToSize(generalText82,195)
+    doc.text(generalText82,15,88)
+
+    generalText83="-Ağrı ve hareket kısıtlığı gibi şikayetlerin hafifletmesi veya tamamen gidermesi, *Gereksiz sistemik tedaivden ve fazla ilaç alımından kaçınılmasının sağlanması"
+    var generalText83 = doc.setFontSize(7).splitTextToSize(generalText83,195)
+    doc.text(generalText83,15,92)
+
+    generalText84="-Diğer tedavi yöntemlerine gerek kalmaması veya ihtiyacın azalması,"
+    var generalText84 = doc.setFontSize(7).splitTextToSize(generalText84,195)
+    doc.text(generalText84,15,97)
+
+    generalText85="-Yan etki ve zarar riskinin çok az olması"
+    var generalText85 = doc.setFontSize(7).splitTextToSize(generalText85,195)
+    doc.text(generalText85,15,101)
+
+    generalText85="-İstenmeyen eklem içi sıvı birikimlerin(kan,kristalli sıvı,eklem sıvısı, iltihabi sıvı) aynı seansta alınmasıyla dramatik ani rahatlama sağlaması,"
+    var generalText85 = doc.setFontSize(7).splitTextToSize(generalText85,195)
+    doc.text(generalText85,15,105)
+
+    generalText85="-Ucuz olması"
+    var generalText85 = doc.setFontSize(7).splitTextToSize(generalText85,195)
+    doc.text(generalText85,15,109)
+
+    generalText85="-Uygulama için ameliyathane gibi özel ortam gerektirmemesi işlemin avantajlarındandır."
+    var generalText85 = doc.setFontSize(7).splitTextToSize(generalText85,195)
+    doc.text(generalText85,15,113)
+
+    generalText3="Alternatifler: Bu hastalığın tedavisi için çeşitli ilaç tedavilerinin ve fizik tedavi yöntemlerinin, bazı durumlarda cerrahi yaklaşımların tedaviye alternatif oluşturması söz konusudur."
+
+    var generalText3 = doc.setFontSize(8).splitTextToSize(generalText3,195)
+    doc.text(generalText3,10,120)
+
+    generalText4="İşlemin Riskleri"
+
+    var generalText4 = doc.setFontSize(8).splitTextToSize(generalText4,195)
+    doc.text(generalText4,10,128)
+
+    generalText5="Genel Riskler ve Komplikasyonlar"
+
+    var generalText5 = doc.setFontSize(8).splitTextToSize(generalText5,195)
+    doc.text(generalText5,10,132)
+
+    generalText91="-Yöntemin olası yan etkileri, ağrıda artış, yanma, sızlanma ve enjeksiyon(iğne) yerinde ciltte kızarıklı, hafif şişlik oluşmasıdır."
+    var generalText91 = doc.setFontSize(7).splitTextToSize(generalText91,195)
+    doc.text(generalText91,10,136)
+
+    generalText92="-Diğer muhtemel yan etkiler, mide bulantısı, baş dönmesi, tansiyon düşmesi,çarpıntı, kan şekerinin ve tansiyonun düşmesi veya artmasıdır."
+    var generalText92 = doc.setFontSize(7).splitTextToSize(generalText92,195)
+    doc.text(generalText92,10,140)
+    
+    generalText93="-Çok daha nadir görülen önemli riskler, kalp ritmi bozukluğu,çarpıntı, bayılma, sinir-kastendon yaralanması veya kopması, felç, kanama alerjik reaksiyonlar, iltihabi durumlar sayılabilir."+
+    "Risklerin her biri hayati fonksiyonları tehlikeye sokabilir."
+    var generalText93 = doc.setFontSize(7).splitTextToSize(generalText93,195)
+    doc.text(generalText93,10,144)
+
+    generalText94="-Riskler uygun teknik, yeterli tıbbi malzeme ve deneyimli tıbbi personel varlığında nadiren görülmektedir.Enjeksiyondan dolayı zarar görmeniz durumunda, bunun giderilmesi için her türlü tıbbi girişim yapılacaktır."
+    var generalText94 = doc.setFontSize(7).splitTextToSize(generalText94,195)
+    doc.text(generalText94,10,150)
+
+    generalText95="-Bu durumların görülme sıklığını en aza indirmek için uygulama öncesi tıbbi durumumuz hakkında doktorunuza detaylı bilgi vermelisiniz."
+    var generalText95 = doc.setFontSize(7).splitTextToSize(generalText95,195)
+    doc.text(generalText95,10,156)
+
+    generalText96="-Bilinen ilaç alerjisi durumlarını, hastalıklarınızı doktorunuza belirtmelisiniz."
+    var generalText96 = doc.setFontSize(7).splitTextToSize(generalText96,195)
+    doc.text(generalText96,10,160)
+
+
+    generalText6="Tedavi Olmazsanız: Önerilen tanı veya tedavi yönteminin kabul edilmediği durumlarda hastalığın tanısındaki belirsizliğin devam etmesi veya uygun tedavi yapılmamasına bağlı sağlığınızdaki"+
+    "bozukluğun, ağrı ve fonksiyon kayıplarınızın devam etmesi ve kimlik bilgileriniz gizli tutulacaktır. Etik kurullar ve resmi makamlar gerektiğinde tıbbi bilgilerinize ulaşabilir. Siz de istediğinizde kendinize ait"+
+    "tıbbi bilgilerinize ulaşablirsiniz."
+
+    var generalText6 = doc.setFontSize(8).splitTextToSize(generalText6,195)
+    doc.text(generalText6,10,168)
+
+
+    generalText9="Özel Durumlar:"
+    var generalText9 = doc.setFontSize(8).splitTextToSize(generalText9,195)
+    doc.text(generalText9,10,180)
+
+    generalText10="Alerji/Kullanılan İlaçlar: Doktoruma bilinen tüm alerjilerim hakkında bilgi verdim. Ayrıca doktorumu kullandığım reçeteli ilaçlar, reçetesiz satılan ilaçlar,bitkisel ilaçlar, diyet katıkı"+
+    "maddeleri, kullanımı yasadışı ilaçlar, alkol ve uyutucu/uyuşturucular konusunda bilgilendirdim. Doktorum tarafından bu maddelerin ameliyat öncesi ve sonrası kullanımının etkileri bana anlatıldı ve öneriler"+
+    "yapıldıç Ameliyatımın öncesinde veya sonrasında tütün ve tütün mamülleri(sigara,nargile,puro,pipo vs.) içmemin iyileşme sürecimin uzamasına neden olabileceği bana anlatıldı. Eğer bu maddelerden herhangi"+
+    "birini kullanırsam yara iyileşme sorunlarıyla daha büyük bir oranda karşılaşma riskim olduğunu biliyorum."
+    var generalText10 = doc.setFontSize(8).splitTextToSize(generalText10,195)
+    doc.text(generalText10,10,184)
+
+
+    generalText11="Hasta, Veli veya Vasinin Onam Açıklaması"
+    var generalText11 = doc.setFontSize(8).splitTextToSize(generalText11,195)
+    doc.text(generalText11,10,204)
+
+    generalText12="Yukarıdaki konularla ilgili bilgilendirmeme ek olarak:"
+    var generalText12 = doc.setFontSize(8).splitTextToSize(generalText12,195)
+    doc.text(generalText12,10,208)
+
+    generalText101="-Uygulanabilecek tanı yöntemleri konusunda ek sorular sorabileceğim ve bunların da cevaplanabileceği konusunda,"
+    var generalText101 = doc.setFontSize(7).splitTextToSize(generalText101,195)
+    doc.text(generalText101,10,212)
+
+    generalText102="-Tanı yöntemine karar vermeden uygun bir süre düşünebileceğim konusunda,"
+    var generalText102 = doc.setFontSize(7).splitTextToSize(generalText102,195)
+    doc.text(generalText102,10,216)
+    
+    generalText103="-Önerilen tanı yöntemleri arasından seçim yapabilceğim konusunda,"
+    var generalText103 = doc.setFontSize(7).splitTextToSize(generalText103,195)
+    doc.text(generalText103,10,220)
+
+    generalText104="-Formun içeriğini okudum ve anladım. Doktorum tüm sorularımı cevapladı. Kendi özgür irademle karar veriyorum."
+    var generalText104 = doc.setFontSize(7).splitTextToSize(generalText104,195)
+    doc.text(generalText104,10,224)
+
+    generalText105="-İstemediğim taktirde tedavi/girişime onam vermek zorunda olmadığımı ve/veya istediğim aşamada işlemi durdurabileceğimi biliyorum."
+    var generalText105 = doc.setFontSize(7).splitTextToSize(generalText105,195)
+    doc.text(generalText105,10,228)
+
+    generalText13="İşlemin Tahmini Süresi: 5-30 dakikadır."
+    var generalText13 = doc.setFontSize(8).splitTextToSize(generalText13,195)
+    doc.text(generalText13,10,232)
+
+    generalText14="Kullanılacak İlaçların Önemli Özellikleri: Sağlık Merkezinde bulunduğum süre içerisinde tanı ve tedavi için kullanılacak ilaçlarla ilgili önemli özellikler(ne için kullanıldığı,faydaları,yan etkileri, nasıl kullanılacağı) konusunda bilgi aldım."
+    var generalText14 = doc.setFontSize(8).splitTextToSize(generalText14,195)
+    doc.text(generalText14,10,236)
+
+    generalText15="Hastanın Sağlığı İçin Kritik Olan Yaşam Tarzı Önerileri: Tedavim/Ameliyatım sonrasıdna yaşam tarzım için yapmam gerekenleri(diyet,banyo,ilaç kullanımı, hareket durumu ve/veya kısıtlama durumu) ile ilgili bilgi aldım."
+    var generalText15 = doc.setFontSize(8).splitTextToSize(generalText15,195)
+    doc.text(generalText15,10,246)
+
+    generalText16="Gerektiğinde Aynı Konuda Tıbbi Yardıma Nasıl Ulaşılabileceği: Gerektiğinde aynı konuda tıbbi yardıma(Kendi hekimine, farklı bir hekime, tedavi gördüğü kliniğe ve acil durumlarda 112'ye) nasıl ulaşacağım konusunda bilgi aldım."
+    var generalText16 = doc.setFontSize(8).splitTextToSize(generalText16,195)
+    doc.text(generalText16,10,256)
+
+    
+    doc.addPage()
+    doc.setFontSize(10);
+    doc.text("İNTRAARTİKÜLER,KAS İÇİ,KAS ÇEVRESİ ENJEKSİYON ve PONKSİYON",55,7);
+
+    doc.setFontSize(10);
+    doc.text("BİLGİLENDİRİLMİŞ ONAM FORMU",75,12);
+
+    var logo = document.getElementById("logo");
+    doc.addImage(logo, 'PNG', 10, 2, 25,10);
+
+    doc.rect(5,1,200,290)
+
+    doc.line(5,16,205,16)
+
+    doc.setFontSize(7);
+    doc.text("Tarih:..../..../....",180,5);
+    var punctureDate = document.getElementById('punctureDate').value
+    doc.setFontSize(6)
+    doc.text(punctureDate,185.5,4)
+
+    doc.setFontSize(7);
+    doc.text("Saat:........",180,10);
+    var punctureHour = document.getElementById('punctureHour').value
+    doc.setFontSize(6)
+    doc.text(punctureHour,185.5,9)
+
+    generalText17="Bize Ulaşabileceğiniz Telefon Numaraları: Sağlık Merkezi Tel: 444 61 01"
+    var generalText17 = doc.setFontSize(8).splitTextToSize(generalText17,195)
+    doc.text(generalText17,10,22)
+    
+
+    generalText18="Yapılacak işlemlerle ilgili daha detaylı bilgi almak için hekimimize danışabilirsiniz."
+    var generalText18 = doc.setFontSize(8).splitTextToSize(generalText18,195)
+    doc.text(generalText18,10,28)
+
+    generalText19="Lütfen; hastalığınız, tedavi süreciniz, cerrahi işlem, oluşabilecek yan etkiler ve olası tüm riskler ile ilgili size anlatılanları ve okuduklarınızı anladığınızı beyan ediniz. "
+    var generalText19 = doc.setFontSize(8).splitTextToSize(generalText19,195)
+    doc.text(generalText19,10,34)
+
+    doc.setFontSize(8)
+    doc.text("[ ]  Okudum,Anladım Onaylıyorum",10,44)
+    var punctureApproval = document.getElementById('punctureApproval').value
+    console.log(punctureApproval)
+    if(punctureApproval == 'punctureApproval') {
+        doc.setFontSize(9)
+        doc.text("X",10.5,44)
+    }
+
+
+    doc.rect(15,50,180,100)
+
+    doc.line(15,60,195,60)
+
+    doc.setLineWidth(0.1);
+    doc.line(100, 50, 100,150);
+
+    doc.line(15,100,195,100)
+
+    doc.line(15,125,195,125)
+
+    doc.setFontSize(10);
+    doc.text("HASTANIN BİLİNCİ AÇIK İSE;",33,55)
+
+    doc.setFontSize(10);
+    var docText ="HASTANIN BİLİNCİ KAPALI VE YANINDA"
+    doc.setFontSize(10);
+    var docText1 ="YASAL TEMSİLCİSİ VAR İSE;"
+    doc.text(docText,115,53)
+    doc.text(docText1,125,57)
+
+    doc.setFontSize(8);
+    doc.text("Hastanın:",17,63)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,67)
+    var puncturePatientUsername = document.getElementById('puncturePatientUsername').value
+    doc.setFontSize(8)
+    doc.text(puncturePatientUsername,33,67)
+
+    doc.setFontSize(8);
+    doc.text("Adresi:",17,72)
+    var puncturePatientAdress = document.getElementById('puncturePatientAdress').value
+    doc.setFontSize(8)
+    doc.text(puncturePatientAdress,27,72)
+
+    doc.setFontSize(8);
+    doc.text("Tel.No:",17,82)
+    var puncturePatientTel = document.getElementById('puncturePatientTel').value
+    doc.setFontSize(8)
+    doc.text(puncturePatientTel,27,82)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,87)
+    const puncturePatientSignature  = document.getElementById('puncturePatientSignature').getElementsByTagName('canvas');
+    const puncturePatientSignaturectx = puncturePatientSignature[0].toDataURL();
+    console.log(puncturePatientSignaturectx);
+    doc.addImage(puncturePatientSignaturectx,"PNG",27,87,15,9);
+
+
+    doc.setFontSize(8);
+    doc.text("Doktor:",17,105)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,110)
+    var punctureDoctorUsername = document.getElementById('punctureDoctorUsername').value
+    doc.setFontSize(8)
+    doc.text(punctureDoctorUsername,33,110)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,115)
+    const punctureDoctorSignature  = document.getElementById('punctureDoctorSignature').getElementsByTagName('canvas');
+    const punctureDoctorSignaturectx = punctureDoctorSignature[0].toDataURL();
+    console.log(punctureDoctorSignaturectx);
+    doc.addImage(punctureDoctorSignaturectx,"PNG",27,115,15,9);
+
+    doc.setFontSize(8);
+    doc.text("Şahit**:",17,130)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",17,135)
+    var punctureWitnessUsername = document.getElementById('punctureWitnessUsername').value
+    doc.setFontSize(8)
+    doc.text(punctureWitnessUsername,33,135)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",17,140)
+    const punctureWitnessSignature  = document.getElementById('punctureWitnessSignature').getElementsByTagName('canvas');
+    const punctureWitnessSignaturectx = punctureWitnessSignature[0].toDataURL();
+    console.log(punctureWitnessSignaturectx);
+    doc.addImage(punctureWitnessSignaturectx,"PNG",27,140,15,9);
+
+    doc.setFontSize(8);
+    doc.text("Yasal Temsilcisi*(Vasi) veya Veli:",102,63)
+
+    doc.setFontSize(8);
+    doc.text("Hasta Adı-Soyadı:",102,67)
+    var punctureRepresentativeUsername = document.getElementById('punctureRepresentativeUsername').value
+    doc.setFontSize(8)
+    doc.text(punctureRepresentativeUsername,126,67)
+
+    doc.setFontSize(8);
+    doc.text("Adresi:",102,72)
+    var punctureRepresentativeAdress = document.getElementById('punctureRepresentativeAdress').value
+    doc.setFontSize(8)
+    doc.text(punctureRepresentativeAdress,113,72)
+
+    doc.setFontSize(8);
+    doc.text("Tel. No:",102,82)
+    var punctureRepresentativeTel = document.getElementById('punctureRepresentativeTel').value
+    doc.setFontSize(8)
+    doc.text(punctureRepresentativeTel,113,82)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,87)
+    const punctureRepresentativeSignature  = document.getElementById('punctureRepresentativeSignature').getElementsByTagName('canvas');
+    const punctureRepresentativeSignaturectx = punctureRepresentativeSignature[0].toDataURL();
+    console.log(punctureRepresentativeSignaturectx);
+    doc.addImage(punctureRepresentativeSignaturectx,"PNG",115,87,15,9);
+
+    doc.setFontSize(8);
+    doc.text("Doktor:",102,105)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",102,110)
+    var punctureRepresentativeDoctorUsername = document.getElementById('punctureRepresentativeDoctorUsername').value
+    doc.setFontSize(8)
+    doc.text(punctureRepresentativeDoctorUsername,117,110)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,115)
+    const punctureRepresentativeDoctorSignature  = document.getElementById('punctureRepresentativeDoctorSignature').getElementsByTagName('canvas');
+    const punctureRepresentativeDoctorSignaturectx = punctureRepresentativeDoctorSignature[0].toDataURL();
+    console.log(punctureRepresentativeDoctorSignaturectx);
+    doc.addImage(punctureRepresentativeDoctorSignaturectx,"PNG",115,115,15,9);
+
+    doc.setFontSize(8);
+    doc.text("Şahit**:",102,130)
+
+    doc.setFontSize(8);
+    doc.text("Adı-Soyadı:",102,135)
+    var punctureRepresentativeWitnessUsername = document.getElementById('punctureRepresentativeWitnessUsername').value
+    doc.setFontSize(8)
+    doc.text(punctureRepresentativeWitnessUsername,117,135)
+
+    doc.setFontSize(8);
+    doc.text("İmza:",102,140)
+    const punctureRepresentativeWitnessSignature  = document.getElementById('punctureRepresentativeWitnessSignature').getElementsByTagName('canvas');
+    const punctureRepresentativeWitnessSignaturectx = punctureRepresentativeWitnessSignature[0].toDataURL();
+    console.log(punctureRepresentativeWitnessSignaturectx);
+    doc.addImage(punctureRepresentativeWitnessSignaturectx,"PNG",115,140,15,9);
+
+    var bloburi = doc.output('bloburi');
+    window.open(bloburi);
+}

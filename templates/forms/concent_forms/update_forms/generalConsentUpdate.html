@@ -1,0 +1,405 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+<script>
+    $(document).ready(function()
+   {
+        $('.generalApproval').click(function()
+        {
+            var text="";
+            $('.generalApproval:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#generalApprovalTxt').val(text);
+        });
+    });
+</script>
+<script>
+    $(function() {
+        if($('#generalPatientSignatureText').is(':contains("lines")')) 
+        {
+            var sig = $('#generalPatientSignature').signature({thickness : 4});
+            sig.signature('draw',$('#generalPatientSignatureText').val());
+            sig.signature('disable');
+            $('#generalPatientSignature').signature({disabled:true,thickness:4})
+
+        }
+        else {
+            var sig = $('#generalPatientSignature').signature({thickness : 4});
+            $('#generalPatientSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#generalPatientSignatureJson').click(function() {
+                $('#generalPatientSignatureText').val(sig.signature('toJSON'));
+            });
+
+        }
+});
+    $(function() {
+        if($('#generalDoctorSignatureText').is(':contains("lines")'))
+        {
+            var sig = $('#generalDoctorSignature').signature({thickness : 4});
+            sig.signature('draw',$('#generalDoctorSignatureText').val());
+            sig.signature('disable');
+            $('#generalDoctorSignature').signature({disabled:true,thickness:4})
+        }
+        else{
+            var sig = $('#generalDoctorSignature').signature({thickness : 4});
+            $('#generalDoctorSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#generalDoctorSignatureJson').click(function() {
+                $('#generalDoctorSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+});
+    $(function() {
+        if($('#generalWitnessSignatureText').is(':contains("lines")')){
+
+            var sig = $('#generalWitnessSignature').signature({thickness:4});
+            sig.signature('draw',$('#generalWitnessSignatureText').val());
+            sig.signature('disable');
+            $('#generalWitnessSignature').signature({disabled:true,thickness:4})
+        }
+        else{
+            var sig = $('#generalWitnessSignature').signature({thickness : 4});
+            $('#generalWitnessSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#generalWitnessSignatureJson').click(function() {
+                $('#generalWitnessSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+        
+});
+    $(function() {
+        if($('#generalRepresentativeSignatureText').is(':contains("lines")')){
+
+            var sig = $('#generalRepresentativeSignature').signature({thickness : 4});
+            sig.signature('draw',$('#generalRepresentativeSignatureText').val());
+            sig.signature('disable');
+            $('#generalRepresentativeSignature').signature({disabled:true,thickness:4})
+        }
+        else{
+            var sig = $('#generalRepresentativeSignature').signature({thickness : 4});
+            $('#generalRepresentativeClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#generalRepresentativeJson').click(function() {
+                $('#generalRepresentativeSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+});
+    $(function() {
+        if($('#generalRepresentativeDoctorSignatureText').is(':contains("lines")')){
+            var sig = $('#generalRepresentativeDoctorSignature').signature({thickness : 4});
+            sig.signature('draw',$('#generalRepresentativeDoctorSignatureText').val());
+            sig.signature('disable');
+            $('#generalRepresentativeDoctorSignature').signature({disabled:true,thickness:4})
+        }
+        else{
+            var sig = $('#generalRepresentativeDoctorSignature').signature({thickness : 4});
+            $('#generalRepresentativeDoctorSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#generalRepresentativeDoctorSignatureJson').click(function() {
+                $('#generalRepresentativeDoctorSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+});
+    $(function() {
+        if($('#generalRepresentativeWitnessSignatureText').is(':contains("lines")')){
+            var sig = $('#generalRepresentativeWitnessSignature').signature({thickness : 4});
+            sig.signature('draw',$('#generalRepresentativeWitnessSignatureText').val());
+            sig.signature('disable');
+            $('#generalRepresentativeWitnessSignature').signature({disabled:true,thickness:4})
+
+        }
+        else{
+            var sig = $('#generalRepresentativeWitnessSignature').signature({thickness : 4});
+            $('#generalRepresentativeWitnessSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#generalRepresentativeWitnessSignatureJson').click(function() {
+                $('#generalRepresentativeWitnessSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+});
+</script>
+<main>
+    <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h4 class="text-center font-weight-light my-4">GENEL BİLGİLENDİRME VE ONAM FORMU</h4>
+                        <div class="card-body">
+                            <form action="{% url 'updateGeneralConsent' generalInformation.id%}" method="POST">
+                                {% csrf_token%}
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <label for="generalPatientUsername" class="form-label">Adı-Soyadı</label>
+                                        <input type="text" class="form-control" id="generalPatientUsername" name="generalPatientUsername" value="{{generalInformation.generalPatientUsername}}">
+
+                                        <label for="generalPatientBirthDate" class="form-label">Doğum Tarihi</label>
+                                        <input type="date" class="form-control" name="generalPatientBirthDate" id="generalPatientBirthDate" value="{{generalInformation.generalPatientBirthDate}}">
+                                    </div>
+                                    <div class="col mb-3">
+                                        <label for="generalProtocolNumber" class="form-label">Protokol No</label>
+                                        <input type="text" class="form-control" name="generalProtocolNumber" id="generalProtocolNumber" value="{{generalInformation.generalProtocolNumber}}">
+
+                                        <label for="generalGender" class="form-label">Cinsiyet</label>
+                                        <div>                                       
+                                            <input class="generalGender" type="radio" id="male" name="generalGender" {% if generalInformation.generalGender == 'erkek'%} checked {%endif%} value="erkek" group="generalGender">
+                                            <label for="male" class="form-label">Erkek</label>
+                                        </div> 
+                                        <div>
+                                            <input class="generalGender" type="radio" id="female" name="generalGender" {% if generalInformation.generalGender == 'kadın'%} checked {%endif%} value="kadın" group="generalGender" >
+                                            <label for="female" class="form-label">Kadın</label>
+                                        </div>
+
+                                    </div>
+                                    <p class="fw-bold">SAYIN HASTA,SAYIN VELİ/VASİ</p>
+                                    <p class="fw-normal">Sunduğumuz sağlık hizmetinden yararlanmak üzere sağlık merkezimize başvurmuş bulunuyorsunuz. Ülkemiz yasalarının 
+                                        hastalara tanıdığı bütün haklardan yararlanma hakkına sahipsiniz.</p>
+                                    <p class="fw-normal">Bu belge bilgilendirme ve aydınlatılmış onam haklarınızdan yararlanabilmenizi amaçlamaktadır. Sağlık merkezimiz
+                                        hizmetlerinden nasıl yararlanacağınız hakkında bilgi alma hakkınız vardır. Sağlık durumunuz hakkında anlayabileceğiniz şekilde bilgi alma
+                                        hakkınız vardır. Size gerçekleştirilebilecek tanı veya tedavi amaçlı girişimler konusunda tüm seçenekler ile bu girişimlerin yarar ve muhtemel
+                                        zararları konusunda anlayabileceğiniz şekilde bilgi alma hakkınız vardır.</p>
+                                    <p class="fw-normal">Yasal ve tıbbi zorunluluk taşıyan durumlar dışında bilgilendirilmeyi reddedebilirsiniz. Yazılı bildirmek
+                                        koşulu ile bilgi almama ya da yerinize güvendiğiniz bir kimsenin bilgilendirilmesini talep etme hakkına sahipsiniz. Sağlık 
+                                        durumunuz veya size uygulanacak tanı ve tedavi amaçlı girişimler konusunda bilgilendirildikten sonra bu tanı veya tedavi amaçlı 
+                                        girişimlerden birini seçerek size uygulanmasını kabul edebilirsiniz. Bazı istisnalar hariç onamınızı (rızanız/kabulünüz)
+                                        olmadığı sürece size tanı veya tedavi amaçlı hiçbir girişim gerçekleştirilemez. Size önerilen tanı veya tedavi amaçlı girişimleri kabul etmediğinizi
+                                        yazılı bir belgeyle bildirmeniz gerekmektedir. Acil durumlarda hayatınızı ya da hayati organınızı tehdit eden durumlarda onamınız alınmadan tanı ve
+                                        tedavi amaçlı girişimler gerçekleştirilebilir.</p>
+                                    <p class="fw-normal">Doktorum tarafından sağlık durumum ve bana uygulanacak tıbbi-cerrahi tedavi-tanı amaçlı girişim-alternatif girişim
+                                        veya tedavi yöntemlerinin olası zararları, beklenmeyen ya da önlenemeyen durumlar tüm komplikasyonlar ve olası riskleri ayrıntıları ile anlatıldı.
+                                        Bu tanı ve tedavi yöntemlerini reddettiğim zaman sağlığımı tehdit edici başka hangi risklerin olabileceği bu tedavi yerine uygulanabilecek bir başka tıbbi yöntemin
+                                        bulunup bulunmadığı konusunda bilgilendirildim.</p>
+                                    <p class="fw-normal">Doktorlarımın planladıkları girişim ve/veya operasyonlarda planladıklarına ek operasyon gerekebilecek durumlar ile karşılaşabileceğimi
+                                        biliyorum ayrıca uygulanabilecek yöntemler konusunda ek sorular sorabileceğim ve bunlarında yanıtlanabileceği tedavi yöntemlerine karar vermeden uygun bir süre
+                                        düşünebileceğim ve önerilen tanı yöntemleri arasından seçim yapabileceğim konusunda seçtiğim tanı yönteminden hayati bir organımı ya da hayatımı tehdit eden bir durum
+                                        olmadığı sürece dilediğim zaman vazgeçebileceğim hususunda anlayabileceğim bir şekilde sözlü-yazılı olarak bilgilendirildim, tüm bu tanı-tedavi yöntemlerinin 
+                                        uygulanmasını serbest irademle hiçbir baskı altında kalmadan kabul ediyorum.</p>
+                                    <p class="fw-normal">Hastalığımın nedeni ile hastanede uygulanacak tüm tanı ve tedavi yöntemlerinin olası yararları ve riskleri anlatıldı.</p>
+                                    <div class="col mb-3">
+                                        <div class="col-xs-2 input-group mb-3 ">
+                                            <span class="input-group-text" id="generalprocessingTime"><b>İşlem Tahmini Süresi:</b></span>
+                                            <input type="text" class="form-control" name="generalprocessingTime" id="GeneralprocessingTime" value="{{generalInformation.generalprocessingTime}}"  aria-describedby="basic-processing_time">
+                                            <span class="input-group-text" id="generalprocessingTime"><b>dakikadır.</b></span>
+                                        </div>
+                                    </div>
+                                    <div class="col mb-3"></div>
+                                    <p class="fw-normal"><b>Kullanılacak İlaçların Önemli Özellikleri:</b> Hastanede bulunduğum süre içerisinde tanı ve tedavi için kullanılacak ilaçlarla
+                                        ilgili önemli özellikler(ne için kullanıldığı, faydaları,yan etkileri, nasıl kullanılacağı) konusunda bilgi aldım.</p>
+                                    <p class="fw-normal"><b>Hastanın Sağlığı İçin Kritik Olan Yaşam Tarzı Önerileri:</b> Tedavim/Ameliyatım sonrasında yaşam tarzım için yapmam gerekenleri
+                                        (Diyet,banyo,ilaç kullanımı,hareket durumu ve/veya kısıtlama durumu) ile ilgili bilgi aldım.</p>
+                                    <p class="fw-normal"><b>Gerektiğinde Aynı Konuda Tıbbi Yardıma Nasıl Ulaşılabileceği:</b> Gerektiğinde aynı konuda tıbbi yardıma(Kendi hekimime, farklı bir hekime,
+                                        tedavi gördüğü kliniğe ve acil durumlarda 112'ye) nasıl ulaşacağım konusunda bilgi aldım.</p>
+                                    <p class="fw-normal"><b>Bize Ulaşabileceğiniz Telefon Numaraları:</b> 444 61 01</p>
+                                    <p class="fw-normal">Yapılacak işlemlerle ilgili daha detaylı bilgi almak için hekiminize danışabilirsiniz.</p>
+                                    <p class="fw-normal">Lütfen; hastalığınız, tedavi süreciniz, cerrahi işlem, oluşabilecek yan etkiler ve olası tüm riskler ile ilgili size anlatılanları ve okuduklarınızı
+                                        anladığını beyan ediniz:</p>
+
+                                    <div class="row">
+                                        <div class="col mb-3">
+                                            <label for="generalDate" class="form-label">Tarih</label>
+                                            <input type="date" class="form-control" id="generalDate" name="generalDate" value="{{generalInformation.generalDate}}">
+
+                                            <input class="generalApproval" type="radio" id="generalApproval" name="generalApproval" {% if generalInformation.generalApproval == 'generalApproval'%} checked {%endif%} value="generalApproval" group="generalApproval">
+                                            <label for="generalApproval" class="col-form-label-lg">Okudum, Anladım Onaylıyorum</label>
+                                            <input id="generalApprovalTxt" type="text" name="generalApprovalTxt" style="display: none;"  readonly>
+                                        </div>
+                                        <div class="col mb-3">        
+                                            <label for="generalHour" class="form-label">Saat</label>
+                                            <input type="time" class="form-control" id="generalHour" name="generalHour" value="{{generalInformation.generalHour}}">
+                                        </div> 
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <p class="fw-bold">HASTANIN BİLİNCİ AÇIK İSE</p>
+                                                <p class="fw-bold">Hastanın</p>
+                                                
+                                                <label for="generalPatientUsername1" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="generalPatientUsername1" id="generalPatientUsername1" value="{{generalInformation.generalPatientUsername1}}">
+
+                                                <label for="generalPatientAdress" class="form-label">Adresi</label>
+                                                <input type="text" class="form-control" name="generalPatientAdress" id="generalPatientAdress" value="{{generalInformation.generalPatientAdress}}">
+
+                                                <label for="generalPatientTel" class="form-label">Tel. No</label>
+                                                <input type="text" class="form-control" name="generalPatientTel" id="generalPatientTel" value="{{generalInformation.generalPatientTel}}">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="generalPatientSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="generalPatientSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="generalPatientSignatureText" id="generalPatientSignatureText" cols="30" rows="10" style="display: none;" >{{generalInformation.generalPatientSignatureText}}</textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="generalPatientSignatureClear" name="generalPatientSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="generalPatientSignatureJson" name="generalPatientSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Doktor</p>
+                                                <label for="generalDoctorUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="generalDoctorUsername" id="generalDoctorUsername" value="{{generalInformation.generalDoctorUsername}}">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="generalDoctorSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="generalDoctorSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="generalDoctorSignatureText" id="generalDoctorSignatureText" cols="30" rows="10" style="display: none;">{{generalInformation.generalDoctorSignatureText}}</textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="generalDoctorSignatureClear" name="generalDoctorSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="generalDoctorSignatureJson" name="generalDoctorSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Şahit**</p>
+                                                <label for="generalWitnessUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="generalWitnessUsername" id="generalWitnessUsername" value="{{generalInformation.generalWitnessUsername}}">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="generalWitnessSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="generalWitnessSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="generalWitnessSignatureText" id="generalWitnessSignatureText" cols="30" rows="10" style="display: none;">{{generalInformation.generalWitnessSignatureText}}</textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="generalWitnessSignatureClear" name="generalWitnessSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="generalWitnessSignatureJson" name="generalWitnessSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-3">
+                                                <p class="fw-bold">HASTANIN BİLİNCİ KAPALI VE YANINDA YASAL TEMSİLCİSİ VAR İSE;</p>
+                                                <p class="fw-bold">Yasal Temsilci*(Vasi) veya Veli</p>
+                                                
+                                                <label for="generalRepresentativeUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="generalRepresentativeUsername" id="generalRepresentativeUsername" value="{{generalInformation.generalRepresentativeUsername}}">
+
+                                                <label for="generalRepresentativeAdress" class="form-label">Adresi</label>
+                                                <input type="text" class="form-control" name="generalRepresentativeAdress" id="generalRepresentativeAdress" value="{{generalInformation.generalRepresentativeAdress}}">
+
+                                                <label for="generalRepresentativeTel" class="form-label">Tel. No</label>
+                                                <input type="text" class="form-control" name="generalRepresentativeTel" id="generalRepresentativeTel" value="{{generalInformation.generalRepresentativeTel}}">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="generalRepresentativeSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="generalRepresentativeSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="generalRepresentativeSignatureText" id="generalRepresentativeSignatureText" cols="30" rows="10" style="display: none;">{{generalInformation.generalRepresentativeSignatureText}}</textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="generalRepresentativeClear" name="generalRepresentativeClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="generalRepresentativeJson" name="generalRepresentativeJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Doktor</p>
+                                                <label for="generalRepresentativeDoctorUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="generalRepresentativeDoctorUsername" id="generalRepresentativeDoctorUsername" value="{{generalInformation.generalRepresentativeDoctorUsername}}">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="generalRepresentativeDoctorSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="generalRepresentativeDoctorSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="generalRepresentativeDoctorSignatureText" id="generalRepresentativeDoctorSignatureText" cols="30" rows="10" style="display: none;">{{generalInformation.generalRepresentativeDoctorSignatureText}}</textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="generalRepresentativeDoctorSignatureClear" name="generalRepresentativeDoctorSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="generalRepresentativeDoctorSignatureJson" name="generalRepresentativeDoctorSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Şahit**</p>
+                                                <label for="generalRepresentativeWitnessUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="generalRepresentativeWitnessUsername" id="generalRepresentativeWitnessUsername" value="{{generalInformation.generalRepresentativeWitnessUsername}}">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="generalRepresentativeWitnessSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="generalRepresentativeWitnessSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="generalRepresentativeWitnessSignatureText" id="generalRepresentativeWitnessSignatureText" cols="30" rows="10" style="display: none;">{{generalInformation.generalRepresentativeWitnessSignatureText}}</textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="generalRepresentativeWitnessSignatureClear" name="generalRepresentativeWitnessSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="generalRepresentativeWitnessSignatureJson" name="generalRepresentativeWitnessSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <button type="submit" name="injectionSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                                        &nbsp;
+                                                        <button type="button" name="İnjectionpreview" onclick="generalConsentPDF()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                                        &nbsp;
+                                                        <button type="button" name="İnjectionprint" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                                        &nbsp;
+                                                        <button type="reset" name="İnjectionclear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock%}

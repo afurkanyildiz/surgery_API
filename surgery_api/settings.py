@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'user',
     'records',
     'ambulance_forms',
+    'consentForms',
     # 'jsignature',
     'surgery_api.templatetags.my_custom_tags',
     'django.contrib.admin',

@@ -55,6 +55,20 @@
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed link-light" href="#" data-bs-toggle="collapse" data-bs-target="#collapseConsentPages" aria-expanded="false" aria-controls="collapseConsentPages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                    Onan Formları
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseConsentPages" aria-labelledby="headingTwo" data-bs-parent="#sidenavConsentAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavConsentAccordionPages">
+                                        <a class="nav-link  link-light" href="{% url 'generalInformation'%}">Genel Bilgilendirme ve Onam Formu</a>
+                                        <a class="nav-link  link-light" href="{% url 'minorSurgery'%}">Küçük Cerrahi Girişim Bilgilendirilmiş Onam Formu</a>
+                                        <a class="nav-link  link-light" href="{% url 'injectionInformed'%}">Enjeksiyon Bilgilendirilmiş Onam Formu</a>
+                                        <a class="nav-link  link-light" href="{% url 'punctureConsent'%}">İntraartiküler, Kas İçi, Kas Çevresi Enjeksiyon ve Ponksiyon Bilgilendirilmiş Onam Formu</a>
+                                        <a class="nav-link  link-light" href="{% url 'kvkkConsent'%}">Kişisel Verilerin Korunması Hakkında Bilgilendirilmiş Onam Formu</a>
+                                    </nav>
+                                </div>
                                 <a class="nav-link  link-light" href="{% url 'record_page'%}">Kayıt Ekleme</a>
                                 <a class="nav-link  link-light" href="{% url 'ambulance_case_form'%}">Ambulans Vaka Formu</a>
                                 <a class="nav-link  link-light" href="{% url 'pre_case_control_form'%}">Vaka Öncesi Kontrol Formu</a>
@@ -75,6 +89,20 @@
                         </a>
                         <div class="collapse" id="collapseTables" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
+                                <a class="nav-link collapsed link-light" href="#" data-bs-toggle="collapse" data-bs-target="#collapseConsentPages" aria-expanded="false" aria-controls="collapseConsentPages">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                                    Onam Formu Tablolar 
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
+                                <div class="collapse" id="collapseConsentPages" aria-labelledby="headingTwo" data-bs-parent="#sidenavConsentAccordion">
+                                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavConsentAccordionPages">
+                                        <a class="nav-link  link-light" href="{% url 'generalInformationTables'%}">Genel Bilgilendirme ve Onam Formu Tablosu</a>
+                                        <a class="nav-link  link-light" href="{% url 'minorSurgeryTables'%}">Küçük Cerrahi Girişim Bilgilendirilmiş Onam Formu Tablosu</a>
+                                        <a class="nav-link  link-light" href="{% url 'injectionInformedTables'%}">Enjeksiyon Bilgilendirilmiş Onam Formu Tablosu</a>
+                                        <a class="nav-link  link-light" href="{% url 'punctureConsentTables'%}">İntraartiküler, Kas İçi, Kas Çevresi Enjeksiyon ve Ponksiyon Bilgilendirilmiş Onam Formu Tablosu</a>
+                                        <a class="nav-link  link-light" href="{% url 'kvkkConsentTables'%}">Kişisel Verilerin Korunması Hakkında Bilgilendirilmiş Onam Formu Tablosu</a>
+                                    </nav>
+                                </div>
                                 <a class="nav-link  link-light" href="{% url 'tables' %}">Kayıt Görüntüleme</a>
                                 <a class="nav-link  link-light" href="{% url 'ambulance_case_tables'%}">Ambulans Vaka Tablosu</a>
                                 <a class="nav-link  link-light" href="{% url 'pre_case_control_tables'%}">Vaka Öncesi Kontrol Tablosu</a>

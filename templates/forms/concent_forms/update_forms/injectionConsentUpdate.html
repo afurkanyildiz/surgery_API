@@ -1,0 +1,175 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+
+<script>
+    $(function() {
+        if($('#patientSignatureText').is(':contains("lines")'))
+        {
+            var sig = $('#patientSignature').signature({thickness:4});
+            sig.signature('draw',$('#patientSignatureText').val());
+            sig.signature('disable');
+            $('#patientSignature').signature({disabled:true,thickness:4})
+        }
+        else{
+            var sig = $('#patientSignature').signature({thickness : 4});
+            $('#patientClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#patientJson').click(function() {
+                $('#patientSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+});
+    $(function() {
+        if($('#employeeSignatureText').is(':contains("lines")'))
+        {
+            var sig = $('#employeeSignature').signature({thickness:4});
+            sig.signature('draw',$('#employeeSignatureText').val());
+            sig.signature('disable');
+            $('#employeeSignature').signature({disabled:true,thickness:4})
+        }
+        else
+        {
+            var sig = $('#employeeSignature').signature({thickness : 4});
+            $('#employeClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#employeJson').click(function() {
+                $('#employeeSignatureText').val(sig.signature('toJSON'));
+            });
+        }
+});
+</script>
+<main>
+    <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h4 class="text-center font-weight-light my-4">ENJEKSİYON BİLGİLENDİRİLMİŞ ONAM FORMU</h4>
+                        <div class="card-body">
+                            <form action="{% url 'updateInjectionConsent' injectionInformed.id %}" method="POST">
+                                {% csrf_token%}
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <p class="fw-normal">Sayın Hasta/Vasi</p>
+                                        <p class="fw-normal">1. Instramüsküler enjeksiyon kas içine(kaba ete), Damar içine intra venöz, ciltaltına subcutan ve cilt 
+                                            arasına intra dermal ve uygulanması gereken ilaçların uygulanması için bir yöntemdir.</p>
+                                        <p class="fw-normal">2. Deneyimli bir sağlık personeli tarafından (doktor nezaretinde) küçük çocuk ve bebeklerin uyluk ön yüzüne,
+                                            daha büyüklerin kalçasına bir enjektör(iğne) aracılığı ile yapılır.</p>
+                                        <p class="fw-normal">3. İşlemin bazen çok nadir görülen istenmeyen etkileri olabilir. Bunlar enjeksiyon yerinde şişlik,
+                                            kızarıklık, enfeksiyon,kas ve sinir zedelenmesi ve alerjidir. Bu durumlar deneyimli bir sağlık personeli tarafından donanımlı
+                                            bir sağlık kuruluşunda yapıldığında oldukça nadirdir ve tedavisi mümkündür.</p>
+                                        <p class="fw-normal">4. Hastanemizde penisilin kas içi uygulanması öncesinde (doktor istemediği sürece) test yapılmamaktadır.
+                                            Çünkü hayatı tehdit edecek düzeyde penisilin alerjisi test sırasında da gerçekleşebilir ve test sırasında alerji olmaması %100 enjeksiyon 
+                                            sırasında alerji olmayacağı anlamına gelmez. Alerji açısından en önemli çocuğun veya birinci dereceden akrabalarının(anne,baba,kardeş)
+                                            daha önce bir ilaca karşı alerjisinin olmamasıdır. Böylece bir durum var ise sağlık personelimize bildiriniz.</p>
+                                        <p class="fw-normal">5. Enjeksiyonunuz reçeteniz uygun düzenlenmiş ise yapılacaktır. Eğer reçetenizde doktor kaşesi yoksa,
+                                            kaşe okunaklı değil ise, recete bir haftadan eskiyse, ilaç dozunda bir sorun varsa sağlık personelimize sizi yeniden değerlendirme için
+                                            doktora yönlendirecektir ve bu durumda sizden ek olarak muayene ücreti alınacaktır.</p>
+                                        <p class="fw-normal">6. Akut romatizmal ateş, B12 vitamini eksikliği gibi belli aralıklarla düzenli enjeksiyon olması gereken
+                                            hastalara durumlarını bildirir raporları var ise reçete sorulmadan enjeksiyonu yapılacaktır.</p>
+                                        <p class="fw-normal">7. Enjeksiyon sonrasında alerjik reaksiyon oluşup oluşmadığının izlenmesi açısından yarım saat 
+                                            bekletileceksiniz. Bu süre sonunda sağlık personeli tarafından tekrar görüldükten sonra gidebilirsiniz.</p>
+                                        <p class="fw-normal">8. Enjeksiyon acil bir işlem değildir. İşleminiz acil hastaların işlerini aksatmayacak şekilde en kısa sürede yapılacaktır.</p>
+                                        <div class="row justify-content-start">
+                                            <div class="col-4"><p class="">9. Size yapılacak enjeksiyon</p></div> 
+                                            <div class="col-4"><input type="text" id="injection1" name="injection1" value="{{injectionInformed.injection1}}"></div> 
+                                            <div class="col-4"><p class="">'dir</p></div>
+                                        </div> 
+                                        <p class="fw-normal">Bu onam formunu okuyup-anladım, anlamadığım yerler hakkında sağlık personelinden yeterli açıklamayı aldım.
+                                            Bu işlemin bana/hastama uygulanmasına izin veriyorum.</p>  
+                                        <p class="fw-normal">NOT: Bir enjeksiyondan daha uzun süreli bir tedaviniz varsa; imzaladığınız formun fotokopisini alıp,
+                                            diğer enjeksiyonlar için geldiğinde getirdiğiniz taktirde tedavi bitene kadar tekrar imzalamanıza gerek olmayacaktır.
+                                        </p> 
+                                    </br>
+                                        <button type="submit" name="injectionSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                        &nbsp;
+                                        <button type="button" name="İnjectionpreview" onclick="InjectionConsentPDF()" class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button>
+                                        &nbsp;
+                                        <button type="button" name="İnjectionprint" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                        &nbsp;
+                                        <button type="reset" name="İnjectionclear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                    </div>     
+                                    <div class="col mb-3">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <label for="injectionDate" class="form-label">Tarih</label>
+                                                <input type="date" class="form-control" id="injectionDate" name="injectionDate" value="{{injectionInformed.injectionDate}}">
+                                            </div>
+                                            <div class="col mb-3">        
+                                                <label for="injectionHour" class="form-label">Saat</label>
+                                                <input type="time" class="form-control" id="injectionHour" name="injectionHour" value="{{injectionInformed.injectionHour}}">
+                                            </div> 
+                                        </div>
+                                        <p class="fw-normal">Hasta/Vasi</p>
+
+                                        <label for="patientUsername" class="form-label">Hastanın Adı-Soyadı</label>
+                                        <input type="text" class="form-control" id="patientUsername" name="patientUsername" value="{{injectionInformed.patientUsername}}">
+
+                                        <label for="patientAdress" class="form-label">Adresi</label>
+                                        <input type="text" class="form-control" id="patientAdress" name="patientAdress" value="{{injectionInformed.patientAdress}}">
+
+                                        <label for="patientTelNo" class="form-label">Tel. No</label>
+                                        <input type="text" class="form-control" id="patientTelNo" name="patientTelNo" value="{{injectionInformed.patientTelNo}}">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <label for="patientUsername" class="form-label">İmza</label>
+                                                </br> 
+                                                <div class=" border border-5" id="patientSignature">
+                                                        
+                                                </div>
+                                                <textarea name="patientSignatureText" id="patientSignatureText" cols="30" rows="10" style="display: none;">{{injectionInformed.patientSignatureText}}</textarea>
+                                            </div>
+                                            <div class="mb-3 col" style="display: block;"> 
+                                                </br>   
+                                                <button class="btn btn-outline-danger" type="button" id="patientClear" name="patientClear">Temizle</button> 
+                                                </br>
+                                                </br>
+                                                <button class="btn btn-outline-success" type="button" id="patientJson" name="patientJson">İmzayı Kaydet</button>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row"> 
+                                            <p class="fw-normal">Bilgilendirme Yapan Sağlık Çalışanı</p>
+
+                                            <label for="employeeUsername" class="form-label">Adı-Soyadı</label>
+                                            </br> 
+                                            <input type="text" class="form-control" id="employeeUsername" name="employeeUsername" value="{{injectionInformed.employeeUsername}}">
+                                            <div class="col mb-3">
+                                                <label for="patientAdress" class="form-label">İmza</label>
+                                                </br>
+                                                <div class=" border border-5" id="employeeSignature">
+                                                        
+                                                </div>
+                                                <textarea name="employeeSignatureText" id="employeeSignatureText" cols="30" rows="10" style="display: none;">{{injectionInformed.employeeSignatureText}}</textarea>
+                                            </div>
+                                            <div class="mb-3 col" style="display: block;"> 
+                                                </br>   
+                                                <button class="btn btn-outline-danger" type="button" id="employeClear" name="employeClear">Temizle</button> 
+                                                </br>
+                                                </br>
+                                                <button class="btn btn-outline-success" type="button" id="employeJson" name="employeJson">İmzayı Kaydet</button>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock%}

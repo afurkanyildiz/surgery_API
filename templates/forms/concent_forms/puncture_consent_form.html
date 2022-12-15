@@ -1,0 +1,359 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content%}
+<style>
+    .kbw-signature { width: 400px; height: 200px; }
+</style>
+<script>
+    $(document).ready(function()
+   {
+        $('.punctureApproval').click(function()
+        {
+            var text="";
+            $('.punctureApproval:checked').each(function()
+            {
+                text +=$(this).attr('id')+",";
+            });
+                text = text.substring(0,text.length-1)
+                $('#punctureApprovalTxt').val(text);
+        });
+    });
+</script>
+<script>
+    $(function() {
+        var sig = $('#puncturePatientSignature').signature({thickness : 4});
+        $('#puncturePatientSignatureClear').click(function() {
+            sig.signature('clear');
+        });
+
+        $('#puncturePatientSignatureJson').click(function() {
+            $('#puncturePatientSignatureText').val(sig.signature('toJSON'));
+        });
+});
+    $(function() {
+            var sig = $('#punctureDoctorSignature').signature({thickness : 4});
+            $('#punctureDoctorSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#punctureDoctorSignatureJson').click(function() {
+                $('#punctureDoctorSignatureText').val(sig.signature('toJSON'));
+            });
+});
+    $(function() {
+        var sig = $('#punctureWitnessSignature').signature({thickness : 4});
+        $('#punctureWitnessSignatureClear').click(function() {
+            sig.signature('clear');
+        });
+
+        $('#punctureWitnessSignatureJson').click(function() {
+            $('#punctureWitnessSignatureText').val(sig.signature('toJSON'));
+        });
+});
+    $(function() {
+            var sig = $('#punctureRepresentativeSignature').signature({thickness : 4});
+            $('#punctureRepresentativeClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#punctureRepresentativeJson').click(function() {
+                $('#punctureRepresentativeSignatureText').val(sig.signature('toJSON'));
+            });
+});
+    $(function() {
+        var sig = $('#punctureRepresentativeDoctorSignature').signature({thickness : 4});
+        $('#punctureRepresentativeDoctorSignatureClear').click(function() {
+            sig.signature('clear');
+        });
+
+        $('#punctureRepresentativeDoctorSignatureJson').click(function() {
+            $('#punctureRepresentativeDoctorSignatureText').val(sig.signature('toJSON'));
+        });
+});
+    $(function() {
+            var sig = $('#punctureRepresentativeWitnessSignature').signature({thickness : 4});
+            $('#punctureRepresentativeWitnessSignatureClear').click(function() {
+                sig.signature('clear');
+            });
+
+            $('#punctureRepresentativeWitnessSignatureJson').click(function() {
+                $('#punctureRepresentativeWitnessSignatureText').val(sig.signature('toJSON'));
+            });
+});
+</script>
+<main>
+    <img src="{% static 'assets/img/Healmedy_Logo_Renkli-yeni.png' %}" id="logo" style="display: none;">
+    <div class="container-fluid px-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                    <div class="card-header">
+                        <h4 class="text-center font-weight-light my-4">İNTRAARTİKÜLER,KAS İÇİ,KAS ÇEVRESİ ENJEKSİYON ve PONKSİYON BİLGİLENDİRİLMİŞ ONAM FORMU</h4>
+                        <div class="card-body">
+                            <form action="" method="POST">
+                                {% csrf_token%}
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <p class="fw-normal">Sayın Hasta, Sayın Veli/Vasi</p>
+                                        <p class="fw-normal">Yöntem</p>
+                                        <p class="fw-normal">Sistemik romatizmal hastalıklar, lokal ve/veya genel travmalar, metabolik hastalıklar, beyinomurilik yaralanmaları,
+                                            iltihabi hastalıklar, psikolojik rahatsızlıklar, herhangi bir ameliyat ve tıbbi girişimin istenmeyen etkisi gibi olaylara bağlı olarak kaslar, kemikler,
+                                            sinirler,eklem ve çevresindeki yapıların fonksiyon ve yapılarında bozulma olabilir.</p>
+                                        <p class="fw-normal">Bu gibi durumlarda; ağrı, uyuşma karıncalanma, his ve hareket kaybı, uyku bozukluğu, eklem ve kaslarda şişme,
+                                            sıvı toplanması, eklem-kas içi veya diğer vücut boluk ve dokuları içine kanama, iltihabı durumlar, kaslarda spazmlar-spastisite,
+                                            tüm vücut veya bir bölgede kısmi ve/veya tam kuvvet kaybı(felç), hayat kalitesinde düşme gibi durumlar ortaya çıkabilir.</p>
+                                        <p class="fw-normal">Bu durumların tanı ve tadavisinde enjeksiyon tedavisi(iğne yapma) veya ponksiyon(sıvının boşaltılması) sık 
+                                            kullanılan, faydalı bir yöntemdir.</p>
+                                        <p class="fw-normal">Enjeksiyon Tedavisi(iğne tedavisi) yukarıda belirtilen durumların tanısını desteklemek veya tedavi etmek
+                                            için kas, eklem içi ve çevresel ile diğer yumuşak dokulara(tendon, tetik nokta ganglion kisti,nöroma,bursa,fasiya(kas kılıfı),
+                                            calt altı gibi.) lokal anestezik, steroid(kortizon), botulinum toksin tip A, fenol,alkol,dekstroz, hyalüronik asit ve benzerleri
+                                            ,serum fizyolojik gibi maddelerin bir veya birkaçının karışımının bir enjektör ve iğne vasıtası ile uygulanmasıdır.</p>
+                                        <p class="fw-normal">Ponksiyon/Aspirasyon(sıvının boşaltılması) eklem içi veya başka dokular arasındaki sıvının (eklem sıvısı, kan
+                                            ,iltihap vb.) bir iğne yardımı ile boşaltılmasıdır.</p>
+                                        <p class="fw-normal">Bu işlemler tek başlarına veya beraber yapılabilir.</p>
+                                        <p class="fw-normal">Bu uygulama sırasında gerektiğinde elektrik stimülatörü, ultrason, tomografi gibi yardımcı tekniklerden faydalanılabilir.</p>
+                                        <p class="fw-normal"></p>
+                                        <ul>
+                                            <li>Hem tanı hemde tedaviye yardımcı olması,</li>
+                                            <li>Aynı seansta analiz için sıvı almanın mümkün olması,</li>
+                                            <li>Eklem içi iltihabi süreci durdurması,</li>
+                                            <li>Ağrı ve hareket kısıtlılığı gibi şikayetlerin hafifletmesi veya tamamen gidermesi, *Gereksiz sistemik tedaviden ve fazla ilaç alımından kaçınılmasının sağlanması</li>
+                                            <li>Diğer tedavi yöntemlerine gerek kalmaması veya ihtiyacın azalması,</li>
+                                            <li>Yan etki ve zarar riskinin çok az olması,</li>
+                                            <li>İstenmeyen eklem içi sıvı birikimlerin(kan,kristalli sıvı, eklem sıvısı,iltahabi sıvı) aynı seansda alınmasıyla dramatik ani rahatlama sağlaması,</li>
+                                            <li>Ucuz olması</li>
+                                            <li>Uygulama için ameliyathane gibi özel ortam gerektirmemesi işlemin avantajlarındandır.</li>
+                                        </ul>
+                                        <p class="fw-normal"><b>Alternatifler:</b> Bu hastalığın tedavisi için çeşitli ilaç tedavilerinin ve fizik tedavi yöntemlerinin, bazı 
+                                            durumlarda cerrahi yaklaşımların tedaviye alternatif oluşturması söz konusudur.</p>
+                                        <p class="fw-bold">İşlemin Riskleri:</p>
+                                        <p class="fw-bold">Genel riskler ve komplikasyonlar</p>
+                                        <ul>
+                                            <li>Yöntemin olası yan etkileri, ağrıda artış, yanma, sızlanma ve enjeksiyon(iğne) yerinde ciltte kızarıklık, hafif şişlik oluşmasıdır.</li>
+                                            <li>Diğer muhtemel yan etkiler, mide bulantısı, baş dönmesi, tansiyon düşmesi, çarpıntı, kan şekerinin ve tansiyonun düşmesi veya artmasıdır.</li>
+                                            <li>Çok daha nadir görülen önemli riskler, kalp ritmi bozukluğu, çarpıntı, bayılma, sinir-kastendon yaralanması veya kopması, felç, kanama, alerjik reaksiyonlar, iltihabi durumlar sayılabilir.</li>
+                                            <p class="fw-normal">Risklerin her biri hayati fonksiyonları tehlikeye sokabilir.</p>
+                                            <li>Riskler uygun teknik, yeterli tıbbi malzeme ve deneyimli tıbbi personel varlığında nadiren görülmektedir. Enjeksiyondan dolayı zarar görmeniz durumunda, bunun giderilmesi için her türlü tıbbi girişim yapılacaktır.</li>
+                                            <li>Bu durumların görülme sıklığını en aza indirmek için uygulama öncesi tıbbi durumunuz hakkında doktorunuza detaylı bilgi vermelisiniz.</li>
+                                            <li>Bilinen İlaç alerjisi durumlarını, hastalıklarınızı doktorunuza belirtmelisiniz.</li>
+                                        </ul> 
+                                        <p class="fw-normal"><b>Tedavi Olmazsanız:</b> Önerilen tanı veya tedavi yönteminin kabul edilmediği durumlarda hastalığın tanısındaki belirsizliğin
+                                            devam etmesi veya uygun tedavi yapılmamasına bağlı sağlığınızdaki bozukluğun, ağrı ve fonksiyon kayıplarınızın devam etmesi ve kimlik bilgileriniz gizli tutulacaktır.
+                                            Etik kurullar ve resmi makamlar gerektiğinde tıbbi bilgilerinize ulaşabilir. Siz de istediğinizde kendinize ait tıbbi bilgilerinize ulaşabilirsiniz.</p>
+                                        <p class="fw-bold">Özel Durumlar:</p>
+                                        <p class="fw-normal">Alerji/Kullanılan İlaçlar: Doktoruma bilinen tüm alerjilerim hakkında bilgi verdim.Ayrıca doktorumu kullandığım reçeteli ilaçlar,
+                                            reçetesiz satılan ilaçlar, bitkisel ilaçlar, diyet katkı maddeleri, kullanımı yasadışı ilaçlar, alkol ve uyutucu/uyuşturucular konusunda bilgilendirdim.
+                                            Doktorum tarafından bu maddelerin ameliyat öncesi ve sonrası kullanımının etkileri bana anlatıldı ve öneriler yapıldı. Ameliyatımın öncesinde veya sonrasında tütün ve 
+                                            tütün mamülleri(sigara,nargile,puro,pipo vs.) içmemin iyileşme sürecimin uzamasına neden olabileceği bana anlatıldı. Eğer bu maddelerden herhangi birini kullanırsam 
+                                            yara iyileşme sorunlarıyla daha büyük bir oranda karşılaşma riskim olduğunu biliyorum.</p>
+                                        <p class="fw-bold">Hasta,Veli veya Vasinin Onam Açıklaması:</p>
+                                        <p class="fw-normal">Yukarıdaki konularla ilgili bilgilendirmeme ek olarak:</p>
+                                        <ul>
+                                            <li>Uygulanabilecek tanı yöntemleri konusunda ek sorular sorabileceğim ve bunların da cevaplanabileceği konusunda,</li>
+                                            <li>Tanı yöntemine karar vermeden uygun bir süre düşünebilceğim konusunda,</li>
+                                            <li>Önerilen tanı yöntemleri arasından seçim yapabileceğim konusunda,</li>
+                                            <li>Formun içeriğini okudum ve anladım. Doktorumun tüm sorularımı cevapladı. Kendi özgür irademle karar veriyorum.</li>
+                                            <li>İstemediğim taktirde tedavi/girişime onam vermek zorunda olmadığımı ve/veya istediğim aşamada işlemi durdurabileceğimi biliyorum.</li>
+                                        </ul>
+                                        <p class="fw-norma"><b>İşlemin Tahmini Süresi:</b>5-30 dakikadır.</p>
+                                        <p class="fw-normal"><b>Kullanılacak İlaçların Önemli Özellikleri:</b>Sağlık Merkezinde bulunduğum süre içerisinde tanı ve tedavi için kullanılacak ilaçlarla ilgili önemli özellikler 
+                                        (ne için kullanıldığı,faydaları,yan etkileri,nasıl kullanılacağı) konusunda bilgi aldım.</p>
+                                        <p class="fw-normal"><b>Hastanın Sağlığı İçin Kritik Olan Yaşam Tarzı Önerileri:</b>Tedavim/Ameliyatım sonrasında yaşam tarzım için yapmam gerekenleri(Diyet,banyo,ilaç kullanımı,hareket durumu ve/veya
+                                            kısıtlama durumu) ile ilgili bilgi aldım.</p>
+                                        <p class="fw-normal"><b>Gerektiğinde Aynı Konuda Tıbbi Yardıma Nasıl Ulaşabileceği:</b>Gerektiğinde aynı konuda tıbbi yardıma (Kendi hekimine, farklı bir hekime, tedavi gördüğü kliniğe ve acil durumlarda 112'ye)
+                                            nasıl ulaşacağım konusunda bilgi aldım.</p>
+                                        <p class="fw-normal"><b>Bize Ulaşabileceğiniz Telefon Numaraları:</b>Sağlık Merkezi Tel:444 61 01</p>
+                                        <p class="fw-normal">Yapılacak işlemlerle ilgili daha detaylı bilgi almak için hekiminize danışabilirsiniz.</p>
+                                        <p class="fw-normal">Lütfen; hastalığınız, tedavi süreciniz, cerrahi işlem, oluşabilecek yan etkiler ve olası tüm riskler ile ilgili size anlatılanları ve okuduklarınızı anladığınızı beyan ediniz.</p>
+                                            
+                                        <button type="submit" name="injectionSave" class="bi bi-save btn btn-outline-success"> Kaydet</button>
+                                        &nbsp;
+                                        <!-- <button type="button" name="İnjectionpreview" onclick="punctureConsentPDF()"  class="bi bi-filetype-pdf btn btn-outline-info"> PDF Önizleme</button> -->
+                                        &nbsp;
+                                        <button type="button" name="İnjectionprint" class="bi bi-printer btn btn-outline-secondary"> Yazdır</button>
+                                        &nbsp;
+                                        <button type="reset" name="İnjectionclear" class="bi bi-basket btn btn-outline-warning"> Temizle</button>
+                                    </div>
+                                    <div class="col mb-3">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <input class="punctureApproval" type="radio" id="punctureApproval" name="punctureApproval" value="punctureApproval" group="punctureApproval">
+                                                <label for="punctureApproval" class="col-form-label-lg">Okudum, Anladım Onaylıyorum</label>
+                                                <input id="punctureApprovalTxt" type="text" name="punctureApprovalTxt" style="display: none;"  readonly>
+
+
+                                                <label for="punctureDate" class="form-label">Tarih</label>
+                                                <input type="date" class="form-control" id="punctureDate" name="punctureDate">
+                                            </div>
+                                            <div class="col mb-3">        
+                                                <label for="punctureHour" class="form-label">Saat</label>
+                                                <input type="time" class="form-control" id="punctureHour" name="punctureHour">
+                                            </div> 
+                                            <div class="row">
+                                                <p class="fw-bold">HASTA BİLİNCİ AÇIK İSE</p>
+                                                <p class="fw-bold">Hastanın</p>
+                                                
+                                                <label for="puncturePatientUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="puncturePatientUsername" id="puncturePatientUsername">
+
+                                                <label for="puncturePatientAdress" class="form-label">Adresi</label>
+                                                <input type="text" class="form-control" name="puncturePatientAdress" id="puncturePatientAdress">
+
+                                                <label for="puncturePatientTel" class="form-label">Tel. No</label>
+                                                <input type="text" class="form-control" name="puncturePatientTel" id="puncturePatientTel">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="puncturePatientSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="puncturePatientSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="puncturePatientSignatureText" id="puncturePatientSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="puncturePatientSignatureClear" name="puncturePatientSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="puncturePatientSignatureJson" name="puncturePatientSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Doktor</p>
+                                                <label for="punctureDoctorUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="punctureDoctorUsername" id="punctureDoctorUsername">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="punctureDoctorSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="punctureDoctorSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="punctureDoctorSignatureText" id="punctureDoctorSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="punctureDoctorSignatureClear" name="punctureDoctorSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="punctureDoctorSignatureJson" name="punctureDoctorSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Şahit**</p>
+                                                <label for="punctureWitnessUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="punctureWitnessUsername" id="punctureWitnessUsername">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="punctureWitnessSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="punctureWitnessSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="punctureWitnessSignatureText" id="punctureWitnessSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="punctureWitnessSignatureClear" name="punctureWitnessSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="punctureWitnessSignatureJson" name="punctureWitnessSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">HASTANIN BİLİNCİ KAPALI VE YANINDA YASAL TEMSİLCİSİ VAR İSE:</p>
+                                                <p class="fw-bold">Yasal Temsilci*(Vasi) veya Veli</p>
+                                                
+                                                <label for="punctureRepresentativeUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="punctureRepresentativeUsername" id="punctureRepresentativeUsername">
+
+                                                <label for="punctureRepresentativeAdress" class="form-label">Adresi</label>
+                                                <input type="text" class="form-control" name="punctureRepresentativeAdress" id="punctureRepresentativeAdress">
+
+                                                <label for="punctureRepresentativeTel" class="form-label">Tel. No</label>
+                                                <input type="text" class="form-control" name="punctureRepresentativeTel" id="punctureRepresentativeTel">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="punctureRepresentativeSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="punctureRepresentativeSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="punctureRepresentativeSignatureText" id="punctureRepresentativeSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="punctureRepresentativeClear" name="punctureRepresentativeClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="punctureRepresentativeJson" name="punctureRepresentativeJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Doktor</p>
+                                                <label for="punctureRepresentativeDoctorUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="punctureRepresentativeDoctorUsername" id="punctureRepresentativeDoctorUsername">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="punctureRepresentativeDoctorSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="punctureRepresentativeDoctorSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="punctureRepresentativeDoctorSignatureText" id="punctureRepresentativeDoctorSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="punctureRepresentativeDoctorSignatureClear" name="punctureRepresentativeDoctorSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="punctureRepresentativeDoctorSignatureJson" name="punctureRepresentativeDoctorSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+
+                                                <p class="fw-bold">Şahit**</p>
+                                                <label for="punctureRepresentativeWitnessUsername" class="form-label">Adı-Soyadı</label>
+                                                <input type="text" class="form-control" name="punctureRepresentativeWitnessUsername" id="punctureRepresentativeWitnessUsername">
+
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="punctureRepresentativeWitnessSignature" class="form-label">İmza</label>
+                                                        </br> 
+                                                        <div class=" border border-5" id="punctureRepresentativeWitnessSignature">
+                                                                
+                                                        </div>
+                                                        <textarea name="punctureRepresentativeWitnessSignatureText" id="punctureRepresentativeWitnessSignatureText" cols="30" rows="10" style="display: none;"></textarea>
+                                                    </div>
+                                                    <div class="mb-3 col" style="display: block;"> 
+                                                        </br>   
+                                                        <button class="btn btn-outline-danger" type="button" id="punctureRepresentativeWitnessSignatureClear" name="punctureRepresentativeWitnessSignatureClear">Temizle</button> 
+                                                        </br>
+                                                        </br>
+                                                        <button class="btn btn-outline-success" type="button" id="punctureRepresentativeWitnessSignatureJson" name="punctureRepresentativeWitnessSignatureJson">İmzayı Kaydet</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col mb-3">
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock%}

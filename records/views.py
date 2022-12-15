@@ -48,9 +48,9 @@ def record_form(request):
         records.record_third_spo2 = request.POST.get('record_third_spo2')
         records.record_third_fire = request.POST.get('record_third_fire')
         records.record_third_respirations_min = request.POST.get('record_third_respirations_min')
-        records.medications = request.POST.getlist('medications')
-        records.scale_used = request.POST.getlist('scale_used')
-        records.way_of_application = request.POST.getlist('way_of_application')
+        records.medications = ','.join(request.POST.getlist('medications'))
+        records.scale_used =','.join(request.POST.getlist('scale_used'))
+        records.way_of_application =','.join(request.POST.getlist('way_of_application'))
         
         records.save()
         return redirect('/index/tables')
@@ -61,14 +61,12 @@ def record_form(request):
 @login_required(login_url='redirect')
 def editRecords(request,id):
     edit_records = Records.objects.get(id=id)
-    print(type(edit_records.medications))
-    print(edit_records.medications)
     if edit_records.medications is not None:
-        edit_records.medications = edit_records.medications.strip('"]["').split(',')
+        edit_records.medications = edit_records.medications.strip("[']").split(',')
     if edit_records.scale_used is not None:
-        edit_records.scale_used = edit_records.scale_used.strip('"]["').split(',')
+        edit_records.scale_used = edit_records.scale_used.strip("[']").split(',')
     if  edit_records.way_of_application is not None:
-        edit_records.way_of_application = edit_records.way_of_application.strip('"]["').split(',')
+        edit_records.way_of_application = edit_records.way_of_application.strip("[']").split(',')
     institutionName = Institution.objects.all()
     medicationName = MedicationName.objects.all()
     way_of_application = WayOfApplication.objects.all()
