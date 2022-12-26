@@ -25,8 +25,8 @@ class GeneralInformation(models.Model):
     generalRepresentativeDoctorSignatureText = models.CharField(max_length=5000,null=True,blank=True)
     generalRepresentativeWitnessUsername = models.CharField(max_length=1000,null=True,blank=True)
     generalRepresentativeWitnessSignatureText = models.CharField(max_length=5000,null=True,blank=True)
-    generalApproval = models.CharField(max_length=100,null=True,blank=True)
-    generalApprovalTxt = models.CharField(max_length=100,null=True,blank=True)
+    generalApproval = models.CharField(max_length=1000,null=True,blank=True)
+    generalApprovalTxt = models.CharField(max_length=1000,null=True,blank=True)
     
     def __str__(self):
         return self.generalPatientUsername
@@ -52,8 +52,8 @@ class KVKKConsent(models.Model):
     kvkkPatientUsername = models.CharField(max_length=1000,null=True,blank=True)
     kvkkPatientDate = models.CharField(max_length=1000,null=True,blank=True)
     kvkkPatientSignatureText = models.CharField(max_length=5000,null=True,blank=True)
-    expression = models.CharField(max_length=100,blank=True, null=True)
-    declaration = models.CharField(max_length=100,blank=True, null=True)
+    expression = models.CharField(max_length=1000,blank=True, null=True)
+    declaration = models.CharField(max_length=1000,blank=True, null=True)
     
     def __str__(self):
         return self.kvkkName
@@ -78,8 +78,8 @@ class minorConsent(models.Model):
     minorinterpreterUsername = models.CharField(max_length=1000,null=True,blank=True)
     minorinterpreterSignatureText = models.CharField(max_length=5000,null=True,blank=True)
     minorinterpreterTel = models.CharField(max_length=1000,null=True,blank=True)
-    minorApproval = models.CharField(max_length=100,blank=True, null=True)
-    minorApprovalTxt = models.CharField(max_length=100,blank=True,null=True)
+    minorApproval = models.CharField(max_length=1000,blank=True, null=True)
+    minorApprovalTxt = models.CharField(max_length=1000,blank=True,null=True)
     
     def __str__(self):
         return self.minorDiagnosis
@@ -103,8 +103,8 @@ class PunctureConsent(models.Model):
     punctureRepresentativeDoctorSignatureText = models.CharField(max_length=1000,null=True,blank=True)
     punctureRepresentativeWitnessUsername = models.CharField(max_length=1000,null=True,blank=True)
     punctureRepresentativeWitnessSignatureText = models.CharField(max_length=1000,null=True,blank=True)
-    punctureApprovalTxt = models.CharField(max_length=100,null=True,blank=True,)
-    punctureApproval = models.CharField(max_length=100,blank=True, null=True)
+    punctureApprovalTxt = models.CharField(max_length=1000,null=True,blank=True,)
+    punctureApproval = models.CharField(max_length=1000,blank=True, null=True)
     
     def __str__(self):
         return self.puncturePatientUsername
