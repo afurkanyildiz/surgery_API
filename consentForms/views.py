@@ -220,21 +220,21 @@ def updatePunctureConsent(request,id):
 
 #table forms
 def generalInformationTables(request):
-    context ={'generalInformation':GeneralInformation.objects.all()}
+    context ={'generalInformation':GeneralInformation.objects.all().order_by('-id')}
     return render(request,"tables/concent_tables/generalConsent.html",context)
 
 def injectionInformedTables(request):
-    context={'injectionInformed': InjectionInformed.objects.all()}
+    context={'injectionInformed': InjectionInformed.objects.all().order_by('-id')}
     return render(request,"tables/concent_tables/injectionConsent.html",context)
 
 def kvkkConsentTables(request):
-    context={'kvkkConsent':KVKKConsent.objects.all()}
+    context={'kvkkConsent':KVKKConsent.objects.all().order_by('-id')}
     return render(request,"tables/concent_tables/kvkkConsent.html", context)
 
 def minorSurgeryTables(request):
-    context={'minorSurgery':minorConsent.objects.all()}
+    context={'minorSurgery':minorConsent.objects.all().order_by('-id')}
     return render(request,"tables/concent_tables/minorConsent.html",context)
 
 def punctureConsentTables(request):
-    context = {'punctureConsent':PunctureConsent.objects.all()}
+    context = {'punctureConsent':PunctureConsent.objects.all().order_by('-id')}
     return render(request,"tables/concent_tables/punctureConsent.html",context)#Create your views here.

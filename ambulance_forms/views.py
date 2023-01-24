@@ -164,7 +164,7 @@ def deleteAmbulanceCaseForm(request,id):
 
 @login_required(login_url='redirect')
 def ambulance_case_tables(request):
-    context={'AmbulanceCase':AmbulanceCase.objects.all()}
+    context={'AmbulanceCase':AmbulanceCase.objects.all().order_by('-id')}
     return render(request,"tables/ambulance_case.html",context)
 
 
@@ -247,7 +247,7 @@ def ambulance_daily_control_form(request):
 
 @login_required(login_url='redirect')
 def ambulance_daily_control_tables(request):
-    context = {'AmbulanceDailyControl' : AmbulanceDailyControl.objects.all()}
+    context = {'AmbulanceDailyControl' : AmbulanceDailyControl.objects.all().order_by('-id')}
     return render(request,"tables/ambulance_daily_control.html",context)
 
 @login_required(login_url='redirect')
@@ -304,7 +304,7 @@ def ambulance_handover_form(request):
 
 @login_required(login_url='redirect')
 def ambulance_handover_tables(request):
-    context = {'AmbulanceHandover' : AmbulanceHandover.objects.all()}
+    context = {'AmbulanceHandover' : AmbulanceHandover.objects.all().order_by('-id')}
     return render(request,'tables/ambulance_handover.html',context)
 
 @login_required(login_url='redirect')
@@ -441,7 +441,7 @@ def ambulance_material_control_form(request):
 
 @login_required(login_url='redirect')
 def ambulance_material_control_tables(request):
-    context = {'AmbulanceMaterial' : AmbulanceMaterialControl.objects.all()}
+    context = {'AmbulanceMaterial' : AmbulanceMaterialControl.objects.all().order_by('-id')}
     return render(request,'tables/ambulance_material_control.html',context)
 
 @login_required(login_url='redirect')
@@ -525,7 +525,7 @@ def call_center_form(request):
 
 @login_required(login_url='redirect')
 def call_center_tables(request):
-    context = {"CallCenter": CallCenter.objects.all()}
+    context = {"CallCenter": CallCenter.objects.all().order_by('-id')}
     return render(request,'tables/call_center.html',context)
 
 @login_required(login_url='redirect')
@@ -583,7 +583,7 @@ def healmedy_case_form(request):
 
 @login_required(login_url='redirect')
 def healmedy_case_tables(request):
-    context = {'HealmedyCase':HealmedyCase.objects.all()}
+    context = {'HealmedyCase':HealmedyCase.objects.all().order_by('-id')}
     return render(request,'tables/healmedy_case.html',context)
 
 @login_required(login_url='redirect')
@@ -662,7 +662,7 @@ def material_request_form(request):
 
 @login_required(login_url='redirect')
 def material_request_tables(request):
-    context = {"MaterialRequest":MaterialRequest.objects.all()}
+    context = {"MaterialRequest":MaterialRequest.objects.all().order_by('-id')}
     return render(request,'tables/material_request.html',context)
 
 @login_required(login_url='redirect')
@@ -745,7 +745,7 @@ def medical_gas_request_form(request):
 
 @login_required(login_url='redirect')
 def medical_gas_request_tables(request):
-    context = {"MedicalGasRequest" : MedicalGasRequest.objects.all()}
+    context = {"MedicalGasRequest" : MedicalGasRequest.objects.all().order_by('-id')}
     return render(request,'tables/medical_gas_request.html',context)
 
 @login_required(login_url='redirect')
@@ -757,8 +757,8 @@ def editMedicalGasRequest(request,id):
 def updateMedicalGasRequest(request,id):
     updateMedicalGasRequest = MedicalGasRequest.objects.get(id=id)
     medicalGasRequestForm = MedicalGasRequestForm(data=request.POST, instance=updateMedicalGasRequest)
-    if medicalGasRequest.is_valid():
-        medicalGasRequest.save()
+    if medicalGasRequestForm.is_valid():
+        medicalGasRequestForm.save()
         
         context = {"MedicalGasRequest":MedicalGasRequest.objects.all()}
         return render(request,"tables/medical_gas_request.html", context)
@@ -849,7 +849,7 @@ def medication_request_form(request):
 
 @login_required(login_url='redirect')
 def medication_request_tables(request):
-    context = {"MedicationRequest" : MedicationRequest.objects.all()}
+    context = {"MedicationRequest" : MedicationRequest.objects.all().order_by('-id')}
     return render(request,'tables/medication_request.html',context)
 
 @login_required(login_url='redirect')
@@ -902,7 +902,7 @@ def pre_case_control_form(request):
     return render(request,'forms/pre-case_control.html')
 
 def pre_case_control_tables(request):
-    context = {"PreCaseControl":PreCaseControl.objects.all()}
+    context = {"PreCaseControl":PreCaseControl.objects.all().order_by('-id')}
     return render(request,'tables/pre-case_control.html',context)
 
 def editPreCaseControl(request,id):
