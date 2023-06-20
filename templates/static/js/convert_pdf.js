@@ -3618,6 +3618,9 @@ function ambulanceCasePdf(){
     doc.line(73, 267, 73, 295);
 
     doc.setLineWidth(0.1);
+    doc.line(105, 267, 105, 295);
+
+    doc.setLineWidth(0.1);
     doc.line(143, 267, 143, 295);
 
     doc.line(5,267,205,267)
@@ -3655,39 +3658,20 @@ function ambulanceCasePdf(){
 
     doc.setFontSize(8);
     doc.text("Evet",42,290);
-    // var yesCheckbox = new jspdf.AcroFormCheckBox();
     var roundYes = document.querySelector('input[name="round_trip"]:checked').value;
-    // let hasYesText = false;
     if(roundYes == 'yes') {
         doc.setFontSize(7)
         doc.text("[X]",50,290.5)
-    //     console.log("Girdi");
-    //     hasYesText = true;
     }
-    // yesCheckbox.appearanceState = hasYesText ? 'On' : 'Off';
-    // yesCheckbox.readOnly = false;
-    // yesCheckbox.fieldName = "Evet";
-    // yesCheckbox.Rect = [50, 288, 2, 2];
-    // yesCheckbox.value = 'yes';
-    // doc.addField(yesCheckbox);
-
     doc.setFontSize(8);
     doc.text("Hayır",55,290);
-    // var noCheckBox = new jspdf.AcroFormCheckBox();
     var roundNo = document.querySelector('input[name="round_trip"]:checked').value;
-    // let hasNoText = false;
     if(roundNo == 'no') {
         doc.setFontSize(7)
         doc.text("[X]",63,290.5)
-        //     console.log("Girdi");
-    //     hasNoText = true;
+
     }
-    // noCheckBox.appearanceState = hasNoText ? 'On' : 'Off';
-    // noCheckBox.readOnly = false;
-    // noCheckBox.fieldName = "Hayır";
-    // noCheckBox.Rect = [63, 288, 2, 2];
-    // noCheckBox.value = 'no';
-    // doc.addField(noCheckBox);
+
 
     // doc.text(delivery_area_username_datetime,42,290);
     doc.setFontSize(9);
@@ -3695,11 +3679,28 @@ function ambulanceCasePdf(){
 
 
 
-    doc.setFontSize(10);
-    doc.text("VAKAYI VEREN KURUM BİLGİSİ:",83,273);
+    doc.setFontSize(6);
+    doc.text("VAKAYI VEREN KURUM BİLGİSİ:",74,273);
     var institution_information = document.getElementById("institution_information").value;
     textlines = doc.setFontSize(8).splitTextToSize(institution_information,67);
     doc.text(textlines,77,277);
+
+    doc.setFontSize(6);
+    doc.text("İŞ KAZASI:",108,273);
+    var workYes = document.querySelector('input[name="work_accident"]:checked').value;
+    doc.setFontSize(8);
+    doc.text("Evet",108,276);
+    if(workYes == 'yes') {
+        doc.setFontSize(7)
+        doc.text("[X]",115,276)
+    }
+    doc.setFontSize(8);
+    doc.text("Hayır",120,276);
+    var workNo = document.querySelector('input[name="work_accident"]:checked').value;
+    if(workNo == 'no') {
+        doc.setFontSize(7)
+        doc.text("[X]",128,276)
+    }
 
 
     var barkod = document.getElementById("barkod");
@@ -8466,6 +8467,9 @@ function updateAmbulanceCasePdf(){
     doc.line(73, 267, 73, 295);
 
     doc.setLineWidth(0.1);
+    doc.line(105, 267, 105, 295);
+
+    doc.setLineWidth(0.1);
     doc.line(143, 267, 143, 295);
 
     doc.line(5,267,205,267)
@@ -8503,53 +8507,50 @@ function updateAmbulanceCasePdf(){
 
     doc.setFontSize(8);
     doc.text("Evet",42,290);
-    // var yesCheckbox = new jspdf.AcroFormCheckBox();
     var roundYes = document.querySelector('input[name="round_trip"]:checked').value;
-    // let hasYesText = false;
     if(roundYes == 'yes') {
         doc.setFontSize(7)
         doc.text("[X]",50,290.5)
-    //     console.log("Girdi");
-    //     hasYesText = true;
     }
-    // yesCheckbox.appearanceState = hasYesText ? 'On' : 'Off';
-    // yesCheckbox.readOnly = false;
-    // yesCheckbox.fieldName = "Evet";
-    // yesCheckbox.Rect = [50, 288, 2, 2];
-    // yesCheckbox.value = 'yes';
-    // doc.addField(yesCheckbox);
-
     doc.setFontSize(8);
     doc.text("Hayır",55,290);
-    // var noCheckBox = new jspdf.AcroFormCheckBox();
     var roundNo = document.querySelector('input[name="round_trip"]:checked').value;
-    // let hasNoText = false;
     if(roundNo == 'no') {
         doc.setFontSize(7)
         doc.text("[X]",63,290.5)
-        //     console.log("Girdi");
-    //     hasNoText = true;
     }
-    // noCheckBox.appearanceState = hasNoText ? 'On' : 'Off';
-    // noCheckBox.readOnly = false;
-    // noCheckBox.fieldName = "Hayır";
-    // noCheckBox.Rect = [63, 288, 2, 2];
-    // noCheckBox.value = 'no';
-    // doc.addField(noCheckBox);
 
-    // doc.text(delivery_area_username_datetime,42,290);
     doc.setFontSize(9);
     doc.text("Şirket Bilgisi:",6,294);
     // var delivery_area_username_datetime = document.getElementById("delivery_area_username_datetime").value;
     // doc.text(delivery_area_username_datetime,42,294);
 
 
-    doc.setFontSize(10);
-    doc.text("VAKAYI VEREN KURUM BİLGİSİ:",83,273);
+    doc.setFontSize(6);
+    doc.text("VAKAYI VEREN KURUM BİLGİSİ:",74,273);
     // var institution_information = document.getElementById("institution_information").value;
     var institution_information = document.getElementById("institution_information").value;
     textlines = doc.setFontSize(8).splitTextToSize(institution_information,70);
     doc.text(textlines,77,277);
+
+
+    doc.setFontSize(6);
+    doc.text("İŞ KAZASI:",108,273);
+    // var institution_information = document.getElementById("institution_information").value;
+    var workYes = document.querySelector('input[name="work_accident"]:checked').value;
+    doc.setFontSize(8);
+    doc.text("Evet",108,276);
+    if(workYes == 'yes') {
+        doc.setFontSize(7)
+        doc.text("[X]",115,276)
+    }
+    doc.setFontSize(8);
+    doc.text("Hayır",120,276);
+    var workNo = document.querySelector('input[name="work_accident"]:checked').value;
+    if(workNo == 'no') {
+        doc.setFontSize(7)
+        doc.text("[X]",128,276)
+    }
 
     // const barkod = document.getElementById("barkod_url");
     // const barkodFile = barkod.files[0];

@@ -99,7 +99,7 @@ def index_page(request):
 @login_required(login_url='redirect')
 def tables_page(request):
     context={'Records':Records.objects.all().order_by('-id')}
-    print(context)
+    # print(context)
     return render(request,"tables.html",context)
     
 @login_required(login_url='redirect')

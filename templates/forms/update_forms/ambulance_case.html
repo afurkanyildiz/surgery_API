@@ -1298,6 +1298,18 @@
                                         <label for="no" class="form-label">Hayır</label>
                                     </div> 
                                     <h6>*Bu Alanın Girilmesi Zorunludur.</h6>
+
+                                    
+                                    <label for="" class="form-label">İŞ KAZASI</label> 
+                                    <div >                                       
+                                        <input class="work_accident" type="radio" id="yes" name="work_accident" {% if AmbulanceCase.work_accident == 'yes' %} checked {%endif%} value="yes" group="work_accident">
+                                        <label for="work_yes" class="form-label">Evet</label>
+                                    </div> 
+                                    <div>
+                                        <input class="work_accident" type="radio" id="no" name="work_accident" {% if AmbulanceCase.work_accident == 'no' %} checked {%endif%}  value="no" group="work_accident">
+                                        <label for="work_no" class="form-label">Hayır</label>
+                                    </div> 
+                                    <h6>*Bu Alanın Girilmesi Zorunludur.</h6>
                                     <!-- <label for="barkod" class="form-label">BARKOD:</label>
                                     <input type="file" id="barkod" name="barkod">
 
@@ -1313,6 +1325,7 @@
 
                                     <label for="institution_information" class="form-label">VAKAYI VEREN KURUM BİLGİSİ</label>
                                     <textarea type="text" class="form-control" id="institution_information" name="institution_information" style="height: 100px">{{AmbulanceCase.institution_information}}</textarea>
+
                                 </div>
                             </div>
                             <div class="row">

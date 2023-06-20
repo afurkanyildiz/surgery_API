@@ -88,6 +88,7 @@ def ambulance_case_form(request):
         ambulanceCase.current = request.POST.get('current')
         ambulanceCase.institution_name = request.POST.get('institution_name')
         ambulanceCase.round_trip = request.POST.get('round_trip')
+        ambulanceCase.work_accident = request.POST.get('work_accident')
         ambulanceCase.money = request.POST.get('money')
         ambulanceCase.transfer_doctor_username = request.POST.get('transfer_doctor_username')
         ambulanceCase.file_number = request.POST.get('file_number')

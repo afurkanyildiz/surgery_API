@@ -87,6 +87,7 @@ class AmbulanceCase(models.Model):
     current = models.CharField(max_length=1000, blank=True,null=True)
     institution_name = models.CharField(max_length=1000, blank=True,null=True)
     round_trip = models.CharField(max_length=1000,blank=True,null=True)
+    work_accident = models.CharField(max_length=1000,blank=True,null=True)
     transfer_doctor_username = models.CharField(max_length=1000, blank=True,null=True)
     transfer_doctor_signaturetext = models.CharField(max_length=5000, blank=True,null=True)
     file_number = models.CharField(max_length=1000, blank=True,null=True)
