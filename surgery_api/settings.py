@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-z$1^#l9=)zaw@x&md18aw+s+lg_pxzcbt3+5b5hi02^&k+kk7@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['hbys.filyosaglikmerkezi.com','116.202.18.80','localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -86,12 +86,8 @@ WSGI_APPLICATION = 'surgery_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'hbys_filyos',
-        'USER' : 'healmedy',
-        'PASSWORD': 'mhacare1',
-        'HOST': '116.202.18.80',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase', 
     }
 }
 
