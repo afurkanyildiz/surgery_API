@@ -33,14 +33,10 @@ services:
         #command: "gunicorn config.wsgi:application --bind 0.0.0.0:8000"
         #networks:
         #   - bridge
-    pgdb:
-        image: postgres
-        container_name: pgdb
-        environment:
-          - POSTGRES_DB=hbys_filyos
-          - POSTGRES_USER=healmedy 
-          - POSTGRES_PASSWORD=mhacare1  
-        volumes: 
-          - pg-data:/var/lib/postgresql/data/
+    dbsqlite:
+    image: sqlite:latest
+    container_name: sqlite-container
+    environment:
+      - DB_FILE=/var/lib/sqlite/data/mydatabase.db
 volumes:
   pg-data:
